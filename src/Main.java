@@ -25,7 +25,7 @@ public class Main {
         gui.setTitle("Google searcher v1.0");
         gui.setVisible(true);
         gui.setResizable(false);
-        gui.setSize(500, 700);
+        gui.setSize(800, 700);
     }
 
     private void initLogic() {

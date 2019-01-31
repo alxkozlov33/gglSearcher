@@ -12,6 +12,32 @@ public class Bootstrapper extends JFrame {
     private JLabel selectedFileLabel;
     private JButton selectFileButton;
     private JTextPane logWindow;
-    private JSeparator seprator;
+    private JSeparator separator;
+
+    public Bootstrapper() {
+        this.setContentPane(mainPanel);
+        logWindow.setVisible(true);
+        separator.setVisible(true);
+    }
+
+    public JLabel getLabelStatusData() {
+        return labelStatusData;
+    }
+
+    public JButton getRunButton() {
+        return runButton;
+    }
+
+    public JButton getStopButton() {
+        return stopButton;
+    }
+
+    public JLabel getSelectedFileLabelData() {
+        return selectedFileLabelData;
+    }
+
+    public JButton getSelectFileButton() {
+        return selectFileButton;
+    }
 }
 
