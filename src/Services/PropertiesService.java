@@ -36,8 +36,8 @@ public class PropertiesService {
     private void createNewFile() {
         OutputStream output = null;
         try {
-            File propertiesFileTemp = File.createTempFile("configIS", ".properties");
-            String propPath = propertiesFileTemp.getAbsolutePath().substring(0, propertiesFileTemp.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + "configIS.properties";
+            File propertiesFileTemp = File.createTempFile("configGGLS", ".properties");
+            String propPath = propertiesFileTemp.getAbsolutePath().substring(0, propertiesFileTemp.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + "configGGLS.properties";
             File f = new File(propPath);
             if (f.exists() && !f.isDirectory()) {
                 propertiesFile = f;

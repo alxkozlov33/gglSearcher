@@ -1,12 +1,10 @@
-import Services.ServicesManager;
+import GUI.Bootstrapper;
 
 import javax.swing.*;
 
 public class Main {
 
     private Bootstrapper gui;
-    private ServicesManager serviceManager;
-    private MainWorker mainWorker;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -16,8 +14,8 @@ public class Main {
     public void start() {
         initLookAndFeel();
         initGUI();
-        initLogic();
-        initServices();
+
+        new DIResolver().initDependencies(gui);
     }
 
     private void initGUI() {
@@ -26,14 +24,6 @@ public class Main {
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setSize(800, 700);
-    }
-
-    private void initLogic() {
-        mainWorker = new MainWorker();
-    }
-
-    private void initServices() {
-        serviceManager = new ServicesManager();
     }
 
     private void initLookAndFeel() {
