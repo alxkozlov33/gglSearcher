@@ -12,4 +12,12 @@ public class GuiService {
     public Bootstrapper getBootstrapper() {
         return bootstrapper;
     }
+
+    public void logAction(String message) {
+        bootstrapper.getLogWindow().append(message + "\n");
+    }
+
+    public void setInputFilePath(String path) {
+        bootstrapper.getSelectedFileLabelData().setText(path);
+    }
 }

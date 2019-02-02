@@ -13,14 +13,11 @@ public class Bootstrapper extends JFrame {
     private JLabel selectedFileLabelData;
     private JLabel selectedFileLabel;
     private JButton selectFileButton;
-    private JTextPane logWindow;
-    private JSeparator separator;
-    private JTextField textField1;
+    private JTextArea logWindow;
+    private JTextField searchingPlaceHolder;
 
     public Bootstrapper() {
         this.setContentPane(mainPanel);
-        logWindow.setVisible(true);
-        //separator.setVisible(true);
     }
 
     public JLabel getLabelStatusData() {
@@ -41,6 +38,14 @@ public class Bootstrapper extends JFrame {
 
     public JButton getSelectFileButton() {
         return selectFileButton;
+    }
+
+    public JTextArea getLogWindow() {
+        return logWindow;
+    }
+
+    public JTextField getSearchingPlaceHolder() {
+        return searchingPlaceHolder;
     }
 }
 

@@ -21,7 +21,6 @@ public class MainController {
         this.guiService = guiService;
         this.logService = logService;
         this.propertiesService = propertiesService;
-
     }
 
     public void StartButtonClickAction() {

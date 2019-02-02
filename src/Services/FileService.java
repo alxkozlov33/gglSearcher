@@ -2,6 +2,7 @@ package Services;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.*;
+import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +19,11 @@ public class FileService {
     private File outputFile;
 
     GuiService guiService;
+    LogService logService;
 
-    public FileService(GuiService guiService) {
+    public FileService(GuiService guiService, LogService logService) {
         this.guiService = guiService;
+        this.logService = logService;
     }
 
     public void setUpInputFile() {
@@ -31,6 +34,7 @@ public class FileService {
         }
         inputFilePath = Paths.get(path);
         inputFile = inFile;
+        logService.logMessage("setUpInputFile: " + inputFile.getAbsolutePath());
         setUpOutputFile();
     }
 
@@ -39,10 +43,11 @@ public class FileService {
         String updatedOutputFilePath = basename+ " - updated." + FilenameUtils.getExtension(inputFilePath.toString());
         outputFilePath = Paths.get(updatedOutputFilePath);
         outputFile = outputFilePath.toFile();
+        logService.logMessage("setUpOutputFile: " + outputFile.getAbsolutePath());
+        guiService.setInputFilePath(cutPath(inputFilePath.toString()));
     }
 
     private String selectFolderDialog() {
-
         String osName = System.getProperty("os.name");
         String result = "";
         if (osName.equalsIgnoreCase("mac os x")) {
@@ -71,7 +76,7 @@ public class FileService {
     }
 
     private String cutPath(String path) {
-        int size = 70;
+        int size = 120;
         if (path.length() <= size) {
             return path;
         } else if (path.length() > size) {

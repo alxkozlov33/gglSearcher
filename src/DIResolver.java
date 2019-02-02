@@ -24,12 +24,13 @@ public class DIResolver {
     public void initDependencies (Bootstrapper mainWindow) {
         bootstrapper = mainWindow;
         getGuiService();
-        getFileService();
         getLogService();
+        getFileService();
         getPropertiesService();
 
         getMainController();
         mapActions();
+        logService.logMessage("Application started...");
     }
     private GuiService getGuiService() {
         if (guiService == null) {
@@ -40,14 +41,14 @@ public class DIResolver {
 
     private FileService getFileService() {
         if (fileService == null) {
-            fileService = new FileService(guiService);
+            fileService = new FileService(guiService, logService);
         }
         return fileService;
     }
 
     private LogService getLogService() {
         if (logService == null) {
-            logService = new LogService();
+            logService = new LogService(guiService);
         }
         return logService;
     }
