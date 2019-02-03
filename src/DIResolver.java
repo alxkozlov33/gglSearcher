@@ -1,12 +1,6 @@
 import Controllers.MainController;
 import GUI.Bootstrapper;
-import Services.FileService;
-import Services.GuiService;
-import Services.LogService;
-import Services.PropertiesService;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Services.*;
 
 public class DIResolver {
 
@@ -14,6 +8,7 @@ public class DIResolver {
     private LogService logService;
     private PropertiesService propertiesService;
     private GuiService guiService;
+    private SearchService searchService;
 
     private MainController mainController;
     private Bootstrapper bootstrapper;
@@ -23,20 +18,28 @@ public class DIResolver {
 
     public void initDependencies (Bootstrapper mainWindow) {
         bootstrapper = mainWindow;
+        getPropertiesService();
         getGuiService();
         getLogService();
         getFileService();
-        getPropertiesService();
+        getSearchService();
 
         getMainController();
         mapActions();
-        logService.logMessage("Application started...");
+        logService.LogMessage("Application started...");
     }
     private GuiService getGuiService() {
         if (guiService == null) {
-            guiService = new GuiService(bootstrapper);
+            guiService = new GuiService(bootstrapper, propertiesService);
         }
         return guiService;
+    }
+
+    private SearchService getSearchService() {
+        if (searchService == null) {
+            searchService = new SearchService(fileService, logService, guiService, propertiesService);
+        }
+        return searchService;
     }
 
     private FileService getFileService() {
@@ -61,7 +64,7 @@ public class DIResolver {
     }
 
     private MainController getMainController() {
-        mainController = new MainController(fileService, guiService, logService, propertiesService);
+        mainController = new MainController(fileService, guiService, logService, propertiesService, searchService);
         return mainController;
     }
 

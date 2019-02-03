@@ -1,15 +1,14 @@
 package Models;
 
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 public class InputCsvModelItem {
 
     public InputCsvModelItem() {
     }
 
-    @CsvBindByPosition(position = 0)
+    @CsvBindByName(column = "cities")
     private String city;
-
 
     public String getCity() {
         return city;

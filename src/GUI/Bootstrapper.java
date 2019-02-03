@@ -18,6 +18,7 @@ public class Bootstrapper extends JFrame {
 
     public Bootstrapper() {
         this.setContentPane(mainPanel);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public JLabel getLabelStatusData() {

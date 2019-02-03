@@ -8,11 +8,17 @@ public class PropertiesService {
     private File propertiesFile;
     private Properties properties;
 
+    private String isWorkStateString = "isWorked";
+    private String selectedCsvInputFileString = "selectedCsvInputFile";
+    private String indexString = "index";
+    private String placeholderPropertyString = "placeholder";
+
     public PropertiesService() {
         properties = new Properties();
+        createNewFile();
     }
 
-    public void saveProperty(String propertyName, String value) {
+    private void saveProperty(String propertyName, String value) {
         OutputStream output = null;
         try {
             output = new FileOutputStream(propertiesFile.getAbsoluteFile());
@@ -33,6 +39,49 @@ public class PropertiesService {
         }
     }
 
+    public void saveWorkState(boolean workState) {
+        saveProperty(isWorkStateString, Boolean.toString(workState));
+    }
+
+    public void saveInputFilePath(File inputFile) {
+        if (inputFile != null){
+            saveProperty(selectedCsvInputFileString, inputFile.getAbsolutePath());
+        }
+        else {
+            saveProperty(selectedCsvInputFileString, "");
+        }
+    }
+
+    public void saveIndex(int index) {
+        saveProperty(indexString, Integer.toString(index));
+    }
+
+    public void savePlaceHolder(String placeholder) {
+        if (placeholder != null) {
+            saveProperty(placeholderPropertyString, placeholder);
+        }
+        else {
+            saveProperty(placeholderPropertyString, "");
+        }
+    }
+
+
+    public boolean getWorkState() {
+        return Boolean.valueOf(restoreProperty(isWorkStateString));
+    }
+
+    public String getInputFilePath() {
+        return restoreProperty(selectedCsvInputFileString);
+    }
+
+    public int getIndex() {
+        return Integer.parseInt(restoreProperty(indexString));
+    }
+
+    public String getPlaceHolder() {
+        return restoreProperty(placeholderPropertyString);
+    }
+
     private void createNewFile() {
         OutputStream output = null;
         try {
@@ -45,9 +94,10 @@ public class PropertiesService {
                 propertiesFile = f;
                 f.createNewFile();
                 output = new FileOutputStream(propertiesFile.getAbsoluteFile());
-                properties.setProperty("index", "0");
-                properties.setProperty("isWorked", "false");
-                properties.setProperty("selectedCsvInputFile", "");
+                saveIndex(0);
+                saveWorkState(false);
+                saveInputFilePath(null);
+                savePlaceHolder(null);
                 properties.store(output, null);
             }
             propertiesFileTemp.delete();
@@ -66,7 +116,7 @@ public class PropertiesService {
         }
     }
 
-    public String restoreProperty(String propertyName) {
+    private String restoreProperty(String propertyName) {
         String result = "0";
         InputStream input = null;
         try {
