@@ -33,16 +33,25 @@ public class FileService {
     private File inputFile;
     private File outputFile;
 
-    GuiService guiService;
-    LogService logService;
+    private final GuiService guiService;
+    private final LogService logService;
+    private final PropertiesService propertiesService;
 
-    public FileService(GuiService guiService, LogService logService) {
+    public FileService(GuiService guiService, LogService logService, PropertiesService propertiesService) {
         this.guiService = guiService;
         this.logService = logService;
+        this.propertiesService = propertiesService;
+
     }
 
-    public void setUpInputFile() {
-        String path = selectFolderDialog();
+    public void setUpInputFile(String restoredPath) {
+        String path = null;
+        if (restoredPath == null) {
+            path = selectFolderDialog();
+        } else {
+            path = restoredPath;
+        }
+
         File inFile = new File(path);
         if (StringUtils.isEmpty(path) && !inFile.exists()) {
             return;
@@ -73,6 +82,10 @@ public class FileService {
         return csvFileData;
     }
 
+    public void RestoreFilesControl() {
+        setUpInputFile(propertiesService.getInputFilePath());
+    }
+
     public void saveCSVItems(ArrayList<InputCsvModelItem> csvFileData) {
         File outputFile = outputFilePath.toFile();
         if (csvFileData == null || csvFileData.size() == 0) {
@@ -95,13 +108,17 @@ public class FileService {
         }
     }
 
+    public File GetInputFile() {
+        return inputFile;
+    }
+
     private void setUpOutputFile() {
         String basename = inputFile.getParent() + File.separator + FilenameUtils.getBaseName(inputFilePath.toString());
         String updatedOutputFilePath = basename+ " - updated." + FilenameUtils.getExtension(inputFilePath.toString());
         outputFilePath = Paths.get(updatedOutputFilePath);
         outputFile = outputFilePath.toFile();
         logService.LogMessage("setUpOutputFile: " + outputFile.getAbsolutePath());
-        guiService.setInputFilePath(cutPath(inputFilePath.toString()));
+        guiService.setInputFilePath(inputFilePath.toString());
     }
 
     private String selectFolderDialog() {
@@ -132,15 +149,5 @@ public class FileService {
         return result;
     }
 
-    private String cutPath(String path) {
-        int size = 120;
-        if (path.length() <= size) {
-            return path;
-        } else if (path.length() > size) {
-            return "..."+path.substring(path.length() - (size - 3));
-        } else {
-            // whatever is appropriate in this case
-            throw new IllegalArgumentException("Something wrong with file path cut");
-        }
-    }
+
 }

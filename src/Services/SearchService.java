@@ -2,7 +2,6 @@ package Services;
 
 import Models.InputCsvModelItem;
 import Models.SearchResult;
-import Models.SearchResultItem;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.jsoup.Connection;
@@ -15,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Element;
 
@@ -28,8 +25,8 @@ public class SearchService {
     private PropertiesService propertiesService;
     private Thread worker;
 
-    int max = 8000;
-    int min = 5000;
+    int max = 70000;
+    int min = 30000;
 
     boolean isWorkFlag = false;
     boolean isError = false;
@@ -39,12 +36,19 @@ public class SearchService {
         this.logService = logService;
         this.guiService = guiService;
         this.propertiesService = propertiesService;
+
+        if (propertiesService.getWorkState()) {
+            fileService.RestoreFilesControl();
+            guiService.RestorePlaceholder();
+            Work();
+        }
     }
 
     public void Work() {
         worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
             isError = false;
+            isWorkFlag = true;
             StartWork();
             guiService.changeApplicationStateToWork(false);
         });
@@ -53,7 +57,7 @@ public class SearchService {
 
     private void StartWork () {
         int index = propertiesService.getIndex();
-        isWorkFlag = true;
+        logService.LogMessage("Continue from: " + index + " record");
         ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
         for (int i = index; i < csvItems.size();  i++) {
             if (!isWorkFlag) {
@@ -61,13 +65,22 @@ public class SearchService {
             }
             propertiesService.saveIndex(i);
             Element body = getQueryBody(csvItems.get(i));
-            if (body == null) {
+            if(isRequestBanned(body)) {
                 continue;
             }
             SearchResult result = new SearchResult(body);
-            logService.LogMessage("Found: "+result.getResults().size()+"... Parsing.");
-            checkResultToInstagramLink(result, csvItems.get(i));
+            logService.LogMessage("Found: "+result.getResults().size()+" results. Parsing.");
+            checkResultToInstagramLink(result, csvItems.get(i)); //TODO: log info about found results
             //fileService.saveCSVItems(); //TODO: save items
+        }
+    }
+
+    private boolean isRequestBanned(Element body) {
+        if (body == null || body.text().toLowerCase().contains("The document has moved")){
+            logService.LogMessage("Request banned...");
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -86,17 +99,22 @@ public class SearchService {
         return result;
     }
 
+    public void setWorkStateToStop() {
+        isWorkFlag = false;
+    }
+
     private Connection.Response executeRequest(InputCsvModelItem item, int timeout) {
         if (!isWorkFlag) {
             return null;
         }
         Connection.Response response = null;
         try {
-            System.out.println("Processing: " + timeout/1000 + " sec");
             if (timeout > (max + min)) {
                 logService.UpdateStatus("Waiting: " + (timeout/1000)/60 + " min");
+                logService.LogMessage("Waiting: " + (timeout/1000)/60 + " min");
             }else {
-                logService.UpdateStatus("Waiting: " + (timeout/1000)/60 + " min");
+                logService.UpdateStatus("Waiting: " + (timeout/1000) + " sec");
+                logService.LogMessage("Waiting: " + (timeout/1000) + " sec");
             }
 
             Thread.sleep(timeout);

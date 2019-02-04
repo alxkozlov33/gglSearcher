@@ -44,7 +44,7 @@ public class DIResolver {
 
     private FileService getFileService() {
         if (fileService == null) {
-            fileService = new FileService(guiService, logService);
+            fileService = new FileService(guiService, logService, propertiesService);
         }
         return fileService;
     }

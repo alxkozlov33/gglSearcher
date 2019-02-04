@@ -10,8 +10,6 @@ public class MainController {
     private PropertiesService propertiesService;
     private SearchService searchService;
 
-    private boolean isWorkFlag;
-
     public MainController(FileService fileService,
                           GuiService guiService,
                           LogService logService,
@@ -27,20 +25,22 @@ public class MainController {
 
     public void StartButtonClickAction() {
         System.out.println("Start action button pressed");
+        propertiesService.saveWorkState(true);
+        propertiesService.saveInputFilePath(fileService.GetInputFile());
+        propertiesService.savePlaceHolder(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
         searchService.Work();
-
     }
 
     public void StopButtonClickAction() {
         System.out.println("Stop action button pressed");
-        isWorkFlag = false;
         propertiesService.saveWorkState(false);
         propertiesService.saveIndex(0);
         logService.LogMessage("Stopping...");
         logService.UpdateStatus("Stopping...");
+        searchService.setWorkStateToStop();
     }
 
     public void SelectInputFile() {
-        fileService.setUpInputFile();
+        fileService.setUpInputFile(null);
     }
 }
