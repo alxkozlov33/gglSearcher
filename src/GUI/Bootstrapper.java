@@ -13,8 +13,11 @@ public class Bootstrapper extends JFrame {
     private JLabel selectedFileLabelData;
     private JLabel selectedFileLabel;
     private JButton selectFileButton;
-    private JTextArea logWindow;
     private JTextField searchingPlaceHolder;
+    private JPanel logPanel;
+    private JPanel logTextPanel;
+    private JTextArea logWindow;
+    private JScrollBar verticalScroolBar;
 
     public Bootstrapper() {
         this.setContentPane(mainPanel);
@@ -47,6 +50,14 @@ public class Bootstrapper extends JFrame {
 
     public JTextField getSearchingPlaceHolder() {
         return searchingPlaceHolder;
+    }
+
+    public JPanel getLogPanel() {
+        return logPanel;
+    }
+
+    public JScrollBar getVerticalScroolBar() {
+        return verticalScroolBar;
     }
 }
 

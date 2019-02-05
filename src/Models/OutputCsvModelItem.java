@@ -1,14 +1,35 @@
 package Models;
 
-import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvBindByName;
 
 public class OutputCsvModelItem {
 
-    @CsvBindByPosition(position = 0)
-    private String companyName;
+    public OutputCsvModelItem() { }
 
+    @CsvBindByName(column = "GalleryName")
+    private String galleryName;
 
-    public String getCompanyName() {
-        return companyName;
+    @CsvBindByName(column = "Website")
+    private String website;
+
+    @CsvBindByName(column = "Address")
+    private String address;
+
+    public OutputCsvModelItem(String GalleryName, String Website, String Address) {
+        this.address = Address;
+        this.galleryName = GalleryName;
+        this.website = Website;
+    }
+
+    public String getGalleryName() {
+        return this.galleryName;
+    }
+
+    public String getWebsite() {
+        return this.website;
+    }
+
+    public String getAddress() {
+        return this.address;
     }
 }

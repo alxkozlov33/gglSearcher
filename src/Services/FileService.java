@@ -1,6 +1,7 @@
 package Services;
 
 import Models.InputCsvModelItem;
+import Models.OutputCsvModelItem;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -15,10 +16,7 @@ import org.apache.commons.io.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -41,7 +39,6 @@ public class FileService {
         this.guiService = guiService;
         this.logService = logService;
         this.propertiesService = propertiesService;
-
     }
 
     public void setUpInputFile(String restoredPath) {
@@ -63,7 +60,7 @@ public class FileService {
     }
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
-        ArrayList csvFileData= null;
+        ArrayList csvFileData = null;
         try {
             csvFileData = new ArrayList<InputCsvModelItem>();
             Reader reader = Files.newBufferedReader(inputFilePath);
@@ -74,8 +71,7 @@ public class FileService {
             csvFileData.addAll(IteratorUtils.toList(csvToBean.iterator()));
             reader.close();
             logService.LogMessage("CSV file was initialized");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             logService.LogMessage("Something wrong with input file");
             ex.printStackTrace();
         }
@@ -86,24 +82,36 @@ public class FileService {
         setUpInputFile(propertiesService.getInputFilePath());
     }
 
-    public void saveCSVItems(ArrayList<InputCsvModelItem> csvFileData) {
+    public void saveCSVItems(ArrayList<OutputCsvModelItem> csvFileData) {
         File outputFile = outputFilePath.toFile();
         if (csvFileData == null || csvFileData.size() == 0) {
             return;
         }
+        FileWriter mFileWriter = null;
         try {
-            Writer writer = Files.newBufferedWriter(Paths.get(outputFile.getAbsolutePath()), StandardOpenOption.APPEND);
-            StatefulBeanToCsv<InputCsvModelItem> beanToCsv = new StatefulBeanToCsvBuilder(writer)
-                    .withQuotechar(CSVWriter.DEFAULT_QUOTE_CHARACTER)
-                    .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
+            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
 
-                    .build();
-            beanToCsv.write(csvFileData);
+            for (OutputCsvModelItem item : csvFileData) {
+                mCsvWriter.writeNext(new String[]{item.getAddress(), item.getGalleryName(), item.getWebsite()});
+            }
+            mCsvWriter.close();
+            mFileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (CsvRequiredFieldEmptyException e) {
-            e.printStackTrace();
-        } catch (CsvDataTypeMismatchException e) {
+        }
+    }
+
+    private void createEmptyCSVFile() {
+        File outputFile = outputFilePath.toFile();
+        FileWriter mFileWriter = null;
+        try {
+            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
+            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
+            mCsvWriter.writeNext(new String[]{"Address", "GalleryName", "Website"});
+            mCsvWriter.close();
+            mFileWriter.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -117,6 +125,14 @@ public class FileService {
         String updatedOutputFilePath = basename+ " - updated." + FilenameUtils.getExtension(inputFilePath.toString());
         outputFilePath = Paths.get(updatedOutputFilePath);
         outputFile = outputFilePath.toFile();
+        try {
+            if (!outputFile.exists()) {
+                outputFile.createNewFile();
+                createEmptyCSVFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         logService.LogMessage("setUpOutputFile: " + outputFile.getAbsolutePath());
         guiService.setInputFilePath(inputFilePath.toString());
     }
@@ -137,7 +153,7 @@ public class FileService {
         } else {
             JFileChooser chooser = new JFileChooser();
             chooser.setDialogTitle("Select target file");
-            chooser.setFileSelectionMode(chooser.FILES_ONLY);
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
             int returnVal = chooser.showDialog(guiService.getBootstrapper(), "Select file");
             if (returnVal == JFileChooser.APPROVE_OPTION) {

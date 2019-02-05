@@ -1,7 +1,9 @@
 package Services;
 
 import Models.InputCsvModelItem;
+import Models.OutputCsvModelItem;
 import Models.SearchResult;
+import Models.SearchResultItem;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.jsoup.Connection;
@@ -25,8 +27,8 @@ public class SearchService {
     private PropertiesService propertiesService;
     private Thread worker;
 
-    int max = 70000;
-    int min = 30000;
+    int max = 7000;
+    int min = 3000;
 
     boolean isWorkFlag = false;
     boolean isError = false;
@@ -37,9 +39,9 @@ public class SearchService {
         this.guiService = guiService;
         this.propertiesService = propertiesService;
 
+        fileService.RestoreFilesControl();
+        guiService.RestorePlaceholder();
         if (propertiesService.getWorkState()) {
-            fileService.RestoreFilesControl();
-            guiService.RestorePlaceholder();
             Work();
         }
     }
@@ -70,8 +72,7 @@ public class SearchService {
             }
             SearchResult result = new SearchResult(body);
             logService.LogMessage("Found: "+result.getResults().size()+" results. Parsing.");
-            checkResultToInstagramLink(result, csvItems.get(i)); //TODO: log info about found results
-            //fileService.saveCSVItems(); //TODO: save items
+            fileService.saveCSVItems(mapSearchResultsToOutputCSV(result));
         }
     }
 
@@ -88,7 +89,21 @@ public class SearchService {
         String result = null;
         if (!StringUtils.isEmpty(inputPlaceHolder)){
             Map valuesMap = new HashMap();
-            valuesMap.put("city", csvItem.getCity());
+            valuesMap.put("columnA", csvItem.getColumnA());
+            valuesMap.put("columnB", csvItem.getColumnB());
+            valuesMap.put("columnC", csvItem.getColumnC());
+            valuesMap.put("columnD", csvItem.getColumnD());
+            valuesMap.put("columnE", csvItem.getColumnE());
+            valuesMap.put("columnF", csvItem.getColumnF());
+            valuesMap.put("columnG", csvItem.getColumnG());
+            valuesMap.put("columnH", csvItem.getColumnH());
+            valuesMap.put("columnI", csvItem.getColumnI());
+            valuesMap.put("columnJ", csvItem.getColumnJ());
+            valuesMap.put("columnK", csvItem.getColumnK());
+            valuesMap.put("columnL", csvItem.getColumnL());
+            valuesMap.put("columnM", csvItem.getColumnM());
+            valuesMap.put("columnN", csvItem.getColumnN());
+            valuesMap.put("columnO", csvItem.getColumnO());
             StrSubstitutor sub = new StrSubstitutor(valuesMap);
             try {
                 result = "https://www.google.com/search?q=" + URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8") + "&pws=0&gl=us&gws_rd=cr";
@@ -157,9 +172,14 @@ public class SearchService {
         return doc;
     }
 
-    private void checkResultToInstagramLink(SearchResult results, InputCsvModelItem csvItem) {
-        for (int i = 0; i < results.getResults().size(); i++){
-
+    private ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSV(SearchResult results) {
+        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
+        if (results.getResults().size() == 0) {
+            return null;
         }
+        for (SearchResultItem item : results.getResults()) {
+            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getAddress()));
+        }
+        return outputItems;
     }
 }

@@ -14,6 +14,7 @@ public class LogService {
     public void LogMessage(String message) {
         String msg = GetTimeString() + message;
         guiService.logAction(msg);
+
     }
 
     public void UpdateStatus(String message) {

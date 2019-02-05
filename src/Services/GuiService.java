@@ -20,6 +20,9 @@ public class GuiService {
         bootstrapper.getLogWindow().append(message + "\n");
     }
 
+    public void ScrollLogWindow() {
+    }
+
     public void setInputFilePath(String path) {
         bootstrapper.getSelectedFileLabelData().setText(cutPath(path));
     }
