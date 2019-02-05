@@ -5,11 +5,7 @@ import Models.OutputCsvModelItem;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.*;
@@ -20,7 +16,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class FileService {
@@ -127,7 +122,10 @@ public class FileService {
         outputFile = outputFilePath.toFile();
         try {
             if (!outputFile.exists()) {
-                outputFile.createNewFile();
+                if (!outputFile.getParentFile().exists())
+                    outputFile.getParentFile().mkdirs();
+                if (!outputFile.exists())
+                    outputFile.createNewFile();
                 createEmptyCSVFile();
             }
         } catch (IOException e) {

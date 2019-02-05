@@ -1,8 +1,6 @@
 package GUI;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.File;
 
 public class Bootstrapper extends JFrame {
     private JPanel mainPanel;
@@ -15,11 +13,11 @@ public class Bootstrapper extends JFrame {
     private JButton selectFileButton;
     private JTextField searchingPlaceHolder;
     private JPanel logPanel;
-    private JPanel logTextPanel;
-    private JTextArea logWindow;
+    private AutoScrollTextArea autoScrollTextArea;
     private JScrollBar verticalScroolBar;
 
     public Bootstrapper() {
+        setVisible(false);
         this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
@@ -44,10 +42,6 @@ public class Bootstrapper extends JFrame {
         return selectFileButton;
     }
 
-    public JTextArea getLogWindow() {
-        return logWindow;
-    }
-
     public JTextField getSearchingPlaceHolder() {
         return searchingPlaceHolder;
     }
@@ -58,6 +52,16 @@ public class Bootstrapper extends JFrame {
 
     public JScrollBar getVerticalScroolBar() {
         return verticalScroolBar;
+    }
+
+    private void createUIComponents() {
+        autoScrollTextArea = new AutoScrollTextArea();
+        getAutoScrollTextArea().setVisible(true);
+        // TODO: place custom component creation code here
+    }
+
+    public AutoScrollTextArea getAutoScrollTextArea() {
+        return autoScrollTextArea;
     }
 }
 

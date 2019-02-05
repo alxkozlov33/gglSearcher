@@ -3,7 +3,8 @@ package Services;
 
 import GUI.*;
 
-//Probably will be deleted
+import javax.swing.text.BadLocationException;
+
 public class GuiService {
     private Bootstrapper bootstrapper;
     private PropertiesService propertiesService;
@@ -17,10 +18,11 @@ public class GuiService {
     }
 
     public void logAction(String message) {
-        bootstrapper.getLogWindow().append(message + "\n");
-    }
-
-    public void ScrollLogWindow() {
+        try {
+            bootstrapper.getAutoScrollTextArea().append(message + "\n");
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setInputFilePath(String path) {
