@@ -1,8 +1,10 @@
 package Models;
 
 
+import Services.LogService;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,39 +12,24 @@ import java.util.List;
 public class SearchResult {
     private List<SearchResultItem> Results;
 
-    public SearchResult(Element body) {
+    private static LogService logService;
 
+    public SearchResult(Element body, LogService logService) {
+        this.logService = logService;
         Results = new ArrayList<>();
-        Elements items = body.select("div.section-result-text-content");
-        System.out.println(items.size());
-        System.out.println("Found " + items.size() + "elements");
+        Elements items = body.select("div#links");
 
-//        Elements businessList = body.select("#rso > div:nth-child(1) > div > div > div:nth-child(2) > div > div:nth-child(4) > div > *");
-//        if (businessList != null) {
-//            for (Element item : businessList) {
-//                Elements el = item.select("span");
-//                String galleryName = "";
-//                if (el.size() > 1 && el.get(0) != null) {
-//                    galleryName = el.get(0).text();
-//                }
-//
-//                String address = "";
-//                if (el.size() > 2 && el.get(el.size() - 2) != null) {
-//                    address = el.get(el.size() - 2).text();
-//                }
-//
-//                SearchResultItem resultItem = new SearchResultItem(galleryName, address, "");
-//                Results.add(resultItem);
-//            }
-//        }
         if (items != null) {
-            Elements resultDivs = items.select("div.g");
+            Elements resultDivs = items.select("div.web-result");
+
+            System.out.println("___________________________________________________________________");
             for (Element div : resultDivs) {
-                SearchResultItem searchResultItem = new SearchResultItem(div);
+                SearchResultItem searchResultItem = new SearchResultItem(div, logService);
                 if (searchResultItem.isItemCorrect()) {
-                    Results.add(new SearchResultItem(div));
+                    Results.add(new SearchResultItem(div, logService));
                 }
             }
+            System.out.println("___________________________________________________________________");
         }
     }
 

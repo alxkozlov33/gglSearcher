@@ -32,7 +32,7 @@ public class MainController {
     }
 
     public void StopButtonClickAction() {
-        System.out.println("Stop action button pressed");
+        //System.out.println("Stop action button pressed");
         propertiesService.saveWorkState(false);
         propertiesService.saveIndex(0);
         logService.LogMessage("Stopping...");

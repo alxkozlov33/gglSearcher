@@ -14,7 +14,7 @@ import javax.swing.text.SimpleAttributeSet;
 public class AutoScrollTextArea extends JScrollPane {
 
     private int linesShown = 0;
-    private int linesToShow = 100;
+    private int linesToShow = 10000;
 
     private JTextPane textPane;
     private SimpleAttributeSet attributeSet;

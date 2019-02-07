@@ -4,8 +4,6 @@ import Models.InputCsvModelItem;
 import Models.OutputCsvModelItem;
 import Models.SearchResult;
 import Models.SearchResultItem;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.jsoup.Connection;
@@ -13,16 +11,12 @@ import org.jsoup.Jsoup;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.jsoup.nodes.Element;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 public class SearchService {
 
@@ -31,8 +25,6 @@ public class SearchService {
     private LogService logService;
     private PropertiesService propertiesService;
     private Thread worker;
-
-    //int min = 3000;
 
     boolean isWorkFlag = false;
     boolean isError = false;
@@ -66,6 +58,7 @@ public class SearchService {
         logService.LogMessage("Continue from: " + index + " record");
         ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
         for (int i = index; i < csvItems.size();  i++) {
+            logService.updateCountItemsStatus(i, csvItems.size());
             if (!isWorkFlag) {
                 break;
             }
@@ -74,8 +67,7 @@ public class SearchService {
             if(isRequestBanned(body)) {
                 continue;
             }
-            SearchResult result = new SearchResult(body);
-            logService.LogMessage("Found: "+result.getResults().size()+" results. Parsing.");
+            SearchResult result = new SearchResult(body, logService);
             fileService.saveCSVItems(mapSearchResultsToOutputCSV(result));
         }
     }
@@ -109,10 +101,17 @@ public class SearchService {
             valuesMap.put("columnN", csvItem.getColumnN());
             valuesMap.put("columnO", csvItem.getColumnO());
             StrSubstitutor sub = new StrSubstitutor(valuesMap);
-            try {
-                result = "https://duckduckgo.com/?q=%21googlemaps+" + URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8")+"&t=hi";
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+
+            if (StringUtils.isEmpty(inputPlaceHolder)) {
+                logService.LogMessage("Define search placeholder");
+                isWorkFlag = false;
+            }
+            else {
+                try {
+                    result = "https://duckduckgo.com/html/?q=" + URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return result;
@@ -128,26 +127,12 @@ public class SearchService {
         }
         Connection.Response response = null;
         try {
-//            if (timeout > (max + min)) {
-//                logService.UpdateStatus("Waiting: " + (timeout/1000)/60 + " min");
-//                logService.LogMessage("Waiting: " + (timeout/1000)/60 + " min");
-//            }else {
-//                logService.UpdateStatus("Waiting: " + (timeout/1000) + " sec");
-//                logService.LogMessage("Waiting: " + (timeout/1000) + " sec");
-//            }
-            WebClient webClient = createWebClient();
             String string = createURL(item, guiService.getBootstrapper().getSearchingPlaceHolder().getText());
-            String redirectedURL = webClient.getPage(string).toString();
-            response = Jsoup.connect(redirectedURL).execute();
-            System.out.println(response.url());
-
-            Thread.sleep(timeout);
-
+            Thread.sleep(500);
             if (!StringUtils.isEmpty(string)) {
                 logService.LogMessage(string);
                 response = Jsoup.connect(string)
                         .followRedirects(true)
-
                         .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
                         .method(Connection.Method.GET)
                         .execute();
@@ -157,41 +142,24 @@ public class SearchService {
             logService.LogMessage("Cannot start searching");
         }
         catch (InterruptedException e) {
-            e.printStackTrace();
+            logService.LogMessage("Error while request executing.");
         }
         return response;
     }
 
-    private static WebClient createWebClient() {
-        WebClient client = new WebClient(BrowserVersion.FIREFOX_3_6);
-        client.setAjaxController(new NicelyResynchronizingAjaxController());
-        client.setThrowExceptionOnFailingStatusCode(false);
-        client.setThrowExceptionOnScriptError(false);
-        client.waitForBackgroundJavaScript(10000);
-        client.waitForBackgroundJavaScriptStartingBefore(10000);
-        client.setCssEnabled(false);
-        client.setJavaScriptEnabled(true);
-        client.setRedirectEnabled(true);
-        return client;
-    }
-
-    private Element getQueryBody(InputCsvModelItem item) {
+       private Element getQueryBody(InputCsvModelItem item) {
         Element doc = null;
         try {
             Connection.Response response = executeRequest(item, 2000);
-            if (response.statusCode() == 302 || response.statusCode() > 500) {
-                System.out.println("Request banned");
-//                int triesCounter = 1;
-//                while (triesCounter < 3) {
-//                    response = executeRequest(item, (min +(1200000 * triesCounter)) + new Random().nextInt(max + (1200000 * triesCounter)));
-//                    triesCounter++;
-//                }
-            }
+
+//            if (response.statusCode() == 302 || response.statusCode() > 500) {
+//                System.out.println("Request banned");
+//            }
             if (response != null) {
                 doc = response.parse().body();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logService.LogMessage("Error while query parsing");
         }
         return doc;
     }

@@ -14,6 +14,7 @@ public class Bootstrapper extends JFrame {
     private JTextField searchingPlaceHolder;
     private JPanel logPanel;
     private AutoScrollTextArea autoScrollTextArea;
+    private JPanel StatusInfoPanel;
     private JScrollBar verticalScroolBar;
 
     public Bootstrapper() {

@@ -1,9 +1,12 @@
 package Models;
 
+import Services.LogService;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 
 public class SearchResultItem {
@@ -12,14 +15,16 @@ public class SearchResultItem {
     private String Description;
     private boolean isItemCorrect;
 
+    private static LogService logService;
     private String Website;
     private String GalleryName;
     private String Address;
 
-    public SearchResultItem(Element div) {
-        MainHeader = div.select("a").first().select("h3").text();
-        SearchedLink = div.select("a").first().attr("href");
-        Description = div.select("div.s").text();
+    public SearchResultItem(Element div, LogService logService) {
+        this.logService = logService;
+        MainHeader = div.select("h2.result__title").text();
+        SearchedLink = div.select("a.result__url").first().attr("href");
+        Description = div.select("a.result__snippet").text();
         getItemSource();
     }
     public SearchResultItem(String GalleryName, String Address, String Website) {
@@ -30,6 +35,8 @@ public class SearchResultItem {
     }
 
     public void getItemSource() {
+        //System.out.println("Check meta tags on: "+ SearchedLink);
+        logService.LogMessage("Check meta tags on: "+ SearchedLink);
         try {
             if (!StringUtils.isEmpty(Description)) {
                 Connection.Response response = Jsoup.connect(SearchedLink)
@@ -40,7 +47,8 @@ public class SearchResultItem {
                 isItemCorrect = checkIfSourceContainTags(response.parse());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logService.LogMessage("Link broken: "+ SearchedLink);
+            //System.out.println("Link broken: "+ SearchedLink);
         }
     }
 
@@ -52,6 +60,12 @@ public class SearchResultItem {
         if (siteDescription.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art ")) ||
                 siteKeywords.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art ")) ||
                 siteName.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art "))) {
+            //System.out.println("Link contains meta tags: "+ SearchedLink);
+            //System.out.println("Link contains meta tags: "+ SearchedLink);
+
+            logService.LogMessage("Link contains meta tags: "+ SearchedLink);
+            logService.LogMessage("Link contains meta tags: "+ SearchedLink);
+
             Website = SearchedLink;
             GalleryName = siteName;
             return true;
