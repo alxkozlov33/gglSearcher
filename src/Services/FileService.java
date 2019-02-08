@@ -51,7 +51,6 @@ public class FileService {
         inputFilePath = Paths.get(path);
         inputFile = inFile;
         logService.LogMessage("setUpInputFile: " + inputFile.getAbsolutePath());
-        setUpOutputFile();
     }
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
@@ -103,7 +102,7 @@ public class FileService {
         try {
             mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
             CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-            mCsvWriter.writeNext(new String[]{"Address", "GalleryName", "Website"});
+            mCsvWriter.writeNext(new String[]{"City", "GalleryName", "Website", "NotSure"});
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
@@ -115,9 +114,9 @@ public class FileService {
         return inputFile;
     }
 
-    private void setUpOutputFile() {
-        String basename = inputFile.getParent() + File.separator + FilenameUtils.getBaseName(inputFilePath.toString());
-        String updatedOutputFilePath = basename+ " - updated." + FilenameUtils.getExtension(inputFilePath.toString());
+    public void setUpOutputFile(String placeholder) {
+        String resultString = placeholder.replace("$", "").replace("{", "").replace("}", "");
+        String updatedOutputFilePath = inputFile.getParent() + File.separator +resultString+"." + FilenameUtils.getExtension(inputFilePath.toString());
         outputFilePath = Paths.get(updatedOutputFilePath);
         outputFile = outputFilePath.toFile();
         try {

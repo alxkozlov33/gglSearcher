@@ -12,11 +12,14 @@ public class OutputCsvModelItem {
     @CsvBindByName(column = "Website")
     private String website;
 
-    @CsvBindByName(column = "Address")
-    private String address;
+    @CsvBindByName(column = "City")
+    private String city;
 
-    public OutputCsvModelItem(String GalleryName, String Website, String Address) {
-        this.address = Address;
+    @CsvBindByName(column = "NotSure")
+    private String notSure;
+
+    public OutputCsvModelItem(String GalleryName, String Website, String City) {
+        this.city = City;
         this.galleryName = GalleryName;
         this.website = Website;
     }
@@ -30,6 +33,8 @@ public class OutputCsvModelItem {
     }
 
     public String getAddress() {
-        return this.address;
+        return this.city;
     }
+
+    public String getNotSure() { return notSure; }
 }

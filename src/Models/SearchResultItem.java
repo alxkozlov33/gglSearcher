@@ -35,7 +35,6 @@ public class SearchResultItem {
     }
 
     public void getItemSource() {
-        //System.out.println("Check meta tags on: "+ SearchedLink);
         logService.LogMessage("Check meta tags on: "+ SearchedLink);
         try {
             if (!StringUtils.isEmpty(Description)) {
@@ -48,7 +47,6 @@ public class SearchResultItem {
             }
         } catch (IOException e) {
             logService.LogMessage("Link broken: "+ SearchedLink);
-            //System.out.println("Link broken: "+ SearchedLink);
         }
     }
 
@@ -60,8 +58,6 @@ public class SearchResultItem {
         if (siteDescription.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art ")) ||
                 siteKeywords.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art ")) ||
                 siteName.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art "))) {
-            //System.out.println("Link contains meta tags: "+ SearchedLink);
-            //System.out.println("Link contains meta tags: "+ SearchedLink);
 
             logService.LogMessage("Link contains meta tags: "+ SearchedLink);
             logService.LogMessage("Link contains meta tags: "+ SearchedLink);
