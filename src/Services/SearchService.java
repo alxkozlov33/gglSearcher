@@ -2,6 +2,7 @@ package Services;
 
 import Models.InputCsvModelItem;
 import Models.OutputCsvModelItem;
+import Models.SearchExceptions;
 import Models.SearchResult;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +33,7 @@ public class SearchService {
 
         fileService.RestoreFilesControl();
         guiService.RestorePlaceholder();
+
         if (propertiesService.getWorkState()) {
             Work();
         }
@@ -49,6 +51,7 @@ public class SearchService {
     }
 
     private void StartWork () {
+        SearchExceptions se = fileService.initExceptions();
         fileService.setUpOutputFile(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
         int index = propertiesService.getIndex();
         logService.LogMessage("Continue from: " + index + " record");

@@ -15,6 +15,8 @@ public class Bootstrapper extends JFrame {
     private JPanel logPanel;
     private AutoScrollTextArea autoScrollTextArea;
     private JPanel StatusInfoPanel;
+    private JLabel exceptionsLabelFileData;
+    private JButton selectExceptionsFileButton;
     private JScrollBar verticalScroolBar;
 
     public Bootstrapper() {
@@ -63,6 +65,14 @@ public class Bootstrapper extends JFrame {
 
     public AutoScrollTextArea getAutoScrollTextArea() {
         return autoScrollTextArea;
+    }
+
+    public JButton getSelectExceptionsFileButton() {
+        return selectExceptionsFileButton;
+    }
+
+    public JLabel getExceptionsLabelFileData() {
+        return exceptionsLabelFileData;
     }
 }
 

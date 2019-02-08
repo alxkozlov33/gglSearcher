@@ -29,11 +29,16 @@ public class GuiService {
         bootstrapper.getSelectedFileLabelData().setText(cutPath(path));
     }
 
+    public void setInputExceptionsFilePath(String path) {
+        bootstrapper.getExceptionsLabelFileData().setText(cutPath(path));
+    }
+
     public void changeApplicationStateToWork(boolean isWorkState) {
         bootstrapper.getRunButton().setEnabled(!isWorkState);
         bootstrapper.getStopButton().setEnabled(isWorkState);
         bootstrapper.getSelectFileButton().setEnabled(!isWorkState);
         bootstrapper.getSearchingPlaceHolder().setEnabled(!isWorkState);
+        bootstrapper.getSelectExceptionsFileButton().setEnabled(!isWorkState);
         propertiesService.saveWorkState(isWorkState);
         if (!isWorkState) {
             propertiesService.saveIndex(0);

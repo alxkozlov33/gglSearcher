@@ -12,6 +12,7 @@ public class PropertiesService {
     private String selectedCsvInputFileString = "selectedCsvInputFile";
     private String indexString = "index";
     private String placeholderPropertyString = "placeholder";
+    private String selectedExceptionsInputFileString = "exceptionsInputFile";
 
     public PropertiesService() {
         properties = new Properties();
@@ -52,6 +53,15 @@ public class PropertiesService {
         }
     }
 
+    public void saveExceptionsFilePath(File inputFile) {
+        if (inputFile != null){
+            saveProperty(selectedExceptionsInputFileString, inputFile.getAbsolutePath());
+        }
+        else {
+            saveProperty(selectedExceptionsInputFileString, "");
+        }
+    }
+
     public void saveIndex(int index) {
         saveProperty(indexString, Integer.toString(index));
     }
@@ -82,6 +92,10 @@ public class PropertiesService {
         return restoreProperty(placeholderPropertyString);
     }
 
+    public String getExceptionsFilePath() {
+        return restoreProperty(selectedExceptionsInputFileString);
+    }
+
     private void createNewFile() {
         OutputStream output = null;
         try {
@@ -97,6 +111,7 @@ public class PropertiesService {
                 saveIndex(0);
                 saveWorkState(false);
                 saveInputFilePath(null);
+                saveExceptionsFilePath(null);
                 savePlaceHolder(null);
                 properties.store(output, null);
             }

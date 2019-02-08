@@ -72,5 +72,6 @@ public class DIResolver {
         bootstrapper.getRunButton().addActionListener(e -> mainController.StartButtonClickAction());
         bootstrapper.getStopButton().addActionListener(e -> mainController.StopButtonClickAction());
         bootstrapper.getSelectFileButton().addActionListener(e -> mainController.SelectInputFile());
+        bootstrapper.getSelectExceptionsFileButton().addActionListener(e -> mainController.SelectExceptionsFile());
     }
 }

@@ -27,6 +27,7 @@ public class MainController {
         System.out.println("Start action button pressed");
         propertiesService.saveWorkState(true);
         propertiesService.saveInputFilePath(fileService.GetInputFile());
+        propertiesService.saveExceptionsFilePath(fileService.GetInputExceptionsFile());
         propertiesService.savePlaceHolder(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
         searchService.Work();
     }
@@ -42,5 +43,9 @@ public class MainController {
 
     public void SelectInputFile() {
         fileService.setUpInputFile(null);
+    }
+
+    public void SelectExceptionsFile() {
+        fileService.setExceptionsFile(null);
     }
 }

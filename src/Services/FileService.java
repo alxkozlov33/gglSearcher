@@ -1,9 +1,6 @@
 package Services;
 
-import Models.InputCsvModelItem;
-import Models.OutputCsvModelItem;
-import Models.SearchResult;
-import Models.SearchResultItem;
+import Models.*;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -15,17 +12,22 @@ import org.apache.commons.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileService {
 
     private Path inputFilePath;
+    private Path inputExceptionsFilePath;
     private Path outputFilePath;
 
     private File inputFile;
+    private File inputExceptionsFile;
     private File outputFile;
 
     private final GuiService guiService;
@@ -53,6 +55,25 @@ public class FileService {
         inputFilePath = Paths.get(path);
         inputFile = inFile;
         logService.LogMessage("setUpInputFile: " + inputFile.getAbsolutePath());
+        guiService.setInputFilePath(inputFilePath.toString());
+    }
+
+    public void setExceptionsFile(String restoredPath) {
+        String path = null;
+        if (restoredPath == null) {
+            path = selectFolderDialog();
+        } else {
+            path = restoredPath;
+        }
+
+        File inFile = new File(path);
+        if (StringUtils.isEmpty(path) && !inFile.exists()) {
+            return;
+        }
+        inputExceptionsFilePath = Paths.get(path);
+        inputExceptionsFile = inFile;
+        logService.LogMessage("setUpInputExceptionsFile: " + inputExceptionsFile.getAbsolutePath());
+        guiService.setInputExceptionsFilePath(inputExceptionsFile.toString());
     }
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
@@ -76,6 +97,7 @@ public class FileService {
 
     public void RestoreFilesControl() {
         setUpInputFile(propertiesService.getInputFilePath());
+        setExceptionsFile(propertiesService.getExceptionsFilePath());
     }
 
     public void saveCSVItems(ArrayList<OutputCsvModelItem> csvFileData) {
@@ -116,6 +138,10 @@ public class FileService {
         return inputFile;
     }
 
+    public File GetInputExceptionsFile() {
+        return inputExceptionsFile;
+    }
+
     public void setUpOutputFile(String placeholder) {
         String resultString = placeholder.replace("$", "").replace("{", "").replace("}", "");
         String updatedOutputFilePath = inputFile.getParent() + File.separator +resultString+"." + FilenameUtils.getExtension(inputFilePath.toString());
@@ -133,7 +159,7 @@ public class FileService {
             e.printStackTrace();
         }
         logService.LogMessage("setUpOutputFile: " + outputFile.getAbsolutePath());
-        guiService.setInputFilePath(inputFilePath.toString());
+
     }
 
     private String selectFolderDialog() {
@@ -173,5 +199,45 @@ public class FileService {
             outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getAddress()));
         }
         return outputItems;
+    }
+
+    public SearchExceptions initExceptions() {
+        SearchExceptions se = new SearchExceptions();
+        se.domainExceptions = new ArrayList<>();
+        se.URLExceptions = new ArrayList<>();
+        se.metaTagsExceptions = new ArrayList<>();
+        try {
+            List<String> lines = Files.readAllLines(inputExceptionsFilePath, StandardCharsets.UTF_8);
+            lines.removeIf(l -> l.equals(""));
+            for (int i = 0; i < lines.size(); i++)
+            {
+                if (lines.get(i).contains("# Exceptions for found domains:")) {
+                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
+                 }
+
+                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
+                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+
+                if (lines.get(i).contains("# Exceptions meta titles:")) {
+                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return se;
+    }
+
+    private ArrayList<String> collectTerms(int index, List<String> lines) throws IOException {
+        ArrayList<String> buffer = new ArrayList<>();
+        for (int k = (index+1); k < lines.size(); k++)
+        {
+            if (lines.get(k).startsWith("#")) {
+                break;
+            }
+            buffer.add(lines.get(k));
+        }
+        return buffer;
     }
 }
