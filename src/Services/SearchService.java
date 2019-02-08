@@ -3,19 +3,13 @@ package Services;
 import Models.InputCsvModelItem;
 import Models.OutputCsvModelItem;
 import Models.SearchResult;
-import Models.SearchResultItem;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.text.StrSubstitutor;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.jsoup.nodes.Element;
 
@@ -66,23 +60,11 @@ public class SearchService {
             }
             propertiesService.saveIndex(i);
             Element body = getQueryBody(csvItems.get(i));
-            if(isRequestBanned(body)) {
-                continue;
-            }
             SearchResult result = new SearchResult(body, logService);
-            fileService.saveCSVItems(mapSearchResultsToOutputCSV(result));
+            ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
+            fileService.saveCSVItems(items);
         }
     }
-
-    private boolean isRequestBanned(Element body) {
-        if (body == null || body.text().toLowerCase().contains("The document has moved")){
-            logService.LogMessage("Request banned...");
-            return true;
-        }else {
-            return false;
-        }
-    }
-
 
     public void setWorkStateToStop() {
         isWorkFlag = false;
@@ -132,16 +114,5 @@ public class SearchService {
             logService.LogMessage("Error while query parsing");
         }
         return doc;
-    }
-
-    private ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSV(SearchResult results) {
-        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
-        if (results.getResults().size() == 0) {
-            return null;
-        }
-        for (SearchResultItem item : results.getResults()) {
-            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getAddress()));
-        }
-        return outputItems;
     }
 }

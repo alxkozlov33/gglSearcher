@@ -27,6 +27,7 @@ public class SearchResultItem {
         Description = div.select("a.result__snippet").text();
         getItemSource();
     }
+
     public SearchResultItem(String GalleryName, String Address, String Website) {
         this.GalleryName = GalleryName;
         this.Address = Address;

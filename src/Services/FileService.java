@@ -2,6 +2,8 @@ package Services;
 
 import Models.InputCsvModelItem;
 import Models.OutputCsvModelItem;
+import Models.SearchResult;
+import Models.SearchResultItem;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -160,5 +162,16 @@ public class FileService {
             }
         }
         return result;
+    }
+
+    public ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(SearchResult results) {
+        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
+        if (results.getResults().size() == 0) {
+            return null;
+        }
+        for (SearchResultItem item : results.getResults()) {
+            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getAddress()));
+        }
+        return outputItems;
     }
 }
