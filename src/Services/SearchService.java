@@ -63,7 +63,10 @@ public class SearchService {
             }
             propertiesService.saveIndex(i);
             Element body = getQueryBody(csvItems.get(i));
-            SearchResult result = new SearchResult(body, logService);
+            SearchResult result = new SearchResult(logService)
+                    .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
+                    .initSearchExceptions(se)
+                    .parsePageBody(body);
             ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
             fileService.saveCSVItems(items);
         }
@@ -79,7 +82,7 @@ public class SearchService {
         }
         Connection.Response response = null;
         try {
-            String inputPlaceHolder = StrUtils.createURL(item, guiService.getBootstrapper().getSearchingPlaceHolder().getText());
+            String inputPlaceHolder = StrUtils.createURL(item, guiService.getSearchPlaceholderText());
             if (StringUtils.isEmpty(inputPlaceHolder)) {
                 logService.LogMessage("Define search placeholder");
                 isWorkFlag = false;

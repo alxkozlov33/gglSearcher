@@ -8,6 +8,8 @@ import javax.swing.text.BadLocationException;
 public class GuiService {
     private Bootstrapper bootstrapper;
     private PropertiesService propertiesService;
+
+
     public GuiService(Bootstrapper frame, PropertiesService propertiesService) {
         bootstrapper = frame;
         this.propertiesService = propertiesService;
@@ -23,6 +25,10 @@ public class GuiService {
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getSearchPlaceholderText() {
+        return bootstrapper.getSearchingPlaceHolder().getText();
     }
 
     public void setInputFilePath(String path) {

@@ -1,6 +1,7 @@
 package Models;
 
 import Services.LogService;
+import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -18,25 +19,27 @@ public class SearchResultItem {
     private static LogService logService;
     private String Website;
     private String GalleryName;
-    private String Address;
+    private String City;
 
-    public SearchResultItem(Element div, LogService logService) {
+    private SearchExceptions se;
+
+    public SearchResultItem(LogService logService) {
         this.logService = logService;
+    }
+
+    public SearchResultItem parseInputDiv(Element div) {
         MainHeader = div.select("h2.result__title").text();
         SearchedLink = div.select("a.result__url").first().attr("href");
         Description = div.select("a.result__snippet").text();
-        getItemSource();
+        return this;
     }
 
-    public SearchResultItem(String GalleryName, String Address, String Website) {
-        this.GalleryName = GalleryName;
-        this.Address = Address;
-        this.Website = Website;
-        isItemCorrect = true;
+    public SearchResultItem initSearchExceptions(SearchExceptions se) {
+        this.se = se;
+        return this;
     }
 
-    public void getItemSource() {
-        logService.LogMessage("Check meta tags on: "+ SearchedLink);
+    public SearchResultItem getItemSource() {
         try {
             if (!StringUtils.isEmpty(Description)) {
                 Connection.Response response = Jsoup.connect(SearchedLink)
@@ -44,29 +47,44 @@ public class SearchResultItem {
                         .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
                         .method(Connection.Method.GET)
                         .execute();
-                isItemCorrect = checkIfSourceContainTags(response.parse());
+                isItemCorrect = checkIfSourceRight(response.parse());
             }
         } catch (IOException e) {
             logService.LogMessage("Link broken: "+ SearchedLink);
         }
+        return this;
     }
 
-    public boolean checkIfSourceContainTags(Element source) {
+    private boolean checkIfSourceRight(Element source) {
         String siteDescription = source.select("meta[name=description]").attr("content");
         String siteKeywords = source.select("meta[name=keywords]").attr("content");
         String siteName = source.select("meta[property=og:title]").attr("content");
 
-        if (siteDescription.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art ")) ||
-                siteKeywords.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art ")) ||
-                siteName.contains("gallery") || (siteDescription.contains("art,") || siteDescription.contains("art "))) {
-
-            logService.LogMessage("Link contains meta tags: "+ SearchedLink);
-            logService.LogMessage("Link contains meta tags: "+ SearchedLink);
-
-            Website = SearchedLink;
-            GalleryName = siteName;
-            return true;
+        for (String metaExceptionKeyword : se.metaTagsExceptions) {
+            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
+                return false;
+            }
+            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
+                return false;
+            }
         }
+
+        for (String domainNameException: se.domainExceptions) {
+            String domainName = StrUtils.extractDomainName(SearchedLink);
+            if (domainNameException.toLowerCase().contains(domainName.toLowerCase())) {
+                return false;
+            }
+        }
+
+        for (String urlException: se.URLExceptions) {
+            if (SearchedLink.toLowerCase().contains(urlException.toLowerCase())) {
+                return  false;
+            }
+        }
+
+
+        Website = SearchedLink;
+        GalleryName = siteName;
         return false;
     }
 
@@ -98,7 +116,11 @@ public class SearchResultItem {
         return GalleryName;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
     }
 }

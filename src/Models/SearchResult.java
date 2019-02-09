@@ -12,25 +12,45 @@ import java.util.List;
 public class SearchResult {
     private List<SearchResultItem> Results;
 
-    private static LogService logService;
+    private LogService logService;
+    private String city;
 
-    public SearchResult(Element body, LogService logService) {
+    private SearchExceptions se;
+
+    public SearchResult(LogService logService) {
         this.logService = logService;
         Results = new ArrayList<>();
+    }
+
+    public SearchResult initSearchExceptions(SearchExceptions se) {
+        this.se = se;
+        return this;
+    }
+
+    public SearchResult parsePageBody(Element body) {
         Elements items = body.select("div#links");
 
-        if (items != null) {
-            Elements resultDivs = items.select("div.web-result");
-
-            System.out.println("___________________________________________________________________");
-            for (Element div : resultDivs) {
-                SearchResultItem searchResultItem = new SearchResultItem(div, logService);
-                if (searchResultItem.isItemCorrect()) {
-                    Results.add(new SearchResultItem(div, logService));
-                }
-            }
-            System.out.println("___________________________________________________________________");
+        if (items == null) {
+            return null;
         }
+        Elements resultDivs = items.select("div.web-result");
+
+        System.out.println("___________________________________________________________________");
+        for (Element div : resultDivs) {
+            SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource()
+                    ;
+            searchResultItem.setCity(city);
+            if (searchResultItem.isItemCorrect()) {
+                Results.add(new SearchResultItem(logService));
+            }
+        }
+        System.out.println("___________________________________________________________________");
+        return this;
+    }
+
+    public SearchResult initCity(String city) {
+        this.city = city;
+        return this;
     }
 
     public List<SearchResultItem> getResults() {

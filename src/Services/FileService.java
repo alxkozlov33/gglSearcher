@@ -12,7 +12,6 @@ import org.apache.commons.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -109,9 +108,8 @@ public class FileService {
         try {
             mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
             CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-
             for (OutputCsvModelItem item : csvFileData) {
-                mCsvWriter.writeNext(new String[]{item.getAddress(), item.getGalleryName(), item.getWebsite()});
+                mCsvWriter.writeNext(new String[]{item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()});
             }
             mCsvWriter.close();
             mFileWriter.close();
@@ -196,7 +194,7 @@ public class FileService {
             return null;
         }
         for (SearchResultItem item : results.getResults()) {
-            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getAddress()));
+            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity()));
         }
         return outputItems;
     }

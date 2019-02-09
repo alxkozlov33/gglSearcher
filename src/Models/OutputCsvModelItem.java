@@ -32,7 +32,7 @@ public class OutputCsvModelItem {
         return this.website;
     }
 
-    public String getAddress() {
+    public String getCity() {
         return this.city;
     }
 
