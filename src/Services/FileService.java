@@ -141,9 +141,14 @@ public class FileService {
     }
 
     public void setUpOutputFile(String placeholder) {
-        String resultString = placeholder.replace("$", "").replace("{", "").replace("}", "");
-        String updatedOutputFilePath = inputFile.getParent() + File.separator +resultString+"." + FilenameUtils.getExtension(inputFilePath.toString());
-        outputFilePath = Paths.get(updatedOutputFilePath);
+        String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "");
+        String parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
+                + File.separator
+                + fileName
+                + "." +
+                FilenameUtils.getExtension(inputFilePath.toString());
+
+        outputFilePath = Paths.get(parentFile);
         outputFile = outputFilePath.toFile();
         try {
             if (!outputFile.exists()) {
@@ -157,7 +162,6 @@ public class FileService {
             e.printStackTrace();
         }
         logService.LogMessage("setUpOutputFile: " + outputFile.getAbsolutePath());
-
     }
 
     private String selectFolderDialog() {
