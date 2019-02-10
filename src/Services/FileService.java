@@ -194,7 +194,7 @@ public class FileService {
             return null;
         }
         for (SearchResultItem item : results.getResults()) {
-            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity()));
+            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink()));
         }
         return outputItems;
     }

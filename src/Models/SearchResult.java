@@ -2,6 +2,7 @@ package Models;
 
 
 import Services.LogService;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import sun.rmi.runtime.Log;
@@ -34,16 +35,26 @@ public class SearchResult {
             return null;
         }
         Elements resultDivs = items.select("div.web-result");
-
-        System.out.println("___________________________________________________________________");
         for (Element div : resultDivs) {
-            SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource()
-                    ;
+            SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();
             searchResultItem.setCity(city);
             if (searchResultItem.isItemCorrect()) {
-                Results.add(new SearchResultItem(logService));
+                Results.add(searchResultItem);
             }
         }
+
+        int galleriesSize = 0;
+        int notSureLinksSize = 0;
+        for (SearchResultItem searchResultItem : Results) {
+            if (!StringUtils.isEmpty(searchResultItem.getWebsite())) {
+                galleriesSize++;
+            }
+            if (!StringUtils.isEmpty(searchResultItem.getNotSureLink())) {
+                notSureLinksSize++;
+            }
+        }
+        logService.LogMessage("Items found: " + galleriesSize);
+        logService.LogMessage("Not sure items found: " + notSureLinksSize);
         System.out.println("___________________________________________________________________");
         return this;
     }

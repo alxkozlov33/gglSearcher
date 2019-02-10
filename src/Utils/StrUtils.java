@@ -60,6 +60,10 @@ public class StrUtils {
         return result;
     }
 
+    public static String getUnmatchedPartOfString(String source) {
+        return source.replaceAll("^(?:https?:\\/\\/)?(?:[^@\\/\\n]+@)?(?:www\\.)?([^:\\/?\\n]+)", "");
+    }
+
     public static String extractDomainName(String URL) {
         String result = "";
 

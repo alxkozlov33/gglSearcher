@@ -17,9 +17,11 @@ public class SearchResultItem {
     private boolean isItemCorrect;
 
     private static LogService logService;
+
     private String Website;
     private String GalleryName;
     private String City;
+    private String NotSureLink;
 
     private SearchExceptions se;
 
@@ -76,16 +78,22 @@ public class SearchResultItem {
             }
         }
 
+        String str = StrUtils.getUnmatchedPartOfString(SearchedLink);
         for (String urlException: se.URLExceptions) {
-            if (SearchedLink.toLowerCase().contains(urlException.toLowerCase())) {
-                return  false;
+            if (str.toLowerCase().contains(urlException.toLowerCase())) {
+                return false;
             }
         }
 
+        if (str.length() > 4){
+            NotSureLink = SearchedLink;
+        }
+        else {
+            Website = SearchedLink;
+        }
 
-        Website = SearchedLink;
         GalleryName = siteName;
-        return false;
+        return true;
     }
 
     public String getMainHeader() {
@@ -104,10 +112,6 @@ public class SearchResultItem {
         return isItemCorrect;
     }
 
-    public void setItemCorrect(boolean itemCorrect) {
-        isItemCorrect = itemCorrect;
-    }
-
     public String getWebsite() {
         return Website;
     }
@@ -122,5 +126,9 @@ public class SearchResultItem {
 
     public void setCity(String city) {
         City = city;
+    }
+
+    public String getNotSureLink() {
+        return NotSureLink;
     }
 }
