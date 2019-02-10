@@ -65,6 +65,7 @@ public class SearchService {
             Element body = getQueryBody(csvItems.get(i));
             SearchResult result = new SearchResult(logService)
                     .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
+                    .initCountry(csvItems.get(i).getColumnB())
                     .initSearchExceptions(se)
                     .parsePageBody(body);
             ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);

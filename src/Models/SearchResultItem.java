@@ -21,6 +21,7 @@ public class SearchResultItem {
     private String Website;
     private String GalleryName;
     private String City;
+    private String Country;
     private String NotSureLink;
 
     private SearchExceptions se;
@@ -70,9 +71,8 @@ public class SearchResultItem {
                 return false;
             }
         }
-
+        String domainName = StrUtils.extractDomainName(SearchedLink);
         for (String domainNameException: se.domainExceptions) {
-            String domainName = StrUtils.extractDomainName(SearchedLink);
             if (domainNameException.toLowerCase().contains(domainName.toLowerCase())) {
                 return false;
             }
@@ -85,11 +85,17 @@ public class SearchResultItem {
             }
         }
 
+        for (String topLevelDomainException: se.topLevelDomainsExceptions) {
+            if (SearchedLink.toLowerCase().contains(topLevelDomainException.toLowerCase())) {
+                return false;
+            }
+        }
+
         if (str.length() > 4){
             NotSureLink = SearchedLink;
         }
         else {
-            Website = SearchedLink;
+            Website = StrUtils.extractDomainName(SearchedLink);
         }
 
         GalleryName = siteName;
@@ -130,5 +136,13 @@ public class SearchResultItem {
 
     public String getNotSureLink() {
         return NotSureLink;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String country) {
+        Country = country;
     }
 }

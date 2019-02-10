@@ -18,11 +18,15 @@ public class OutputCsvModelItem {
     @CsvBindByName(column = "NotSure")
     private String notSure;
 
-    public OutputCsvModelItem(String GalleryName, String Website, String City, String notSureLink) {
+    @CsvBindByName(column = "Country")
+    private String country;
+
+    public OutputCsvModelItem(String GalleryName, String Website, String City, String notSureLink, String country) {
         this.city = City;
         this.galleryName = GalleryName;
         this.website = Website;
         this.notSure = notSureLink;
+        this.country = country;
     }
 
     public String getGalleryName() {
@@ -38,4 +42,8 @@ public class OutputCsvModelItem {
     }
 
     public String getNotSure() { return notSure; }
+
+    public String getCountry() {
+        return country;
+    }
 }

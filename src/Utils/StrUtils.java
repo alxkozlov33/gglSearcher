@@ -71,7 +71,7 @@ public class StrUtils {
         Matcher matcher = pattern.matcher(URL);
         if (matcher.find())
         {
-            result = matcher.group(1);
+            result = matcher.group(0);
         }
         return result;
     }

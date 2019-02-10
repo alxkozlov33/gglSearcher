@@ -109,7 +109,7 @@ public class FileService {
             mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
             CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
             for (OutputCsvModelItem item : csvFileData) {
-                mCsvWriter.writeNext(new String[]{item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()});
+                mCsvWriter.writeNext(new String[]{item.getCountry(), item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()});
             }
             mCsvWriter.close();
             mFileWriter.close();
@@ -124,7 +124,7 @@ public class FileService {
         try {
             mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
             CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-            mCsvWriter.writeNext(new String[]{"City", "GalleryName", "Website", "NotSure"});
+            mCsvWriter.writeNext(new String[]{"Country", "City", "GalleryName", "Website", "NotSure"});
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
@@ -198,7 +198,7 @@ public class FileService {
             return null;
         }
         for (SearchResultItem item : results.getResults()) {
-            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink()));
+            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
         }
         return outputItems;
     }
@@ -208,14 +208,14 @@ public class FileService {
         se.domainExceptions = new ArrayList<>();
         se.URLExceptions = new ArrayList<>();
         se.metaTagsExceptions = new ArrayList<>();
+        se.topLevelDomainsExceptions = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(inputExceptionsFilePath, StandardCharsets.UTF_8);
             lines.removeIf(l -> l.equals(""));
-            for (int i = 0; i < lines.size(); i++)
-            {
+            for (int i = 0; i < lines.size(); i++) {
                 if (lines.get(i).contains("# Exceptions for found domains:")) {
                     se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
-                 }
+                }
 
                 if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
                     se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
@@ -223,6 +223,10 @@ public class FileService {
 
                 if (lines.get(i).contains("# Exceptions meta titles:")) {
                     se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+
+                if (lines.get(i).contains("# Exceptions for top level domains:")) {
+                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
                 }
             }
         } catch (IOException e) {

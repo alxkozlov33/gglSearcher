@@ -15,6 +15,7 @@ public class SearchResult {
 
     private LogService logService;
     private String city;
+    private String country;
 
     private SearchExceptions se;
 
@@ -38,6 +39,7 @@ public class SearchResult {
         for (Element div : resultDivs) {
             SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();
             searchResultItem.setCity(city);
+            searchResultItem.setCountry(country);
             if (searchResultItem.isItemCorrect()) {
                 Results.add(searchResultItem);
             }
@@ -59,6 +61,11 @@ public class SearchResult {
         return this;
     }
 
+    public SearchResult initCountry(String country) {
+        this.country = country;
+        return this;
+    }
+
     public SearchResult initCity(String city) {
         this.city = city;
         return this;
@@ -66,5 +73,13 @@ public class SearchResult {
 
     public List<SearchResultItem> getResults() {
         return Results;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
