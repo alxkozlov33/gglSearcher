@@ -47,6 +47,11 @@ public class FileService {
             path = restoredPath;
         }
 
+        if (!FilenameUtils.getExtension(path).equalsIgnoreCase("csv")) {
+            logService.LogMessage("Selected input file has invalid format");
+            return;
+        }
+
         File inFile = new File(path);
         if (StringUtils.isEmpty(path) && !inFile.exists()) {
             return;
@@ -63,6 +68,11 @@ public class FileService {
             path = selectFolderDialog();
         } else {
             path = restoredPath;
+        }
+
+        if (!FilenameUtils.getExtension(path).equalsIgnoreCase("txt")) {
+            logService.LogMessage("Selected exceptions file has invalid format");
+            return;
         }
 
         File inFile = new File(path);
@@ -141,7 +151,7 @@ public class FileService {
     }
 
     public void setUpOutputFile(String placeholder) {
-        String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "");
+        String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         String parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
                 + File.separator
                 + fileName

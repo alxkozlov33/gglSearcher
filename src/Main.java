@@ -20,7 +20,7 @@ public class Main {
 
     private void initGUI() {
         gui = new Bootstrapper();
-        gui.setTitle("Info searcher v1.5 [DDG]");
+        gui.setTitle("Info searcher v1.6 [DDG]");
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setSize(800, 700);
