@@ -6,11 +6,16 @@ import Models.SearchExceptions;
 import Models.SearchResult;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import org.jsoup.nodes.Element;
 
@@ -63,13 +68,15 @@ public class SearchService {
             }
             propertiesService.saveIndex(i);
             Element body = getQueryBody(csvItems.get(i));
-            SearchResult result = new SearchResult(logService)
-                    .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
-                    .initCountry(csvItems.get(i).getColumnB())
-                    .initSearchExceptions(se)
-                    .parsePageBody(body);
-            ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
-            fileService.saveCSVItems(items);
+            if (body != null) {
+                SearchResult result = new SearchResult(logService)
+                        .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
+                        .initCountry(csvItems.get(i).getColumnB())
+                        .initSearchExceptions(se)
+                        .parsePageBody(body);
+                ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
+                fileService.saveCSVItems(items);
+            }
         }
     }
 
@@ -81,6 +88,7 @@ public class SearchService {
         if (!isWorkFlag) {
             return null;
         }
+
         Connection.Response response = null;
         try {
             String inputPlaceHolder = StrUtils.createURL(item, guiService.getSearchPlaceholderText());
@@ -94,13 +102,12 @@ public class SearchService {
                 logService.LogMessage(inputPlaceHolder);
                 response = Jsoup.connect(inputPlaceHolder)
                         .followRedirects(true)
-                        .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
+                        .userAgent("DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)")
                         .method(Connection.Method.GET)
                         .execute();
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            logService.LogMessage("Cannot start searching");
+            logService.LogMessage("Error while request executing.");
         } catch (InterruptedException e) {
             logService.LogMessage("Error while request executing.");
         }

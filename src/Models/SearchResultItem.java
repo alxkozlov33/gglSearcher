@@ -32,7 +32,7 @@ public class SearchResultItem {
 
     public SearchResultItem parseInputDiv(Element div) {
         MainHeader = div.select("h2.result__title").text();
-        SearchedLink = div.select("a.result__url").first().attr("href");
+        SearchedLink = StrUtils.normalizeLink(div.selectFirst("a.result__url").text());
         Description = div.select("a.result__snippet").text();
         return this;
     }
@@ -45,9 +45,10 @@ public class SearchResultItem {
     public SearchResultItem getItemSource() {
         try {
             if (!StringUtils.isEmpty(Description)) {
-                Connection.Response response = Jsoup.connect(SearchedLink)
+                String link = StrUtils.normalizeLink(SearchedLink);
+                Connection.Response response = Jsoup.connect(link)
                         .followRedirects(true)
-                        .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/602.2.14 (KHTML, like Gecko) Version/10.0.1 Safari/602.2.14")
+                        .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                         .method(Connection.Method.GET)
                         .execute();
                 isItemCorrect = checkIfSourceRight(response.parse());

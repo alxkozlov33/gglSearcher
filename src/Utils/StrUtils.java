@@ -6,6 +6,7 @@ import org.apache.commons.lang.text.StrSubstitutor;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -21,6 +22,46 @@ public class StrUtils {
 
         try {
             result = "https://duckduckgo.com/html/?q=" + URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static String decodeURL(String decodedURL) {
+        String result = null;
+        try {
+            result = java.net.URLDecoder.decode(decodedURL, String.valueOf(StandardCharsets.UTF_8));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public static String normalizeLink(String link) {
+        if (StringUtils.isEmpty(link)) {
+            return "";
+        }
+        String result;
+        if (link.startsWith("http://")) {
+            result = link;
+        } else if (link.startsWith("www")) {
+            result = "http://" + link;
+        } else {
+            result = "http://www." + link;
+        }
+        return result;
+    }
+
+    public static String createQueryURL(InputCsvModelItem csvItem, String inputPlaceHolder) {
+        String result = null;
+        if (StringUtils.isEmpty(inputPlaceHolder)) {
+            return "";
+        }
+        StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
+
+        try {
+            result = URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

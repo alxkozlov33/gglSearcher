@@ -23,6 +23,7 @@ public class AutoScrollTextArea extends JScrollPane {
         super();
         this.setViewportView(getTextPane());
         redirectSystemStreams();
+
     }
 
     private void redirectSystemStreams() {
