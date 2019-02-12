@@ -213,7 +213,7 @@ public class FileService {
         return outputItems;
     }
 
-    public SearchExceptions initExceptions() {
+    public SearchExceptions initExceptionsKeywords() {
         SearchExceptions se = new SearchExceptions();
         se.domainExceptions = new ArrayList<>();
         se.URLExceptions = new ArrayList<>();

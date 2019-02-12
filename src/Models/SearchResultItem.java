@@ -63,6 +63,9 @@ public class SearchResultItem {
         String siteDescription = source.select("meta[name=description]").attr("content");
         String siteKeywords = source.select("meta[name=keywords]").attr("content");
         String siteName = source.select("meta[property=og:title]").attr("content");
+        if (StringUtils.isEmpty(siteName)) {
+            siteName = source.select("title").text();
+        }
 
         for (String metaExceptionKeyword : se.metaTagsExceptions) {
             if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {

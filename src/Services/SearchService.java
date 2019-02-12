@@ -6,16 +6,11 @@ import Models.SearchExceptions;
 import Models.SearchResult;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.jsoup.nodes.Element;
 
@@ -55,13 +50,13 @@ public class SearchService {
         worker.start();
     }
 
-    private void StartWork () {
-        SearchExceptions se = fileService.initExceptions();
+    private void StartWork() {
+        SearchExceptions se = fileService.initExceptionsKeywords();
         fileService.setUpOutputFile(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
         int index = propertiesService.getIndex();
         logService.LogMessage("Continue from: " + index + " record");
         ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
-        for (int i = index; i < csvItems.size();  i++) {
+        for (int i = index; i < csvItems.size(); i++) {
             logService.updateCountItemsStatus(i, csvItems.size());
             if (!isWorkFlag) {
                 break;
@@ -84,48 +79,38 @@ public class SearchService {
         isWorkFlag = false;
     }
 
-    private Connection.Response executeRequest(InputCsvModelItem item) {
+    private Element getQueryBody(InputCsvModelItem item) {
         if (!isWorkFlag) {
             return null;
         }
-
-        Connection.Response response = null;
+        String inputPlaceHolder = StrUtils.createURL(item, guiService.getSearchPlaceholderText());
+        if (StringUtils.isEmpty(inputPlaceHolder)) {
+            logService.LogMessage("Define search placeholder");
+            isWorkFlag = false;
+            return null;
+        }
+        Element doc = null;
         try {
-            String inputPlaceHolder = StrUtils.createURL(item, guiService.getSearchPlaceholderText());
-            if (StringUtils.isEmpty(inputPlaceHolder)) {
-                logService.LogMessage("Define search placeholder");
-                isWorkFlag = false;
-                return null;
-            }
-            Thread.sleep(500);
+            Thread.sleep(10000);
             if (!StringUtils.isEmpty(inputPlaceHolder)) {
                 logService.LogMessage(inputPlaceHolder);
-                response = Jsoup.connect(inputPlaceHolder)
+                Connection.Response response = Jsoup.connect(inputPlaceHolder)
                         .followRedirects(true)
                         .userAgent("DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)")
                         .method(Connection.Method.GET)
                         .execute();
+
+                if (response != null) {
+                    if (response.statusCode() > 300) {
+                        System.out.println("Request banned");
+                    }
+                    doc = response.parse().body();
+                }
             }
         } catch (IOException e) {
             logService.LogMessage("Error while request executing.");
         } catch (InterruptedException e) {
             logService.LogMessage("Error while request executing.");
-        }
-        return response;
-    }
-
-       private Element getQueryBody(InputCsvModelItem item) {
-        Element doc = null;
-        try {
-            Connection.Response response = executeRequest(item);
-            if (response != null) {
-                if (response.statusCode() > 300) {
-                    System.out.println("Request banned");
-                }
-                doc = response.parse().body();
-            }
-        } catch (Exception e) {
-            logService.LogMessage("Error while query parsing");
         }
         return doc;
     }
