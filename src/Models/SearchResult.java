@@ -34,6 +34,7 @@ public class SearchResult {
         }
         if (items != null) {
             Elements resultDivs = items.select("div.g");
+            
             for (Element div : resultDivs) {
                 SearchResultItem searchResultItem = new SearchResultItem(div);
                 if (searchResultItem.isItemCorrect()) {
