@@ -2,6 +2,7 @@ package Services;
 
 import Models.InputCsvModelItem;
 import Models.OutputCsvModelItem;
+import Models.ProxyObjects.ProxyObjectDto;
 import Models.SearchExceptions;
 import Models.SearchResult;
 import Utils.StrUtils;
@@ -20,16 +21,18 @@ public class SearchService {
     private GuiService guiService;
     private LogService logService;
     private PropertiesService propertiesService;
+    private ProxyService proxyService;
     private Thread worker;
 
     boolean isWorkFlag = false;
     boolean isError = false;
 
-    public SearchService(FileService fileService, LogService logService, GuiService guiService, PropertiesService propertiesService) {
+    public SearchService(FileService fileService, LogService logService, GuiService guiService, PropertiesService propertiesService, ProxyService proxyService) {
         this.fileService = fileService;
         this.logService = logService;
         this.guiService = guiService;
         this.propertiesService = propertiesService;
+        this.proxyService = proxyService;
 
         fileService.RestoreFilesControl();
         guiService.RestorePlaceholder();
@@ -51,27 +54,35 @@ public class SearchService {
     }
 
     private void StartWork() {
-        SearchExceptions se = fileService.initExceptionsKeywords();
-        fileService.setUpOutputFile(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
-        int index = propertiesService.getIndex();
-        logService.LogMessage("Continue from: " + index + " record");
-        ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
-        for (int i = index; i < csvItems.size(); i++) {
-            logService.updateCountItemsStatus(i, csvItems.size());
-            if (!isWorkFlag) {
-                break;
+        try {
+            SearchExceptions se = fileService.initExceptionsKeywords();
+            fileService.setUpOutputFile(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
+            int index = propertiesService.getIndex();
+            logService.LogMessage("Continue from: " + index + " record");
+            ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
+            for (int i = index; i < csvItems.size(); i++) {
+                logService.updateCountItemsStatus(i, csvItems.size());
+                if (!isWorkFlag) {
+                    break;
+                }
+                propertiesService.saveIndex(i);
+                Element body = getQueryBody(csvItems.get(i));
+                if (body != null) {
+                    SearchResult result = new SearchResult(logService)
+                            .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
+                            .initCountry(csvItems.get(i).getColumnB())
+                            .initSearchExceptions(se)
+                            .parsePageBody(body);
+                    ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
+                    fileService.saveCSVItems(items);
+                }
             }
-            propertiesService.saveIndex(i);
-            Element body = getQueryBody(csvItems.get(i));
-            if (body != null) {
-                SearchResult result = new SearchResult(logService)
-                        .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
-                        .initCountry(csvItems.get(i).getColumnB())
-                        .initSearchExceptions(se)
-                        .parsePageBody(body);
-                ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
-                fileService.saveCSVItems(items);
-            }
+        }
+        catch (Exception e) {
+            isWorkFlag = false;
+            isError = true;
+            guiService.changeApplicationStateToWork(false);
+            logService.LogMessage("Application failed");
         }
     }
 
@@ -89,6 +100,7 @@ public class SearchService {
             isWorkFlag = false;
             return null;
         }
+        ProxyObjectDto proxy = proxyService.getNewProxy();
         Element doc = null;
         try {
             Thread.sleep(10000);
@@ -97,6 +109,7 @@ public class SearchService {
                 Connection.Response response = Jsoup.connect(inputPlaceHolder)
                         .followRedirects(true)
                         .userAgent("DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)")
+                        .proxy(proxy.ip, proxy.port)
                         .method(Connection.Method.GET)
                         .execute();
 

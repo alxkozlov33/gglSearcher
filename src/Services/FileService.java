@@ -245,7 +245,7 @@ public class FileService {
         return se;
     }
 
-    private ArrayList<String> collectTerms(int index, List<String> lines) throws IOException {
+    private ArrayList<String> collectTerms(int index, List<String> lines) {
         ArrayList<String> buffer = new ArrayList<>();
         for (int k = (index+1); k < lines.size(); k++)
         {

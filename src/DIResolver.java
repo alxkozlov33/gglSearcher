@@ -9,6 +9,7 @@ public class DIResolver {
     private PropertiesService propertiesService;
     private GuiService guiService;
     private SearchService searchService;
+    private ProxyService proxyService;
 
     private MainController mainController;
     private Bootstrapper bootstrapper;
@@ -18,6 +19,7 @@ public class DIResolver {
 
     public void initDependencies (Bootstrapper mainWindow) {
         bootstrapper = mainWindow;
+        getProxyService();
         getPropertiesService();
         getGuiService();
         getLogService();
@@ -37,7 +39,7 @@ public class DIResolver {
 
     private SearchService getSearchService() {
         if (searchService == null) {
-            searchService = new SearchService(fileService, logService, guiService, propertiesService);
+            searchService = new SearchService(fileService, logService, guiService, propertiesService, proxyService);
         }
         return searchService;
     }
@@ -73,5 +75,12 @@ public class DIResolver {
         bootstrapper.getStopButton().addActionListener(e -> mainController.StopButtonClickAction());
         bootstrapper.getSelectFileButton().addActionListener(e -> mainController.SelectInputFile());
         bootstrapper.getSelectExceptionsFileButton().addActionListener(e -> mainController.SelectExceptionsFile());
+    }
+
+    public ProxyService getProxyService() {
+        if (proxyService == null) {
+            proxyService = new ProxyService();
+        }
+        return proxyService;
     }
 }

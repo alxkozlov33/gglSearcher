@@ -14,5 +14,6 @@
     <orderEntry type="library" name="commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="net.sourceforge.htmlunit:htmlunit:2.9" level="project" />
     <orderEntry type="library" name="org.apache.clerezza.ext:org.json.simple:0.4" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
   </component>
 </module>
