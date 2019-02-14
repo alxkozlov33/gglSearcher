@@ -47,7 +47,8 @@ public class SearchResultItem {
         try {
             if (!StringUtils.isEmpty(Description)) {
                 URI url = URI.create(SearchedLink).normalize();
-                Connection.Response response = Jsoup.connect(url.toString())
+                String pureUrl = StrUtils.clearLink(url.toString());
+                Connection.Response response = Jsoup.connect(pureUrl)
                         .followRedirects(true)
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                         .ignoreHttpErrors(true)

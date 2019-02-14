@@ -30,6 +30,7 @@ public class ProxyService {
                         .execute();
 
                 json = response.parse().text();
+                logService.LogMessage("Response from proxy service: " + json);
                 if (StrUtils.isProxyGrabbed(json)) {
                     success = true;
                     break;
@@ -49,7 +50,7 @@ public class ProxyService {
         }
 
         if(success) {
-            logService.LogMessage("Response from proxy service: " + json);
+
             ProxyObjectDto dto = new ProxyObjectDto(json);
             return dto;
         }

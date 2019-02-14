@@ -40,6 +40,16 @@ public class StrUtils {
         return result;
     }
 
+    public static String clearLink(String link) {
+        if (StringUtils.isEmpty(link)) {
+            return "";
+        }
+        if (link.startsWith("/")) {
+            link = link.substring(link.indexOf("=") + 1);
+        }
+        return link;
+    }
+
     public static String normalizeLink(String link) {
         if (StringUtils.isEmpty(link)) {
             return "";

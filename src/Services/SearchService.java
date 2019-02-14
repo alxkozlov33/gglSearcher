@@ -122,8 +122,6 @@ public class SearchService {
             logService.LogMessage("Waiting: " + waitingTime/1000 + " sec.");
             Thread.sleep(waitingTime);
             ProxyObjectDto proxy = proxyService.getNewProxy();
-            System.setProperty("http.proxyHost", proxy.ip);
-            System.setProperty("http.proxyPort", String.valueOf(proxy.port));
             logService.LogMessage("Used proxy: " +proxy.ip + ":" + proxy.port);
             String userAgent = userAgentsRotatorService.getRandomUserAgent();
             logService.LogMessage("Used UserAgent: " + userAgent);
@@ -137,16 +135,15 @@ public class SearchService {
                         .ignoreHttpErrors(true)
                         .execute();
 
-                System.clearProperty("http.proxyHost");
-                System.clearProperty("http.proxyPort");
                 logService.LogMessage("Request returned: " + response.statusCode() + " status code.");
                 doc = response.parse().body();
-                //System.out.println(doc);
             }
         } catch (IOException e) {
             logService.LogMessage("Error while request executing.");
+            logService.drawLine();
         } catch (InterruptedException e) {
             logService.LogMessage("Error while request executing.");
+            logService.drawLine();
         }
         return doc;
     }

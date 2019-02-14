@@ -26,6 +26,10 @@ public class LogService {
         return "["+date.format(DateTimeFormatter.ISO_LOCAL_DATE) + " " +time.format(DateTimeFormatter.ISO_LOCAL_TIME)+"]: ";
     }
 
+    public void drawLine() {
+        LogMessage("_________________________________________________________________");
+    }
+
     public void updateCountItemsStatus(int currentItem, int totalItems) {
 
         if (totalItems > 1) {
