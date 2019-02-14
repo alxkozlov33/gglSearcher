@@ -30,7 +30,6 @@ public class ProxyService {
                         .ignoreHttpErrors(true)
                         .timeout(10000)
                         .execute();
-
                 success = true;
                 break;
             } catch (SocketTimeoutException ex) {
