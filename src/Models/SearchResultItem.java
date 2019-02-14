@@ -6,9 +6,9 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URI;
 
 public class SearchResultItem {
     private String MainHeader;
@@ -31,9 +31,9 @@ public class SearchResultItem {
     }
 
     public SearchResultItem parseInputDiv(Element div) {
-        MainHeader = div.select("h2.result__title").text();
-        SearchedLink = StrUtils.normalizeLink(div.selectFirst("a.result__url").text());
-        Description = div.select("a.result__snippet").text();
+        MainHeader = div.select("a").first().select("h3").text();
+        SearchedLink = div.select("a").first().attr("href");
+        Description = div.select("div.s").text();
         return this;
     }
 
@@ -45,16 +45,18 @@ public class SearchResultItem {
     public SearchResultItem getItemSource() {
         try {
             if (!StringUtils.isEmpty(Description)) {
-                String link = StrUtils.normalizeLink(SearchedLink);
-                Connection.Response response = Jsoup.connect(link)
+                URI url = URI.create(SearchedLink).normalize();
+                Connection.Response response = Jsoup.connect(url.toString())
                         .followRedirects(true)
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
+                        .ignoreHttpErrors(false)
                         .method(Connection.Method.GET)
                         .execute();
+
                 isItemCorrect = checkIfSourceRight(response.parse());
             }
         } catch (IOException e) {
-            logService.LogMessage("Link broken: "+ SearchedLink);
+            logService.LogMessage("Link broken: " + SearchedLink);
         }
         return this;
     }
@@ -77,7 +79,7 @@ public class SearchResultItem {
         }
         String domainName = StrUtils.extractDomainName(SearchedLink);
         for (String domainNameException: se.domainExceptions) {
-            if (domainNameException.toLowerCase().contains(domainName.toLowerCase())) {
+            if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {
                 return false;
             }
         }

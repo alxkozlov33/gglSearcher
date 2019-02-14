@@ -10,6 +10,7 @@ public class DIResolver {
     private GuiService guiService;
     private SearchService searchService;
     private ProxyService proxyService;
+    private UserAgentsRotatorService userAgentsRotatorService;
 
     private MainController mainController;
     private Bootstrapper bootstrapper;
@@ -19,10 +20,11 @@ public class DIResolver {
 
     public void initDependencies (Bootstrapper mainWindow) {
         bootstrapper = mainWindow;
-        getProxyService();
+        getUserAgentsRotatorService();
         getPropertiesService();
         getGuiService();
         getLogService();
+        getProxyService();
         getFileService();
         getSearchService();
 
@@ -39,7 +41,7 @@ public class DIResolver {
 
     private SearchService getSearchService() {
         if (searchService == null) {
-            searchService = new SearchService(fileService, logService, guiService, propertiesService, proxyService);
+            searchService = new SearchService(fileService, logService, guiService, propertiesService, proxyService, userAgentsRotatorService);
         }
         return searchService;
     }
@@ -79,8 +81,15 @@ public class DIResolver {
 
     public ProxyService getProxyService() {
         if (proxyService == null) {
-            proxyService = new ProxyService();
+            proxyService = new ProxyService(logService);
         }
         return proxyService;
+    }
+
+    public UserAgentsRotatorService getUserAgentsRotatorService() {
+        if (userAgentsRotatorService == null) {
+            userAgentsRotatorService = new UserAgentsRotatorService();
+        }
+        return userAgentsRotatorService;
     }
 }

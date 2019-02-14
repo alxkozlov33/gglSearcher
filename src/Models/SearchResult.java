@@ -2,10 +2,8 @@ package Models;
 
 
 import Services.LogService;
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,34 +28,21 @@ public class SearchResult {
     }
 
     public SearchResult parsePageBody(Element body) {
-        Elements items = body.select("div#links");
+        Results = new ArrayList<>();
+        Elements items = body.select("#res");
 
-        if (items == null) {
-            return null;
-        }
-        Elements resultDivs = items.select("div.web-result");
-        for (Element div : resultDivs) {
-            SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();
-            searchResultItem.setCity(city);
-            searchResultItem.setCountry(country);
-            if (searchResultItem.isItemCorrect()) {
-                Results.add(searchResultItem);
-            }
-        }
+        if (items != null) {
+            Elements resultDivs = items.select("div.g");
 
-        int galleriesSize = 0;
-        int notSureLinksSize = 0;
-        for (SearchResultItem searchResultItem : Results) {
-            if (!StringUtils.isEmpty(searchResultItem.getWebsite())) {
-                galleriesSize++;
-            }
-            if (!StringUtils.isEmpty(searchResultItem.getNotSureLink())) {
-                notSureLinksSize++;
+            for (Element div : resultDivs) {
+                SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();
+                searchResultItem.setCity(city);
+                searchResultItem.setCountry(country);
+                if (searchResultItem.isItemCorrect()) {
+                    Results.add(searchResultItem);
+                }
             }
         }
-        logService.LogMessage("Items found: " + galleriesSize);
-        logService.LogMessage("Not sure items found: " + notSureLinksSize);
-        System.out.println("___________________________________________________________________");
         return this;
     }
 
