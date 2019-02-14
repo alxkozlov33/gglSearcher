@@ -16,10 +16,9 @@ public class ProxyService {
         Connection.Response response = null;
         String json = null;
 
-        int i = 0;
         boolean success = false;
 
-        while(i < 3) {
+        while(!success) {
             try {
                 response = Jsoup.connect("http://pubproxy.com/api/proxy?google=true&last_check=3&api=ZlBnbzgzUnhvUjBqbytFa1dZTzAzdz09&format=txt")
                         .ignoreContentType(true)
@@ -28,35 +27,28 @@ public class ProxyService {
                         .ignoreHttpErrors(true)
                         .timeout(10000)
                         .execute();
-                success = true;
-                break;
+
+                json = response.parse().text();
+                if (json != null) {
+                    success = true;
+                    break;
+                }
             } catch (SocketTimeoutException ex) {
                 logService.LogMessage("Cannot get proxy");
             } catch (IOException e) {
                 logService.LogMessage("Cannot get proxy");
             }
             try {
-                Thread.sleep(180000);
+                logService.LogMessage("Waiting 5 minutes to get proxy again...");
+                Thread.sleep(300000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logService.LogMessage("Thread sleep 300000 problem");
             }
-            i++;
+            success = false;
         }
 
         if(success) {
-            try {
-                json = response.parse().text();
-            } catch (IOException e) {
-                logService.LogMessage("Cannot parse body");
-            }
-//            Gson gson = new Gson();
-//            ProxyObject po = gson.fromJson(json, ProxyObject.class);
-//            if (po.count == 0) {
-//                return null;
-//            }
             ProxyObjectDto dto = new ProxyObjectDto(json);
-//            dto.ip = po.data.get(0).ip;
-//            dto.port = Integer.parseInt(po.data.get(0).port);
             return dto;
         }
         return null;
