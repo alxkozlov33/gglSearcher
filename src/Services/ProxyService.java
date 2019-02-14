@@ -1,6 +1,7 @@
 package Services;
 
 import Models.ProxyObjects.ProxyObjectDto;
+import Utils.StrUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
@@ -29,7 +30,7 @@ public class ProxyService {
                         .execute();
 
                 json = response.parse().text();
-                if (json != null) {
+                if (StrUtils.isProxyGrabbed(json)) {
                     success = true;
                     break;
                 }
@@ -48,6 +49,7 @@ public class ProxyService {
         }
 
         if(success) {
+            logService.LogMessage("Response from proxy service: " + json);
             ProxyObjectDto dto = new ProxyObjectDto(json);
             return dto;
         }

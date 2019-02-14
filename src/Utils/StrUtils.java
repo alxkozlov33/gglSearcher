@@ -118,4 +118,18 @@ public class StrUtils {
         }
         return result;
     }
+
+
+    public static boolean isProxyGrabbed(String response) {
+        if (response.isEmpty()) {
+            return false;
+        }
+        Pattern pattern = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$");
+        Matcher matcher = pattern.matcher(response);
+        if (matcher.find())
+        {
+            return true;
+        }
+        return false;
+    }
 }

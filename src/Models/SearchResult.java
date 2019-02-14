@@ -44,7 +44,7 @@ public class SearchResult {
                 }
             }
             logService.LogMessage(Results.size() + " results will be saved.");
-            logService.LogMessage("_____________________________________________________________________________________");
+            logService.LogMessage("_________________________________________________________________");
         }
         return this;
     }
