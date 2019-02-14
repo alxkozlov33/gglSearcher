@@ -33,6 +33,7 @@ public class SearchResult {
 
         if (items != null) {
             Elements resultDivs = items.select("div.g");
+            logService.LogMessage("Parsed: " + resultDivs.size() + " links");
 
             for (Element div : resultDivs) {
                 SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();
@@ -42,6 +43,8 @@ public class SearchResult {
                     Results.add(searchResultItem);
                 }
             }
+            logService.LogMessage(Results.size() + " results will be saved.");
+            logService.LogMessage("_____________________________________________________________________________________");
         }
         return this;
     }

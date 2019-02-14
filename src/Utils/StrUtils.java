@@ -21,7 +21,9 @@ public class StrUtils {
         StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
 
         try {
-            result = "https://www.google.com/search?q=" + URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8") + "&pws=0&gl=us&gws_rd=cr";
+            result = "https://www.google.com/search?q=" +
+                    URLEncoder.encode(sub.replace(inputPlaceHolder).replaceAll("[^a-zA-Z0-9\\s]", ""), "UTF-8") +
+                    "&pws=0&gl=us&gws_rd=cr";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

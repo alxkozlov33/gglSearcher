@@ -58,7 +58,7 @@ public class FileService {
         }
         inputFilePath = Paths.get(path);
         inputFile = inFile;
-        logService.LogMessage("setUpInputFile: " + inputFile.getAbsolutePath());
+        logService.LogMessage("Input data file initialized:: " + inputFile.getAbsolutePath());
         guiService.setInputFilePath(inputFilePath.toString());
     }
 
@@ -81,11 +81,15 @@ public class FileService {
         }
         inputExceptionsFilePath = Paths.get(path);
         inputExceptionsFile = inFile;
-        logService.LogMessage("setUpInputExceptionsFile: " + inputExceptionsFile.getAbsolutePath());
+        logService.LogMessage("Exceptions file initialized: " + inputExceptionsFile.getAbsolutePath());
         guiService.setInputExceptionsFilePath(inputExceptionsFile.toString());
     }
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
+        if (inputFilePath == null) {
+            logService.LogMessage("Input data file path empty. Application cannot start.");
+            return null;
+        }
         ArrayList csvFileData = null;
         try {
             csvFileData = new ArrayList<InputCsvModelItem>();
@@ -96,7 +100,6 @@ public class FileService {
                     .build();
             csvFileData.addAll(IteratorUtils.toList(csvToBean.iterator()));
             reader.close();
-            logService.LogMessage("CSV file was initialized");
         } catch (Exception ex) {
             logService.LogMessage("Something wrong with input file");
             ex.printStackTrace();
@@ -151,6 +154,10 @@ public class FileService {
     }
 
     public void setUpOutputFile(String placeholder) {
+        if (StringUtils.isEmpty(placeholder)) {
+            logService.LogMessage("Check search placeholder and input file. Application cannot start.");
+            return;
+        }
         String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         String parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
                 + File.separator
@@ -214,6 +221,10 @@ public class FileService {
     }
 
     public SearchExceptions initExceptionsKeywords() {
+        if (inputExceptionsFilePath == null) {
+            logService.LogMessage("Exceptions file path empty. Application cannot start.");
+            return null;
+        }
         SearchExceptions se = new SearchExceptions();
         se.domainExceptions = new ArrayList<>();
         se.URLExceptions = new ArrayList<>();

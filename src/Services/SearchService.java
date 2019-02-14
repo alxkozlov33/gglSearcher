@@ -69,8 +69,12 @@ public class SearchService {
             SearchExceptions se = fileService.initExceptionsKeywords();
             fileService.setUpOutputFile(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
             int index = propertiesService.getIndex();
-            logService.LogMessage("Continue from: " + index + " record");
             ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
+            if (csvItems == null) {
+                guiService.changeApplicationStateToWork(false);
+                return;
+            }
+            logService.LogMessage("Continue from: " + index + " record");
             for (int i = index; i < csvItems.size(); i++) {
                 logService.updateCountItemsStatus(i, csvItems.size());
                 if (!isWorkFlag) {
@@ -111,10 +115,13 @@ public class SearchService {
             isWorkFlag = false;
             return null;
         }
-        ProxyObjectDto proxy = proxyService.getNewProxy();
+
         Element doc = null;
         try {
-            Thread.sleep(getRandomTime());
+            int waitingTime = getRandomTime();
+            logService.LogMessage("Waiting: " + waitingTime/1000 + " sec.");
+            Thread.sleep(waitingTime);
+            ProxyObjectDto proxy = proxyService.getNewProxy();
             System.setProperty("http.proxyHost", proxy.ip);
             System.setProperty("http.proxyPort", String.valueOf(proxy.port));
             logService.LogMessage("Used proxy: " +proxy.ip + ":" + proxy.port);
@@ -124,16 +131,17 @@ public class SearchService {
                 logService.LogMessage(inputPlaceHolder);
                 Connection.Response response = Jsoup.connect(inputPlaceHolder)
                         .followRedirects(true)
+                        .proxy(proxy.ip, proxy.port)
                         .userAgent(userAgent)
                         .method(Connection.Method.GET)
+                        .ignoreHttpErrors(true)
                         .execute();
 
                 System.clearProperty("http.proxyHost");
                 System.clearProperty("http.proxyPort");
-                if (response.statusCode() > 300) {
-                    System.out.println("Request banned");
-                }
+                logService.LogMessage("Request returned: " + response.statusCode() + " status code.");
                 doc = response.parse().body();
+                //System.out.println(doc);
             }
         } catch (IOException e) {
             logService.LogMessage("Error while request executing.");

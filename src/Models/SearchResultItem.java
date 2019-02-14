@@ -8,6 +8,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 
 public class SearchResultItem {
@@ -49,13 +50,16 @@ public class SearchResultItem {
                 Connection.Response response = Jsoup.connect(url.toString())
                         .followRedirects(true)
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
-                        .ignoreHttpErrors(false)
+                        .ignoreHttpErrors(true)
                         .method(Connection.Method.GET)
                         .execute();
 
                 isItemCorrect = checkIfSourceRight(response.parse());
             }
         } catch (IOException e) {
+            logService.LogMessage("Link broken: " + SearchedLink);
+        }
+        catch (IllegalArgumentException e) {
             logService.LogMessage("Link broken: " + SearchedLink);
         }
         return this;
