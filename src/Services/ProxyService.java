@@ -35,6 +35,11 @@ public class ProxyService {
             } catch (IOException e) {
                 logService.LogMessage("Cannot get proxy");
             }
+            try {
+                Thread.sleep(180000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             i++;
         }
 
