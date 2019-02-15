@@ -47,6 +47,9 @@ public class StrUtils {
         if (link.startsWith("/")) {
             link = link.substring(link.indexOf("=") + 1);
         }
+        if (link.startsWith("www")) {
+            link = "http://" + link;
+        }
         return link;
     }
 

@@ -8,7 +8,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 
 public class SearchResultItem {
@@ -32,8 +31,8 @@ public class SearchResultItem {
     }
 
     public SearchResultItem parseInputDiv(Element div) {
-        MainHeader = div.select("a").first().select("h3").text();
-        SearchedLink = div.select("a").first().attr("href");
+        MainHeader = div.select("h3").text();
+        SearchedLink = div.select("cite").text();
         Description = div.select("div.s").text();
         return this;
     }
