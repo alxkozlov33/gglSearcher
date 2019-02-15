@@ -96,7 +96,7 @@ public class SearchService {
             isWorkFlag = false;
             isError = true;
             guiService.changeApplicationStateToWork(false);
-            logService.LogMessage("Application failed");
+            logService.LogMessage("Application stopped");
             e.printStackTrace();
         }
     }
@@ -127,6 +127,7 @@ public class SearchService {
             logService.LogMessage("Used UserAgent: " + userAgent);
             if (!StringUtils.isEmpty(inputPlaceHolder)) {
                 logService.LogMessage(inputPlaceHolder);
+                inputPlaceHolder = "https://www.google.com/search?q=art+gallery+Youkaichi&pws=0&gl=us&gws_rd=cr&ie=UTF-8";
                 Connection.Response response = Jsoup.connect(inputPlaceHolder)
                         .followRedirects(true)
                         .proxy(proxy.ip, proxy.port)
@@ -138,11 +139,9 @@ public class SearchService {
                 logService.LogMessage("Request returned: " + response.statusCode() + " status code.");
                 doc = response.parse().body();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             logService.LogMessage("Error while request executing.");
-            logService.drawLine();
-        } catch (InterruptedException e) {
-            logService.LogMessage("Error while request executing.");
+            logService.LogMessage(e.getMessage());
             logService.drawLine();
         }
         return doc;

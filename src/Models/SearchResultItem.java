@@ -32,7 +32,7 @@ public class SearchResultItem {
 
     public SearchResultItem parseInputDiv(Element div) {
         MainHeader = div.select("h3").text();
-        SearchedLink = div.select("cite").text();
+        SearchedLink = div.select("div.r > a").attr("href");
         Description = div.select("div.s").text();
         return this;
     }
@@ -56,11 +56,9 @@ public class SearchResultItem {
 
                 isItemCorrect = checkIfSourceRight(response.parse());
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             logService.LogMessage("Link broken: " + SearchedLink);
-        }
-        catch (IllegalArgumentException e) {
-            logService.LogMessage("Link broken: " + SearchedLink);
+            logService.LogMessage(e.getMessage());
         }
         return this;
     }
@@ -74,29 +72,29 @@ public class SearchResultItem {
         }
 
         for (String metaExceptionKeyword : se.metaTagsExceptions) {
-            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
+            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase().replaceAll("\\s+",""))) {
                 return false;
             }
-            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
+            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase().replaceAll("\\s+",""))) {
                 return false;
             }
         }
         String domainName = StrUtils.extractDomainName(SearchedLink);
         for (String domainNameException: se.domainExceptions) {
-            if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {
+            if (domainName.toLowerCase().contains(domainNameException.toLowerCase().replaceAll("\\s+",""))) {
                 return false;
             }
         }
 
         String str = StrUtils.getUnmatchedPartOfString(SearchedLink);
         for (String urlException: se.URLExceptions) {
-            if (str.toLowerCase().contains(urlException.toLowerCase())) {
+            if (str.toLowerCase().contains(urlException.toLowerCase().replaceAll("\\s+",""))) {
                 return false;
             }
         }
 
         for (String topLevelDomainException: se.topLevelDomainsExceptions) {
-            if (SearchedLink.toLowerCase().contains(topLevelDomainException.toLowerCase())) {
+            if (SearchedLink.toLowerCase().contains(topLevelDomainException.toLowerCase().replaceAll("\\s+",""))) {
                 return false;
             }
         }

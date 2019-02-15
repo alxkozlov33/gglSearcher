@@ -26,7 +26,6 @@ public class PropertiesService {
             properties.setProperty(propertyName, value);
             properties.store(output, null);
         } catch (IOException io) {
-            io.printStackTrace();
             System.out.println(io.getMessage());
         } finally {
             if (output != null) {
@@ -117,7 +116,6 @@ public class PropertiesService {
             }
             propertiesFileTemp.delete();
         } catch (IOException io) {
-            io.printStackTrace();
             System.out.println(io.getMessage());
         } finally {
             if (output != null) {
@@ -143,7 +141,6 @@ public class PropertiesService {
             }
         } catch (IOException ex) {
             System.out.println(ex.getStackTrace());
-            ex.printStackTrace();
         } finally {
             if (input != null) {
                 try {

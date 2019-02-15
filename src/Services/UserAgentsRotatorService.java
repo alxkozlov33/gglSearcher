@@ -127,8 +127,6 @@ public class UserAgentsRotatorService {
         givenList.add("Opera/9.80 (Windows NT 6.1; U; en-GB) Presto/2.7.62 Version/11.00");
         givenList.add("Opera/9.80 (Windows NT 6.1; U; zh-tw) Presto/2.7.62 Version/11.01");
         givenList.add("Opera/9.80 (Windows NT 6.0; U; en) Presto/2.8.99 Version/11.10");
-        givenList.add("Opera/9.80 (X11; Linux i686; U; ru) Presto/2.8.131 Version/11.11");
-        givenList.add("Opera/9.80 (Windows NT 5.1) Presto/2.12.388 Version/12.14");
         givenList.add("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.12 Safari/537.36 OPR/14.0.1116.4");
         givenList.add("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.29 Safari/537.36 OPR/15.0.1147.24 (Edition Next)");
         givenList.add("Opera/9.80 (Linux armv6l ; U; CE-HTML/1.0 NETTV/3.0.1;; en) Presto/2.6.33 Version/10.60");
