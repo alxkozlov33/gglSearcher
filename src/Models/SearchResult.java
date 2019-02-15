@@ -34,6 +34,9 @@ public class SearchResult {
         if (items != null) {
             Elements resultDivs = items.select("div.g");
             logService.LogMessage("Parsed: " + resultDivs.size() + " links");
+            if (resultDivs.size() == 0) {
+                System.out.println("Empty");
+            }
 
             for (Element div : resultDivs) {
                 SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();

@@ -22,7 +22,7 @@ public class StrUtils {
 
         try {
             result = "https://www.google.com/search?q=" +
-                    URLEncoder.encode(sub.replace(inputPlaceHolder).replaceAll("[^a-zA-Z0-9\\s]", ""), "UTF-8") +
+                    URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8") +
                     "&pws=0&gl=us&gws_rd=cr";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class StrUtils {
         if (StringUtils.isEmpty(link)) {
             return "";
         }
-        if (link.startsWith("/")) {
+        if (link.startsWith("/url")) {
             link = link.substring(link.indexOf("=") + 1);
         }
         if (link.startsWith("www")) {
@@ -85,22 +85,31 @@ public class StrUtils {
 
     private static  Map valuesMap(InputCsvModelItem csvItem) {
         Map valuesMap = new HashMap();
-        valuesMap.put("columnA", csvItem.getColumnA());
-        valuesMap.put("columnB", csvItem.getColumnB());
-        valuesMap.put("columnC", csvItem.getColumnC());
-        valuesMap.put("columnD", csvItem.getColumnD());
-        valuesMap.put("columnE", csvItem.getColumnE());
-        valuesMap.put("columnF", csvItem.getColumnF());
-        valuesMap.put("columnG", csvItem.getColumnG());
-        valuesMap.put("columnH", csvItem.getColumnH());
-        valuesMap.put("columnI", csvItem.getColumnI());
-        valuesMap.put("columnJ", csvItem.getColumnJ());
-        valuesMap.put("columnK", csvItem.getColumnK());
-        valuesMap.put("columnL", csvItem.getColumnL());
-        valuesMap.put("columnM", csvItem.getColumnM());
-        valuesMap.put("columnN", csvItem.getColumnN());
-        valuesMap.put("columnO", csvItem.getColumnO());
+        valuesMap.put("columnA", replaceCharacters(csvItem.getColumnA()));
+        valuesMap.put("columnB", replaceCharacters(csvItem.getColumnB()));
+        valuesMap.put("columnC", replaceCharacters(csvItem.getColumnC()));
+        valuesMap.put("columnD", replaceCharacters(csvItem.getColumnD()));
+        valuesMap.put("columnE", replaceCharacters(csvItem.getColumnE()));
+        valuesMap.put("columnF", replaceCharacters(csvItem.getColumnF()));
+        valuesMap.put("columnG", replaceCharacters(csvItem.getColumnG()));
+        valuesMap.put("columnH", replaceCharacters(csvItem.getColumnH()));
+        valuesMap.put("columnI", replaceCharacters(csvItem.getColumnI()));
+        valuesMap.put("columnJ", replaceCharacters(csvItem.getColumnJ()));
+        valuesMap.put("columnK", replaceCharacters(csvItem.getColumnK()));
+        valuesMap.put("columnL", replaceCharacters(csvItem.getColumnL()));
+        valuesMap.put("columnM", replaceCharacters(csvItem.getColumnM()));
+        valuesMap.put("columnN", replaceCharacters(csvItem.getColumnN()));
+        valuesMap.put("columnO", replaceCharacters(csvItem.getColumnO()));
         return valuesMap;
+    }
+
+    private static String replaceCharacters(String value) {
+        if (StringUtils.isEmpty(value)) {
+            return value;
+        }
+        else {
+            return value.replaceAll("[^a-zA-Z0-9\\s]", "");
+        }
     }
 
     public static String getSearchValue(InputCsvModelItem csvItem, String inputPlaceHolder) {

@@ -48,8 +48,8 @@ public class SearchService {
 
     private int getRandomTime() {
         Random r = new Random();
-        int low = 15000;
-        int high = 30000;
+        int low = 20000;
+        int high = 40000;
         return r.nextInt(high-low) + low;
     }
 
@@ -92,6 +92,8 @@ public class SearchService {
                     fileService.saveCSVItems(items);
                 }
             }
+            logService.LogMessage("Search finished");
+            logService.UpdateStatus("Finished");
         } catch (Exception e) {
             isWorkFlag = false;
             isError = true;
@@ -117,32 +119,38 @@ public class SearchService {
         }
 
         Element doc = null;
-        try {
-            int waitingTime = getRandomTime();
-            logService.LogMessage("Waiting: " + waitingTime/1000 + " sec.");
-            Thread.sleep(waitingTime);
-            ProxyObjectDto proxy = proxyService.getNewProxy();
-            logService.LogMessage("Used proxy: " +proxy.ip + ":" + proxy.port);
-            String userAgent = userAgentsRotatorService.getRandomUserAgent();
-            logService.LogMessage("Used UserAgent: " + userAgent);
-            if (!StringUtils.isEmpty(inputPlaceHolder)) {
-                logService.LogMessage(inputPlaceHolder);
-                inputPlaceHolder = "https://www.google.com/search?q=art+gallery+Youkaichi&pws=0&gl=us&gws_rd=cr&ie=UTF-8";
-                Connection.Response response = Jsoup.connect(inputPlaceHolder)
-                        .followRedirects(true)
-                        .proxy(proxy.ip, proxy.port)
-                        .userAgent(userAgent)
-                        .method(Connection.Method.GET)
-                        .ignoreHttpErrors(true)
-                        .execute();
-
-                logService.LogMessage("Request returned: " + response.statusCode() + " status code.");
-                doc = response.parse().body();
+        int i = 0;
+        while (i < 3) {
+            try {
+                int waitingTime = getRandomTime();
+                logService.LogMessage("Waiting: " + waitingTime / 1000 + " sec.");
+                Thread.sleep(waitingTime);
+                ProxyObjectDto proxy = proxyService.getNewProxy();
+                logService.LogMessage("Used proxy: " + proxy.ip + ":" + proxy.port);
+                String userAgent = userAgentsRotatorService.getRandomUserAgent();
+                logService.LogMessage("Used UserAgent: " + userAgent);
+                if (!StringUtils.isEmpty(inputPlaceHolder)) {
+                    logService.LogMessage(inputPlaceHolder);
+                    Connection.Response response = Jsoup.connect(inputPlaceHolder)
+                            .followRedirects(true)
+                            .proxy(proxy.ip, proxy.port)
+                            .userAgent(userAgent)
+                            .method(Connection.Method.GET)
+                            .ignoreHttpErrors(true)
+                            .execute();
+                    logService.LogMessage("Request returned: " + response.statusCode() + " status code.");
+                    doc = response.parse().body();
+                    if (response.statusCode() != 200){
+                        continue;
+                    }
+                    break;
+                }
+            } catch (Exception e) {
+                logService.LogMessage("Error while request executing.");
+                logService.LogMessage(e.getMessage());
+                logService.drawLine();
             }
-        } catch (Exception e) {
-            logService.LogMessage("Error while request executing.");
-            logService.LogMessage(e.getMessage());
-            logService.drawLine();
+            i++;
         }
         return doc;
     }

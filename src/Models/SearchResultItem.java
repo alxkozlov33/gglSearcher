@@ -6,8 +6,6 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-
-import java.io.IOException;
 import java.net.URI;
 
 public class SearchResultItem {
@@ -33,6 +31,9 @@ public class SearchResultItem {
     public SearchResultItem parseInputDiv(Element div) {
         MainHeader = div.select("h3").text();
         SearchedLink = div.select("div.r > a").attr("href");
+        if (StringUtils.isEmpty(SearchedLink)){
+            SearchedLink = div.select("h3.r > a").attr("href");
+        }
         Description = div.select("div.s").text();
         return this;
     }
@@ -44,7 +45,7 @@ public class SearchResultItem {
 
     public SearchResultItem getItemSource() {
         try {
-            if (!StringUtils.isEmpty(Description)) {
+            if (!StringUtils.isEmpty(Description) && !StringUtils.isEmpty(SearchedLink)) {
                 URI url = URI.create(SearchedLink).normalize();
                 String pureUrl = StrUtils.clearLink(url.toString());
                 Connection.Response response = Jsoup.connect(pureUrl)
@@ -72,29 +73,29 @@ public class SearchResultItem {
         }
 
         for (String metaExceptionKeyword : se.metaTagsExceptions) {
-            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase().replaceAll("\\s+",""))) {
+            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
                 return false;
             }
-            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase().replaceAll("\\s+",""))) {
+            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
                 return false;
             }
         }
         String domainName = StrUtils.extractDomainName(SearchedLink);
         for (String domainNameException: se.domainExceptions) {
-            if (domainName.toLowerCase().contains(domainNameException.toLowerCase().replaceAll("\\s+",""))) {
+            if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {
                 return false;
             }
         }
 
         String str = StrUtils.getUnmatchedPartOfString(SearchedLink);
         for (String urlException: se.URLExceptions) {
-            if (str.toLowerCase().contains(urlException.toLowerCase().replaceAll("\\s+",""))) {
+            if (str.toLowerCase().contains(urlException.toLowerCase())) {
                 return false;
             }
         }
 
         for (String topLevelDomainException: se.topLevelDomainsExceptions) {
-            if (SearchedLink.toLowerCase().contains(topLevelDomainException.toLowerCase().replaceAll("\\s+",""))) {
+            if (SearchedLink.toLowerCase().contains(topLevelDomainException.toLowerCase())) {
                 return false;
             }
         }

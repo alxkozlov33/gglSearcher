@@ -263,7 +263,7 @@ public class FileService {
             if (lines.get(k).startsWith("#")) {
                 break;
             }
-            buffer.add(lines.get(k));
+            buffer.add(lines.get(k).replaceAll("\\s+","").toLowerCase());
         }
         return buffer;
     }
