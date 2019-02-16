@@ -18,16 +18,30 @@ public class StrUtils {
         if (StringUtils.isEmpty(inputPlaceHolder)) {
             return "";
         }
-        StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
+        String queryTerm;
+        if (csvItem != null) {
+            StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
+            queryTerm = sub.replace(inputPlaceHolder);
+        }
+        else {
+            queryTerm = inputPlaceHolder;
+        }
 
         try {
             result = "https://www.google.com/search?q=" +
-                    URLEncoder.encode(sub.replace(inputPlaceHolder), "UTF-8") +
+                    URLEncoder.encode(queryTerm, "UTF-8") +
                     "&pws=0&gl=us&gws_rd=cr";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static boolean isStringContainsExtraSymbols(String value) {
+        return value.contains("\"") || value.contains("{") || value.contains("}") || value.contains("%") ||
+                value.contains("!") || value.contains("@") || value.contains("#") || value.contains("$") ||
+                value.contains("^") || value.contains("&") || value.contains("*") || value.contains("(") ||
+                value.contains(")") || value.contains("-") || value.contains("=") || value.contains("+");
     }
 
     public static String decodeURL(String decodedURL) {

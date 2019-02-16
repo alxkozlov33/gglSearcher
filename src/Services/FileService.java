@@ -1,6 +1,7 @@
 package Services;
 
 import Models.*;
+import Utils.StrUtils;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -48,7 +49,7 @@ public class FileService {
         }
 
         if (!FilenameUtils.getExtension(path).equalsIgnoreCase("csv")) {
-            logService.LogMessage("Selected input file has invalid format");
+            logService.LogMessage("Selected input file has invalid format or file not selected");
             return;
         }
 
@@ -87,7 +88,11 @@ public class FileService {
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
         if (inputFilePath == null) {
-            logService.LogMessage("Input data file path empty. Application cannot start.");
+            logService.LogMessage("Input data file path empty.");
+            return null;
+        }
+        if (StrUtils.isStringContainsExtraSymbols(inputFilePath.toString())) {
+            logService.LogMessage("Input data file has wrong symbols in name or path");
             return null;
         }
         ArrayList csvFileData = null;
@@ -102,7 +107,7 @@ public class FileService {
             reader.close();
         } catch (Exception ex) {
             logService.LogMessage("Something wrong with input file");
-            ex.printStackTrace();
+            logService.LogMessage(ex.getMessage());
         }
         return csvFileData;
     }
@@ -127,7 +132,8 @@ public class FileService {
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logService.LogMessage("Cannot save data to output file");
+            logService.LogMessage(e.getMessage());
         }
     }
 
@@ -141,7 +147,8 @@ public class FileService {
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logService.LogMessage("Cannot create empty output file");
+            logService.LogMessage(e.getMessage());
         }
     }
 
@@ -159,14 +166,23 @@ public class FileService {
             return;
         }
         String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
-        String parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
-                + File.separator
-                + fileName
-                + "." +
-                FilenameUtils.getExtension(inputFilePath.toString());
+        String parentFile = null;
+        if (inputFilePath == null || inputFile == null) {
+            File f = new File(".");
+            String filePath = f.getAbsolutePath().replace(".", "") + fileName;
+            outputFilePath = Paths.get(filePath);
+            outputFile = outputFilePath.toFile();
+        }
+        else {
+            parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
+                    + File.separator
+                    + fileName
+                    + "." +
+                    FilenameUtils.getExtension(inputFilePath.toString());
+            outputFilePath = Paths.get(parentFile);
+            outputFile = outputFilePath.toFile();
+        }
 
-        outputFilePath = Paths.get(parentFile);
-        outputFile = outputFilePath.toFile();
         try {
             if (!outputFile.exists()) {
                 if (!outputFile.getParentFile().exists())
@@ -176,9 +192,10 @@ public class FileService {
                 createEmptyCSVFile();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logService.LogMessage("Check search placeholder and input file. Application cannot start.");
+            logService.LogMessage(e.getMessage());
         }
-        logService.LogMessage("setUpOutputFile: " + outputFile.getAbsolutePath());
+        logService.LogMessage("Output file initialized: " + outputFile.getAbsolutePath());
     }
 
     private String selectFolderDialog() {
@@ -225,6 +242,10 @@ public class FileService {
             logService.LogMessage("Exceptions file path empty. Application cannot start.");
             return null;
         }
+        if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFilePath.toString())) {
+            logService.LogMessage("Exceptions file has wrong symbols in name or path");
+            return null;
+        }
         SearchExceptions se = new SearchExceptions();
         se.domainExceptions = new ArrayList<>();
         se.URLExceptions = new ArrayList<>();
@@ -251,7 +272,8 @@ public class FileService {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logService.LogMessage("Cannot initialize input exceptions file");
+            logService.LogMessage(e.getMessage());
         }
         return se;
     }

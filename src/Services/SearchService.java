@@ -71,25 +71,33 @@ public class SearchService {
             int index = propertiesService.getIndex();
             ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
             if (csvItems == null) {
-                guiService.changeApplicationStateToWork(false);
-                return;
-            }
-            logService.LogMessage("Continue from: " + index + " record");
-            for (int i = index; i < csvItems.size(); i++) {
-                logService.updateCountItemsStatus(i, csvItems.size());
-                if (!isWorkFlag) {
-                    break;
-                }
-                propertiesService.saveIndex(i);
-                Element body = getQueryBody(csvItems.get(i));
+                Element body = getQueryBody(null);
                 if (body != null) {
                     SearchResult result = new SearchResult(logService)
-                            .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
-                            .initCountry(csvItems.get(i).getColumnB())
                             .initSearchExceptions(se)
                             .parsePageBody(body);
                     ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
                     fileService.saveCSVItems(items);
+                }
+            }
+            else {
+                logService.LogMessage("Continue from: " + index + " record");
+                for (int i = index; i < csvItems.size(); i++) {
+                    logService.updateCountItemsStatus(i, csvItems.size());
+                    if (!isWorkFlag) {
+                        break;
+                    }
+                    propertiesService.saveIndex(i);
+                    Element body = getQueryBody(csvItems.get(i));
+                    if (body != null) {
+                        SearchResult result = new SearchResult(logService)
+                                .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
+                                .initCountry(csvItems.get(i).getColumnB())
+                                .initSearchExceptions(se)
+                                .parsePageBody(body);
+                        ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
+                        fileService.saveCSVItems(items);
+                    }
                 }
             }
             logService.LogMessage("Search finished");

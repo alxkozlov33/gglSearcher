@@ -33,7 +33,6 @@ public class PropertiesService {
                     output.close();
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
-                    e.printStackTrace();
                 }
             }
         }
@@ -73,7 +72,6 @@ public class PropertiesService {
             saveProperty(placeholderPropertyString, "");
         }
     }
-
 
     public boolean getWorkState() {
         return Boolean.valueOf(restoreProperty(isWorkStateString));
@@ -123,7 +121,6 @@ public class PropertiesService {
                     output.close();
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
-                    e.printStackTrace();
                 }
             }
         }
@@ -147,7 +144,6 @@ public class PropertiesService {
                     input.close();
                 } catch (IOException e) {
                     System.out.println(e.getStackTrace());
-                    e.printStackTrace();
                 }
             }
         }
