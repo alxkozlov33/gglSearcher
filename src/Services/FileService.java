@@ -34,10 +34,10 @@ public class FileService {
     private final LogService logService;
     private final PropertiesService propertiesService;
 
-    public FileService(GuiService guiService, LogService logService, PropertiesService propertiesService) {
-        this.guiService = guiService;
-        this.logService = logService;
-        this.propertiesService = propertiesService;
+    public FileService() {
+        this.guiService = DIResolver.getGuiService();
+        this.logService = DIResolver.getLogService();
+        this.propertiesService = DIResolver.getPropertiesService();
     }
 
     public void setUpInputFile(String restoredPath) {

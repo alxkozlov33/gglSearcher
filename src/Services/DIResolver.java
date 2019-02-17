@@ -1,19 +1,21 @@
+package Services;
+
 import Controllers.MainController;
 import GUI.Bootstrapper;
 import Services.*;
 
 public class DIResolver {
 
-    private FileService fileService;
-    private LogService logService;
-    private PropertiesService propertiesService;
-    private GuiService guiService;
-    private SearchService searchService;
-    private ProxyService proxyService;
-    private UserAgentsRotatorService userAgentsRotatorService;
+    private static FileService fileService;
+    private static LogService logService;
+    private static PropertiesService propertiesService;
+    private static GuiService guiService;
+    private static SearchService searchService;
+    private static ProxyService proxyService;
+    private static UserAgentsRotatorService userAgentsRotatorService;
 
     private MainController mainController;
-    private Bootstrapper bootstrapper;
+    private static Bootstrapper bootstrapper;
 
     public DIResolver() {
     }
@@ -32,35 +34,35 @@ public class DIResolver {
         mapActions();
         logService.LogMessage("Application started...");
     }
-    private GuiService getGuiService() {
+    public static GuiService getGuiService() {
         if (guiService == null) {
-            guiService = new GuiService(bootstrapper, propertiesService);
+            guiService = new GuiService(bootstrapper);
         }
         return guiService;
     }
 
-    private SearchService getSearchService() {
+    public static SearchService getSearchService() {
         if (searchService == null) {
-            searchService = new SearchService(fileService, logService, guiService, propertiesService, proxyService, userAgentsRotatorService);
+            searchService = new SearchService();
         }
         return searchService;
     }
 
-    private FileService getFileService() {
+    public static FileService getFileService() {
         if (fileService == null) {
-            fileService = new FileService(guiService, logService, propertiesService);
+            fileService = new FileService();
         }
         return fileService;
     }
 
-    private LogService getLogService() {
+    public static LogService getLogService() {
         if (logService == null) {
-            logService = new LogService(guiService);
+            logService = new LogService();
         }
         return logService;
     }
 
-    private PropertiesService getPropertiesService() {
+    public static PropertiesService getPropertiesService() {
         if (propertiesService == null) {
             propertiesService = new PropertiesService();
         }
@@ -79,14 +81,14 @@ public class DIResolver {
         bootstrapper.getSelectExceptionsFileButton().addActionListener(e -> mainController.SelectExceptionsFile());
     }
 
-    public ProxyService getProxyService() {
+    public static ProxyService getProxyService() {
         if (proxyService == null) {
             proxyService = new ProxyService(logService);
         }
         return proxyService;
     }
 
-    public UserAgentsRotatorService getUserAgentsRotatorService() {
+    public static UserAgentsRotatorService getUserAgentsRotatorService() {
         if (userAgentsRotatorService == null) {
             userAgentsRotatorService = new UserAgentsRotatorService();
         }

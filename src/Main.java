@@ -1,4 +1,5 @@
 import GUI.Bootstrapper;
+import Services.DIResolver;
 
 import javax.swing.*;
 

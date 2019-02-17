@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 
 public class LogService {
 
-    private GuiService guiService;
-    public LogService(GuiService guiService) {
-        this.guiService = guiService;
+    private final GuiService guiService;
+    public LogService() {
+        this.guiService = DIResolver.getGuiService();
     }
 
     public void LogMessage(String message) {

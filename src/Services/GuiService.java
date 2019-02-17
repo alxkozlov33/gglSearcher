@@ -7,12 +7,12 @@ import javax.swing.text.BadLocationException;
 
 public class GuiService {
     private Bootstrapper bootstrapper;
-    private PropertiesService propertiesService;
 
+    private final PropertiesService propertiesService;
 
-    public GuiService(Bootstrapper frame, PropertiesService propertiesService) {
+    public GuiService(Bootstrapper frame) {
+        propertiesService = DIResolver.getPropertiesService();
         bootstrapper = frame;
-        this.propertiesService = propertiesService;
     }
 
     public Bootstrapper getBootstrapper() {

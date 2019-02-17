@@ -10,7 +10,6 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,24 +17,22 @@ import org.jsoup.nodes.Element;
 
 public class SearchService {
 
-    private FileService fileService;
-    private GuiService guiService;
-    private LogService logService;
-    private PropertiesService propertiesService;
-    private ProxyService proxyService;
-    private UserAgentsRotatorService userAgentsRotatorService;
-    private Thread worker;
+    private final FileService fileService;
+    private final GuiService guiService;
+    private final LogService logService;
+    private final PropertiesService propertiesService;
+    private final ProxyService proxyService;
+    private final UserAgentsRotatorService userAgentsRotatorService;
 
-    boolean isWorkFlag = false;
-    boolean isError = false;
+    private boolean isWorkFlag = false;
 
-    public SearchService(FileService fileService, LogService logService, GuiService guiService, PropertiesService propertiesService, ProxyService proxyService, UserAgentsRotatorService userAgentsRotatorService) {
-        this.fileService = fileService;
-        this.logService = logService;
-        this.guiService = guiService;
-        this.propertiesService = propertiesService;
-        this.proxyService = proxyService;
-        this.userAgentsRotatorService = userAgentsRotatorService;
+    public SearchService() {
+        this.fileService = DIResolver.getFileService();
+        this.logService =  DIResolver.getLogService();
+        this.guiService = DIResolver.getGuiService();
+        this.propertiesService = DIResolver.getPropertiesService();
+        this.proxyService = DIResolver.getProxyService();
+        this.userAgentsRotatorService = DIResolver.getUserAgentsRotatorService();
 
         userAgentsRotatorService.initList();
         fileService.RestoreFilesControl();
@@ -54,9 +51,8 @@ public class SearchService {
     }
 
     public void Work() {
-        worker = new Thread(() -> {
+        Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
-            isError = false;
             isWorkFlag = true;
             StartWork();
             guiService.changeApplicationStateToWork(false);
@@ -104,7 +100,6 @@ public class SearchService {
             logService.UpdateStatus("Finished");
         } catch (Exception e) {
             isWorkFlag = false;
-            isError = true;
             guiService.changeApplicationStateToWork(false);
             logService.LogMessage("Application stopped");
             e.printStackTrace();
