@@ -59,6 +59,10 @@ public class SearchService {
     private void StartWork() {
         try {
             int index = propertiesService.getIndex();
+            if (StringUtils.isEmpty(guiService.getSearchPlaceholderText())){
+                logService.LogMessage("Placeholder empty");
+                return;
+            }
             if (inputCsvItems == null || StrUtils.isPlaceholderHasSubstituteTerms(guiService.getSearchPlaceholderText())) {
                 Element body = getQueryBody(null);
                 if (body != null) {
