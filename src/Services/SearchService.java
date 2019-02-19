@@ -63,6 +63,10 @@ public class SearchService {
                 logService.LogMessage("Placeholder empty");
                 return;
             }
+            if (searchExceptions == null){
+                logService.LogMessage("Exceptions file was not chosen");
+                return;
+            }
             if (inputCsvItems == null || StrUtils.isPlaceholderHasSubstituteTerms(guiService.getSearchPlaceholderText())) {
                 Element body = getQueryBody(null);
                 if (body != null) {

@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.SearchExceptions;
 import Services.*;
+import Utils.StrUtils;
 
 import java.util.ArrayList;
 
@@ -25,32 +26,34 @@ public class MainController {
     }
 
     public void ApplicationStarted() {
-        userAgentsRotatorService.initList();
-        SearchExceptions searchExceptions = null;
-        ArrayList inputCsvData = null;
+        Thread worker = new Thread(() -> {
+            userAgentsRotatorService.initList();
+            SearchExceptions searchExceptions = null;
+            ArrayList inputCsvData = null;
 
-        String placeholderTerm = propertiesService.getPlaceHolder();
-        String inputFile = propertiesService.getInputFilePath();
-        if(fileService.SetInputFile(inputFile)) {
-            inputCsvData = fileService.InitCSVItems();
-            guiService.setInputFilePath(inputFile);
-        }
-        else {
-            placeholderTerm = placeholderTerm.replaceAll("\\$\\{column[A-z]\\}", "");
-        }
+            String placeholderTerm = propertiesService.getPlaceHolder();
+            String inputFile = propertiesService.getInputFilePath();
+            if (fileService.SetInputFile(inputFile)) {
+                inputCsvData = fileService.InitCSVItems();
+                guiService.setInputFilePath(inputFile);
+            } else {
+                placeholderTerm = StrUtils.clearPlaceholderFromCSVColumnsTerms(placeholderTerm);
+            }
 
-        guiService.setPlaceholder(placeholderTerm);
-        fileService.SetOutputFile(placeholderTerm);
+            guiService.setPlaceholder(placeholderTerm);
+            fileService.SetOutputFile(placeholderTerm);
 
-        String exceptionsFile = propertiesService.getExceptionsFilePath();
-        if (fileService.SetExceptionsFile(exceptionsFile)) {
-            searchExceptions = fileService.initExceptionsKeywords();
-            guiService.setInputExceptionsFilePath(exceptionsFile);
-        }
+            String exceptionsFile = propertiesService.getExceptionsFilePath();
+            if (fileService.SetExceptionsFile(exceptionsFile)) {
+                searchExceptions = fileService.initExceptionsKeywords();
+                guiService.setInputExceptionsFilePath(exceptionsFile);
+            }
 
-        if (propertiesService.getWorkState()) {
-            searchService.DoWork(inputCsvData, searchExceptions);
-        }
+            if (propertiesService.getWorkState()) {
+                searchService.DoWork(inputCsvData, searchExceptions);
+            }
+        });
+        worker.start();
     }
 
     public void StartButtonClickAction() {
@@ -60,6 +63,7 @@ public class MainController {
         propertiesService.savePlaceHolder(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
         ArrayList inputCsvData = fileService.InitCSVItems();
 
+        fileService.SetOutputFile(guiService.getSearchPlaceholderText());
         SearchExceptions searchExceptions = fileService.initExceptionsKeywords();
         searchService.DoWork(inputCsvData, searchExceptions);
     }
@@ -79,7 +83,7 @@ public class MainController {
     public void ClearInputFile() {
         fileService.clearInputFile();
         guiService.setInputFilePath("");
-        guiService.setPlaceholder(guiService.getSearchPlaceholderText().replaceAll("\\$\\{column[A-z]\\}", ""));
+        guiService.setPlaceholder(StrUtils.clearPlaceholderFromCSVColumnsTerms(guiService.getSearchPlaceholderText()));
     }
     public void SelectExceptionsFile() {
         fileService.SetExceptionsFile(null);

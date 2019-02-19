@@ -14,6 +14,7 @@ import org.apache.commons.io.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,15 +91,16 @@ public class FileService {
         String parentFile = null;
         if (outputFile == null || inputFile == null) {
             File f = new File(".");
-            String filePath = f.getAbsolutePath().replace(".", "") + fileName;
+            String filePath = f.getAbsolutePath().replace(".", "") + fileName + ".csv";
             outputFile = new File(filePath);
         }
         else {
+            String str = FilenameUtils.getExtension(inputFile.getPath());
             parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
                     + File.separator
                     + fileName
-                    + "." +
-                    FilenameUtils.getExtension(inputFile.getPath());
+                    + "."
+                    + str;
             outputFile = new File(parentFile);
         }
 
@@ -142,17 +144,17 @@ public class FileService {
         }
         ArrayList csvFileData = null;
         try {
-            csvFileData = new ArrayList<InputCsvModelItem>();
-            Reader reader = Files.newBufferedReader(inputFile.toPath());
+            Reader reader = Files.newBufferedReader(Paths.get(inputFile.getAbsolutePath()));
             CsvToBean<InputCsvModelItem> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(InputCsvModelItem.class)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.NEITHER)
                     .build();
-            csvFileData.addAll(IteratorUtils.toList(csvToBean.iterator()));
+            csvFileData = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
             reader.close();
         } catch (Exception ex) {
             logService.LogMessage("Something wrong with input file");
             logService.LogMessage(ex.getMessage());
+            ex.getStackTrace();
         }
         return csvFileData;
     }
@@ -187,7 +189,7 @@ public class FileService {
     }
     public SearchExceptions initExceptionsKeywords() {
         if (inputExceptionsFile == null) {
-            logService.LogMessage("Exceptions file path empty. Application cannot start.");
+            logService.LogMessage("Exceptions file path empty");
             return null;
         }
         if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFile.getAbsolutePath())) {
@@ -233,7 +235,7 @@ public class FileService {
             if (lines.get(k).startsWith("#")) {
                 break;
             }
-            buffer.add(lines.get(k).replaceAll("\\s+","").toLowerCase());
+            buffer.add(lines.get(k).trim().toLowerCase());
         }
         return buffer;
     }
