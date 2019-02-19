@@ -1,6 +1,7 @@
 package Utils;
 
 import Models.InputCsvModelItem;
+import Services.DIResolver;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
 
@@ -24,24 +25,32 @@ public class StrUtils {
             queryTerm = sub.replace(inputPlaceHolder);
         }
         else {
-            queryTerm = inputPlaceHolder;
+            queryTerm = inputPlaceHolder.replaceAll("\\$\\{column[A-z]\\}", "");
+            DIResolver.getGuiService().setPlaceholder(queryTerm);
         }
 
         try {
             result = "https://www.google.com/search?q=" +
                     URLEncoder.encode(queryTerm, "UTF-8") +
-                    "&pws=0&gl=us&gws_rd=cr";
+                    "&pws=0&gl=us&gws_rd=cr&num=150";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         return result;
     }
 
+    public static boolean isPlaceholderHasSubstituteTerms(String placeholder) {
+        String pattern = "\\$\\{column[A-z]\\}";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(placeholder);
+        return !m.find();
+    }
+
     public static boolean isStringContainsExtraSymbols(String value) {
         return value.contains("\"") || value.contains("{") || value.contains("}") || value.contains("%") ||
                 value.contains("!") || value.contains("@") || value.contains("#") || value.contains("$") ||
                 value.contains("^") || value.contains("&") || value.contains("*") || value.contains("(") ||
-                value.contains(")") || value.contains("-") || value.contains("=") || value.contains("+");
+                value.contains(")") || value.contains("=") || value.contains("+");
     }
 
     public static String decodeURL(String decodedURL) {

@@ -24,6 +24,8 @@ public class SearchService {
     private final ProxyService proxyService;
     private final UserAgentsRotatorService userAgentsRotatorService;
 
+    private ArrayList<InputCsvModelItem> inputCsvItems;
+    private SearchExceptions searchExceptions;
     private boolean isWorkFlag = false;
 
     public SearchService() {
@@ -33,14 +35,6 @@ public class SearchService {
         this.propertiesService = DIResolver.getPropertiesService();
         this.proxyService = DIResolver.getProxyService();
         this.userAgentsRotatorService = DIResolver.getUserAgentsRotatorService();
-
-        userAgentsRotatorService.initList();
-        fileService.RestoreFilesControl();
-        guiService.RestorePlaceholder();
-
-        if (propertiesService.getWorkState()) {
-            Work();
-        }
     }
 
     private int getRandomTime() {
@@ -50,7 +44,9 @@ public class SearchService {
         return r.nextInt(high-low) + low;
     }
 
-    public void Work() {
+    public void DoWork(ArrayList<InputCsvModelItem> inputCsvItems, SearchExceptions searchExceptions) {
+        this.inputCsvItems = inputCsvItems;
+        this.searchExceptions = searchExceptions;
         Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
             isWorkFlag = true;
@@ -62,37 +58,33 @@ public class SearchService {
 
     private void StartWork() {
         try {
-            SearchExceptions se = fileService.initExceptionsKeywords();
-            fileService.setUpOutputFile(guiService.getBootstrapper().getSearchingPlaceHolder().getText());
             int index = propertiesService.getIndex();
-            ArrayList<InputCsvModelItem> csvItems = fileService.InitCSVItems();
-            if (csvItems == null) {
+            if (inputCsvItems == null || StrUtils.isPlaceholderHasSubstituteTerms(guiService.getSearchPlaceholderText())) {
                 Element body = getQueryBody(null);
                 if (body != null) {
                     SearchResult result = new SearchResult(logService)
-                            .initSearchExceptions(se)
+                            .initSearchExceptions(searchExceptions)
                             .parsePageBody(body);
                     ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
-                    fileService.saveCSVItems(items);
+                    fileService.SaveResultCsvItems(items);
                 }
-            }
-            else {
+            } else {
                 logService.LogMessage("Continue from: " + index + " record");
-                for (int i = index; i < csvItems.size(); i++) {
-                    logService.updateCountItemsStatus(i, csvItems.size());
+                for (int i = index; i < inputCsvItems.size(); i++) {
+                    logService.updateCountItemsStatus(i, inputCsvItems.size());
                     if (!isWorkFlag) {
                         break;
                     }
                     propertiesService.saveIndex(i);
-                    Element body = getQueryBody(csvItems.get(i));
+                    Element body = getQueryBody(inputCsvItems.get(i));
                     if (body != null) {
                         SearchResult result = new SearchResult(logService)
-                                .initCity(StrUtils.getSearchValue(csvItems.get(i), guiService.getSearchPlaceholderText()))
-                                .initCountry(csvItems.get(i).getColumnB())
-                                .initSearchExceptions(se)
+                                .initCity(StrUtils.getSearchValue(inputCsvItems.get(i), guiService.getSearchPlaceholderText()))
+                                .initCountry(inputCsvItems.get(i).getColumnB())
+                                .initSearchExceptions(searchExceptions)
                                 .parsePageBody(body);
                         ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(result);
-                        fileService.saveCSVItems(items);
+                        fileService.SaveResultCsvItems(items);
                     }
                 }
             }

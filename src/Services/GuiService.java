@@ -39,20 +39,20 @@ public class GuiService {
         bootstrapper.getExceptionsLabelFileData().setText(cutPath(path));
     }
 
+    public void setPlaceholder(String placeholder) {
+        bootstrapper.getSearchingPlaceHolder().setText(placeholder);
+    }
+
     public void changeApplicationStateToWork(boolean isWorkState) {
         bootstrapper.getRunButton().setEnabled(!isWorkState);
         bootstrapper.getStopButton().setEnabled(isWorkState);
-        bootstrapper.getSelectFileButton().setEnabled(!isWorkState);
         bootstrapper.getSearchingPlaceHolder().setEnabled(!isWorkState);
-        bootstrapper.getSelectExceptionsFileButton().setEnabled(!isWorkState);
+        bootstrapper.getExceptionsFile().setEnabled(!isWorkState);
+        bootstrapper.getInputData().setEnabled(!isWorkState);
         propertiesService.saveWorkState(isWorkState);
         if (!isWorkState) {
             propertiesService.saveIndex(0);
         }
-    }
-
-    public void RestorePlaceholder() {
-        bootstrapper.getSearchingPlaceHolder().setText(propertiesService.getPlaceHolder());
     }
 
     private String cutPath(String path) {

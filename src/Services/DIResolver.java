@@ -14,7 +14,7 @@ public class DIResolver {
     private static ProxyService proxyService;
     private static UserAgentsRotatorService userAgentsRotatorService;
 
-    private MainController mainController;
+    private static MainController mainController;
     private static Bootstrapper bootstrapper;
 
     public DIResolver() {
@@ -69,16 +69,22 @@ public class DIResolver {
         return propertiesService;
     }
 
-    private MainController getMainController() {
-        mainController = new MainController(fileService, guiService, logService, propertiesService, searchService);
+    public static MainController getMainController() {
+        if(mainController == null) {
+            mainController = new MainController();
+        }
         return mainController;
     }
 
     private void mapActions() {
         bootstrapper.getRunButton().addActionListener(e -> mainController.StartButtonClickAction());
         bootstrapper.getStopButton().addActionListener(e -> mainController.StopButtonClickAction());
-        bootstrapper.getSelectFileButton().addActionListener(e -> mainController.SelectInputFile());
-        bootstrapper.getSelectExceptionsFileButton().addActionListener(e -> mainController.SelectExceptionsFile());
+
+        bootstrapper.getChooseExceptionsFile().addActionListener(e -> mainController.SelectExceptionsFile());
+        bootstrapper.getClearExceptionsFile().addActionListener(e -> mainController.ClearExceptionsFile());
+
+        bootstrapper.getChooseInputFile().addActionListener(e -> mainController.SelectInputFile());
+        bootstrapper.getClearInputFile().addActionListener(e -> mainController.ClearInputFile());
     }
 
     public static ProxyService getProxyService() {

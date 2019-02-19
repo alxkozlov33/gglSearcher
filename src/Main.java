@@ -1,3 +1,4 @@
+import Controllers.MainController;
 import GUI.Bootstrapper;
 import Services.DIResolver;
 
@@ -17,11 +18,12 @@ public class Main {
         initGUI();
 
         new DIResolver().initDependencies(gui);
+        DIResolver.getMainController().ApplicationStarted();
     }
 
     private void initGUI() {
         gui = new Bootstrapper();
-        gui.setTitle("Info searcher v2.3 [GGL]");
+        gui.setTitle("Info searcher v2.4 [GGL]");
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setSize(800, 700);

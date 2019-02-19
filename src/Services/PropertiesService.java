@@ -16,7 +16,7 @@ public class PropertiesService {
 
     public PropertiesService() {
         properties = new Properties();
-        createNewFile();
+        createNewFileIfNotExists();
     }
 
     private void saveProperty(String propertyName, String value) {
@@ -42,28 +42,25 @@ public class PropertiesService {
         saveProperty(isWorkStateString, Boolean.toString(workState));
     }
 
-    public void saveInputFilePath(File inputFile) {
+    public void saveInputFilePath(String inputFile) {
         if (inputFile != null){
-            saveProperty(selectedCsvInputFileString, inputFile.getAbsolutePath());
+            saveProperty(selectedCsvInputFileString, inputFile);
         }
         else {
             saveProperty(selectedCsvInputFileString, "");
         }
     }
-
-    public void saveExceptionsFilePath(File inputFile) {
+    public void saveExceptionsFilePath(String inputFile) {
         if (inputFile != null){
-            saveProperty(selectedExceptionsInputFileString, inputFile.getAbsolutePath());
+            saveProperty(selectedExceptionsInputFileString, inputFile);
         }
         else {
             saveProperty(selectedExceptionsInputFileString, "");
         }
     }
-
     public void saveIndex(int index) {
         saveProperty(indexString, Integer.toString(index));
     }
-
     public void savePlaceHolder(String placeholder) {
         if (placeholder != null) {
             saveProperty(placeholderPropertyString, placeholder);
@@ -76,24 +73,20 @@ public class PropertiesService {
     public boolean getWorkState() {
         return Boolean.valueOf(restoreProperty(isWorkStateString));
     }
-
     public String getInputFilePath() {
         return restoreProperty(selectedCsvInputFileString);
     }
-
     public int getIndex() {
         return Integer.parseInt(restoreProperty(indexString));
     }
-
     public String getPlaceHolder() {
         return restoreProperty(placeholderPropertyString);
     }
-
     public String getExceptionsFilePath() {
         return restoreProperty(selectedExceptionsInputFileString);
     }
 
-    private void createNewFile() {
+    private void createNewFileIfNotExists() {
         OutputStream output = null;
         try {
             File propertiesFileTemp = File.createTempFile("configGGLS", ".properties");
@@ -127,10 +120,10 @@ public class PropertiesService {
     }
 
     private String restoreProperty(String propertyName) {
-        String result = "0";
+        String result = "";
         InputStream input = null;
         try {
-            createNewFile();
+            createNewFileIfNotExists();
             input = new FileInputStream(propertiesFile.getAbsoluteFile());
             properties.load(input);
             if (properties.get(propertyName) != null) {
