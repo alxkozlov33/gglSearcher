@@ -66,11 +66,11 @@ public class StrUtils {
         if (StringUtils.isEmpty(link)) {
             return "";
         }
-        if (link.startsWith("/url")) {
-            link = link.substring(link.indexOf("=") + 1);
-        }
         if (link.startsWith("www")) {
             link = "http://" + link;
+        }
+        if (link.startsWith("/url")) {
+            link = link.substring(link.indexOf("=") + 1);
         }
         return link;
     }

@@ -44,10 +44,10 @@ public class SearchResultItem {
     }
 
     public SearchResultItem getItemSource() {
+        String pureUrl = null;
         try {
             if (!StringUtils.isEmpty(Description) && !StringUtils.isEmpty(SearchedLink)) {
-                URI url = URI.create(SearchedLink).normalize();
-                String pureUrl = StrUtils.clearLink(url.toString());
+                pureUrl = StrUtils.clearLink(SearchedLink);
                 Connection.Response response = Jsoup.connect(pureUrl)
                         .followRedirects(true)
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
@@ -58,7 +58,7 @@ public class SearchResultItem {
                 isItemCorrect = checkIfSourceRight(response.parse());
             }
         } catch (Exception e) {
-            logService.LogMessage("Link broken: " + SearchedLink);
+            logService.LogMessage("Link broken: " + pureUrl);
             logService.LogMessage(e.getMessage());
         }
         return this;
