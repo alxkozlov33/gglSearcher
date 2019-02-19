@@ -25,8 +25,7 @@ public class StrUtils {
             queryTerm = sub.replace(inputPlaceHolder);
         }
         else {
-            queryTerm = inputPlaceHolder.replaceAll("\\$\\{column[A-z]\\}", "");
-            DIResolver.getGuiService().setPlaceholder(queryTerm);
+            queryTerm = inputPlaceHolder;
         }
 
         try {

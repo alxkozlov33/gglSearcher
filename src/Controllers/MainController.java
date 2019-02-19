@@ -29,21 +29,24 @@ public class MainController {
         SearchExceptions searchExceptions = null;
         ArrayList inputCsvData = null;
 
+        String placeholderTerm = propertiesService.getPlaceHolder();
         String inputFile = propertiesService.getInputFilePath();
         if(fileService.SetInputFile(inputFile)) {
             inputCsvData = fileService.InitCSVItems();
             guiService.setInputFilePath(inputFile);
         }
+        else {
+            placeholderTerm = placeholderTerm.replaceAll("\\$\\{column[A-z]\\}", "");
+        }
+
+        guiService.setPlaceholder(placeholderTerm);
+        fileService.SetOutputFile(placeholderTerm);
 
         String exceptionsFile = propertiesService.getExceptionsFilePath();
         if (fileService.SetExceptionsFile(exceptionsFile)) {
             searchExceptions = fileService.initExceptionsKeywords();
             guiService.setInputExceptionsFilePath(exceptionsFile);
         }
-
-        String placeholderTerm = propertiesService.getPlaceHolder();
-        guiService.setPlaceholder(placeholderTerm);
-        fileService.SetOutputFile(placeholderTerm);
 
         if (propertiesService.getWorkState()) {
             searchService.DoWork(inputCsvData, searchExceptions);
@@ -76,6 +79,7 @@ public class MainController {
     public void ClearInputFile() {
         fileService.clearInputFile();
         guiService.setInputFilePath("");
+        guiService.setPlaceholder(guiService.getSearchPlaceholderText().replaceAll("\\$\\{column[A-z]\\}", ""));
     }
     public void SelectExceptionsFile() {
         fileService.SetExceptionsFile(null);
