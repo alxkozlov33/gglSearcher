@@ -3,6 +3,7 @@ package Controllers;
 import Models.SearchExceptions;
 import Services.*;
 import Utils.StrUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.util.ArrayList;
 
@@ -26,34 +27,31 @@ public class MainController {
     }
 
     public void ApplicationStarted() {
-        Thread worker = new Thread(() -> {
-            userAgentsRotatorService.initList();
-            SearchExceptions searchExceptions = null;
-            ArrayList inputCsvData = null;
+        userAgentsRotatorService.initList();
+        SearchExceptions searchExceptions = null;
+        ArrayList inputCsvData = null;
 
-            String placeholderTerm = propertiesService.getPlaceHolder();
-            String inputFile = propertiesService.getInputFilePath();
-            if (fileService.SetInputFile(inputFile)) {
-                inputCsvData = fileService.InitCSVItems();
-                guiService.setInputFilePath(inputFile);
-            } else {
-                placeholderTerm = StrUtils.clearPlaceholderFromCSVColumnsTerms(placeholderTerm);
-            }
+        String placeholderTerm = propertiesService.getPlaceHolder();
+        String inputFile = propertiesService.getInputFilePath();
+        if (fileService.SetInputFile(inputFile)) {
+            inputCsvData = fileService.InitCSVItems();
+            guiService.setInputFilePath(fileService.getInputFilePath());
+        } else {
+            placeholderTerm = StrUtils.clearPlaceholderFromCSVColumnsTerms(placeholderTerm);
+        }
 
-            guiService.setPlaceholder(placeholderTerm);
-            fileService.SetOutputFile(placeholderTerm);
+        guiService.setPlaceholder(placeholderTerm);
+        fileService.SetOutputFile(placeholderTerm);
 
-            String exceptionsFile = propertiesService.getExceptionsFilePath();
-            if (fileService.SetExceptionsFile(exceptionsFile)) {
-                searchExceptions = fileService.initExceptionsKeywords();
-                guiService.setInputExceptionsFilePath(exceptionsFile);
-            }
+        String exceptionsFile = propertiesService.getExceptionsFilePath();
+        if (fileService.SetExceptionsFile(exceptionsFile)) {
+            searchExceptions = fileService.initExceptionsKeywords();
+            guiService.setInputExceptionsFilePath(exceptionsFile);
+        }
 
-            if (propertiesService.getWorkState()) {
-                searchService.DoWork(inputCsvData, searchExceptions);
-            }
-        });
-        worker.start();
+        if (propertiesService.getWorkState()) {
+            searchService.DoWork(inputCsvData, searchExceptions);
+        }
     }
 
     public void StartButtonClickAction() {
@@ -79,6 +77,7 @@ public class MainController {
     public void SelectInputFile() {
         fileService.SetInputFile(null);
         guiService.setInputFilePath(fileService.getInputFilePath());
+        propertiesService.saveInputFilePath(fileService.getInputFilePath());
     }
     public void ClearInputFile() {
         fileService.clearInputFile();
@@ -88,6 +87,7 @@ public class MainController {
     public void SelectExceptionsFile() {
         fileService.SetExceptionsFile(null);
         guiService.setInputExceptionsFilePath(fileService.getExceptionsFilePath());
+        propertiesService.saveInputFilePath(fileService.getInputFilePath());
     }
     public void ClearExceptionsFile() {
         fileService.clearExceptionsFile();

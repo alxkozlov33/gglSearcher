@@ -57,12 +57,12 @@ public class FileService {
             return false;
         }
 
-        inputFile = inFile;
-        logService.LogMessage("Input data file initialized: " + inputFile.getAbsolutePath());
+        inputFile = new File(path);
+        logService.LogMessage("Input data file initialized: " + inputFile);
         return true;
     }
     public boolean SetExceptionsFile(String restoredPath) {
-        String path = null;
+        String path;
         if (restoredPath == null) {
             path = DirUtils.selectFolderDialog(guiService.getBootstrapper());
         } else {
@@ -78,7 +78,7 @@ public class FileService {
         if (StringUtils.isEmpty(path) && !inFile.exists()) {
             return false;
         }
-        inputExceptionsFile = inFile;
+        inputExceptionsFile = new File(path);
         logService.LogMessage("Exceptions file initialized: " + inputExceptionsFile.getAbsolutePath());
         return true;
     }
@@ -124,13 +124,13 @@ public class FileService {
         if (inputFile == null){
             return "";
         }
-        return inputFile.getAbsolutePath();
+        return inputFile.toString();
     }
     public String getExceptionsFilePath() {
         if (inputExceptionsFile == null){
             return "";
         }
-        return inputExceptionsFile.getAbsolutePath();
+        return inputExceptionsFile.toString();
     }
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
