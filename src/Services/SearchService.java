@@ -52,6 +52,8 @@ public class SearchService {
             isWorkFlag = true;
             StartWork();
             guiService.changeApplicationStateToWork(false);
+            logService.LogMessage("Stopped");
+            logService.UpdateStatus("Stopped");
         });
         worker.start();
     }
@@ -67,7 +69,7 @@ public class SearchService {
                 logService.LogMessage("Exceptions file was not chosen");
                 return;
             }
-            if (inputCsvItems == null || StrUtils.isPlaceholderHasSubstituteTerms(guiService.getSearchPlaceholderText())) {
+            if (inputCsvItems == null && StrUtils.isPlaceholderHasSubstituteTerms(guiService.getSearchPlaceholderText())) {
                 Element body = getQueryBody(null);
                 if (body != null) {
                     SearchResult result = new SearchResult(logService)

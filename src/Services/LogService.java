@@ -33,10 +33,10 @@ public class LogService {
     public void updateCountItemsStatus(int currentItem, int totalItems) {
 
         if (totalItems > 1) {
-            guiService.getBootstrapper().getLabelStatusData().setText("Processed " + currentItem + "/" + (totalItems - 1) +"items.");
+            guiService.getBootstrapper().getLabelStatusData().setText("Processed " + currentItem + "/" + (totalItems - 1) +" items.");
         }
         else {
-            guiService.getBootstrapper().getLabelStatusData().setText("Processed " + currentItem + "/" + (totalItems) +"items");
+            guiService.getBootstrapper().getLabelStatusData().setText("Processed " + currentItem + "/" + (totalItems) +" items");
         }
         try {
             Thread.sleep(1500);
