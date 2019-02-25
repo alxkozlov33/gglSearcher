@@ -39,8 +39,8 @@ public class SearchService {
 
     private int getRandomTime() {
         Random r = new Random();
-        int low = 2000;
-        int high = 4000;
+        int low = 20000;
+        int high = 40000;
         return r.nextInt(high-low) + low;
     }
 
