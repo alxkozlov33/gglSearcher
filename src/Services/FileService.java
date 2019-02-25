@@ -93,8 +93,12 @@ public class FileService {
         String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         String parentFile = null;
         if (outputFile == null || inputFile == null) {
-            File f = new File(".");
-            String filePath = f.getAbsolutePath().replace(".", "") + fileName + ".csv";
+            String absolutePath = new File(".").getAbsolutePath();
+            if(absolutePath.endsWith("."))
+            {
+                absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
+            }
+            String filePath = absolutePath + fileName + ".csv";
             outputFile = new File(filePath);
         }
         else {
