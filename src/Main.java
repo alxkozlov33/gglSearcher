@@ -1,4 +1,3 @@
-import Controllers.MainController;
 import GUI.Bootstrapper;
 import Services.DIResolver;
 
@@ -23,7 +22,7 @@ public class Main {
 
     private void initGUI() {
         gui = new Bootstrapper();
-        gui.setTitle("Info searcher v2.6 [GGL]");
+        gui.setTitle("Info searcher v2.6.2 [GGL]");
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setSize(800, 700);

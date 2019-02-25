@@ -12,11 +12,9 @@ public class DirUtils {
             FileDialog chooser = new FileDialog(frame, "Select file");
             System.setProperty("apple.awt.fileDialogForDirectories", "false");
             chooser.setVisible(true);
-
             System.setProperty("apple.awt.fileDialogForDirectories", "true");
             if (chooser.getFile() != null) {
-                String fileName = chooser.getFile();
-                result = fileName;
+                result = chooser.getDirectory() + chooser.getFile();
             }
         } else {
             JFileChooser chooser = new JFileChooser();

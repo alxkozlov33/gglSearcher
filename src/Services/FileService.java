@@ -1,6 +1,7 @@
 package Services;
 
 import Models.*;
+import Utils.CSVUtils;
 import Utils.DirUtils;
 import Utils.StrUtils;
 import com.opencsv.CSVWriter;
@@ -12,10 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileService {
@@ -158,19 +161,21 @@ public class FileService {
         }
         return csvFileData;
     }
+
     public void SaveResultCsvItems(ArrayList<OutputCsvModelItem> csvFileData) {
         if (csvFileData == null || csvFileData.size() == 0) {
             return;
         }
-        FileWriter mFileWriter = null;
+
         try {
-            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
-            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
+            FileWriter writer = new FileWriter(outputFile.getAbsoluteFile(), true);
             for (OutputCsvModelItem item : csvFileData) {
-                mCsvWriter.writeNext(new String[]{item.getCountry(), item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()});
+                String[] data = new String[]{item.getCountry(), item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()};
+                CSVUtils.writeLine(writer, Arrays.asList(data), ',', '"');
             }
-            mCsvWriter.close();
-            mFileWriter.close();
+            writer.flush();
+            writer.close();
+
         } catch (IOException e) {
             logService.LogMessage("Cannot save data to output file");
             logService.LogMessage(e.getMessage());

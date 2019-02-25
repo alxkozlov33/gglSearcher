@@ -4,7 +4,8 @@ import com.opencsv.bean.CsvBindByName;
 
 public class OutputCsvModelItem {
 
-    public OutputCsvModelItem() { }
+    public OutputCsvModelItem() {
+    }
 
     @CsvBindByName(column = "GalleryName")
     private String galleryName;
@@ -30,20 +31,37 @@ public class OutputCsvModelItem {
     }
 
     public String getGalleryName() {
+        if (galleryName == null) {
+            return "";
+        }
         return this.galleryName;
     }
 
     public String getWebsite() {
+        if (website == null) {
+            return "";
+        }
         return this.website;
     }
 
     public String getCity() {
+        if (city == null) {
+            return "";
+        }
         return this.city;
     }
 
-    public String getNotSure() { return notSure; }
+    public String getNotSure() {
+        if (notSure == null) {
+            return "";
+        }
+        return notSure;
+    }
 
     public String getCountry() {
+        if (country == null) {
+            return "";
+        }
         return country;
     }
 }

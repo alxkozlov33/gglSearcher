@@ -31,7 +31,7 @@ public class StrUtils {
         try {
             result = "https://www.google.com/search?q=" +
                     URLEncoder.encode(queryTerm, "UTF-8") +
-                    "&pws=0&gl=us&gws_rd=cr&num=150";
+                    "&pws=0&gl=us&gws_rd=cr";//&num=150";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
