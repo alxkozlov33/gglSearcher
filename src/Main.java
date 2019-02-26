@@ -22,7 +22,7 @@ public class Main {
 
     private void initGUI() {
         gui = new Bootstrapper();
-        gui.setTitle("Info searcher v2.6.4 [GGL]");
+        gui.setTitle("Info searcher v2.6.5 [GGL]");
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setSize(800, 700);
