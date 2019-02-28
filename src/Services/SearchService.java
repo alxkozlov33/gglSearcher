@@ -1,15 +1,15 @@
 package Services;
 
 import Models.InputCsvModelItem;
-import Models.OutputCsvModelItem;
-import Models.ProxyObjects.ProxyObjectDto;
-import Models.SearchExceptions;
+import Models.OutputCSVModels.OutputCsvModelItem;
+import Models.SearchSettings;
 import Models.SearchResult;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class SearchService {
     private final UserAgentsRotatorService userAgentsRotatorService;
 
     private ArrayList<InputCsvModelItem> inputCsvItems;
-    private SearchExceptions searchExceptions;
+    private SearchSettings searchExceptions;
     private boolean isWorkFlag = false;
 
     public SearchService() {
@@ -44,7 +44,7 @@ public class SearchService {
         return r.nextInt(high-low) + low;
     }
 
-    public void DoWork(ArrayList<InputCsvModelItem> inputCsvItems, SearchExceptions searchExceptions) {
+    public void DoWork(ArrayList<InputCsvModelItem> inputCsvItems, SearchSettings searchExceptions) {
         this.inputCsvItems = inputCsvItems;
         this.searchExceptions = searchExceptions;
         Thread worker = new Thread(() -> {
@@ -130,15 +130,15 @@ public class SearchService {
                 int waitingTime = getRandomTime();
                 logService.LogMessage("Waiting: " + waitingTime / 1000 + " sec.");
                 Thread.sleep(waitingTime);
-                ProxyObjectDto proxy = proxyService.getNewProxy();
-                logService.LogMessage("Used proxy: " + proxy.ip + ":" + proxy.port);
+                Proxy proxy = proxyService.getNewProxy();
+                logService.LogMessage("Used proxy: " + proxy.address());
                 String userAgent = userAgentsRotatorService.getRandomUserAgent();
                 logService.LogMessage("Used UserAgent: " + userAgent);
                 if (!StringUtils.isEmpty(inputPlaceHolder)) {
                     logService.LogMessage(inputPlaceHolder);
                     Connection.Response response = Jsoup.connect(inputPlaceHolder)
                             .followRedirects(true)
-                            .proxy(proxy.ip, proxy.port)
+                            .proxy(proxy)
                             .userAgent(userAgent)
                             .method(Connection.Method.GET)
                             .ignoreHttpErrors(true)

@@ -1,19 +1,20 @@
 package Services;
 
-import Models.ProxyObjects.ProxyObjectDto;
 import Utils.StrUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
-public class ProxyService {
+class ProxyService {
     private LogService logService;
-    public ProxyService(LogService logService) {
+    ProxyService(LogService logService) {
         this.logService = logService;
     }
-    public ProxyObjectDto getNewProxy() {
+    Proxy getNewProxy() {
         Connection.Response response = null;
         String json = null;
 
@@ -35,8 +36,6 @@ public class ProxyService {
                     success = true;
                     break;
                 }
-            } catch (SocketTimeoutException ex) {
-                logService.LogMessage("Cannot get proxy");
             } catch (IOException e) {
                 logService.LogMessage("Cannot get proxy");
             }
@@ -49,11 +48,12 @@ public class ProxyService {
             success = false;
         }
 
-        if(success) {
-
-            ProxyObjectDto dto = new ProxyObjectDto(json);
-            return dto;
+        Proxy proxy = null;
+        if (success) {
+            if (!StringUtils.isEmpty(json)) {
+                proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(json.split(":")[0], Integer.parseInt(json.split(":")[1])));
+            }
         }
-        return null;
+        return proxy;
     }
 }

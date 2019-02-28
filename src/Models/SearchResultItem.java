@@ -6,7 +6,6 @@ import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import java.net.URI;
 
 public class SearchResultItem {
     private String MainHeader;
@@ -22,7 +21,7 @@ public class SearchResultItem {
     private String Country;
     private String NotSureLink;
 
-    private SearchExceptions se;
+    private SearchSettings se;
 
     public SearchResultItem(LogService logService) {
         this.logService = logService;
@@ -38,7 +37,7 @@ public class SearchResultItem {
         return this;
     }
 
-    public SearchResultItem initSearchExceptions(SearchExceptions se) {
+    public SearchResultItem initSearchExceptions(SearchSettings se) {
         this.se = se;
         return this;
     }

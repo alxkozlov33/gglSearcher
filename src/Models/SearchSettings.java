@@ -2,7 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 
-public class SearchExceptions {
+public class SearchSettings {
 
     public ArrayList<String> domainExceptions;
     public ArrayList<String> URLExceptions;

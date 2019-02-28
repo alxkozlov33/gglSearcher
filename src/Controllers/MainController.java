@@ -1,9 +1,8 @@
 package Controllers;
 
-import Models.SearchExceptions;
+import Models.SearchSettings;
 import Services.*;
 import Utils.StrUtils;
-import org.apache.commons.io.FilenameUtils;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class MainController {
 
     public void ApplicationStarted() {
         userAgentsRotatorService.initList();
-        SearchExceptions searchExceptions = null;
+        SearchSettings searchExceptions = null;
         ArrayList inputCsvData = null;
 
         String placeholderTerm = propertiesService.getPlaceHolder();
@@ -62,7 +61,7 @@ public class MainController {
         ArrayList inputCsvData = fileService.InitCSVItems();
 
         fileService.SetOutputFile(guiService.getSearchPlaceholderText());
-        SearchExceptions searchExceptions = fileService.initExceptionsKeywords();
+        SearchSettings searchExceptions = fileService.initExceptionsKeywords();
         searchService.DoWork(inputCsvData, searchExceptions);
     }
 

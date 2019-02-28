@@ -1,6 +1,7 @@
 package Services;
 
 import Models.*;
+import Models.OutputCSVModels.OutputCsvModelItem;
 import Utils.CSVUtils;
 import Utils.DirUtils;
 import Utils.StrUtils;
@@ -13,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -196,7 +196,7 @@ public class FileService {
         }
         return outputItems;
     }
-    public SearchExceptions initExceptionsKeywords() {
+    public SearchSettings initExceptionsKeywords() {
         if (inputExceptionsFile == null) {
             logService.LogMessage("Exceptions file path empty");
             return null;
@@ -205,7 +205,7 @@ public class FileService {
             logService.LogMessage("Exceptions file has wrong symbols in name or path");
             return null;
         }
-        SearchExceptions se = new SearchExceptions();
+        SearchSettings se = new SearchSettings();
         se.domainExceptions = new ArrayList<>();
         se.URLExceptions = new ArrayList<>();
         se.metaTagsExceptions = new ArrayList<>();

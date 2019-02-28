@@ -15,14 +15,14 @@ public class SearchResult {
     private String city;
     private String country;
 
-    private SearchExceptions se;
+    private SearchSettings se;
 
     public SearchResult(LogService logService) {
         this.logService = logService;
         Results = new ArrayList<>();
     }
 
-    public SearchResult initSearchExceptions(SearchExceptions se) {
+    public SearchResult initSearchExceptions(SearchSettings se) {
         this.se = se;
         return this;
     }
