@@ -5,26 +5,19 @@ import com.opencsv.bean.CsvBindByName;
 public abstract class OutputCSVItem extends OutputCSVModelGeoData {
 
     @CsvBindByName(column = "GalleryName")
-    public String galleryName;
+    private String galleryName;
 
     @CsvBindByName(column = "Website")
-    public String website;
+    private String website;
 
     @CsvBindByName(column = "NotSure")
-    public String notSure;
+    private String notSure;
 
-    public OutputCSVItem(String GalleryName, String Website, String City, String NotSureLink, String Сountry) {
-        this.city = City;
+    public OutputCSVItem(String GalleryName, String Website, String City, String notSureLink, String Country) {
+        super(City, Country);
         this.galleryName = GalleryName;
         this.website = Website;
-        this.notSure = NotSureLink;
-        this.country = Сountry;
-    }
-
-    public OutputCSVItem(String GalleryName, String Website, String NotSureLink) {
-        this.galleryName = GalleryName;
-        this.website = Website;
-        this.notSure = NotSureLink;
+        this.notSure = notSureLink;
     }
 
     public String getGalleryName() {
@@ -44,5 +37,17 @@ public abstract class OutputCSVItem extends OutputCSVModelGeoData {
             return "";
         }
         return notSure;
+    }
+
+    public void setGalleryName(String galleryName) {
+        this.galleryName = galleryName;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setNotSure(String notSure) {
+        this.notSure = notSure;
     }
 }
