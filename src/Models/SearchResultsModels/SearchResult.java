@@ -1,6 +1,7 @@
-package Models;
+package Models.SearchResultsModels;
 
 
+import Models.SearchSettings;
 import Services.LogService;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

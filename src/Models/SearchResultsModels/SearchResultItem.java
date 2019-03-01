@@ -1,12 +1,15 @@
-package Models;
+package Models.SearchResultsModels;
 
 import Abstract.GoogleSearchResultItem;
+import Models.SearchSettings;
 import Services.LogService;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+
+import java.util.List;
 
 public class SearchResultItem extends GoogleSearchResultItem {
 
@@ -156,5 +159,10 @@ public class SearchResultItem extends GoogleSearchResultItem {
 
     public void setCountry(String country) {
         Country = country;
+    }
+
+    @Override
+    public List<GoogleSearchResultItem> getResults(Element html) {
+        return null;
     }
 }

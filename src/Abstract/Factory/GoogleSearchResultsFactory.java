@@ -1,14 +1,13 @@
 package Abstract.Factory;
 
 import Abstract.GoogleSearchResultItem;
-import Models.SearchResultItem;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GoogleSearchResultsFactory {
+
+    public abstract GoogleSearchResultItem getResults();
 
     public List<GoogleSearchResultItem> buildResults(Element body) {
 //        ArrayList<GoogleSearchResultItem> Result = new ArrayList<>();
@@ -32,5 +31,6 @@ public abstract class GoogleSearchResultsFactory {
 //            logService.LogMessage(Results.size() + " results will be saved.");
 //            logService.drawLine();
 //        }
+        return null;
     }
 }

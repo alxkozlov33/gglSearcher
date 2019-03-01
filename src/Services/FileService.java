@@ -2,6 +2,7 @@ package Services;
 
 import Models.*;
 import Models.OutputCSVModels.OutputCsvModelItem;
+import Models.SearchResultsModels.SearchResultItem;
 import Utils.CSVUtils;
 import Utils.DirUtils;
 import Utils.StrUtils;
