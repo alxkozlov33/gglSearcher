@@ -2,6 +2,7 @@ package Services;
 
 import Models.*;
 import Models.OutputCSVModels.OutputCsvModelItem;
+import Models.SearchResultsModels.SearchResult;
 import Models.SearchResultsModels.SearchResultItem;
 import Utils.CSVUtils;
 import Utils.DirUtils;
@@ -197,58 +198,58 @@ public class FileService {
         }
         return outputItems;
     }
-    public SearchSettings initExceptionsKeywords() {
-        if (inputExceptionsFile == null) {
-            logService.LogMessage("Exceptions file path empty");
-            return null;
-        }
-        if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFile.getAbsolutePath())) {
-            logService.LogMessage("Exceptions file has wrong symbols in name or path");
-            return null;
-        }
-        SearchSettings se = new SearchSettings();
-        se.domainExceptions = new ArrayList<>();
-        se.URLExceptions = new ArrayList<>();
-        se.metaTagsExceptions = new ArrayList<>();
-        se.topLevelDomainsExceptions = new ArrayList<>();
-        try {
-            List<String> lines = Files.readAllLines(inputExceptionsFile.toPath(), StandardCharsets.UTF_8);
-            lines.removeIf(l -> l.equals(""));
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).contains("# Exceptions for found domains:")) {
-                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
+//    public SearchSettings initExceptionsKeywords() {
+//        if (inputExceptionsFile == null) {
+//            logService.LogMessage("Exceptions file path empty");
+//            return null;
+//        }
+//        if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFile.getAbsolutePath())) {
+//            logService.LogMessage("Exceptions file has wrong symbols in name or path");
+//            return null;
+//        }
+//        SearchSettings se = new SearchSettings();
+//        se.domainExceptions = new ArrayList<>();
+//        se.URLExceptions = new ArrayList<>();
+//        se.metaTagsExceptions = new ArrayList<>();
+//        se.topLevelDomainsExceptions = new ArrayList<>();
+//        try {
+//            List<String> lines = Files.readAllLines(inputExceptionsFile.toPath(), StandardCharsets.UTF_8);
+//            lines.removeIf(l -> l.equals(""));
+//            for (int i = 0; i < lines.size(); i++) {
+//                if (lines.get(i).contains("# Exceptions for found domains:")) {
+//                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
+//                }
+//
+//                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
+//                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
+//                }
+//
+//                if (lines.get(i).contains("# Exceptions meta titles:")) {
+//                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
+//                }
+//
+//                if (lines.get(i).contains("# Exceptions for top level domains:")) {
+//                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
+//                }
+//            }
+//        } catch (IOException e) {
+//            logService.LogMessage("Cannot initialize input exceptions file");
+//            logService.LogMessage(e.getMessage());
+//        }
+//        return se;
+//    }
 
-                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
-                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions meta titles:")) {
-                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for top level domains:")) {
-                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-            }
-        } catch (IOException e) {
-            logService.LogMessage("Cannot initialize input exceptions file");
-            logService.LogMessage(e.getMessage());
-        }
-        return se;
-    }
-
-    private ArrayList<String> collectTerms(int index, List<String> lines) {
-        ArrayList<String> buffer = new ArrayList<>();
-        for (int k = (index+1); k < lines.size(); k++)
-        {
-            if (lines.get(k).startsWith("#")) {
-                break;
-            }
-            buffer.add(lines.get(k).trim().toLowerCase());
-        }
-        return buffer;
-    }
+//    private ArrayList<String> collectTerms(int index, List<String> lines) {
+//        ArrayList<String> buffer = new ArrayList<>();
+//        for (int k = (index+1); k < lines.size(); k++)
+//        {
+//            if (lines.get(k).startsWith("#")) {
+//                break;
+//            }
+//            buffer.add(lines.get(k).trim().toLowerCase());
+//        }
+//        return buffer;
+//    }
     private void createEmptyCSVFile() {
         FileWriter mFileWriter = null;
         try {

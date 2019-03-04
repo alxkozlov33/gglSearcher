@@ -2,8 +2,8 @@ package Services;
 
 import Models.InputCsvModelItem;
 import Models.OutputCSVModels.OutputCsvModelItem;
+import Models.SearchResultsModels.SearchResult;
 import Models.SearchSettings;
-import Models.SearchResult;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
@@ -130,7 +130,7 @@ public class SearchService {
                 int waitingTime = getRandomTime();
                 logService.LogMessage("Waiting: " + waitingTime / 1000 + " sec.");
                 Thread.sleep(waitingTime);
-                Proxy proxy = proxyService.getNewProxy();
+                Proxy proxy = proxyService.getNewProxyAddress();
                 logService.LogMessage("Used proxy: " + proxy.address());
                 String userAgent = userAgentsRotatorService.getRandomUserAgent();
                 logService.LogMessage("Used UserAgent: " + userAgent);

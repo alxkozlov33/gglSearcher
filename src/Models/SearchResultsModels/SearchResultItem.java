@@ -1,6 +1,6 @@
 package Models.SearchResultsModels;
 
-import Abstract.GoogleSearchResultItem;
+import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Models.SearchSettings;
 import Services.LogService;
 import Utils.StrUtils;
@@ -159,10 +159,5 @@ public class SearchResultItem extends GoogleSearchResultItem {
 
     public void setCountry(String country) {
         Country = country;
-    }
-
-    @Override
-    public List<GoogleSearchResultItem> getResults(Element html) {
-        return null;
     }
 }
