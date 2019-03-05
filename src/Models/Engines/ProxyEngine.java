@@ -20,6 +20,7 @@ public class ProxyEngine extends WebEngine {
                 .userAgent(requestData.userAgent)
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
+                .timeout(requestDelay)
                 .execute();
     }
 }

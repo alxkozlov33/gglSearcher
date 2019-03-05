@@ -1,11 +1,18 @@
 package Services;
 
 import Abstract.SearchResultModels.GoogleSearchResultItem;
+import Abstract.WebEngine;
+import Abstract.WebPageObject;
+import Models.Engines.ProxyEngine;
 import Models.Engines.WebUrlEngine;
+import Models.RequestData;
 import Models.SearchSettings;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.Connection;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.pmw.tinylog.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,68 +27,19 @@ public class ResultsFiltrationService {
 
     WebUrlEngine webUrlEngine = new WebUrlEngine();
 
-    private boolean containsMetaTags() {
-        for (String metaExceptionKeyword : settings.metaTagsExceptions) {
-            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
-                return false;
-            }
-            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
-                return false;
-            }
-        }
-        return true;
+    private final ProxyService proxyService;
+
+    public ResultsFiltrationService(ProxyService proxyService) {
+        this.proxyService = proxyService;
     }
 
-    private boolean checkIfSourceRight(Element source) {
-        String siteDescription = source.select("meta[name=description]").attr("content");
-        String siteKeywords = source.select("meta[name=keywords]").attr("content");
-        String siteName = source.select("meta[property=og:title]").attr("content");
-        if (StringUtils.isEmpty(siteName)) {
-            siteName = source.select("title").text();
-        }
+    public WebPageObject getWebPageObject(RequestData requestData) throws IOException {
+        Element element = webUrlEngine.getWebSourceData(requestData);
+        String siteDescription = element.select("meta[name=description]").attr("content");
+        String siteKeywords = element.select("meta[name=keywords]").attr("content");
+        String siteName = element.select("meta[property=og:title]").attr("content");
 
-        for (String metaExceptionKeyword : settings.metaTagsExceptions) {
-            if (siteDescription.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
-                return false;
-            }
-            if (siteKeywords.toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
-                return false;
-            }
-        }
-        String domainName = StrUtils.extractDomainName(link);
-        for (String domainNameException: settings.domainExceptions) {
-            if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {
-                return false;
-            }
-        }
-
-        String str = StrUtils.getUnmatchedPartOfString(link);
-        for (String urlException: settings.URLExceptions) {
-            if (str.toLowerCase().contains(urlException.toLowerCase())) {
-                return false;
-            }
-        }
-
-        for (String topLevelDomainException: settings.topLevelDomainsExceptions) {
-            if (link.toLowerCase().contains(topLevelDomainException.toLowerCase())) {
-                return false;
-            }
-        }
-
-        if (str.length() > 15){
-            NotSureLink = link;
-        }
-        else {
-            Website = StrUtils.extractDomainName(link);
-        }
-
-        if (StringUtils.isEmpty(siteName)) {
-            GalleryName = mainHeader;
-        }
-        else {
-            GalleryName = siteName;
-        }
-        return true;
+        return new WebPageObject(siteDescription, siteKeywords, siteName);
     }
 
     public ArrayList filterData(ArrayList<GoogleSearchResultItem> data) {
@@ -139,8 +97,8 @@ public class ResultsFiltrationService {
 
     public void initExceptionsKeywords(File settingsFile) {
         if (settingsFile == null) {
+            Logger.error("Cannot initialize input exceptions file");
             throw new NullPointerException();
-            //logService.LogMessage("Exceptions file path empty");
         }
         Path settingsFilePath = settingsFile.toPath();
 
@@ -167,8 +125,7 @@ public class ResultsFiltrationService {
                 }
             }
         } catch (IOException e) {
-            //logService.LogMessage("Cannot initialize input exceptions file");
-            //logService.LogMessage(e.getMessage());
+            Logger.error(e, "Cannot initialize input exceptions file");
         }
     }
 

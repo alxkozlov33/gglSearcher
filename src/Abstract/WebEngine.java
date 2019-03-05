@@ -10,7 +10,7 @@ public abstract class WebEngine {
     public WebEngine() {
     }
 
-    protected boolean isValidResponse(Connection.Response response) {
+    public boolean isValidResponse(Connection.Response response) {
         boolean isValidFlag = false;
         if (response.statusCode() == 200) {
             isValidFlag = true;
