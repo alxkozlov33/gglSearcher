@@ -1,6 +1,6 @@
 package Abstract;
 
-public class WebPageObject extends ComparedObject {
+public class WebPageObject {
 
     public WebPageObject(String siteDescription, String siteKeywords, String siteName) {
         this.siteDescription = siteDescription;
@@ -8,7 +8,19 @@ public class WebPageObject extends ComparedObject {
         this.siteName = siteName;
     }
 
-    public String siteDescription;
-    public String siteKeywords;
-    public String siteName;
+    private String siteDescription;
+    private String siteKeywords;
+    private String siteName;
+
+    public String getSiteDescription() {
+        return siteDescription;
+    }
+
+    public String getSiteKeywords() {
+        return siteKeywords;
+    }
+
+    public String getSiteName() {
+        return siteName;
+    }
 }

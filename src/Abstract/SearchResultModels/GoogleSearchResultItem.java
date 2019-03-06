@@ -1,8 +1,6 @@
 package Abstract.SearchResultModels;
 
-import Abstract.ComparedObject;
-
-public class GoogleSearchResultItem extends ComparedObject {
+public class GoogleSearchResultItem {
     public String mainHeader;
     public String link;
     public String description;

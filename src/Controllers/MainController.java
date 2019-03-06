@@ -44,7 +44,7 @@ public class MainController {
 
         String exceptionsFile = propertiesService.getExceptionsFilePath();
         if (fileService.SetExceptionsFile(exceptionsFile)) {
-            searchExceptions = fileService.initExceptionsKeywords();
+            //searchExceptions = fileService.initExceptionsKeywords();
             guiService.setInputExceptionsFilePath(exceptionsFile);
         }
 
@@ -61,8 +61,8 @@ public class MainController {
         ArrayList inputCsvData = fileService.InitCSVItems();
 
         fileService.SetOutputFile(guiService.getSearchPlaceholderText());
-        SearchSettings searchExceptions = fileService.initExceptionsKeywords();
-        searchService.DoWork(inputCsvData, searchExceptions);
+        //SearchSettings searchExceptions = fileService.initExceptionsKeywords();
+        //searchService.DoWork(inputCsvData, searchExceptions);
     }
 
     public void StopButtonClickAction() {
