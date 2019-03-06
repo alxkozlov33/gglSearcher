@@ -2,7 +2,7 @@ package Services;
 
 import Controllers.MainController;
 import GUI.Bootstrapper;
-import Services.*;
+import org.pmw.tinylog.Logger;
 
 public class DIResolver {
 
@@ -31,70 +31,58 @@ public class DIResolver {
         getSearchService();
 
         getMainController();
-        mapActions();
-        logService.LogMessage("Application started...");
+        Logger.info("Application started...");
     }
-    public static GuiService getGuiService() {
+    public GuiService getGuiService() {
         if (guiService == null) {
             guiService = new GuiService(bootstrapper);
         }
         return guiService;
     }
 
-    public static SearchService getSearchService() {
+    public SearchService getSearchService() {
         if (searchService == null) {
             searchService = new SearchService();
         }
         return searchService;
     }
 
-    public static FileService getFileService() {
+    public FileService getFileService() {
         if (fileService == null) {
             fileService = new FileService();
         }
         return fileService;
     }
 
-    public static LogService getLogService() {
+    public LogService getLogService() {
         if (logService == null) {
             logService = new LogService();
         }
         return logService;
     }
 
-    public static PropertiesService getPropertiesService() {
+    public PropertiesService getPropertiesService() {
         if (propertiesService == null) {
             propertiesService = new PropertiesService();
         }
         return propertiesService;
     }
 
-    public static MainController getMainController() {
+    public MainController getMainController() {
         if(mainController == null) {
             mainController = new MainController();
         }
         return mainController;
     }
 
-    private void mapActions() {
-        bootstrapper.getRunButton().addActionListener(e -> mainController.StartButtonClickAction());
-        bootstrapper.getStopButton().addActionListener(e -> mainController.StopButtonClickAction());
-
-        bootstrapper.getChooseExceptionsFile().addActionListener(e -> mainController.SelectExceptionsFile());
-        bootstrapper.getClearExceptionsFile().addActionListener(e -> mainController.ClearExceptionsFile());
-
-        bootstrapper.getChooseInputFile().addActionListener(e -> mainController.SelectInputFile());
-        bootstrapper.getClearInputFile().addActionListener(e -> mainController.ClearInputFile());
-    }
-
-    public static ProxyService getProxyService() {
+    public ProxyService getProxyService() {
         if (proxyService == null) {
             proxyService = new ProxyService(logService);
         }
         return proxyService;
     }
 
-    public static UserAgentsRotatorService getUserAgentsRotatorService() {
+    public UserAgentsRotatorService getUserAgentsRotatorService() {
         if (userAgentsRotatorService == null) {
             userAgentsRotatorService = new UserAgentsRotatorService();
         }

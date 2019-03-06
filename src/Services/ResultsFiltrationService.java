@@ -77,40 +77,6 @@ public class ResultsFiltrationService {
 //        }
     }
 
-    public void initExceptionsKeywords(File settingsFile) {
-        if (settingsFile == null) {
-            Logger.error("Cannot initialize input exceptions file");
-            throw new NullPointerException();
-        }
-        Path settingsFilePath = settingsFile.toPath();
-
-        SearchSettings se = new SearchSettings();
-        try {
-            List<String> lines = Files.readAllLines(settingsFilePath, StandardCharsets.UTF_8);
-            lines.removeIf(l -> l.equals(""));
-
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).contains("# Exceptions for found domains:")) {
-                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
-                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions meta titles:")) {
-                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for top level domains:")) {
-                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-            }
-        } catch (IOException e) {
-            Logger.error(e, "Cannot initialize input exceptions file");
-        }
-    }
-
     private ArrayList<String> collectTerms(int index, List<String> lines) {
         ArrayList<String> buffer = new ArrayList<>();
         for (int k = (index+1); k < lines.size(); k++)

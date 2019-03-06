@@ -1,6 +1,11 @@
 package GUI;
 
+import Abstract.Commands.*;
+import Controllers.MainController;
+import Services.DIResolver;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class Bootstrapper extends JFrame {
     private JPanel mainPanel;
@@ -23,8 +28,8 @@ public class Bootstrapper extends JFrame {
     private JMenu exceptionsFile;
     private JMenu inputData;
 
-    private JMenuItem clearExceptionsFile;
-    private JMenuItem chooseExceptionsFile;
+    private JMenuItem clearSettingsFile;
+    private JMenuItem chooseSettingsFile;
 
     private JMenuItem chooseInputFile;
     private JMenuItem clearInputFile;
@@ -41,14 +46,25 @@ public class Bootstrapper extends JFrame {
         getInputData().add(getClearInputFile());
 
         exceptionsFile = new JMenu("Exceptions file");
-        chooseExceptionsFile = new JMenuItem("Choose new exceptions file");
-        getExceptionsFile().add(getChooseExceptionsFile());
-        clearExceptionsFile = new JMenuItem("Clear exceptions file");
-        getExceptionsFile().add(getClearExceptionsFile());
+        chooseSettingsFile = new JMenuItem("Choose new settings file");
+        getExceptionsFile().add(getChooseSettingsFile());
+        clearSettingsFile = new JMenuItem("Clear settings file");
+        getExceptionsFile().add(getClearSettingsFile());
 
         getMenubar().add(getInputData());
         getMenubar().add(getExceptionsFile());
         setJMenuBar(getMenubar());
+
+
+        DIResolver diResolver = new DIResolver();
+        runButton.setAction(new RunButtonActionCommand(diResolver));
+        stopButton.setAction(new StopButtonActionCommand(diResolver));
+
+        chooseSettingsFile.setAction(new SelectSettingsFileActionCommand(diResolver));
+        clearSettingsFile.setAction(new ClearSettingsFileActionCommand(diResolver));
+
+        chooseInputFile.setAction(new SelectInputDataFileActionCommand(diResolver));
+        clearInputFile.setAction(new ClearInputDataFileActionCommand(diResolver));
     }
 
     public JLabel getLabelStatusData() {
@@ -108,12 +124,12 @@ public class Bootstrapper extends JFrame {
         return menubar;
     }
 
-    public JMenuItem getClearExceptionsFile() {
-        return clearExceptionsFile;
+    public JMenuItem getClearSettingsFile() {
+        return clearSettingsFile;
     }
 
-    public JMenuItem getChooseExceptionsFile() {
-        return chooseExceptionsFile;
+    public JMenuItem getChooseSettingsFile() {
+        return chooseSettingsFile;
     }
 
     public JMenuItem getChooseInputFile() {

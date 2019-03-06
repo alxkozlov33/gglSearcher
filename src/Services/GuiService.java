@@ -3,19 +3,30 @@ package Services;
 
 import GUI.*;
 
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.io.File;
 
 public class GuiService {
     private Bootstrapper bootstrapper;
 
-    private final PropertiesService propertiesService;
+    //private final PropertiesService propertiesService;
 
     public GuiService(Bootstrapper frame) {
-        propertiesService = DIResolver.getPropertiesService();
+        //propertiesService = DIResolver.getPropertiesService();
         bootstrapper = frame;
     }
 
-    public Bootstrapper getBootstrapper() {
+    public String getSearchPlaceholderText(){
+        return bootstrapper.getSearchingPlaceHolder().getText();
+    }
+
+    public void setSettingsFilePath(String path) {
+        bootstrapper.getExceptionsLabelFileData().setText(path);
+    }
+
+    private Bootstrapper getBootstrapper() {
         return bootstrapper;
     }
 
@@ -25,10 +36,6 @@ public class GuiService {
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getSearchPlaceholderText() {
-        return bootstrapper.getSearchingPlaceHolder().getText();
     }
 
     public void setInputFilePath(String path) {
@@ -49,9 +56,9 @@ public class GuiService {
         bootstrapper.getSearchingPlaceHolder().setEnabled(!isWorkState);
         bootstrapper.getExceptionsFile().setEnabled(!isWorkState);
         bootstrapper.getInputData().setEnabled(!isWorkState);
-        propertiesService.saveWorkState(isWorkState);
+        //propertiesService.saveWorkState(isWorkState);
         if (!isWorkState) {
-            propertiesService.saveIndex(0);
+           // propertiesService.saveIndex(0);
         }
     }
 
@@ -66,4 +73,25 @@ public class GuiService {
             throw new IllegalArgumentException("Something wrong with file path cut");
         }
     }
+
+    public void setStatusText(String text) {
+        bootstrapper.getLabelStatusData().setText(text);
+    }
+
+    public void updateCountItemsStatus(int currentItem, int totalItems) {
+
+        if (totalItems > 1) {
+            setStatusText("Processed " + currentItem + "/" + (totalItems - 1) +" items.");
+        }
+        else {
+            setStatusText("Processed " + currentItem + "/" + (totalItems) +" items");
+        }
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

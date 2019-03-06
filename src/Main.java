@@ -17,7 +17,6 @@ public class Main {
         initGUI();
 
         new DIResolver().initDependencies(gui);
-        DIResolver.getMainController().ApplicationStarted();
     }
 
     private void initGUI() {

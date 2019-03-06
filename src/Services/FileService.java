@@ -1,11 +1,11 @@
 package Services;
 
+import GUI.Bootstrapper;
 import Models.*;
 import Models.OutputCSVModels.OutputCsvModelItem;
 import Models.SearchResultsModels.SearchResult;
 import Models.SearchResultsModels.SearchResultItem;
 import Utils.CSVUtils;
-import Utils.DirUtils;
 import Utils.StrUtils;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
@@ -14,7 +14,10 @@ import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.*;
+import org.pmw.tinylog.Logger;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,12 +32,12 @@ public class FileService {
     private File inputExceptionsFile;
     private File outputFile;
 
-    private final GuiService guiService;
-    private final LogService logService;
+    //private final GuiService guiService;
+    //private final LogService logService;
 
     public FileService() {
-        this.guiService = DIResolver.getGuiService();
-        this.logService = DIResolver.getLogService();
+       // this.guiService = DIResolver.getGuiService();
+        //this.logService = DIResolver.getLogService();
     }
 
     public void clearInputFile() {
@@ -47,13 +50,13 @@ public class FileService {
     public boolean SetInputFile(String restoredPath) {
         String path;
         if (restoredPath == null) {
-            path = DirUtils.selectFolderDialog(guiService.getBootstrapper());
+            path = selectFileDialog();
         } else {
             path = restoredPath;
         }
 
         if (!FilenameUtils.getExtension(path).equalsIgnoreCase("csv")) {
-            logService.LogMessage("Selected input file has invalid format or file not selected");
+            Logger.info("Selected input file has invalid format or file not selected");
             return false;
         }
 
@@ -63,19 +66,19 @@ public class FileService {
         }
 
         inputFile = new File(path);
-        logService.LogMessage("Input data file initialized: " + inputFile);
+        Logger.info("Input data file initialized: "+ inputFile);
         return true;
     }
     public boolean SetExceptionsFile(String restoredPath) {
         String path;
         if (restoredPath == null) {
-            path = DirUtils.selectFolderDialog(guiService.getBootstrapper());
+            path = selectFileDialog();
         } else {
             path = restoredPath;
         }
 
         if (!FilenameUtils.getExtension(path).equalsIgnoreCase("txt")) {
-            logService.LogMessage("Selected exceptions file has invalid format");
+            Logger.info("Selected exceptions file has invalid format");
             return false;
         }
 
@@ -84,13 +87,12 @@ public class FileService {
             return false;
         }
         inputExceptionsFile = new File(path);
-        logService.LogMessage("Exceptions file initialized: " + inputExceptionsFile.getAbsolutePath());
+        Logger.info("Settings file initialized: " + inputExceptionsFile.getAbsolutePath());
         return true;
     }
-    public boolean SetOutputFile(String placeholder) {
+    public void SetOutputFile(String placeholder) {
         if (StringUtils.isEmpty(placeholder)) {
-            logService.LogMessage("Check search placeholder and input file. Application cannot start.");
-            return false;
+            Logger.error("Check search placeholder and input file. Application cannot start.");
         }
         String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         String parentFile = null;
@@ -122,11 +124,9 @@ public class FileService {
                 createEmptyCSVFile();
             }
         } catch (IOException e) {
-            logService.LogMessage("Check search placeholder and input file. Application cannot start.");
-            logService.LogMessage(e.getMessage());
+            Logger.error(e,"Check search placeholder and input file. Application cannot start.");
         }
-        logService.LogMessage("Output file initialized: " + outputFile.getAbsolutePath());
-        return true;
+        Logger.info("Output file initialized: " + outputFile.getAbsolutePath());
     }
 
     public String getInputFilePath() {
@@ -144,11 +144,11 @@ public class FileService {
 
     public ArrayList<InputCsvModelItem> InitCSVItems() {
         if (inputFile == null) {
-            logService.LogMessage("Input data file path empty.");
+            Logger.info("Input data file path empty");
             return null;
         }
         if (StrUtils.isStringContainsExtraSymbols(inputFile.getAbsolutePath())) {
-            logService.LogMessage("Input data file has wrong symbols in name or path");
+            Logger.info("Input data file has wrong symbols in name or path");
             return null;
         }
         ArrayList csvFileData = null;
@@ -161,9 +161,7 @@ public class FileService {
             csvFileData = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
             reader.close();
         } catch (Exception ex) {
-            logService.LogMessage("Something wrong with input file");
-            logService.LogMessage(ex.getMessage());
-            ex.getStackTrace();
+            Logger.error(ex, "Something wrong with input file");
         }
         return csvFileData;
     }
@@ -183,8 +181,7 @@ public class FileService {
             writer.close();
 
         } catch (IOException e) {
-            logService.LogMessage("Cannot save data to output file");
-            logService.LogMessage(e.getMessage());
+            Logger.error(e, "Cannot save data to output file");
         }
     }
 
@@ -198,58 +195,59 @@ public class FileService {
         }
         return outputItems;
     }
-//    public SearchSettings initExceptionsKeywords() {
-//        if (inputExceptionsFile == null) {
-//            logService.LogMessage("Exceptions file path empty");
-//            return null;
-//        }
-//        if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFile.getAbsolutePath())) {
-//            logService.LogMessage("Exceptions file has wrong symbols in name or path");
-//            return null;
-//        }
-//        SearchSettings se = new SearchSettings();
-//        se.domainExceptions = new ArrayList<>();
-//        se.URLExceptions = new ArrayList<>();
-//        se.metaTagsExceptions = new ArrayList<>();
-//        se.topLevelDomainsExceptions = new ArrayList<>();
-//        try {
-//            List<String> lines = Files.readAllLines(inputExceptionsFile.toPath(), StandardCharsets.UTF_8);
-//            lines.removeIf(l -> l.equals(""));
-//            for (int i = 0; i < lines.size(); i++) {
-//                if (lines.get(i).contains("# Exceptions for found domains:")) {
-//                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
-//                }
-//
-//                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
-//                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
-//                }
-//
-//                if (lines.get(i).contains("# Exceptions meta titles:")) {
-//                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
-//                }
-//
-//                if (lines.get(i).contains("# Exceptions for top level domains:")) {
-//                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
-//                }
-//            }
-//        } catch (IOException e) {
-//            logService.LogMessage("Cannot initialize input exceptions file");
-//            logService.LogMessage(e.getMessage());
-//        }
-//        return se;
-//    }
+    public SearchSettings initSettingsFile() {
+        if (inputExceptionsFile == null) {
+            Logger.info("Exceptions file path empty");
+            return null;
+        }
+        if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFile.getAbsolutePath())) {
+            Logger.info("Exceptions file has wrong symbols in name or path");
+            return null;
+        }
+        SearchSettings se = new SearchSettings();
+        se.domainExceptions = new ArrayList<>();
+        se.URLExceptions = new ArrayList<>();
+        se.metaTagsExceptions = new ArrayList<>();
+        se.topLevelDomainsExceptions = new ArrayList<>();
+        try {
+            List<String> lines = Files.readAllLines(inputExceptionsFile.toPath(), StandardCharsets.UTF_8);
+            lines.removeIf(l -> l.equals(""));
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).contains("# Exceptions for found domains:")) {
+                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
 
-//    private ArrayList<String> collectTerms(int index, List<String> lines) {
-//        ArrayList<String> buffer = new ArrayList<>();
-//        for (int k = (index+1); k < lines.size(); k++)
-//        {
-//            if (lines.get(k).startsWith("#")) {
-//                break;
-//            }
-//            buffer.add(lines.get(k).trim().toLowerCase());
-//        }
-//        return buffer;
-//    }
+                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
+                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+
+                if (lines.get(i).contains("# Exceptions meta titles:")) {
+                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+
+                if (lines.get(i).contains("# Exceptions for top level domains:")) {
+                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+            }
+        } catch (IOException e) {
+            Logger.error(e,"Cannot initialize input exceptions file");
+        }
+        return se;
+    }
+
+    private ArrayList<String> collectTerms(int index, List<String> lines) {
+        ArrayList<String> buffer = new ArrayList<>();
+        for (int k = (index+1); k < lines.size(); k++)
+        {
+            if (lines.get(k).startsWith("#")) {
+                break;
+            }
+            buffer.add(lines.get(k).trim().toLowerCase());
+        }
+        return buffer;
+    }
+
+
     private void createEmptyCSVFile() {
         FileWriter mFileWriter = null;
         try {
@@ -259,8 +257,33 @@ public class FileService {
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
-            logService.LogMessage("Cannot create empty output file");
-            logService.LogMessage(e.getMessage());
+            Logger.error(e, "Cannot create empty output file");
         }
+    }
+
+    private String selectFileDialog() {
+        String osName = System.getProperty("os.name");
+        String result = "";
+        if (osName.equalsIgnoreCase("mac os x")) {
+            FileDialog chooser = new FileDialog(new Bootstrapper(), "Select file");
+            System.setProperty("apple.awt.fileDialogForDirectories", "false");
+            chooser.setVisible(true);
+            System.setProperty("apple.awt.fileDialogForDirectories", "true");
+            if (chooser.getFile() != null) {
+                result = chooser.getDirectory() + chooser.getFile();
+            }
+        } else {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Select target file");
+            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+            int returnVal = chooser.showDialog(new Bootstrapper(), "Select file");
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File userSelectedFolder = chooser.getSelectedFile();
+                String folderName = userSelectedFolder.getAbsolutePath();
+                result = folderName;
+            }
+        }
+        return result;
     }
 }
