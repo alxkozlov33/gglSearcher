@@ -1,14 +1,16 @@
-package Abstract.ResultsFactories;
+package Abstract.Factories.Concrete;
 
+import Abstract.Factories.ISearchResultFactory;
 import Abstract.SearchResultModels.RegularSearchResult;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.pmw.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListResultsFactory implements IResultSearchFactory {
+public class RegularResultsResultFactory implements ISearchResultFactory {
     @Override
     public List<RegularSearchResult> processBody(Element body) {
         ArrayList<RegularSearchResult> results = new ArrayList<>();
@@ -16,7 +18,7 @@ public class ListResultsFactory implements IResultSearchFactory {
 
         if (items != null) {
             Elements resultDivs = items.select("div.g");
-            //logService.LogMessage("Parsed: " + resultDivs.size() + " links");
+            Logger.info("Parsed: " + resultDivs.size() + " links");
             if (resultDivs.size() == 0) {
                 //logService.LogMessage("Empty");
             }
@@ -36,8 +38,8 @@ public class ListResultsFactory implements IResultSearchFactory {
 
                 results.add(regularSearchResult);
             }
-            //logService.LogMessage(Results.size() + " results will be saved.");
-            //logService.drawLine();
+            Logger.info(results.size() + " results will be saved.");
+            Logger.info("________________________________________");
         }
         return results;
     }

@@ -15,6 +15,6 @@ public class StopButtonActionCommand extends AbstractCommandAction {
         propertiesService.saveIndex(0);
         logService.LogMessage("Stopping...");
         guiService.setStatusText("Stopping...");
-        searchService.setWorkStateToStop();
+        searchingProcessor.setWorkStateToStop();
     }
 }

@@ -23,8 +23,7 @@ public class SearchResultItem extends GoogleSearchResultItem {
 
     private SearchSettings se;
 
-    public SearchResultItem(LogService logService) {
-        this.logService = logService;
+    public SearchResultItem() {
     }
 
     public SearchResultItem parseInputDiv(Element div) {

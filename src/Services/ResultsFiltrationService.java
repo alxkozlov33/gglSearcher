@@ -7,17 +7,12 @@ import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.URLExceptionsSpecification;
 import Abstract.Specifications.Specification;
 import Abstract.WebPageObject;
-import Models.Engines.WebUrlEngine;
+import Abstract.Engines.WebUrlEngine;
 import Models.RequestData;
 import Models.SearchSettings;
 import org.jsoup.nodes.Element;
-import org.pmw.tinylog.Logger;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

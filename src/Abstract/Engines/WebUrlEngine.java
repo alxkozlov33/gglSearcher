@@ -1,20 +1,25 @@
-package Models.Engines;
+package Abstract.Engines;
 
-import Abstract.WebEngine;
 import Models.RequestData;
 import com.jcabi.aspects.RetryOnFailure;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
+import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
     private final int requestDelay = 15000;
-    public Element getWebSourceData(RequestData requestData) throws IOException {
-        Connection.Response response = makeRequest(requestData);
-        if(isValidResponse(response)) {
-            return response.parse();
+    public Element getWebSourceData(RequestData requestData) {
+        Connection.Response response = null;
+        try {
+            response = makeRequest(requestData);
+            if (isValidResponse(response)) {
+                return response.parse();
+            }
+        } catch (IOException e) {
+            Logger.error(e, "Error while request executing");
         }
         return null;
     }

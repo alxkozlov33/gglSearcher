@@ -1,11 +1,9 @@
 package GUI;
 
 import Abstract.Commands.*;
-import Controllers.MainController;
 import Services.DIResolver;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class Bootstrapper extends JFrame {
     private JPanel mainPanel;

@@ -2,6 +2,8 @@ package Abstract.Commands;
 
 import Models.SearchSettings;
 import Services.DIResolver;
+import Services.SearchingProcessor;
+
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
@@ -23,10 +25,12 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         SearchSettings searchSettings = fileService.initSettingsFile();
         //searchService.DoWork(inputCsvData, searchSettings);
 
+        SearchingProcessor searchingProcessor = new SearchingProcessor(propertiesService, fileService, guiService);
+
         Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
-            searchService.setWorkFlagToRun();
-            searchService.StartWork();
+            searchingProcessor.setWorkFlagToRun();
+            searchingProcessor.StartWork();
             guiService.changeApplicationStateToWork(false);
             logService.LogMessage("Finished");
             guiService.setStatusText("Finished...");

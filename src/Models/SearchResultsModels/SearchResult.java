@@ -5,6 +5,7 @@ import Models.SearchSettings;
 import Services.LogService;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.pmw.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +13,12 @@ import java.util.List;
 public class SearchResult {
     private List<SearchResultItem> Results;
 
-    private LogService logService;
     private String city;
     private String country;
 
     private SearchSettings se;
 
-    public SearchResult(LogService logService) {
-        this.logService = logService;
+    public SearchResult() {
         Results = new ArrayList<>();
     }
 
@@ -34,21 +33,21 @@ public class SearchResult {
 
         if (items != null) {
             Elements resultDivs = items.select("div.g");
-            logService.LogMessage("Parsed: " + resultDivs.size() + " links");
+            Logger.info("Parsed: " + resultDivs.size() + " links");
             if (resultDivs.size() == 0) {
                 System.out.println("Empty");
             }
 
             for (Element div : resultDivs) {
-                SearchResultItem searchResultItem = new SearchResultItem(logService).parseInputDiv(div).initSearchExceptions(se).getItemSource();
+                SearchResultItem searchResultItem = new SearchResultItem().parseInputDiv(div).initSearchExceptions(se).getItemSource();
                 searchResultItem.setCity(city);
                 searchResultItem.setCountry(country);
                 if (searchResultItem.isItemCorrect()) {
                     Results.add(searchResultItem);
                 }
             }
-            logService.LogMessage(Results.size() + " results will be saved.");
-            logService.drawLine();
+            Logger.info(Results.size() + " results will be saved.");
+            Logger.info("________________________________________");
         }
         return this;
     }

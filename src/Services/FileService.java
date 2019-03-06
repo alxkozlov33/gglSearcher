@@ -1,10 +1,9 @@
 package Services;
 
+import Abstract.OutputModels.OutputRegularCSVItem;
 import GUI.Bootstrapper;
 import Models.*;
-import Models.OutputCSVModels.OutputCsvModelItem;
-import Models.SearchResultsModels.SearchResult;
-import Models.SearchResultsModels.SearchResultItem;
+import Abstract.OutputModels.OutputCsvModelItem;
 import Utils.CSVUtils;
 import Utils.StrUtils;
 import com.opencsv.CSVWriter;
@@ -185,16 +184,17 @@ public class FileService {
         }
     }
 
-    public ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(SearchResult results) {
+    public ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(List<OutputRegularCSVItem> results) {
         ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
-        if (results.getResults().size() == 0) {
+        if (results.size() == 0) {
             return null;
         }
-        for (SearchResultItem item : results.getResults()) {
+        for (OutputRegularCSVItem item : results) {
             outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
         }
         return outputItems;
     }
+
     public SearchSettings initSettingsFile() {
         if (inputExceptionsFile == null) {
             Logger.info("Exceptions file path empty");

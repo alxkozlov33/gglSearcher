@@ -1,20 +1,18 @@
 package Services;
 
-import Controllers.MainController;
 import GUI.Bootstrapper;
 import org.pmw.tinylog.Logger;
 
 public class DIResolver {
 
-    private static FileService fileService;
-    private static LogService logService;
-    private static PropertiesService propertiesService;
-    private static GuiService guiService;
-    private static SearchService searchService;
-    private static ProxyService proxyService;
-    private static UserAgentsRotatorService userAgentsRotatorService;
+    private FileService fileService;
+    private LogService logService;
+    private PropertiesService propertiesService;
+    private GuiService guiService;
+    private ProxyService proxyService;
+    private UserAgentsRotatorService userAgentsRotatorService;
+    private SearchingProcessor searchingProcessor;
 
-    private static MainController mainController;
     private static Bootstrapper bootstrapper;
 
     public DIResolver() {
@@ -28,9 +26,8 @@ public class DIResolver {
         getLogService();
         getProxyService();
         getFileService();
-        getSearchService();
+        getSearchingProcessor();
 
-        getMainController();
         Logger.info("Application started...");
     }
     public GuiService getGuiService() {
@@ -40,11 +37,11 @@ public class DIResolver {
         return guiService;
     }
 
-    public SearchService getSearchService() {
-        if (searchService == null) {
-            searchService = new SearchService();
+    public SearchingProcessor getSearchingProcessor() {
+        if (searchingProcessor == null) {
+            searchingProcessor = new SearchingProcessor(propertiesService, fileService, guiService);
         }
-        return searchService;
+        return searchingProcessor;
     }
 
     public FileService getFileService() {
@@ -66,13 +63,6 @@ public class DIResolver {
             propertiesService = new PropertiesService();
         }
         return propertiesService;
-    }
-
-    public MainController getMainController() {
-        if(mainController == null) {
-            mainController = new MainController();
-        }
-        return mainController;
     }
 
     public ProxyService getProxyService() {

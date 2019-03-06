@@ -2,6 +2,7 @@ package Abstract.Commands;
 
 import Models.SearchSettings;
 import Services.DIResolver;
+import Services.SearchingProcessor;
 import Utils.StrUtils;
 
 import java.awt.event.ActionEvent;
@@ -37,8 +38,9 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
             guiService.setInputExceptionsFilePath(exceptionsFile);
         }
 
+        SearchingProcessor searchingProcessor = new SearchingProcessor(propertiesService, fileService, guiService);
         if (propertiesService.getWorkState()) {
-            searchService.DoWork(inputCsvData, searchExceptions);
+            searchingProcessor.StartWork();
         }
     }
 }

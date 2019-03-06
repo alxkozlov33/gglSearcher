@@ -1,6 +1,5 @@
-package Models.Engines;
+package Abstract.Engines;
 
-import Abstract.WebEngine;
 import Models.RequestData;
 import com.jcabi.aspects.RetryOnFailure;
 import org.jsoup.Connection;
@@ -9,6 +8,10 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 
 public class ProxyEngine extends WebEngine {
+
+    String URL = "";
+    String userAgeng = "";
+
     private final int requestDelay = 60000;
     private final int attempts = 50;
 

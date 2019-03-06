@@ -1,8 +1,8 @@
-package Abstract;
+package Abstract.OutputModels;
 
 import com.opencsv.bean.CsvBindByName;
 
-public abstract class OutputCSVItem extends OutputCSVModelGeoData {
+public class OutputRegularCSVItem extends OutputCsvModelItem {
 
     @CsvBindByName(column = "GalleryName")
     private String galleryName;
@@ -13,7 +13,7 @@ public abstract class OutputCSVItem extends OutputCSVModelGeoData {
     @CsvBindByName(column = "NotSure")
     private String notSure;
 
-    public OutputCSVItem(String GalleryName, String Website, String City, String notSureLink, String Country) {
+    public OutputRegularCSVItem(String GalleryName, String Website, String City, String notSureLink, String Country) {
         super(City, Country);
         this.galleryName = GalleryName;
         this.website = Website;

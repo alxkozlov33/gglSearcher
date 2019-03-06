@@ -9,7 +9,7 @@ public abstract class AbstractCommandAction extends AbstractAction {
     protected GuiService guiService;
     protected LogService logService;
     protected PropertiesService propertiesService;
-    protected SearchService searchService;
+    protected SearchingProcessor searchingProcessor;
     protected UserAgentsRotatorService userAgentsRotatorService;
 
     public AbstractCommandAction(DIResolver diResolver, String name) {
@@ -18,7 +18,7 @@ public abstract class AbstractCommandAction extends AbstractAction {
         this.guiService = diResolver.getGuiService();
         this.logService = diResolver.getLogService();
         this.propertiesService = diResolver.getPropertiesService();
-        this.searchService = diResolver.getSearchService();
+        this.searchingProcessor = diResolver.getSearchingProcessor();
         this.userAgentsRotatorService = diResolver.getUserAgentsRotatorService();
     }
 }

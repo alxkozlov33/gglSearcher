@@ -1,4 +1,4 @@
-package Abstract;
+package Abstract.Engines;
 
 import Models.RequestData;
 import com.jcabi.aspects.RetryOnFailure;
@@ -6,9 +6,7 @@ import org.jsoup.Connection;
 
 import java.io.IOException;
 
-public abstract class WebEngine {
-    public WebEngine() {
-    }
+abstract class WebEngine {
 
     public boolean isValidResponse(Connection.Response response) {
         boolean isValidFlag = false;

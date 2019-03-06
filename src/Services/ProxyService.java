@@ -1,24 +1,18 @@
 package Services;
 
-import Models.Engines.ProxyEngine;
+import Abstract.Engines.ProxyEngine;
 import Models.RequestData;
-import Utils.StrUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
-import org.jsoup.Jsoup;
+import org.pmw.tinylog.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 
-class ProxyService {
-    private LogService logService;
-
+public class ProxyService {
     ProxyEngine proxyEngine = new ProxyEngine();
-
-
-    ProxyService(LogService logService) {
-        this.logService = logService;
+    public ProxyService() {
     }
 //    Proxy getNewProxy() {
 //        Connection.Response response = null;
@@ -64,12 +58,18 @@ class ProxyService {
 //    }
 
 
-    public Proxy getNewProxyAddress() throws IOException {
+    public Proxy getNewProxyAddress() {
         RequestData requestData = new RequestData(
                 "http://pubproxy.com/api/proxy?google=true&last_check=3&api=ZlBnbzgzUnhvUjBqbytFa1dZTzAzdz09&format=txt",
                 "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)");
-        Connection.Response response = proxyEngine.makeRequest(requestData);
-        String textProxy = response.parse().text();
+        Connection.Response response = null;
+        String textProxy = null;
+        try {
+            response = proxyEngine.makeRequest(requestData);
+            textProxy = response.parse().text();
+        } catch (IOException e) {
+            Logger.error(e, "Error while proxy request executing");
+        }
 
         Proxy proxy = null;
             if (!StringUtils.isEmpty(textProxy)) {
