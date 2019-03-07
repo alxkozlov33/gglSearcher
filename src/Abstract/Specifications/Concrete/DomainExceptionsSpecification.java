@@ -9,7 +9,7 @@ public class DomainExceptionsSpecification extends AbstractSpecification<GoogleS
 
     private ArrayList<String> domainExceptions;
     public DomainExceptionsSpecification(ArrayList<String> domainExceptions) {
-        this.domainExceptions = domainExDomainExceptionsSpecificationceptions;
+        this.domainExceptions = domainExceptions;
     }
 
     @Override

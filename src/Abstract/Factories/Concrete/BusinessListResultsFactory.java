@@ -1,14 +1,14 @@
 package Abstract.Factories.Concrete;
 
 import Abstract.Factories.ISearchResultFactory;
-import Abstract.SearchResultModels.RegularSearchResult;
+import Abstract.SearchResultModels.RegularSearchResultItem;
 import org.jsoup.nodes.Element;
 
 import java.util.List;
 
 public class BusinessListResultsFactory implements ISearchResultFactory {
     @Override
-    public List<RegularSearchResult> processBody(Element body) {
+    public List<RegularSearchResultItem> processBody(Element body) {
        return null;
     }
 }

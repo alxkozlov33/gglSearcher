@@ -2,8 +2,6 @@ package Services;
 
 import Models.SearchSettings;
 import Utils.StrUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.pmw.tinylog.Logger;
 
 import java.io.File;
@@ -16,11 +14,16 @@ import java.util.List;
 public class SettingsService {
 
     private static SearchSettings searchSettings;
+    private static File settingsDataFile;
 
     public SettingsService() {
         if (searchSettings == null) {
             this.searchSettings = new SearchSettings();
         }
+    }
+
+    public File getSettingsDataFile() {
+        return settingsDataFile;
     }
 
     public void initSettingsFile(File settingsFile) {
@@ -32,13 +35,16 @@ public class SettingsService {
             Logger.info("Exceptions file has wrong symbols in name or path");
             return;
         }
+
+        settingsDataFile = settingsFile;
+
         SearchSettings searchSettings = new SearchSettings();
         searchSettings.domainExceptions = new ArrayList<>();
         searchSettings.URLExceptions = new ArrayList<>();
         searchSettings.metaTagsExceptions = new ArrayList<>();
         searchSettings.topLevelDomainsExceptions = new ArrayList<>();
         try {
-            List<String> lines = Files.readAllLines(settingsFile.toPath(), StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(getSettingsDataFile().toPath(), StandardCharsets.UTF_8);
             lines.removeIf(l -> l.equals(""));
             for (int i = 0; i < lines.size(); i++) {
                 if (lines.get(i).contains("# Exceptions for found domains:")) {
@@ -74,27 +80,6 @@ public class SettingsService {
         return buffer;
     }
 
-//    public boolean SetExceptionsFile(String restoredPath) {
-//        String path;
-//        if (restoredPath == null) {
-//            path = selectFileDialog();
-//        } else {
-//            path = restoredPath;
-//        }
-//
-//        if (!FilenameUtils.getExtension(path).equalsIgnoreCase("txt")) {
-//            Logger.info("Selected exceptions file has invalid format");
-//            return false;
-//        }
-//
-//        File inFile = new File(path);
-//        if (StringUtils.isEmpty(path) && !inFile.exists()) {
-//            return false;
-//        }
-//        inputExceptionsFile = new File(path);
-//        Logger.info("Settings file initialized: " + inputExceptionsFile.getAbsolutePath());
-//        return true;
-//    }
 
     public SearchSettings getSearchSettings() {
         return searchSettings;
@@ -102,5 +87,9 @@ public class SettingsService {
 
     public static SearchSettings getSearchSettingsStatic() {
         return searchSettings;
+    }
+
+    public void clearSettingsFile() {
+
     }
 }

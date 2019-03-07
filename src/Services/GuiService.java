@@ -1,22 +1,16 @@
 package Services;
 
-
 import GUI.*;
-
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.*;
-import java.io.File;
 
 public class GuiService {
     private Bootstrapper bootstrapper;
 
     public GuiService() {
-        bootstrapper = new Bootstrapper();
-        bootstrapper.setTitle("Info searcher v2.6.5 [GGL]");
-        bootstrapper.setVisible(true);
-        bootstrapper.setResizable(false);
-        bootstrapper.setSize(800, 700);
+    }
+
+    public void setBootstrapper(Bootstrapper bootstrapper) {
+        this.bootstrapper = bootstrapper;
     }
 
     public String getSearchPlaceholderText(){
@@ -25,10 +19,6 @@ public class GuiService {
 
     public void setSettingsFilePath(String path) {
         bootstrapper.getExceptionsLabelFileData().setText(path);
-    }
-
-    private Bootstrapper getBootstrapper() {
-        return bootstrapper;
     }
 
     public void logAction(String message) {
@@ -41,10 +31,6 @@ public class GuiService {
 
     public void setInputFilePath(String path) {
         bootstrapper.getSelectedFileLabelData().setText(cutPath(path));
-    }
-
-    public void setInputExceptionsFilePath(String path) {
-        bootstrapper.getExceptionsLabelFileData().setText(cutPath(path));
     }
 
     public void setPlaceholder(String placeholder) {

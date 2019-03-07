@@ -1,6 +1,13 @@
 package Abstract.SearchResultModels;
 
 public class GoogleSearchResultItem {
+
+    public GoogleSearchResultItem(String mainHeader, String link, String description) {
+        this.mainHeader = mainHeader;
+        this.link = link;
+        this.description = description;
+    }
+
     private String mainHeader;
     private String link;
     private String description;

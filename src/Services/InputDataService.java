@@ -17,6 +17,7 @@ import java.util.List;
 
 public class InputDataService {
     private static List<InputCsvModelItem> inputCsvModelItems;
+    private static File inputDataFile;
 
     public InputDataService() {
         if (inputCsvModelItems == null) {
@@ -27,22 +28,29 @@ public class InputDataService {
     public static List<InputCsvModelItem> getInputCsvModelItemsStatic() {
         return inputCsvModelItems;
     }
+
+    public File getInputDataFile() {
+        return inputDataFile;
+    }
+
     public List<InputCsvModelItem> getInputCsvModelItems() {
         return inputCsvModelItems;
     }
 
-    public ArrayList<InputCsvModelItem> initCSVItems(File inputDataFile) {
-        if (inputDataFile == null) {
+
+    public ArrayList<InputCsvModelItem> initCSVItems(File inputFile) {
+        if (inputFile == null) {
             Logger.info("Input data file path empty");
             return null;
         }
-        if (StrUtils.isStringContainsExtraSymbols(inputDataFile.getAbsolutePath())) {
+        if (StrUtils.isStringContainsExtraSymbols(inputFile.getAbsolutePath())) {
             Logger.info("Input data file has wrong symbols in name or path");
             return null;
         }
+        inputDataFile = inputFile;
         ArrayList csvFileData = null;
         try {
-            Reader reader = Files.newBufferedReader(Paths.get(inputDataFile.getAbsolutePath()));
+            Reader reader = Files.newBufferedReader(Paths.get(getInputDataFile().getAbsolutePath()));
             CsvToBean<InputCsvModelItem> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(InputCsvModelItem.class)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.NEITHER)
@@ -53,5 +61,9 @@ public class InputDataService {
             Logger.error(ex, "Something wrong with input file");
         }
         return csvFileData;
+    }
+
+    public void clearInputDataFile() {
+        inputDataFile = null;
     }
 }

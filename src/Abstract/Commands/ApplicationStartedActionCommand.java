@@ -1,46 +1,38 @@
 package Abstract.Commands;
 
-import Models.SearchSettings;
-import Services.DIResolver;
-import Services.SearchingProcessor;
-import Utils.StrUtils;
-
+import Services.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import java.io.File;
 
 public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
+    private final DIResolver diResolver;
+
     public ApplicationStartedActionCommand(DIResolver diResolver) {
-        super(diResolver, "");
+        super( "");
+        this.diResolver = diResolver;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        userAgentsRotatorService.initList();
-        SearchSettings searchExceptions = null;
-        ArrayList inputCsvData = null;
+        diResolver.getUserAgentsRotatorService().initList();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
+        GuiService guiService = diResolver.getGuiService();
+        OutputDataService outputDataService = diResolver.getOutputDataService();
 
         String placeholderTerm = propertiesService.getPlaceHolder();
-        String inputFile = propertiesService.getInputFilePath();
-        if (fileService.SetInputFile(inputFile)) {
-            inputCsvData = fileService.InitCSVItems();
-            guiService.setInputFilePath(fileService.getInputFilePath());
-        } else {
-            placeholderTerm = StrUtils.clearPlaceholderFromCSVColumnsTerms(placeholderTerm);
-        }
+        String inputFile = new File(propertiesService.getInputFilePath()).getAbsolutePath();
+        String settingsFile = new File(propertiesService.getSettingsFilePath()).getAbsolutePath();
 
+        guiService.setInputFilePath(inputFile);
+        guiService.setSettingsFilePath(settingsFile);
         guiService.setPlaceholder(placeholderTerm);
-        fileService.SetOutputFile(placeholderTerm);
 
-        String exceptionsFile = propertiesService.getExceptionsFilePath();
-        if (fileService.SetExceptionsFile(exceptionsFile)) {
-            //searchExceptions = fileService.initExceptionsKeywords();
-            guiService.setInputExceptionsFilePath(exceptionsFile);
-        }
+        outputDataService.setOutputFile(placeholderTerm);
 
-        SearchingProcessor searchingProcessor = new SearchingProcessor(propertiesService, fileService, guiService);
+        SearchingProcessor searchingProcessor = new SearchingProcessor();
         if (propertiesService.getWorkState()) {
-            searchingProcessor.StartWork();
+            searchingProcessor.StartWork(guiService);
         }
     }
 }

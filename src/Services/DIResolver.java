@@ -1,51 +1,61 @@
 package Services;
 
-import GUI.Bootstrapper;
 import org.pmw.tinylog.Logger;
 
 public class DIResolver {
 
-    private FileService fileService;
-    private LogService logService;
-    private GuiService guiService;
-    private SearchingProcessor searchingProcessor;
+    private final UserAgentsRotatorService userAgentsRotatorService;
+    private final PropertiesService propertiesService;
+    private final GuiService guiService;
+    private final OutputDataService outputDataService;
+    private final InputDataService inputDataService;
+    private final SearchService searchService;
+    private final SettingsService settingsService;
 
-    public DIResolver() {
-    }
+    public DIResolver(UserAgentsRotatorService userAgentsRotatorService,
+                      PropertiesService propertiesService,
+                      GuiService guiService,
+                      OutputDataService outputDataService,
+                      InputDataService inputDataService,
+                      SearchService searchService,
+                      SettingsService settingsService) {
 
-    public void initDependencies () {
-        getGuiService();
-        getLogService();
-        getFileService();
-        getSearchingProcessor();
+        this.userAgentsRotatorService = userAgentsRotatorService;
+        this.propertiesService = propertiesService;
+        this.guiService = guiService;
+        this.outputDataService = outputDataService;
+        this.inputDataService = inputDataService;
+        this.searchService = searchService;
+        this.settingsService = settingsService;
 
         Logger.info("Application started...");
     }
+
+    public UserAgentsRotatorService getUserAgentsRotatorService() {
+        return userAgentsRotatorService;
+    }
+
+    public PropertiesService getPropertiesService() {
+        return propertiesService;
+    }
+
     public GuiService getGuiService() {
-        if (guiService == null) {
-            guiService = new GuiService();
-        }
         return guiService;
     }
 
-    public SearchingProcessor getSearchingProcessor() {
-        if (searchingProcessor == null) {
-            searchingProcessor = new SearchingProcessor(fileService, guiService);
-        }
-        return searchingProcessor;
+    public OutputDataService getOutputDataService() {
+        return outputDataService;
     }
 
-    public FileService getFileService() {
-        if (fileService == null) {
-            fileService = new FileService();
-        }
-        return fileService;
+    public InputDataService getInputDataService() {
+        return inputDataService;
     }
 
-    public LogService getLogService() {
-        if (logService == null) {
-            logService = new LogService();
-        }
-        return logService;
+    public SearchService getSearchService() {
+        return searchService;
+    }
+
+    public SettingsService getSettingsService() {
+        return settingsService;
     }
 }

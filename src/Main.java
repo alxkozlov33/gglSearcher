@@ -1,7 +1,9 @@
+import Abstract.Commands.ApplicationStartedActionCommand;
 import GUI.Bootstrapper;
-import Services.DIResolver;
+import Services.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class Main {
 
@@ -13,10 +15,27 @@ public class Main {
     public void start() {
         initLookAndFeel();
 
-        new DIResolver().initDependencies();
+        GuiService guiService = new GuiService();
+        UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
+        PropertiesService propertiesService = new PropertiesService();
+        OutputDataService outputDataService = new OutputDataService();
+        InputDataService inputDataService = new InputDataService();
+        SearchService searchService = new SearchService();
+        SettingsService settingsService = new SettingsService();
+
+        DIResolver diResolver = new DIResolver(userAgentsRotatorService, propertiesService, guiService, outputDataService, inputDataService, searchService, settingsService);
+
+        Bootstrapper bootstrapper = new Bootstrapper(diResolver);
+        bootstrapper.setTitle("Info searcher v2.6.5 [GGL]");
+        bootstrapper.setVisible(true);
+        bootstrapper.setResizable(false);
+        bootstrapper.setSize(800, 700);
+
+        guiService.setBootstrapper(bootstrapper);
+
+        ApplicationStartedActionCommand applicationStartedActionCommand = new ApplicationStartedActionCommand(diResolver);
+        applicationStartedActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
     }
-
-
 
     private void initLookAndFeel() {
         try {

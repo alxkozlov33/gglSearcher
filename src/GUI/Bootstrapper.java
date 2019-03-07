@@ -4,6 +4,7 @@ import Abstract.Commands.*;
 import Services.DIResolver;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class Bootstrapper extends JFrame {
     private JPanel mainPanel;
@@ -32,7 +33,7 @@ public class Bootstrapper extends JFrame {
     private JMenuItem chooseInputFile;
     private JMenuItem clearInputFile;
 
-    public Bootstrapper() {
+    public Bootstrapper(DIResolver diResolver) {
         setVisible(false);
         this.setContentPane(mainPanel);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -53,8 +54,6 @@ public class Bootstrapper extends JFrame {
         getMenubar().add(getExceptionsFile());
         setJMenuBar(getMenubar());
 
-
-        DIResolver diResolver = new DIResolver();
         runButton.setAction(new RunButtonActionCommand(diResolver));
         stopButton.setAction(new StopButtonActionCommand(diResolver));
 

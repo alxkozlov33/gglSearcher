@@ -3,29 +3,19 @@ package Services;
 import Abstract.Engines.WebUrlEngine;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.WebPageObject;
+import Abstract.Specifications.AbstractSpecification;
 import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.URLExceptionsSpecification;
-import Abstract.Specifications.Specification;
 import Models.RequestData;
-import Models.SearchSettings;
+import Utils.ResultsUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 
 public class SearchService {
-
-    private final ProxyService proxyService;
-    private final PropertiesService propertiesService;
-    private SearchSettings searchSettings;
-
-    public SearchService() {
-        proxyService = new ProxyService();
-        propertiesService = new PropertiesService();
-        searchSettings = new SearchSettings();
-    }
 
     public WebPageObject getWebSitePageSource(GoogleSearchResultItem item) {
         ProxyService proxyService = new ProxyService();
@@ -37,33 +27,24 @@ public class SearchService {
         return parseSourceData(element);
     }
 
-    public WebPageObject parseSourceData(Element html){
+    private WebPageObject parseSourceData(Element html){
         String siteDescription = html.select("meta[name=description]").attr("content");
         String siteKeywords = html.select("meta[name=keywords]").attr("content");
         String siteName = html.select("meta[property=og:title]").attr("content");
         if (StringUtils.isEmpty(siteName)) {
             siteName = html.select("title").text();
         }
-        WebPageObject webPageObject = new WebPageObject(siteDescription, siteKeywords, siteName);
-        return webPageObject;
+        return new WebPageObject(siteDescription, siteKeywords, siteName);
     }
 
-    public ArrayList filterGoogleResultData(Set<GoogleSearchResultItem> googleSearchResults) {
-        Specification<GoogleSearchResultItem> googleItemsSpec =
-                new DomainExceptionsSpecification(searchSettings.domainExceptions)
-                        .and(new TopLevelDomainExceptionsSpecification(searchSettings.topLevelDomainsExceptions))
-                        .and(new URLExceptionsSpecification(searchSettings.URLExceptions));
+    public <T extends GoogleSearchResultItem> ArrayList filterGoogleResultData(List<T> googleSearchResults) {
+        SettingsService settingsService = new SettingsService();
 
-        return filterResults(googleSearchResults, googleItemsSpec);
-    }
+        AbstractSpecification<GoogleSearchResultItem> googleItemsSpec =
+                new DomainExceptionsSpecification(settingsService.getSearchSettings().domainExceptions)
+                        .and(new TopLevelDomainExceptionsSpecification(settingsService.getSearchSettings().topLevelDomainsExceptions))
+                        .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions));
 
-    <T> ArrayList<T> filterResults(Set<T> set, Specification<T> spec) {
-        ArrayList<T> results = new ArrayList<>();
-        for(T t : set) {
-            if( spec.isSatisfiedBy(t) ) {
-                results.add(t);
-            }
-        }
-        return results;
+        return ResultsUtils.filterResults(googleSearchResults, googleItemsSpec);
     }
 }

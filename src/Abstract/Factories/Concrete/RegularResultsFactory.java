@@ -1,7 +1,7 @@
 package Abstract.Factories.Concrete;
 
 import Abstract.Factories.ISearchResultFactory;
-import Abstract.SearchResultModels.RegularSearchResult;
+import Abstract.SearchResultModels.RegularSearchResultItem;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -12,8 +12,8 @@ import java.util.List;
 
 public class RegularResultsFactory implements ISearchResultFactory {
     @Override
-    public List<RegularSearchResult> processBody(Element body) {
-        ArrayList<RegularSearchResult> results = new ArrayList<>();
+    public List<RegularSearchResultItem> processBody(Element body) {
+        ArrayList<RegularSearchResultItem> results = new ArrayList<>();
         Elements items = body.select("#res");
 
         if (items != null) {
@@ -24,7 +24,7 @@ public class RegularResultsFactory implements ISearchResultFactory {
             }
 
             for (Element div : resultDivs) {
-                RegularSearchResult regularSearchResult = new RegularSearchResult();
+
                 String mainHeader = div.select("h3").text();
                 String link = div.select("div.r > a").attr("href");
                 if (StringUtils.isEmpty(link)) {
@@ -32,11 +32,8 @@ public class RegularResultsFactory implements ISearchResultFactory {
                 }
                 String description = div.select("div.s").text();
 
-                regularSearchResult.link = link;
-                regularSearchResult.description = description;
-                regularSearchResult.mainHeader = mainHeader;
-
-                results.add(regularSearchResult);
+                RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, link, description);
+                results.add(regularSearchResultItem);
             }
             Logger.info(results.size() + " results will be saved.");
             Logger.info("________________________________________");

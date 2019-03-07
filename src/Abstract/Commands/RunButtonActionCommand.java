@@ -1,43 +1,39 @@
 package Abstract.Commands;
 
-import Models.SearchSettings;
-import Services.DIResolver;
-import Services.InputDataService;
-import Services.SearchingProcessor;
-
+import Services.*;
+import org.pmw.tinylog.Logger;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 public class RunButtonActionCommand extends AbstractCommandAction {
 
+    private final DIResolver diResolver;
+
     public RunButtonActionCommand(DIResolver diResolver) {
-        super(diResolver,"Run");
+        super("Run");
+        this.diResolver = diResolver;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        OutputDataService outputDataService = diResolver.getOutputDataService();
+        InputDataService inputDataService = diResolver.getInputDataService();
+        SettingsService settingsService = diResolver.getSettingsService();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
+        GuiService guiService = diResolver.getGuiService();
+
         propertiesService.saveWorkState(true);
-        propertiesService.saveInputFilePath(fileService.getInputFilePath());
-        propertiesService.saveExceptionsFilePath(fileService.getExceptionsFilePath());
+        propertiesService.saveInputFilePath(inputDataService.getInputDataFile().getAbsolutePath());
+        propertiesService.saveExceptionsFilePath(settingsService.getSettingsDataFile().getAbsolutePath());
         propertiesService.savePlaceHolder(guiService.getSearchPlaceholderText());
-        InputDataService inputDataService = new InputDataService();
 
-        inputDataService.initCSVItems();
-
-        ArrayList inputCsvData = fileService.InitCSVItems();
-
-        fileService.SetOutputFile(guiService.getSearchPlaceholderText());
-        SearchSettings searchSettings = fileService.initSettingsFile();
-        //searchService.DoWork(inputCsvData, searchSettings);
-
-        SearchingProcessor searchingProcessor = new SearchingProcessor(propertiesService, fileService, guiService);
+        outputDataService.setOutputFile(guiService.getSearchPlaceholderText());
+        SearchingProcessor searchingProcessor = new SearchingProcessor();
 
         Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
-            searchingProcessor.setWorkFlagToRun();
-            searchingProcessor.StartWork();
+            searchingProcessor.StartWork(guiService);
             guiService.changeApplicationStateToWork(false);
-            logService.LogMessage("Finished");
+            Logger.info("Finished");
             guiService.setStatusText("Finished...");
         });
         worker.start();

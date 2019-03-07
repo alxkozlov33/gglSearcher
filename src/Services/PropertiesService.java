@@ -82,7 +82,7 @@ public class PropertiesService {
     public String getPlaceHolder() {
         return restoreProperty(placeholderPropertyString);
     }
-    public String getExceptionsFilePath() {
+    public String getSettingsFilePath() {
         return restoreProperty(selectedExceptionsInputFileString);
     }
 
