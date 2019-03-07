@@ -29,7 +29,7 @@ public class SearchResultItem extends GoogleSearchResultItem {
     public SearchResultItem parseInputDiv(Element div) {
         mainHeader = div.select("h3").text();
         link = div.select("div.r > a").attr("href");
-        if (StringUtils.isEmpty(link)){
+        if (StringUtils.isEmpty(getLink())){
             link = div.select("h3.r > a").attr("href");
         }
         description = div.select("div.s").text();
@@ -43,9 +43,9 @@ public class SearchResultItem extends GoogleSearchResultItem {
 
     public SearchResultItem getItemSource() {
         try {
-            if (!StringUtils.isEmpty(description) && !StringUtils.isEmpty(link)) {
-                link = StrUtils.clearLink(link);
-                Connection.Response response = Jsoup.connect(link)
+            if (!StringUtils.isEmpty(super.getDescription()) && !StringUtils.isEmpty(getLink())) {
+                link = StrUtils.clearLink(getLink());
+                Connection.Response response = Jsoup.connect(getLink())
                         .followRedirects(true)
                         .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                         .ignoreHttpErrors(true)
@@ -55,7 +55,7 @@ public class SearchResultItem extends GoogleSearchResultItem {
                 isItemCorrect = checkIfSourceRight(response.parse());
             }
         } catch (Exception e) {
-            logService.LogMessage("Link broken: " + link);
+            logService.LogMessage("Link broken: " + getLink());
             logService.LogMessage(e.getMessage());
         }
         return this;
@@ -77,14 +77,14 @@ public class SearchResultItem extends GoogleSearchResultItem {
                 return false;
             }
         }
-        String domainName = StrUtils.extractDomainName(link);
+        String domainName = StrUtils.extractDomainName(getLink());
         for (String domainNameException: se.domainExceptions) {
             if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {
                 return false;
             }
         }
 
-        String str = StrUtils.getUnmatchedPartOfString(link);
+        String str = StrUtils.getUnmatchedPartOfString(getLink());
         for (String urlException: se.URLExceptions) {
             if (str.toLowerCase().contains(urlException.toLowerCase())) {
                 return false;
@@ -92,20 +92,20 @@ public class SearchResultItem extends GoogleSearchResultItem {
         }
 
         for (String topLevelDomainException: se.topLevelDomainsExceptions) {
-            if (link.toLowerCase().contains(topLevelDomainException.toLowerCase())) {
+            if (getLink().toLowerCase().contains(topLevelDomainException.toLowerCase())) {
                 return false;
             }
         }
 
         if (str.length() > 15){
-            NotSureLink = link;
+            NotSureLink = getLink();
         }
         else {
-            Website = StrUtils.extractDomainName(link);
+            Website = StrUtils.extractDomainName(getLink());
         }
 
         if (StringUtils.isEmpty(siteName)) {
-            GalleryName = mainHeader;
+            GalleryName = super.getMainHeader();
         }
         else {
             GalleryName = siteName;
@@ -115,15 +115,15 @@ public class SearchResultItem extends GoogleSearchResultItem {
     }
 
     public String getMainHeader() {
-        return mainHeader;
+        return super.getMainHeader();
     }
 
     public String getSearchedLink() {
-        return mainHeader;
+        return super.getMainHeader();
     }
 
     public String getDescription() {
-        return mainHeader;
+        return super.getMainHeader();
     }
 
     public boolean isItemCorrect() {

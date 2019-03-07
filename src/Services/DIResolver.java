@@ -7,24 +7,15 @@ public class DIResolver {
 
     private FileService fileService;
     private LogService logService;
-    private PropertiesService propertiesService;
     private GuiService guiService;
-    private ProxyService proxyService;
-    private UserAgentsRotatorService userAgentsRotatorService;
     private SearchingProcessor searchingProcessor;
-
-    private static Bootstrapper bootstrapper;
 
     public DIResolver() {
     }
 
-    public void initDependencies (Bootstrapper mainWindow) {
-        bootstrapper = mainWindow;
-        getUserAgentsRotatorService();
-        getPropertiesService();
+    public void initDependencies () {
         getGuiService();
         getLogService();
-        getProxyService();
         getFileService();
         getSearchingProcessor();
 
@@ -32,14 +23,14 @@ public class DIResolver {
     }
     public GuiService getGuiService() {
         if (guiService == null) {
-            guiService = new GuiService(bootstrapper);
+            guiService = new GuiService();
         }
         return guiService;
     }
 
     public SearchingProcessor getSearchingProcessor() {
         if (searchingProcessor == null) {
-            searchingProcessor = new SearchingProcessor(propertiesService, fileService, guiService);
+            searchingProcessor = new SearchingProcessor(fileService, guiService);
         }
         return searchingProcessor;
     }
@@ -56,26 +47,5 @@ public class DIResolver {
             logService = new LogService();
         }
         return logService;
-    }
-
-    public PropertiesService getPropertiesService() {
-        if (propertiesService == null) {
-            propertiesService = new PropertiesService();
-        }
-        return propertiesService;
-    }
-
-    public ProxyService getProxyService() {
-        if (proxyService == null) {
-            proxyService = new ProxyService();
-        }
-        return proxyService;
-    }
-
-    public UserAgentsRotatorService getUserAgentsRotatorService() {
-        if (userAgentsRotatorService == null) {
-            userAgentsRotatorService = new UserAgentsRotatorService();
-        }
-        return userAgentsRotatorService;
     }
 }

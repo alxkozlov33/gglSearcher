@@ -47,121 +47,36 @@ public class FileService {
     }
 
 
-    public boolean SetExceptionsFile(String restoredPath) {
-        String path;
-        if (restoredPath == null) {
-            path = selectFileDialog();
-        } else {
-            path = restoredPath;
-        }
 
-        if (!FilenameUtils.getExtension(path).equalsIgnoreCase("txt")) {
-            Logger.info("Selected exceptions file has invalid format");
-            return false;
-        }
 
-        File inFile = new File(path);
-        if (StringUtils.isEmpty(path) && !inFile.exists()) {
-            return false;
-        }
-        inputExceptionsFile = new File(path);
-        Logger.info("Settings file initialized: " + inputExceptionsFile.getAbsolutePath());
-        return true;
-    }
-    public void SetOutputFile(String placeholder) {
-        if (StringUtils.isEmpty(placeholder)) {
-            Logger.error("Check search placeholder and input file. Application cannot start.");
-        }
-        String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
-        String parentFile = null;
-        if (outputFile == null || inputFile == null) {
-            String absolutePath = new File(".").getAbsolutePath();
-            if(absolutePath.endsWith("."))
-            {
-                absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
-            }
-            String filePath = absolutePath + fileName + ".csv";
-            outputFile = new File(filePath);
-        }
-        else {
-            String str = FilenameUtils.getExtension(inputFile.getPath());
-            parentFile = inputFile.getAbsolutePath().substring(0, inputFile.getAbsolutePath().lastIndexOf(File.separator))
-                    + File.separator
-                    + fileName
-                    + "."
-                    + str;
-            outputFile = new File(parentFile);
-        }
 
-        try {
-            if (!outputFile.exists()) {
-                if (!outputFile.getParentFile().exists())
-                    outputFile.getParentFile().mkdirs();
-                if (!outputFile.exists())
-                    outputFile.createNewFile();
-                createEmptyCSVFile();
-            }
-        } catch (IOException e) {
-            Logger.error(e,"Check search placeholder and input file. Application cannot start.");
-        }
-        Logger.info("Output file initialized: " + outputFile.getAbsolutePath());
-    }
+//    public String getInputFilePath() {
+//        if (inputFile == null){
+//            return "";
+//        }
+//        return inputFile.toString();
+//    }
+//    public String getExceptionsFilePath() {
+//        if (inputExceptionsFile == null){
+//            return "";
+//        }
+//        return inputExceptionsFile.toString();
+//    }
 
-    public String getInputFilePath() {
-        if (inputFile == null){
-            return "";
-        }
-        return inputFile.toString();
-    }
-    public String getExceptionsFilePath() {
-        if (inputExceptionsFile == null){
-            return "";
-        }
-        return inputExceptionsFile.toString();
-    }
 
-    public void SaveResultCsvItems(ArrayList<OutputCsvModelItem> csvFileData) {
-        if (csvFileData == null || csvFileData.size() == 0) {
-            return;
-        }
 
-        try {
-            FileWriter writer = new FileWriter(outputFile.getAbsoluteFile(), true);
-            for (OutputCsvModelItem item : csvFileData) {
-                String[] data = new String[]{item.getCountry(), item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()};
-                CSVUtils.writeLine(writer, Arrays.asList(data), ',', '"');
-            }
-            writer.flush();
-            writer.close();
+//    public ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(List<OutputRegularCSVItem> results) {
+//        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
+//        if (results.size() == 0) {
+//            return null;
+//        }
+//        for (OutputRegularCSVItem item : results) {
+//            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
+//        }
+//        return outputItems;
+//    }
 
-        } catch (IOException e) {
-            Logger.error(e, "Cannot save data to output file");
-        }
-    }
 
-    public ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(List<OutputRegularCSVItem> results) {
-        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
-        if (results.size() == 0) {
-            return null;
-        }
-        for (OutputRegularCSVItem item : results) {
-            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
-        }
-        return outputItems;
-    }
-
-    private void createEmptyCSVFile() {
-        FileWriter mFileWriter = null;
-        try {
-            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
-            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-            mCsvWriter.writeNext(new String[]{"Country", "City", "GalleryName", "Website", "NotSure"});
-            mCsvWriter.close();
-            mFileWriter.close();
-        } catch (IOException e) {
-            Logger.error(e, "Cannot create empty output file");
-        }
-    }
 
     private String selectFileDialog() {
         String osName = System.getProperty("os.name");

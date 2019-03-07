@@ -1,13 +1,14 @@
 package Abstract.Strategies.Concrete;
 
-import Abstract.Engines.WebUrlEngine;
 import Abstract.OutputModels.OutputRegularCSVItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
+import Abstract.SearchResultModels.WebPageObject;
+import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
-import Models.RequestData;
-import Services.ProxyService;
-import Services.UserAgentsRotatorService;
-import org.jsoup.nodes.Element;
+import Services.SearchService;
+import Services.SettingsService;
+import Utils.StrUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,35 +29,48 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
         if (searchItems.size() == 0) {
             return null;
         }
-        for (GoogleSearchResultItem item : searchItems) {
-            checkWebSite(item);
-            outputItems.add(new OutputRegularCSVItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
+        SearchService searchService = new SearchService();
+        SettingsService settingsService = new SettingsService();
+        MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
+
+        for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
+
+            WebPageObject webPageObject = searchService.getWebSitePageSource(googleSearchResultItem);
+            metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject);
+
+            if (metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
+                String galleryName = getGalleryName(webPageObject, googleSearchResultItem);
+                String notSureLink = getNotSureLink(googleSearchResultItem);
+                String webSite = getWebSite(googleSearchResultItem);
+                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, city, notSureLink, country);
+                outputItems.add(outputRegularCSVItem);
+            }
         }
-
-//        if (str.length() > 15){
-//            NotSureLink = link;
-//        }
-//        else {
-//            Website = StrUtils.extractDomainName(link);
-//        }
-//
-//        if (StringUtils.isEmpty(siteName)) {
-//            GalleryName = mainHeader;
-//        }
-//        else {
-//            GalleryName = siteName;
-//        }
-
         return outputItems;
     }
 
-    private checkWebSite(GoogleSearchResultItem item) {
-        ProxyService proxyService = new ProxyService();
-        UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
+    private String getGalleryName(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
+        if (StringUtils.isEmpty(webPageObject.getSiteName())) {
+            return webPageObject.getSiteName();
+        }
+        return googleSearchResultItem.getMainHeader();
+    }
 
-        RequestData requestData = new RequestData(item.link, userAgentsRotatorService.getRandomUserAgent(), proxyService.getNewProxyAddress());
+    private String getNotSureLink(GoogleSearchResultItem googleSearchResultItem) {
+        String notSureLink = "";
+        String urlPath = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
+        if (urlPath.length() > 15){
+            notSureLink = googleSearchResultItem.getLink();
+        }
+        return notSureLink;
+   }
 
-        Element element = new WebUrlEngine().getWebSourceData(requestData);
-
+    private String getWebSite(GoogleSearchResultItem googleSearchResultItem) {
+        String webSite = "";
+        String urlPath = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
+        if (urlPath.length() < 15){
+            webSite = StrUtils.extractDomainName(googleSearchResultItem.getLink());
+        }
+        return webSite;
     }
 }

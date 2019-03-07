@@ -16,19 +16,16 @@ public class SearchingProcessor {
 
     private final FileService fileService;
     private final GuiService guiService;
-//    private final LogService logService;
     private final PropertiesService propertiesService;
-//    private final ProxyService proxyService;
-//    private final UserAgentsRotatorService userAgentsRotatorService;
 
     private ArrayList<InputCsvModelItem> inputCsvItems;
     private SearchSettings searchExceptions;
     private boolean isWorkFlag = false;
 
-    public SearchingProcessor(PropertiesService propertiesService, FileService fileService, GuiService guiService) {
+    public SearchingProcessor(FileService fileService, GuiService guiService) {
        this.fileService = fileService;
        this.guiService = guiService;
-       this.propertiesService = propertiesService;
+       this.propertiesService = new PropertiesService();
 //        this.proxyService = DIResolver.getProxyService();
 //        this.userAgentsRotatorService = DIResolver.getUserAgentsRotatorService();
     }

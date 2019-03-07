@@ -5,8 +5,6 @@ import javax.swing.*;
 
 public class Main {
 
-    private Bootstrapper gui;
-
     public static void main(String[] args) {
         Main main = new Main();
         main.start();
@@ -14,18 +12,11 @@ public class Main {
 
     public void start() {
         initLookAndFeel();
-        initGUI();
 
-        new DIResolver().initDependencies(gui);
+        new DIResolver().initDependencies();
     }
 
-    private void initGUI() {
-        gui = new Bootstrapper();
-        gui.setTitle("Info searcher v2.6.5 [GGL]");
-        gui.setVisible(true);
-        gui.setResizable(false);
-        gui.setSize(800, 700);
-    }
+
 
     private void initLookAndFeel() {
         try {

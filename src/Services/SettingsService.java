@@ -2,6 +2,8 @@ package Services;
 
 import Models.SearchSettings;
 import Utils.StrUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.pmw.tinylog.Logger;
 
 import java.io.File;
@@ -72,7 +74,33 @@ public class SettingsService {
         return buffer;
     }
 
-    public static SearchSettings getSearchSettings() {
+//    public boolean SetExceptionsFile(String restoredPath) {
+//        String path;
+//        if (restoredPath == null) {
+//            path = selectFileDialog();
+//        } else {
+//            path = restoredPath;
+//        }
+//
+//        if (!FilenameUtils.getExtension(path).equalsIgnoreCase("txt")) {
+//            Logger.info("Selected exceptions file has invalid format");
+//            return false;
+//        }
+//
+//        File inFile = new File(path);
+//        if (StringUtils.isEmpty(path) && !inFile.exists()) {
+//            return false;
+//        }
+//        inputExceptionsFile = new File(path);
+//        Logger.info("Settings file initialized: " + inputExceptionsFile.getAbsolutePath());
+//        return true;
+//    }
+
+    public SearchSettings getSearchSettings() {
+        return searchSettings;
+    }
+
+    public static SearchSettings getSearchSettingsStatic() {
         return searchSettings;
     }
 }

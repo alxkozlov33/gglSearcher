@@ -4,7 +4,6 @@ import Abstract.Engines.WebUrlEngine;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
-import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.URLExceptionsSpecification;
 import Abstract.Specifications.Specification;
@@ -28,19 +27,17 @@ public class SearchService {
         searchSettings = new SearchSettings();
     }
 
-    public void getWebSitePageSource(GoogleSearchResultItem item) {
+    public WebPageObject getWebSitePageSource(GoogleSearchResultItem item) {
         ProxyService proxyService = new ProxyService();
         UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
 
-        RequestData requestData = new RequestData(item.link, userAgentsRotatorService.getRandomUserAgent(), proxyService.getNewProxyAddress());
+        RequestData requestData = new RequestData(item.getLink(), userAgentsRotatorService.getRandomUserAgent(), proxyService.getNewProxyAddress());
 
         Element element = new WebUrlEngine().getWebSourceData(requestData);
-        WebPageObject webPageObject = parseSourceData(element);
-        MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(searchSettings.metaTagsExceptions);
-        metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject);
+        return parseSourceData(element);
     }
 
-    private WebPageObject parseSourceData(Element html){
+    public WebPageObject parseSourceData(Element html){
         String siteDescription = html.select("meta[name=description]").attr("content");
         String siteKeywords = html.select("meta[name=keywords]").attr("content");
         String siteName = html.select("meta[property=og:title]").attr("content");

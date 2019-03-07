@@ -2,6 +2,7 @@ package Abstract.Commands;
 
 import Models.SearchSettings;
 import Services.DIResolver;
+import Services.InputDataService;
 import Services.SearchingProcessor;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,10 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         propertiesService.saveInputFilePath(fileService.getInputFilePath());
         propertiesService.saveExceptionsFilePath(fileService.getExceptionsFilePath());
         propertiesService.savePlaceHolder(guiService.getSearchPlaceholderText());
+        InputDataService inputDataService = new InputDataService();
+
+        inputDataService.initCSVItems();
+
         ArrayList inputCsvData = fileService.InitCSVItems();
 
         fileService.SetOutputFile(guiService.getSearchPlaceholderText());

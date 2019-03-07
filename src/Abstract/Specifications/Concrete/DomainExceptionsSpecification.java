@@ -9,12 +9,12 @@ public class DomainExceptionsSpecification extends AbstractSpecification<GoogleS
 
     private ArrayList<String> domainExceptions;
     public DomainExceptionsSpecification(ArrayList<String> domainExceptions) {
-        this.domainExceptions = domainExceptions;
+        this.domainExceptions = domainExDomainExceptionsSpecificationceptions;
     }
 
     @Override
     public boolean isSatisfiedBy(GoogleSearchResultItem googleSearchResultItem) {
-        String domainName = StrUtils.extractDomainName(googleSearchResultItem.link);
+        String domainName = StrUtils.extractDomainName(googleSearchResultItem.getLink());
         for (String domainNameException: domainExceptions) {
             if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {
                 return false;

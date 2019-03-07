@@ -11,11 +11,12 @@ import java.io.File;
 public class GuiService {
     private Bootstrapper bootstrapper;
 
-    //private final PropertiesService propertiesService;
-
-    public GuiService(Bootstrapper frame) {
-        //propertiesService = DIResolver.getPropertiesService();
-        bootstrapper = frame;
+    public GuiService() {
+        bootstrapper = new Bootstrapper();
+        bootstrapper.setTitle("Info searcher v2.6.5 [GGL]");
+        bootstrapper.setVisible(true);
+        bootstrapper.setResizable(false);
+        bootstrapper.setSize(800, 700);
     }
 
     public String getSearchPlaceholderText(){

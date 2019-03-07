@@ -24,7 +24,10 @@ public class InputDataService {
         }
     }
 
-    public static List<InputCsvModelItem> getInputCsvModelItems() {
+    public static List<InputCsvModelItem> getInputCsvModelItemsStatic() {
+        return inputCsvModelItems;
+    }
+    public List<InputCsvModelItem> getInputCsvModelItems() {
         return inputCsvModelItems;
     }
 

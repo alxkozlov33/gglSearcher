@@ -14,7 +14,7 @@ public class URLExceptionsSpecification extends AbstractSpecification<GoogleSear
 
     @Override
     public boolean isSatisfiedBy(GoogleSearchResultItem googleSearchResultItem) {
-        String str = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.link);
+        String str = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
         for (String urlException: URLExceptions) {
             if (str.toLowerCase().contains(urlException.toLowerCase())) {
                 return false;
