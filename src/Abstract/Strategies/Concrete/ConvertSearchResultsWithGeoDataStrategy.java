@@ -1,9 +1,13 @@
 package Abstract.Strategies.Concrete;
 
-import Abstract.OutputModels.OutputCsvModelItem;
+import Abstract.Engines.WebUrlEngine;
 import Abstract.OutputModels.OutputRegularCSVItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
+import Models.RequestData;
+import Services.ProxyService;
+import Services.UserAgentsRotatorService;
+import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +29,34 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
             return null;
         }
         for (GoogleSearchResultItem item : searchItems) {
+            checkWebSite(item);
             outputItems.add(new OutputRegularCSVItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
         }
+
+//        if (str.length() > 15){
+//            NotSureLink = link;
+//        }
+//        else {
+//            Website = StrUtils.extractDomainName(link);
+//        }
+//
+//        if (StringUtils.isEmpty(siteName)) {
+//            GalleryName = mainHeader;
+//        }
+//        else {
+//            GalleryName = siteName;
+//        }
+
         return outputItems;
+    }
+
+    private checkWebSite(GoogleSearchResultItem item) {
+        ProxyService proxyService = new ProxyService();
+        UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
+
+        RequestData requestData = new RequestData(item.link, userAgentsRotatorService.getRandomUserAgent(), proxyService.getNewProxyAddress());
+
+        Element element = new WebUrlEngine().getWebSourceData(requestData);
+
     }
 }

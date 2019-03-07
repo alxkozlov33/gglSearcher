@@ -10,7 +10,7 @@ import org.pmw.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularResultsResultFactory implements ISearchResultFactory {
+public class RegularResultsFactory implements ISearchResultFactory {
     @Override
     public List<RegularSearchResult> processBody(Element body) {
         ArrayList<RegularSearchResult> results = new ArrayList<>();

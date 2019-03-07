@@ -1,23 +1,27 @@
 package Abstract.Strategies.Concrete;
 
 import Abstract.Engines.WebUrlEngine;
-import Abstract.Factories.Concrete.RegularResultsResultFactory;
+import Abstract.Factories.Concrete.RegularResultsFactory;
+import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.RegularSearchResult;
+import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
+import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
+import Abstract.Specifications.Concrete.URLExceptionsSpecification;
+import Abstract.Specifications.Specification;
 import Abstract.Strategies.ISearchModeStrategy;
 import Models.InputCsvModelItem;
 import Abstract.OutputModels.OutputCsvModelItem;
 import Models.RequestData;
-import Services.FileService;
-import Services.GuiService;
-import Services.PropertiesService;
-import Services.UserAgentsRotatorService;
-import Services.ProxyService;
+import Models.SearchSettings;
+import Services.*;
+import Utils.ResultsUtils;
 import Utils.StrUtils;
 import org.jsoup.nodes.Element;
 import org.pmw.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MultipleSearchModeStrategy implements ISearchModeStrategy {
     boolean isWorkFlag;
@@ -48,7 +52,7 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
             WebUrlEngine webUrlEngine = new WebUrlEngine();
             Element body = webUrlEngine.getWebSourceData(requestData);
 
-            RegularResultsResultFactory regularResultsFactory = new RegularResultsResultFactory();
+            RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
             //TODO: Business list implementation there:
             List<RegularSearchResult> regularSearchResults = regularResultsFactory.processBody(body);
 
@@ -56,9 +60,21 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
 //                SearchResult result = new SearchResult()
 //                        .initSearchExceptions(searchExceptions)
 //                        .parsePageBody(body);
-                ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(regularSearchResults);
-                fileService.SaveResultCsvItems(items);
-            }
+
+            filterGoogleResultData(regularSearchResults);
+            ArrayList<OutputCsvModelItem> items = fileService.mapSearchResultsToOutputCSVModels(regularSearchResults);
+            fileService.SaveResultCsvItems(items);
         }
+    }
+
+    public ArrayList filterGoogleResultData(List<GoogleSearchResultItem> googleSearchResults) {
+        SettingsService settingsService = new SettingsService();
+
+        Specification<GoogleSearchResultItem> googleItemsSpec =
+                new DomainExceptionsSpecification(settingsService.getSearchSettings().domainExceptions)
+                        .and(new TopLevelDomainExceptionsSpecification(settingsService.getSearchSettings().topLevelDomainsExceptions))
+                        .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions));
+
+        return ResultsUtils.filterResults(googleSearchResults, googleItemsSpec);
     }
 }

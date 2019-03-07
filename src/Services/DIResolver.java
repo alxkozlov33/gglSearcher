@@ -67,7 +67,7 @@ public class DIResolver {
 
     public ProxyService getProxyService() {
         if (proxyService == null) {
-            proxyService = new ProxyService(logService);
+            proxyService = new ProxyService();
         }
         return proxyService;
     }

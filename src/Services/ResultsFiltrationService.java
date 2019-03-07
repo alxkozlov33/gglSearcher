@@ -6,7 +6,7 @@ import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.URLExceptionsSpecification;
 import Abstract.Specifications.Specification;
-import Abstract.WebPageObject;
+import Abstract.SearchResultModels.WebPageObject;
 import Abstract.Engines.WebUrlEngine;
 import Models.RequestData;
 import Models.SearchSettings;
@@ -36,15 +36,6 @@ public class ResultsFiltrationService {
             }
         }
         return results;
-    }
-
-    public WebPageObject getWebPageObject(RequestData requestData) throws IOException {
-        Element element = webUrlEngine.getWebSourceData(requestData);
-        String siteDescription = element.select("meta[name=description]").attr("content");
-        String siteKeywords = element.select("meta[name=keywords]").attr("content");
-        String siteName = element.select("meta[property=og:title]").attr("content");
-
-        return new WebPageObject(siteDescription, siteKeywords, siteName);
     }
 
     public ArrayList filterResultsData(Set<GoogleSearchResultItem> googleSearchResults) {

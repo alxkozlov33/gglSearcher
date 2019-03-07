@@ -1,7 +1,7 @@
 package Abstract.Specifications.Concrete;
 
 import Abstract.Specifications.AbstractSpecification;
-import Abstract.WebPageObject;
+import Abstract.SearchResultModels.WebPageObject;
 
 import java.util.ArrayList;
 

@@ -46,28 +46,7 @@ public class FileService {
         inputExceptionsFile = null;
     }
 
-    public boolean SetInputFile(String restoredPath) {
-        String path;
-        if (restoredPath == null) {
-            path = selectFileDialog();
-        } else {
-            path = restoredPath;
-        }
 
-        if (!FilenameUtils.getExtension(path).equalsIgnoreCase("csv")) {
-            Logger.info("Selected input file has invalid format or file not selected");
-            return false;
-        }
-
-        File inFile = new File(path);
-        if (StringUtils.isEmpty(path) && !inFile.exists()) {
-            return false;
-        }
-
-        inputFile = new File(path);
-        Logger.info("Input data file initialized: "+ inputFile);
-        return true;
-    }
     public boolean SetExceptionsFile(String restoredPath) {
         String path;
         if (restoredPath == null) {
@@ -141,30 +120,6 @@ public class FileService {
         return inputExceptionsFile.toString();
     }
 
-    public ArrayList<InputCsvModelItem> InitCSVItems() {
-        if (inputFile == null) {
-            Logger.info("Input data file path empty");
-            return null;
-        }
-        if (StrUtils.isStringContainsExtraSymbols(inputFile.getAbsolutePath())) {
-            Logger.info("Input data file has wrong symbols in name or path");
-            return null;
-        }
-        ArrayList csvFileData = null;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(inputFile.getAbsolutePath()));
-            CsvToBean<InputCsvModelItem> csvToBean = new CsvToBeanBuilder(reader)
-                    .withType(InputCsvModelItem.class)
-                    .withFieldAsNull(CSVReaderNullFieldIndicator.NEITHER)
-                    .build();
-            csvFileData = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
-            reader.close();
-        } catch (Exception ex) {
-            Logger.error(ex, "Something wrong with input file");
-        }
-        return csvFileData;
-    }
-
     public void SaveResultCsvItems(ArrayList<OutputCsvModelItem> csvFileData) {
         if (csvFileData == null || csvFileData.size() == 0) {
             return;
@@ -194,59 +149,6 @@ public class FileService {
         }
         return outputItems;
     }
-
-    public SearchSettings initSettingsFile() {
-        if (inputExceptionsFile == null) {
-            Logger.info("Exceptions file path empty");
-            return null;
-        }
-        if (StrUtils.isStringContainsExtraSymbols(inputExceptionsFile.getAbsolutePath())) {
-            Logger.info("Exceptions file has wrong symbols in name or path");
-            return null;
-        }
-        SearchSettings se = new SearchSettings();
-        se.domainExceptions = new ArrayList<>();
-        se.URLExceptions = new ArrayList<>();
-        se.metaTagsExceptions = new ArrayList<>();
-        se.topLevelDomainsExceptions = new ArrayList<>();
-        try {
-            List<String> lines = Files.readAllLines(inputExceptionsFile.toPath(), StandardCharsets.UTF_8);
-            lines.removeIf(l -> l.equals(""));
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).contains("# Exceptions for found domains:")) {
-                    se.domainExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
-                    se.URLExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions meta titles:")) {
-                    se.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for top level domains:")) {
-                    se.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-            }
-        } catch (IOException e) {
-            Logger.error(e,"Cannot initialize input exceptions file");
-        }
-        return se;
-    }
-
-    private ArrayList<String> collectTerms(int index, List<String> lines) {
-        ArrayList<String> buffer = new ArrayList<>();
-        for (int k = (index+1); k < lines.size(); k++)
-        {
-            if (lines.get(k).startsWith("#")) {
-                break;
-            }
-            buffer.add(lines.get(k).trim().toLowerCase());
-        }
-        return buffer;
-    }
-
 
     private void createEmptyCSVFile() {
         FileWriter mFileWriter = null;

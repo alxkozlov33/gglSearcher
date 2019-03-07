@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 
 import java.util.List;
 
-public class BusinessListResultsResultFactory implements ISearchResultFactory {
+public class BusinessListResultsFactory implements ISearchResultFactory {
     @Override
     public List<RegularSearchResult> processBody(Element body) {
        return null;
