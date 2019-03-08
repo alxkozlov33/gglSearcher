@@ -29,7 +29,7 @@ public class DIResolver {
         this.searchService = searchService;
         this.settingsService = settingsService;
 
-        Logger.info("Application started...");
+        Logger.tag("SYSTEM").info("Application started...");
     }
 
     public UserAgentsRotatorService getUserAgentsRotatorService() {

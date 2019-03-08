@@ -19,7 +19,7 @@ public class WebUrlEngine extends WebEngine {
                 return response.parse();
             }
         } catch (IOException e) {
-            Logger.error(e, "Error while request executing");
+            Logger.tag("SYSTEM").error(e, "Error while request executing");
         }
         return null;
     }

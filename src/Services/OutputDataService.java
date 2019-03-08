@@ -28,7 +28,7 @@ public class OutputDataService {
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
-            Logger.error(e, "Cannot create empty output file");
+            Logger.tag("SYSTEM").error(e, "Cannot create empty output file");
         }
     }
 
@@ -87,7 +87,7 @@ public class OutputDataService {
             writer.close();
 
         } catch (IOException e) {
-            Logger.error(e, "Cannot save data to output file");
+            Logger.tag("SYSTEM").error(e, "Cannot save data to output file");
         }
     }
 

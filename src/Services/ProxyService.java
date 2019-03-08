@@ -27,7 +27,7 @@ public class ProxyService {
             response = proxyEngine.makeRequest(requestData);
             textProxy = response.parse().text();
         } catch (IOException e) {
-            Logger.error(e, "Error while proxy request executing");
+            Logger.tag("SYSTEM").error(e, "Error while proxy request executing");
         }
 
         Proxy proxy = null;

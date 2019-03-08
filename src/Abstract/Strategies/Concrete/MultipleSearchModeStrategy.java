@@ -29,7 +29,7 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
         int index = propertiesService.getIndex();
 
         isWorkFlag = true;
-        Logger.info("Continue from: " + index + " record");
+        Logger.tag("SYSTEM").info("Continue from: " + index + " record");
         WebUrlEngine webUrlEngine = new WebUrlEngine();
         OutputDataService outputDataService = new OutputDataService();
         SearchService searchService = new SearchService();

@@ -4,7 +4,10 @@ import Services.DIResolver;
 import Services.GuiService;
 import Services.PropertiesService;
 import Services.SettingsService;
+import org.tinylog.Logger;
+
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class SelectSettingsFileActionCommand extends AbstractCommandAction {
 
@@ -17,14 +20,15 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Logger.tag("SYSTEM").info("Select input settings file button action performed");
         SettingsService settingsService = diResolver.getSettingsService();
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
 
         settingsService.initSettingsFile(null);
 
-        String settingsFileAbsolutePath = settingsService.getSettingsDataFile().getAbsolutePath();
+        File settingsFileAbsolutePath = settingsService.getSettingsDataFile();
         guiService.setSettingsFilePath(settingsFileAbsolutePath);
-        propertiesService.saveInputFilePath(settingsFileAbsolutePath);
+        propertiesService.saveInputFilePath(settingsFileAbsolutePath.getAbsolutePath());
     }
 }

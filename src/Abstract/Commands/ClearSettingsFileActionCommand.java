@@ -3,6 +3,7 @@ package Abstract.Commands;
 import Services.DIResolver;
 import Services.GuiService;
 import Services.SettingsService;
+import org.tinylog.Logger;
 
 import java.awt.event.ActionEvent;
 
@@ -17,10 +18,11 @@ public class ClearSettingsFileActionCommand extends AbstractCommandAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Logger.tag("SYSTEM").info("Settings data file removed");
         SettingsService settingsService = diResolver.getSettingsService();
         GuiService guiService = diResolver.getGuiService();
 
         settingsService.clearSettingsFile();
-        guiService.setSettingsFilePath("");
+        guiService.setSettingsFilePath(null);
     }
 }

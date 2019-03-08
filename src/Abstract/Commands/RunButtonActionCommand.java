@@ -16,6 +16,8 @@ public class RunButtonActionCommand extends AbstractCommandAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Logger.tag("SYSTEM").info("Run button action performed");
+
         OutputDataService outputDataService = diResolver.getOutputDataService();
         InputDataService inputDataService = diResolver.getInputDataService();
         SettingsService settingsService = diResolver.getSettingsService();
@@ -34,7 +36,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
             guiService.changeApplicationStateToWork(true);
             searchingProcessor.StartWork(guiService);
             guiService.changeApplicationStateToWork(false);
-            Logger.info("Finished");
+            Logger.tag("SYSTEM").info("Finished");
             guiService.setStatusText("Finished...");
         });
         worker.start();

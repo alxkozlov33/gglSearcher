@@ -2,3 +2,55 @@
 01:09:38.370 ERROR: Check search placeholder and input file. Application cannot start.
 01:11:43.623 ERROR: Check search placeholder and input file. Application cannot start.
 01:19:06.453 ERROR: Check search placeholder and input file. Application cannot start.
+16:42:14.919 ERROR: Check search placeholder and input file. Application cannot start.
+16:45:58.205 ERROR: Check search placeholder and input file. Application cannot start.
+16:56:29.152 INFO: Services.DIResolver.<init>()
+	Application started...
+16:56:29.509 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+	Application started
+16:56:29.600 INFO: Services.InputDataService.initCSVItems()
+	Input data file path empty
+16:56:29.607 INFO: Services.SettingsService.initSettingsFile()
+	Exceptions file path empty
+16:56:29.615 ERROR: Services.OutputDataService.setOutputFile()
+	Check search placeholder and input file. Application cannot start.
+16:56:49.412 INFO: Services.DIResolver.<init>()
+ Application started...
+16:56:49.750 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+16:56:49.779 INFO: Services.InputDataService.initCSVItems()
+ Input data file path empty
+16:56:49.808 INFO: Services.SettingsService.initSettingsFile()
+ Exceptions file path empty
+16:56:49.825 ERROR: Services.OutputDataService.setOutputFile()
+ Check search placeholder and input file. Application cannot start.
+16:57:29.814 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+16:57:29.820 INFO: Services.InputDataService.initCSVItems()
+ Input data file path empty
+16:57:36.605 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+16:57:36.606 INFO: Services.InputDataService.initCSVItems()
+ Input data file path empty
+17:09:22.212 INFO: Services.DIResolver.<init>()
+ Application started...
+17:09:22.599 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+17:09:22.689 INFO: Services.InputDataService.initInputDataFile()
+ Input data file path empty
+17:09:22.693 INFO: Services.SettingsService.initSettingsFile()
+ Settings file path empty
+17:09:22.701 ERROR: Services.OutputDataService.setOutputFile()
+ Check search placeholder and input file. Application cannot start.
+17:24:42.512 INFO: Services.DIResolver.<init>()
+ Application started...
+17:24:42.846 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+17:24:42.901 INFO: Services.InputDataService.initInputDataFile()
+ Input data file path empty
+17:24:42.906 INFO: Services.SettingsService.initSettingsFile()
+ Settings file path empty
+17:24:42.915 ERROR: Services.OutputDataService.setOutputFile()
+ Check search placeholder and input file. Application cannot start.
+17:24:48.000 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed

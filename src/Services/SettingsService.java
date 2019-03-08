@@ -29,15 +29,14 @@ public class SettingsService {
 
     public void initSettingsFile(String settingsFilePath) {
         if (StringUtils.isEmpty(settingsFilePath)) {
-            Logger.info("Exceptions file path empty");
+            Logger.tag("SYSTEM").info("Settings file path empty");
             return;
         }
-        if (StrUtils.isStringContainsExtraSymbols(settingsFilePath)) {
-            Logger.info("Exceptions file has wrong symbols in name or path");
-            return;
-        }
-
         settingsDataFile = new File(settingsFilePath);
+    }
+
+    public void initSettingsFileData(String settingsFilePath) {
+        initSettingsFile(settingsFilePath);
 
         SearchSettings searchSettings = new SearchSettings();
         searchSettings.domainExceptions = new ArrayList<>();
@@ -65,7 +64,7 @@ public class SettingsService {
                 }
             }
         } catch (IOException e) {
-            Logger.error(e,"Cannot initialize input exceptions file");
+            Logger.tag("SYSTEM").error(e,"Cannot initialize input exceptions file");
         }
     }
 

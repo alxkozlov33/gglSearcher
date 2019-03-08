@@ -1,6 +1,7 @@
 package Services;
 
 import Models.InputCsvModelItem;
+import Utils.DirUtils;
 import Utils.StrUtils;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -9,6 +10,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
 
+import java.awt.*;
 import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -38,17 +40,17 @@ public class InputDataService {
         return inputCsvModelItems;
     }
 
+    public void initInputDataFile(String filePath) {
+        if (StringUtils.isEmpty(filePath)) {
+            Logger.tag("SYSTEM").info("Input data file path empty");
+            return;
+        }
+        inputDataFile = new File(filePath);
+    }
 
-    public ArrayList<InputCsvModelItem> initCSVItems(String inputFilePath) {
-        if (StringUtils.isEmpty(inputFilePath)) {
-            Logger.info("Input data file path empty");
-            return null;
-        }
-        if (StrUtils.isStringContainsExtraSymbols(inputFilePath)) {
-            Logger.info("Input data file has wrong symbols in name or path");
-            return null;
-        }
-        inputDataFile = new File(inputFilePath);
+    public ArrayList<InputCsvModelItem> initCSVItems(String inputFilePath, Frame frame) {
+        initInputDataFile(inputFilePath);
+
         ArrayList csvFileData = null;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(getInputDataFile().getAbsolutePath()));
@@ -59,7 +61,7 @@ public class InputDataService {
             csvFileData = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
             reader.close();
         } catch (Exception ex) {
-            Logger.error(ex, "Something wrong with input file");
+            Logger.tag("SYSTEM").error(ex, "Something wrong with input file");
         }
         return csvFileData;
     }

@@ -13,7 +13,7 @@ public class SearchingProcessor {
         String placeHolderText = guiService.getSearchPlaceholderText();
         try {
             if (StringUtils.isEmpty(placeHolderText)) {
-                Logger.error("Placeholder text empty");
+                Logger.tag("SYSTEM").error("Placeholder text empty");
                 return;
             }
 
@@ -24,7 +24,7 @@ public class SearchingProcessor {
 
         } catch (Exception e) {
             guiService.changeApplicationStateToWork(false);
-            Logger.error(e, "Application stopped");
+            Logger.tag("SYSTEM").error(e, "Application stopped");
         }
     }
 

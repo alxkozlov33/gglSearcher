@@ -2,11 +2,17 @@ package Services;
 
 import GUI.*;
 import javax.swing.text.BadLocationException;
+import java.awt.*;
+import java.io.File;
 
 public class GuiService {
     private Bootstrapper bootstrapper;
 
     public GuiService() {
+    }
+
+    public Frame getMainFrame() {
+        return bootstrapper;
     }
 
     public void setBootstrapper(Bootstrapper bootstrapper) {
@@ -17,8 +23,11 @@ public class GuiService {
         return bootstrapper.getSearchingPlaceHolder().getText();
     }
 
-    public void setSettingsFilePath(String path) {
-        bootstrapper.getExceptionsLabelFileData().setText(path);
+    public void setSettingsFilePath(File file) {
+        if (file == null) {
+            return;
+        }
+        bootstrapper.getExceptionsLabelFileData().setText(file.getAbsolutePath());
     }
 
     public void logAction(String message) {
@@ -29,8 +38,11 @@ public class GuiService {
         }
     }
 
-    public void setInputFilePath(String path) {
-        bootstrapper.getSelectedFileLabelData().setText(cutPath(path));
+    public void setInputFilePath(File file) {
+        if (file == null){
+            return;
+        }
+        bootstrapper.getSelectedFileLabelData().setText(cutPath(file.getAbsolutePath()));
     }
 
     public void setPlaceholder(String placeholder) {

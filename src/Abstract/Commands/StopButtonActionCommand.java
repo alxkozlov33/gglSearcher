@@ -17,12 +17,13 @@ public class StopButtonActionCommand extends AbstractCommandAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Logger.tag("SYSTEM").info("Stop button action performed");
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
 
         propertiesService.saveWorkState(false);
         propertiesService.saveIndex(0);
-        Logger.info("Stopping...");
+        Logger.tag("SYSTEM").info("Stopping...");
         guiService.setStatusText("Stopping...");
 
     }

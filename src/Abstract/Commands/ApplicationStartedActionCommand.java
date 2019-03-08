@@ -1,6 +1,8 @@
 package Abstract.Commands;
 
 import Services.*;
+import org.tinylog.Logger;
+
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -15,6 +17,8 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Logger.tag("SYSTEM").info("Application started");
+
         diResolver.getUserAgentsRotatorService().initList();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
@@ -24,11 +28,11 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
         String placeholderTerm = propertiesService.getPlaceHolder();
 
-        inputDataService.initCSVItems(propertiesService.getInputFilePath());
+        inputDataService.initInputDataFile(propertiesService.getInputFilePath());
         settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
 
-        guiService.setInputFilePath(inputDataService.getInputDataFile().getAbsolutePath());
-        guiService.setSettingsFilePath(settingsService.getSettingsDataFile().getAbsolutePath());
+        guiService.setInputFilePath(inputDataService.getInputDataFile());
+        guiService.setSettingsFilePath(settingsService.getSettingsDataFile());
         guiService.setPlaceholder(placeholderTerm);
 
         outputDataService.setOutputFile(placeholderTerm);
