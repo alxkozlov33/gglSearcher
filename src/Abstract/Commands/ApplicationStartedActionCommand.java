@@ -2,9 +2,7 @@ package Abstract.Commands;
 
 import Services.*;
 import org.tinylog.Logger;
-
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
@@ -28,7 +26,7 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
         String placeholderTerm = propertiesService.getPlaceHolder();
 
-        inputDataService.initInputDataFile(propertiesService.getInputFilePath());
+        inputDataService.initInputDataFile(propertiesService.getInputFile());
         settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
 
         guiService.setInputFilePath(inputDataService.getInputDataFile());

@@ -1,7 +1,8 @@
 package Services;
 
 import GUI.*;
-import javax.swing.text.BadLocationException;
+import Utils.DirUtils;
+
 import java.awt.*;
 import java.io.File;
 
@@ -23,26 +24,24 @@ public class GuiService {
         return bootstrapper.getSearchingPlaceHolder().getText();
     }
 
-    public void setSettingsFilePath(File file) {
-        if (file == null) {
-            return;
-        }
-        bootstrapper.getExceptionsLabelFileData().setText(file.getAbsolutePath());
+    public void clearSettingsFilePath() {
+        bootstrapper.getSettingsLabelFileData().setText("");
     }
 
-    public void logAction(String message) {
-        try {
-            bootstrapper.getAutoScrollTextArea().append(message + "\n");
-        } catch (BadLocationException e) {
-            e.printStackTrace();
+    public void clearInputDataFilePath() {
+        bootstrapper.getSelectedFileLabelData().setText("");
+    }
+
+    public void setSettingsFilePath(File file) {
+        if (DirUtils.isFileOk(file, "txt")) {
+            bootstrapper.getSettingsLabelFileData().setText(file.getAbsolutePath());
         }
     }
 
     public void setInputFilePath(File file) {
-        if (file == null){
-            return;
+        if (DirUtils.isFileOk(file, "csv")) {
+            bootstrapper.getSelectedFileLabelData().setText(cutPath(file.getAbsolutePath()));
         }
-        bootstrapper.getSelectedFileLabelData().setText(cutPath(file.getAbsolutePath()));
     }
 
     public void setPlaceholder(String placeholder) {

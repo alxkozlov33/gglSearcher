@@ -1,5 +1,9 @@
 package Services;
 
+import Utils.DirUtils;
+import org.apache.commons.lang.StringUtils;
+import org.tinylog.Logger;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -42,39 +46,35 @@ public class PropertiesService {
         saveProperty(isWorkStateString, Boolean.toString(workState));
     }
 
-    public void saveInputFilePath(String inputFile) {
-        if (inputFile != null){
-            saveProperty(selectedCsvInputFileString, inputFile);
-        }
-        else {
-            saveProperty(selectedCsvInputFileString, "");
+    public void saveInputFilePath(File inputFile) {
+        if (DirUtils.isFileOk(inputFile, "csv")) {
+            saveProperty(selectedCsvInputFileString, inputFile.getAbsolutePath());
         }
     }
-    public void saveExceptionsFilePath(String inputFile) {
-        if (inputFile != null){
-            saveProperty(selectedExceptionsInputFileString, inputFile);
-        }
-        else {
-            saveProperty(selectedExceptionsInputFileString, "");
+
+    public void saveExceptionsFilePath(File inputFile) {
+        if (DirUtils.isFileOk(inputFile, "txt")) {
+            saveProperty(selectedExceptionsInputFileString, inputFile.getAbsolutePath());
         }
     }
+
     public void saveIndex(int index) {
         saveProperty(indexString, Integer.toString(index));
     }
+
     public void savePlaceHolder(String placeholder) {
-        if (placeholder != null) {
-            saveProperty(placeholderPropertyString, placeholder);
-        }
-        else {
+        if (StringUtils.isEmpty(placeholder)) {
             saveProperty(placeholderPropertyString, "");
+        } else {
+            saveProperty(placeholderPropertyString, placeholder);
         }
     }
 
     public boolean getWorkState() {
         return Boolean.valueOf(restoreProperty(isWorkStateString));
     }
-    public String getInputFilePath() {
-        return restoreProperty(selectedCsvInputFileString);
+    public File getInputFile() {
+        return new File(restoreProperty(selectedCsvInputFileString));
     }
     public int getIndex() {
         return Integer.parseInt(restoreProperty(indexString));
@@ -82,8 +82,8 @@ public class PropertiesService {
     public String getPlaceHolder() {
         return restoreProperty(placeholderPropertyString);
     }
-    public String getSettingsFilePath() {
-        return restoreProperty(selectedExceptionsInputFileString);
+    public File getSettingsFilePath() {
+        return new File(restoreProperty(selectedExceptionsInputFileString));
     }
 
     private void createNewFileIfNotExists() {
@@ -107,20 +107,20 @@ public class PropertiesService {
             }
             propertiesFileTemp.delete();
         } catch (IOException io) {
-            System.out.println(io.getMessage());
+            Logger.tag("SYSTEM").error(io);
         } finally {
             if (output != null) {
                 try {
                     output.close();
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                    Logger.tag("SYSTEM").error(e);
                 }
             }
         }
     }
 
     private String restoreProperty(String propertyName) {
-        String result = "";
+        String result = null;
         InputStream input = null;
         try {
             createNewFileIfNotExists();
@@ -130,13 +130,13 @@ public class PropertiesService {
                 result = properties.get(propertyName).toString();
             }
         } catch (IOException ex) {
-            System.out.println(ex.getStackTrace());
+            Logger.tag("SYSTEM").error(ex);
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException e) {
-                    System.out.println(e.getStackTrace());
+                    Logger.tag("SYSTEM").error(e);
                 }
             }
         }

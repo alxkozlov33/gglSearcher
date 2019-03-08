@@ -25,8 +25,8 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         GuiService guiService = diResolver.getGuiService();
 
         propertiesService.saveWorkState(true);
-        propertiesService.saveInputFilePath(inputDataService.getInputDataFile().getAbsolutePath());
-        propertiesService.saveExceptionsFilePath(settingsService.getSettingsDataFile().getAbsolutePath());
+        propertiesService.saveInputFilePath(inputDataService.getInputDataFile());
+        propertiesService.saveExceptionsFilePath(settingsService.getSettingsDataFile());
         propertiesService.savePlaceHolder(guiService.getSearchPlaceholderText());
 
         outputDataService.setOutputFile(guiService.getSearchPlaceholderText());

@@ -4,6 +4,7 @@ import Services.DIResolver;
 import Services.GuiService;
 import Services.PropertiesService;
 import Services.SettingsService;
+import Utils.DirUtils;
 import org.tinylog.Logger;
 
 import java.awt.event.ActionEvent;
@@ -25,10 +26,10 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
 
-        settingsService.initSettingsFile(null);
-
-        File settingsFileAbsolutePath = settingsService.getSettingsDataFile();
+        File settingsFileAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame());
         guiService.setSettingsFilePath(settingsFileAbsolutePath);
-        propertiesService.saveInputFilePath(settingsFileAbsolutePath.getAbsolutePath());
+        propertiesService.saveExceptionsFilePath(settingsFileAbsolutePath);
+        Thread worker = new Thread(() -> settingsService.initSettingsFileData(settingsFileAbsolutePath));
+        worker.start();
     }
 }

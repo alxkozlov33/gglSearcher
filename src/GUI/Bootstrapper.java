@@ -4,7 +4,6 @@ import Abstract.Commands.*;
 import Services.DIResolver;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class Bootstrapper extends JFrame {
     private JPanel mainPanel;
@@ -19,7 +18,7 @@ public class Bootstrapper extends JFrame {
     private JPanel logPanel;
     private AutoScrollTextArea autoScrollTextArea;
     private JPanel StatusInfoPanel;
-    private JLabel exceptionsLabelFileData;
+    private JLabel settingsLabelFileData;
     private JButton selectExceptionsFileButton;
     private JScrollBar verticalScroolBar;
     private JMenuBar menubar;
@@ -110,8 +109,8 @@ public class Bootstrapper extends JFrame {
         return selectExceptionsFileButton;
     }
 
-    public JLabel getExceptionsLabelFileData() {
-        return exceptionsLabelFileData;
+    public JLabel getSettingsLabelFileData() {
+        return settingsLabelFileData;
     }
 
     public JMenuBar getMenubar() {

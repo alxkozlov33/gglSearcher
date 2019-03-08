@@ -1,8 +1,7 @@
 package Services;
 
 import Models.SearchSettings;
-import Utils.StrUtils;
-import org.apache.commons.lang.StringUtils;
+import Utils.DirUtils;
 import org.tinylog.Logger;
 
 import java.io.File;
@@ -27,17 +26,17 @@ public class SettingsService {
         return settingsDataFile;
     }
 
-    public void initSettingsFile(String settingsFilePath) {
-        if (StringUtils.isEmpty(settingsFilePath)) {
-            Logger.tag("SYSTEM").info("Settings file path empty");
-            return;
+    public void initSettingsFile(File file) {
+        if (DirUtils.isFileOk(file, "txt")) {
+            settingsDataFile = file;
         }
-        settingsDataFile = new File(settingsFilePath);
     }
 
-    public void initSettingsFileData(String settingsFilePath) {
+    public void initSettingsFileData(File settingsFilePath) {
         initSettingsFile(settingsFilePath);
-
+        if(!DirUtils.isFileOk(settingsFilePath, "txt")) {
+            return;
+        }
         SearchSettings searchSettings = new SearchSettings();
         searchSettings.domainExceptions = new ArrayList<>();
         searchSettings.URLExceptions = new ArrayList<>();

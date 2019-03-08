@@ -18,8 +18,7 @@ public class ClearInputDataFileActionCommand extends AbstractCommandAction {
         InputDataService inputDataService = diResolver.getInputDataService();
 
         inputDataService.clearInputDataFile();
-        guiService.setInputFilePath(null);
-        guiService.setPlaceholder(StrUtils.clearPlaceholderFromCSVColumnsTerms(guiService.getSearchPlaceholderText()));
+        guiService.clearInputDataFilePath();
     }
 
     public ClearInputDataFileActionCommand(DIResolver diResolver) {

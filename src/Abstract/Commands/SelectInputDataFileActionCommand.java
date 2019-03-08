@@ -7,6 +7,7 @@ import Services.PropertiesService;
 import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class SelectInputDataFileActionCommand extends AbstractCommandAction {
 
@@ -19,10 +20,10 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         InputDataService inputDataService = diResolver.getInputDataService();
 
-        String inputDataAbsolutePath = DirUtils.selectFolderDialog(guiService.getMainFrame());
-        guiService.setInputFilePath(inputDataService.getInputDataFile());
+        File inputDataAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame());
+        guiService.setInputFilePath(inputDataAbsolutePath);
         propertiesService.saveInputFilePath(inputDataAbsolutePath);
-        inputDataService.initCSVItems(inputDataAbsolutePath, guiService.getMainFrame());
+        new Thread(() -> inputDataService.initCSVItems(inputDataAbsolutePath)).start();
     }
 
     public SelectInputDataFileActionCommand(DIResolver diResolver) {

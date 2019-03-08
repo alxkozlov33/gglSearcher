@@ -2,15 +2,11 @@ package Services;
 
 import Models.InputCsvModelItem;
 import Utils.DirUtils;
-import Utils.StrUtils;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import org.apache.commons.collections4.IteratorUtils;
-import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
-
-import java.awt.*;
 import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -40,30 +36,32 @@ public class InputDataService {
         return inputCsvModelItems;
     }
 
-    public void initInputDataFile(String filePath) {
-        if (StringUtils.isEmpty(filePath)) {
-            Logger.tag("SYSTEM").info("Input data file path empty");
-            return;
+    public void initInputDataFile(File filePath) {
+        if (DirUtils.isFileOk(filePath, "csv")) {
+            inputDataFile = filePath;
         }
-        inputDataFile = new File(filePath);
     }
 
-    public ArrayList<InputCsvModelItem> initCSVItems(String inputFilePath, Frame frame) {
+    public void initCSVItems(File inputFilePath) {
         initInputDataFile(inputFilePath);
-
-        ArrayList csvFileData = null;
+        if(!DirUtils.isFileOk(inputFilePath, "csv")) {
+            return;
+        }
         try {
             Reader reader = Files.newBufferedReader(Paths.get(getInputDataFile().getAbsolutePath()));
             CsvToBean<InputCsvModelItem> csvToBean = new CsvToBeanBuilder(reader)
                     .withType(InputCsvModelItem.class)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.NEITHER)
                     .build();
-            csvFileData = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
+            inputCsvModelItems = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
             reader.close();
         } catch (Exception ex) {
             Logger.tag("SYSTEM").error(ex, "Something wrong with input file");
         }
-        return csvFileData;
+    }
+
+    public List<InputCsvModelItem> getInputFileData() {
+        return inputCsvModelItems;
     }
 
     public void clearInputDataFile() {
