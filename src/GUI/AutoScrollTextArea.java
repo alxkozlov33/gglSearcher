@@ -1,8 +1,10 @@
 package GUI;
 
+
 import java.awt.Font;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.logging.Logger;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -61,6 +63,8 @@ public class AutoScrollTextArea extends JScrollPane {
                 write(b, 0, b.length);
             }
         };
+
+
 
         System.setOut(new PrintStream(out, true));
         System.setErr(new PrintStream(out, true));

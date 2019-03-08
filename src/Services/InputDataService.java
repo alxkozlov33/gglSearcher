@@ -6,7 +6,8 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import org.apache.commons.collections4.IteratorUtils;
-import org.pmw.tinylog.Logger;
+import org.apache.commons.lang.StringUtils;
+import org.tinylog.Logger;
 
 import java.io.File;
 import java.io.Reader;
@@ -38,16 +39,16 @@ public class InputDataService {
     }
 
 
-    public ArrayList<InputCsvModelItem> initCSVItems(File inputFile) {
-        if (inputFile == null) {
+    public ArrayList<InputCsvModelItem> initCSVItems(String inputFilePath) {
+        if (StringUtils.isEmpty(inputFilePath)) {
             Logger.info("Input data file path empty");
             return null;
         }
-        if (StrUtils.isStringContainsExtraSymbols(inputFile.getAbsolutePath())) {
+        if (StrUtils.isStringContainsExtraSymbols(inputFilePath)) {
             Logger.info("Input data file has wrong symbols in name or path");
             return null;
         }
-        inputDataFile = inputFile;
+        inputDataFile = new File(inputFilePath);
         ArrayList csvFileData = null;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(getInputDataFile().getAbsolutePath()));

@@ -19,13 +19,16 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
+        InputDataService inputDataService = diResolver.getInputDataService();
+        SettingsService settingsService = diResolver.getSettingsService();
 
         String placeholderTerm = propertiesService.getPlaceHolder();
-        String inputFile = new File(propertiesService.getInputFilePath()).getAbsolutePath();
-        String settingsFile = new File(propertiesService.getSettingsFilePath()).getAbsolutePath();
 
-        guiService.setInputFilePath(inputFile);
-        guiService.setSettingsFilePath(settingsFile);
+        inputDataService.initCSVItems(propertiesService.getInputFilePath());
+        settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
+
+        guiService.setInputFilePath(inputDataService.getInputDataFile().getAbsolutePath());
+        guiService.setSettingsFilePath(settingsService.getSettingsDataFile().getAbsolutePath());
         guiService.setPlaceholder(placeholderTerm);
 
         outputDataService.setOutputFile(placeholderTerm);

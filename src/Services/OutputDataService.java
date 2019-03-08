@@ -4,7 +4,7 @@ import Abstract.OutputModels.OutputCsvModelItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import com.opencsv.CSVWriter;
 import org.apache.commons.lang3.StringUtils;
-import org.pmw.tinylog.Logger;
+import org.tinylog.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -34,7 +34,8 @@ public class OutputDataService {
 
     public void setOutputFile(String placeholder) {   //TODO: Set manually output folder
         if (StringUtils.isEmpty(placeholder)) {
-            Logger.error("Check search placeholder and input file. Application cannot start.");
+            Logger.tag("SYSTEM").error("Check search placeholder and input file. Application cannot start.");
+            
         }
 //        String fileName = placeholder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
 //        String parentFile = null;

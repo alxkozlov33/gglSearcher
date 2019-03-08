@@ -2,7 +2,8 @@ package Services;
 
 import Models.SearchSettings;
 import Utils.StrUtils;
-import org.pmw.tinylog.Logger;
+import org.apache.commons.lang.StringUtils;
+import org.tinylog.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,17 +27,17 @@ public class SettingsService {
         return settingsDataFile;
     }
 
-    public void initSettingsFile(File settingsFile) {
-        if (settingsFile == null) {
+    public void initSettingsFile(String settingsFilePath) {
+        if (StringUtils.isEmpty(settingsFilePath)) {
             Logger.info("Exceptions file path empty");
             return;
         }
-        if (StrUtils.isStringContainsExtraSymbols(settingsFile.getAbsolutePath())) {
+        if (StrUtils.isStringContainsExtraSymbols(settingsFilePath)) {
             Logger.info("Exceptions file has wrong symbols in name or path");
             return;
         }
 
-        settingsDataFile = settingsFile;
+        settingsDataFile = new File(settingsFilePath);
 
         SearchSettings searchSettings = new SearchSettings();
         searchSettings.domainExceptions = new ArrayList<>();

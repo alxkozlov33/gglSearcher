@@ -16,6 +16,6 @@
     <orderEntry type="library" name="org.apache.clerezza.ext:org.json.simple:0.4" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="com.jcabi:jcabi-aspects:0.22.6" level="project" />
-    <orderEntry type="library" name="org.tinylog:jcl-binding:1.3.6" level="project" />
+    <orderEntry type="library" name="tinylog-api-2.0.0-M3" level="project" />
   </component>
 </module>

@@ -1,0 +1,4 @@
+01:08:03.153 ERROR: Check search placeholder and input file. Application cannot start.
+01:09:38.370 ERROR: Check search placeholder and input file. Application cannot start.
+01:11:43.623 ERROR: Check search placeholder and input file. Application cannot start.
+01:19:06.453 ERROR: Check search placeholder and input file. Application cannot start.

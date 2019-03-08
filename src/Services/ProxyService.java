@@ -4,7 +4,7 @@ import Abstract.Engines.ProxyEngine;
 import Models.RequestData;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
-import org.pmw.tinylog.Logger;
+import org.tinylog.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

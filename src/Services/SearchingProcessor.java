@@ -3,8 +3,8 @@ package Services;
 import Abstract.Factories.Concrete.SearchingModeFactory;
 import Abstract.Strategies.ISearchModeStrategy;
 import org.apache.commons.lang.StringUtils;
+import org.tinylog.Logger;
 
-import org.pmw.tinylog.Logger;
 
 public class SearchingProcessor {
 

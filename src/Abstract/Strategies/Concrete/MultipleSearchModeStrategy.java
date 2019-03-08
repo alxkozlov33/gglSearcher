@@ -2,20 +2,14 @@ package Abstract.Strategies.Concrete;
 
 import Abstract.Engines.WebUrlEngine;
 import Abstract.Factories.Concrete.RegularResultsFactory;
-import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.RegularSearchResultItem;
-import Abstract.Specifications.AbstractSpecification;
-import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
-import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
-import Abstract.Specifications.Concrete.URLExceptionsSpecification;
 import Abstract.Strategies.ISearchModeStrategy;
 import Models.InputCsvModelItem;
 import Models.RequestData;
 import Services.*;
-import Utils.ResultsUtils;
 import Utils.StrUtils;
 import org.jsoup.nodes.Element;
-import org.pmw.tinylog.Logger;
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

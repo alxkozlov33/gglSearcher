@@ -1,6 +1,7 @@
 package Services;
 
-import org.pmw.tinylog.Logger;
+
+import org.tinylog.Logger;
 
 public class DIResolver {
 

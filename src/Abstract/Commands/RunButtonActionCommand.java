@@ -1,7 +1,8 @@
 package Abstract.Commands;
 
 import Services.*;
-import org.pmw.tinylog.Logger;
+import org.tinylog.Logger;
+
 import java.awt.event.ActionEvent;
 
 public class RunButtonActionCommand extends AbstractCommandAction {

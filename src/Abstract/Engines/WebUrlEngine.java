@@ -5,7 +5,7 @@ import com.jcabi.aspects.RetryOnFailure;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import org.pmw.tinylog.Logger;
+import org.tinylog.Logger;
 
 import java.io.IOException;
 
