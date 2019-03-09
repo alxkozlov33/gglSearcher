@@ -294,3 +294,149 @@
  Select input data file button action performed
 01:12:37.614 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
  Select input data file button action performed
+12:44:50.658 INFO: Services.DIResolver.<init>()
+ Application started...
+12:44:51.202 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:03:47.168 INFO: Services.DIResolver.<init>()
+ Application started...
+13:03:47.661 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:03:51.616 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+13:03:57.796 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+13:04:06.590 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
+ Output folder removed
+13:05:05.031 INFO: Services.DIResolver.<init>()
+ Application started...
+13:05:05.497 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:05:08.025 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
+ Output folder removed
+13:05:10.664 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+13:10:10.631 INFO: Services.DIResolver.<init>()
+ Application started...
+13:10:11.142 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:13:02.002 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
+ Output folder removed
+13:13:03.413 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+13:13:26.201 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+13:14:23.583 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
+ Finished
+13:14:54.176 INFO: Services.DIResolver.<init>()
+ Application started...
+13:14:54.755 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:15:26.258 INFO: Services.DIResolver.<init>()
+ Application started...
+13:15:26.716 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:16:32.969 INFO: Services.DIResolver.<init>()
+ Application started...
+13:16:33.505 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:17:19.194 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+13:18:40.850 INFO: Services.DIResolver.<init>()
+ Application started...
+13:18:41.332 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:52:20.293 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+13:54:15.443 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Error while request executing: java.net.SocketTimeoutException: Read timeout
+	at org.jsoup.internal.ConstrainableInputStream.read(ConstrainableInputStream.java:58)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.jsoup.internal.ConstrainableInputStream.readToByteBuffer(ConstrainableInputStream.java:87)
+	at org.jsoup.helper.DataUtil.readToByteBuffer(DataUtil.java:175)
+	at org.jsoup.helper.DataUtil.parseInputStream(DataUtil.java:104)
+	at org.jsoup.helper.HttpConnection$Response.parse(HttpConnection.java:851)
+	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:19)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
+	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
+	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
+	at Main.start(Main.java:37)
+	at Main.main(Main.java:12)
+13:55:28.135 ERROR: Services.SearchingProcessor.StartWork()
+ Application stopped: java.lang.NullPointerException
+	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:17)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
+	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
+	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
+	at Main.start(Main.java:37)
+	at Main.main(Main.java:12)
+13:55:41.598 INFO: Services.DIResolver.<init>()
+ Application started...
+13:55:42.169 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+13:55:56.686 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+13:56:28.297 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+ Parsed: 0 links
+13:56:28.313 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+ 0 results will be saved.
+13:56:28.325 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+ ________________________________________
+14:06:06.595 INFO: Services.DIResolver.<init>()
+ Application started...
+14:06:07.200 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+14:06:16.621 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+14:07:28.235 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+ Parsed: 100 links
+14:08:29.022 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+ 100 results will be saved.
+14:08:29.024 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+ ________________________________________
+14:08:43.226 ERROR: Services.SearchingProcessor.StartWork()
+ Application stopped: java.lang.NullPointerException
+	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:18)
+	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:8)
+	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
+	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
+	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:55)
+	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
+	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
+	at Main.start(Main.java:37)
+	at Main.main(Main.java:12)
+14:13:31.370 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+14:13:38.384 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+14:13:48.078 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Error while request executing: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:735)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:678)
+	at sun.net.www.protocol.http.HttpURLConnection.doTunneling(HttpURLConnection.java:2037)
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
+	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
+	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
+	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
+	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:37)
+	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:17)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
+	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
+	at Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0(RunButtonActionCommand.java:37)
+	at java.lang.Thread.run(Thread.java:748)
+14:13:54.646 ERROR: Services.SearchingProcessor.StartWork()
+ Application stopped: java.lang.NullPointerException
+	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
+	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
+	at Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0(RunButtonActionCommand.java:37)
+	at java.lang.Thread.run(Thread.java:748)
+14:13:54.657 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
+ Finished

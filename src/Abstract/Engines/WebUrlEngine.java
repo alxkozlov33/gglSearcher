@@ -10,7 +10,7 @@ import org.tinylog.Logger;
 import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
-    private final int requestDelay = 15000;
+    private final int requestDelay = 100000;
     public Element getWebSourceData(RequestData requestData) {
         Connection.Response response = null;
         try {

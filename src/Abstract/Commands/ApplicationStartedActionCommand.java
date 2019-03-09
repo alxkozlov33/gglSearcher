@@ -24,16 +24,14 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         InputDataService inputDataService = diResolver.getInputDataService();
         SettingsService settingsService = diResolver.getSettingsService();
 
-        String placeholderTerm = propertiesService.getPlaceHolder();
-
         inputDataService.initInputDataFile(propertiesService.getInputFile());
-        outputDataService.setOutputFile(propertiesService.getOutputFolderPath(), placeholderTerm);
+        outputDataService.setOutputFile(propertiesService.getOutputFolderPath());
         settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
 
         guiService.setInputFilePath(inputDataService.getInputDataFile());
         guiService.setSettingsFilePath(settingsService.getSettingsDataFile());
         guiService.setOutputFolder(outputDataService.getOutputFile());
-        guiService.setPlaceholder(placeholderTerm);
+        guiService.setPlaceholder( propertiesService.getPlaceHolder());
 
         SearchingProcessor searchingProcessor = new SearchingProcessor();
         if (propertiesService.getWorkState()) {

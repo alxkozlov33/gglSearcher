@@ -18,10 +18,8 @@ public class SelectOutputFolderActionCommand extends AbstractCommandAction {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
 
-        String placeHolderTerm = propertiesService.getPlaceHolder();
-
         File outputFolder = DirUtils.selectFolderDialog(guiService.getMainFrame(), "Select output folder");
-        outputDataService.setOutputFile(outputFolder, placeHolderTerm);
+        outputDataService.setOutputFile(outputFolder);
         propertiesService.saveOutputFolderPath(outputFolder);
         guiService.setOutputFolder(outputDataService.getOutputFile());
     }

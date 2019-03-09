@@ -3,7 +3,6 @@ package Services;
 import Abstract.OutputModels.OutputCsvModelItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Utils.DirUtils;
-import com.opencsv.CSVWriter;
 import org.tinylog.Logger;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,25 +18,32 @@ public class OutputDataService {
     public OutputDataService() {
     }
 
-    private void createEmptyCSVFile(File outputFile) {
-        FileWriter mFileWriter = null;
-        try {
-            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
-            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-            mCsvWriter.writeNext(new String[]{"Country", "City", "GalleryName", "Website", "NotSure"});
-            mCsvWriter.close();
-            mFileWriter.close();
-        } catch (IOException e) {
-            Logger.tag("SYSTEM").error(e, "Cannot create empty output file");
-        }
-    }
+//    private void createEmptyCSVFile(File outputFile) {
+//        FileWriter mFileWriter = null;
+//        try {
+//            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
+//            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
+//            mCsvWriter.writeNext(new String[]{"Country", "City", "GalleryName", "Website", "NotSure"});
+//            mCsvWriter.close();
+//            mFileWriter.close();
+//        } catch (IOException e) {
+//            Logger.tag("SYSTEM").error(e, "Cannot create empty output file");
+//        }
+//    }
 
-    public void setOutputFile(File outputFolder, String placeHolder) {   //TODO: Set manually output folder
-        if (!DirUtils.isDirOk(outputFolder)) {
-        }
-        this.outputFolder = outputFolder;
+    public void createOutputFile(String placeHolder) {
         String fileNameFromPlaceHolder = placeHolder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         outputFile = new File(outputFolder + File.separator + fileNameFromPlaceHolder + ".csv");
+    }
+
+    public File getOutputFolder() {
+        return outputFile;
+    }
+
+    public void setOutputFile(File outputFolder) {   //TODO: Set manually output folder
+        if (DirUtils.isDirOk(outputFolder)) {
+            this.outputFolder = outputFolder;
+        }
     }
 
     public void saveResultCsvItems(ArrayList<OutputCsvModelItem> csvFileData) {
@@ -64,6 +70,7 @@ public class OutputDataService {
         if (results.size() == 0) {
             return null;
         }
+
         for (GoogleSearchResultItem item : results) {
             //outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
         }
@@ -76,6 +83,6 @@ public class OutputDataService {
     }
 
     public File getOutputFile() {
-        return outputFile;
+        return outputFolder;
     }
 }

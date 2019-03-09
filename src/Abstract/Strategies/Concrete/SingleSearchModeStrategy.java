@@ -7,6 +7,7 @@ public class SingleSearchModeStrategy implements ISearchModeStrategy {
 
     @Override
     public void processData(GuiService guiService) {
+        System.out.println("test");
 //        Element body = getQueryBody(null);
 //        if (body != null) {
 //            SearchResult result = new SearchResult()

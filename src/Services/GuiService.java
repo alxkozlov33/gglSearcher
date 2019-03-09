@@ -30,7 +30,7 @@ public class GuiService {
     }
 
     public void clearOutputFolderPath() {
-        bootstrapper.getOutputFolder().setText("");
+        bootstrapper.getSelectedOutputFolderData().setText("");
     }
 
     public void clearInputDataFilePath() {

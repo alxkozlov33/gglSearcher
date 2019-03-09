@@ -21,6 +21,8 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
     public void processData(GuiService guiService) {
         InputDataService inputDataService = new InputDataService();
         PropertiesService propertiesService = new PropertiesService();
+
+        inputDataService.initCSVItems(inputDataService.getInputDataFile());
         List<InputCsvModelItem> inputCsvItems = inputDataService.getInputCsvModelItems();
 
         ProxyService proxyService = new ProxyService();

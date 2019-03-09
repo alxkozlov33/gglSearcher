@@ -42,7 +42,7 @@ public class StrUtils {
         String pattern = "\\$\\{column[A-z]\\}";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(placeholder);
-        return !m.find();
+        return m.find();
     }
 
     public static boolean isStringContainsExtraSymbols(String value) {
