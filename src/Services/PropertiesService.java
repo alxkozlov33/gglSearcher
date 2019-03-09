@@ -17,6 +17,7 @@ public class PropertiesService {
     private String indexString = "index";
     private String placeholderPropertyString = "placeholder";
     private String selectedExceptionsInputFileString = "exceptionsInputFile";
+    private String outputFolderPathString = "outputFolderPath";
 
     public PropertiesService() {
         properties = new Properties();
@@ -120,7 +121,7 @@ public class PropertiesService {
     }
 
     private String restoreProperty(String propertyName) {
-        String result = null;
+        String result = "";
         InputStream input = null;
         try {
             createNewFileIfNotExists();
@@ -141,5 +142,13 @@ public class PropertiesService {
             }
         }
         return result;
+    }
+
+    public void saveOutputFolderPath(File outputFolder) {
+        properties.setProperty(outputFolderPathString, outputFolder.getAbsolutePath());
+    }
+
+    public File getOutputFolderPath() {
+        return new File(properties.getProperty(outputFolderPathString));
     }
 }

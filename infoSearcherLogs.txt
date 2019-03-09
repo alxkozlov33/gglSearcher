@@ -54,3 +54,243 @@
  Check search placeholder and input file. Application cannot start.
 17:24:48.000 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
  Select input data file button action performed
+23:12:23.060 INFO: Services.DIResolver.<init>()
+ Application started...
+23:12:23.667 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:12:23.719 ERROR: Services.OutputDataService.setOutputFile()
+ Check search placeholder and input file. Application cannot start.
+23:12:23.763 ERROR: Services.SearchingProcessor.StartWork()
+ Placeholder text empty
+23:12:26.915 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+23:12:33.321 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+23:12:51.207 INFO: Services.DIResolver.<init>()
+ Application started...
+23:12:51.666 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:12:51.765 ERROR: Services.OutputDataService.setOutputFile()
+ Check search placeholder and input file. Application cannot start.
+23:12:51.771 ERROR: Services.SearchingProcessor.StartWork()
+ Placeholder text empty
+23:13:55.641 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+23:14:29.674 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
+ Finished
+23:46:40.175 INFO: Services.DIResolver.<init>()
+ Application started...
+23:46:40.626 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:47:32.200 INFO: Services.DIResolver.<init>()
+ Application started...
+23:47:32.720 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:49:41.857 INFO: Services.DIResolver.<init>()
+ Application started...
+23:49:42.600 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:49:46.452 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+23:52:24.899 INFO: Services.DIResolver.<init>()
+ Application started...
+23:52:25.407 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:52:41.438 INFO: Services.DIResolver.<init>()
+ Application started...
+23:52:41.966 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:53:23.754 INFO: Services.DIResolver.<init>()
+ Application started...
+23:53:24.332 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:55:28.130 INFO: Services.DIResolver.<init>()
+ Application started...
+23:55:28.800 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:56:29.588 INFO: Services.DIResolver.<init>()
+ Application started...
+23:56:30.082 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:58:56.139 INFO: Services.DIResolver.<init>()
+ Application started...
+23:58:56.641 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:59:49.230 INFO: Services.DIResolver.<init>()
+ Application started...
+23:59:49.724 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+23:59:54.113 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:13:11.469 INFO: Services.DIResolver.<init>()
+ Application started...
+00:13:11.973 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:24:30.630 INFO: Services.DIResolver.<init>()
+ Application started...
+00:24:31.136 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:25:12.675 INFO: Services.DIResolver.<init>()
+ Application started...
+00:25:13.161 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:25:29.405 INFO: Services.DIResolver.<init>()
+ Application started...
+00:25:29.901 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:27:23.822 INFO: Services.DIResolver.<init>()
+ Application started...
+00:27:24.531 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:27:53.534 INFO: Services.DIResolver.<init>()
+ Application started...
+00:27:54.054 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:29:29.036 INFO: Services.DIResolver.<init>()
+ Application started...
+00:29:29.577 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:31:29.707 INFO: Services.DIResolver.<init>()
+ Application started...
+00:31:30.215 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:31:33.962 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:31:51.566 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:33:56.915 INFO: Services.DIResolver.<init>()
+ Application started...
+00:33:57.470 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:36:09.505 INFO: Services.DIResolver.<init>()
+ Application started...
+00:36:10.027 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:37:42.220 INFO: Services.DIResolver.<init>()
+ Application started...
+00:37:42.782 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:37:48.912 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:37:58.083 INFO: Abstract.Commands.ClearInputDataFileActionCommand.actionPerformed()
+ Input data file removed
+00:37:59.760 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:38:03.340 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:38:05.590 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:39:03.454 INFO: Services.DIResolver.<init>()
+ Application started...
+00:39:03.989 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:39:10.385 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:40:21.875 INFO: Services.DIResolver.<init>()
+ Application started...
+00:40:22.469 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:40:24.930 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:40:36.414 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:40:46.051 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:51:19.032 INFO: Services.DIResolver.<init>()
+ Application started...
+00:51:19.544 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:51:22.494 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:51:27.836 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:53:06.908 INFO: Services.DIResolver.<init>()
+ Application started...
+00:53:07.444 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:53:10.102 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:53:34.206 INFO: Services.DIResolver.<init>()
+ Application started...
+00:53:34.712 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:53:36.689 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:53:40.166 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:53:45.473 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:53:53.682 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:54:01.739 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:55:00.580 INFO: Services.DIResolver.<init>()
+ Application started...
+00:55:01.120 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:55:05.076 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:56:35.806 INFO: Services.DIResolver.<init>()
+ Application started...
+00:56:36.578 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:56:40.073 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:56:53.994 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+00:57:04.969 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+00:57:22.481 INFO: Services.DIResolver.<init>()
+ Application started...
+00:57:22.999 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:58:03.678 INFO: Services.DIResolver.<init>()
+ Application started...
+00:58:04.195 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+00:58:14.846 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+00:58:28.801 INFO: Services.DIResolver.<init>()
+ Application started...
+00:58:29.285 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:00:23.881 INFO: Services.DIResolver.<init>()
+ Application started...
+01:00:24.425 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:07:06.945 INFO: Services.DIResolver.<init>()
+ Application started...
+01:07:07.438 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:07:52.520 INFO: Services.DIResolver.<init>()
+ Application started...
+01:07:53.003 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:08:53.557 INFO: Services.DIResolver.<init>()
+ Application started...
+01:08:54.078 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:09:57.465 INFO: Services.DIResolver.<init>()
+ Application started...
+01:09:58.025 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:10:00.900 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+01:10:09.675 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+01:10:46.600 INFO: Services.DIResolver.<init>()
+ Application started...
+01:10:47.090 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:10:52.053 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+01:12:05.685 INFO: Services.DIResolver.<init>()
+ Application started...
+01:12:06.250 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:12:13.520 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+01:12:20.590 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed
+01:12:37.614 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
+ Select input data file button action performed

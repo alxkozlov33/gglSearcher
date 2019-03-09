@@ -27,13 +27,13 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         String placeholderTerm = propertiesService.getPlaceHolder();
 
         inputDataService.initInputDataFile(propertiesService.getInputFile());
+        outputDataService.setOutputFile(propertiesService.getOutputFolderPath(), placeholderTerm);
         settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
 
         guiService.setInputFilePath(inputDataService.getInputDataFile());
         guiService.setSettingsFilePath(settingsService.getSettingsDataFile());
+        guiService.setOutputFolder(outputDataService.getOutputFile());
         guiService.setPlaceholder(placeholderTerm);
-
-        outputDataService.setOutputFile(placeholderTerm);
 
         SearchingProcessor searchingProcessor = new SearchingProcessor();
         if (propertiesService.getWorkState()) {

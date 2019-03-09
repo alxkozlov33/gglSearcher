@@ -2,6 +2,7 @@ package Services;
 
 import GUI.*;
 import Utils.DirUtils;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.io.File;
@@ -28,13 +29,17 @@ public class GuiService {
         bootstrapper.getSettingsLabelFileData().setText("");
     }
 
+    public void clearOutputFolderPath() {
+        bootstrapper.getOutputFolder().setText("");
+    }
+
     public void clearInputDataFilePath() {
         bootstrapper.getSelectedFileLabelData().setText("");
     }
 
     public void setSettingsFilePath(File file) {
         if (DirUtils.isFileOk(file, "txt")) {
-            bootstrapper.getSettingsLabelFileData().setText(file.getAbsolutePath());
+            bootstrapper.getSettingsLabelFileData().setText(cutPath(file.getAbsolutePath()));
         }
     }
 
@@ -52,7 +57,7 @@ public class GuiService {
         bootstrapper.getRunButton().setEnabled(!isWorkState);
         bootstrapper.getStopButton().setEnabled(isWorkState);
         bootstrapper.getSearchingPlaceHolder().setEnabled(!isWorkState);
-        bootstrapper.getExceptionsFile().setEnabled(!isWorkState);
+        bootstrapper.getSettingsFile().setEnabled(!isWorkState);
         bootstrapper.getInputData().setEnabled(!isWorkState);
         //propertiesService.saveWorkState(isWorkState);
         if (!isWorkState) {
@@ -91,5 +96,7 @@ public class GuiService {
         }
     }
 
-
+    public void setOutputFolder(File outputFolder) {
+        bootstrapper.getSelectedOutputFolderData().setText(cutPath(outputFolder.getAbsolutePath()));
+    }
 }

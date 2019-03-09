@@ -89,6 +89,6 @@ public class SettingsService {
     }
 
     public void clearSettingsFile() {
-
+        settingsDataFile = null;
     }
 }

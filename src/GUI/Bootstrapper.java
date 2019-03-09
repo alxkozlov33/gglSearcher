@@ -8,22 +8,22 @@ import javax.swing.*;
 public class Bootstrapper extends JFrame {
     private JPanel mainPanel;
     private JButton runButton;
-    private JLabel labelStatus;
     private JLabel labelStatusData;
     private JButton stopButton;
     private JLabel selectedFileLabelData;
-    private JLabel selectedFileLabel;
     private JButton selectFileButton;
     private JTextField searchingPlaceHolder;
     private JPanel logPanel;
     private AutoScrollTextArea autoScrollTextArea;
     private JPanel StatusInfoPanel;
     private JLabel settingsLabelFileData;
+    private JLabel selectedOutputFolderData;
     private JButton selectExceptionsFileButton;
     private JScrollBar verticalScroolBar;
     private JMenuBar menubar;
 
-    private JMenu exceptionsFile;
+    private JMenu outputFolder;
+    private JMenu settingsFile;
     private JMenu inputData;
 
     private JMenuItem clearSettingsFile;
@@ -31,6 +31,9 @@ public class Bootstrapper extends JFrame {
 
     private JMenuItem chooseInputFile;
     private JMenuItem clearInputFile;
+
+    private JMenuItem chooseOutputFolder;
+    private JMenuItem clearOutputFolder;
 
     public Bootstrapper(DIResolver diResolver) {
         setVisible(false);
@@ -43,14 +46,21 @@ public class Bootstrapper extends JFrame {
         clearInputFile = new JMenuItem("Clear existing file");
         getInputData().add(getClearInputFile());
 
-        exceptionsFile = new JMenu("Exceptions file");
+        settingsFile = new JMenu("Settings file");
         chooseSettingsFile = new JMenuItem("Choose new settings file");
-        getExceptionsFile().add(getChooseSettingsFile());
+        getSettingsFile().add(getChooseSettingsFile());
         clearSettingsFile = new JMenuItem("Clear settings file");
-        getExceptionsFile().add(getClearSettingsFile());
+        getSettingsFile().add(getClearSettingsFile());
+
+        outputFolder = new JMenu("Output folder");
+        chooseOutputFolder = new JMenuItem("Choose output folder");
+        getOutputFolder().add(getChooseOutputFolder());
+        clearOutputFolder = new JMenuItem("Clear output folder");
+        getOutputFolder().add(getClearOutputFolder());
 
         getMenubar().add(getInputData());
-        getMenubar().add(getExceptionsFile());
+        getMenubar().add(getSettingsFile());
+        getMenubar().add(getOutputFolder());
         setJMenuBar(getMenubar());
 
         runButton.setAction(new RunButtonActionCommand(diResolver));
@@ -61,6 +71,9 @@ public class Bootstrapper extends JFrame {
 
         chooseInputFile.setAction(new SelectInputDataFileActionCommand(diResolver));
         clearInputFile.setAction(new ClearInputDataFileActionCommand(diResolver));
+
+        chooseOutputFolder.setAction(new SelectOutputFolderActionCommand(diResolver));
+        clearOutputFolder.setAction(new ClearOutputFolderActionCommand(diResolver));
     }
 
     public JLabel getLabelStatusData() {
@@ -136,12 +149,28 @@ public class Bootstrapper extends JFrame {
         return clearInputFile;
     }
 
-    public JMenu getExceptionsFile() {
-        return exceptionsFile;
+    public JMenu getSettingsFile() {
+        return settingsFile;
     }
 
     public JMenu getInputData() {
         return inputData;
+    }
+
+    public JMenu getOutputFolder() {
+        return outputFolder;
+    }
+
+    public JMenuItem getChooseOutputFolder() {
+        return chooseOutputFolder;
+    }
+
+    public JMenuItem getClearOutputFolder() {
+        return clearOutputFolder;
+    }
+
+    public JLabel getSelectedOutputFolderData() {
+        return selectedOutputFolderData;
     }
 }
 

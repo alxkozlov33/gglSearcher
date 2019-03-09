@@ -20,7 +20,7 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         InputDataService inputDataService = diResolver.getInputDataService();
 
-        File inputDataAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame());
+        File inputDataAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select CSV data file", "csv");
         guiService.setInputFilePath(inputDataAbsolutePath);
         propertiesService.saveInputFilePath(inputDataAbsolutePath);
         new Thread(() -> inputDataService.initCSVItems(inputDataAbsolutePath)).start();

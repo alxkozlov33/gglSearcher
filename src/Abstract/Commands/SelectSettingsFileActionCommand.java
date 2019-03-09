@@ -26,7 +26,7 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
 
-        File settingsFileAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame());
+        File settingsFileAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select settings text file", "txt");
         guiService.setSettingsFilePath(settingsFileAbsolutePath);
         propertiesService.saveExceptionsFilePath(settingsFileAbsolutePath);
         Thread worker = new Thread(() -> settingsService.initSettingsFileData(settingsFileAbsolutePath));

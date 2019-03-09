@@ -28,8 +28,8 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         propertiesService.saveInputFilePath(inputDataService.getInputDataFile());
         propertiesService.saveExceptionsFilePath(settingsService.getSettingsDataFile());
         propertiesService.savePlaceHolder(guiService.getSearchPlaceholderText());
+        propertiesService.saveOutputFolderPath(outputDataService.getOutputFile());
 
-        outputDataService.setOutputFile(guiService.getSearchPlaceholderText());
         SearchingProcessor searchingProcessor = new SearchingProcessor();
 
         Thread worker = new Thread(() -> {
