@@ -18,12 +18,7 @@ public class RegularResultsFactory implements ISearchResultFactory {
         if (items != null) {
             Elements resultDivs = items.select("div.g");
             Logger.tag("SYSTEM").info("Parsed: " + resultDivs.size() + " links");
-            if (resultDivs.size() == 0) {
-                //logService.LogMessage("Empty");
-            }
-
             for (Element div : resultDivs) {
-
                 String mainHeader = div.select("h3").text();
                 String link = div.select("div.r > a").attr("href");
                 if (StringUtils.isEmpty(link)) {
@@ -34,8 +29,6 @@ public class RegularResultsFactory implements ISearchResultFactory {
                 RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, link, description);
                 results.add(regularSearchResultItem);
             }
-            Logger.tag("SYSTEM").info(results.size() + " results will be saved.");
-            Logger.tag("SYSTEM").info("________________________________________");
         }
         return results;
     }

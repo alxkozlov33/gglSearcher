@@ -1,13 +1,12 @@
 package Services;
 
-import Abstract.OutputModels.OutputCsvModelItem;
-import Abstract.SearchResultModels.GoogleSearchResultItem;
+import Abstract.OutputModels.IOutputModel;
+import Utils.CSVUtils;
 import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OutputDataService {
@@ -37,25 +36,25 @@ public class OutputDataService {
     }
 
     public File getOutputFolder() {
-        return outputFile;
+        return outputFolder;
     }
 
-    public void setOutputFile(File outputFolder) {   //TODO: Set manually output folder
+    public void setOutputFile(File outputFolder) { //TODO: Set manually output folder
         if (DirUtils.isDirOk(outputFolder)) {
             this.outputFolder = outputFolder;
         }
     }
 
-    public void saveResultCsvItems(ArrayList<OutputCsvModelItem> csvFileData) {
+    public void saveResultCsvItems(List<IOutputModel> csvFileData) {
         if (csvFileData == null || csvFileData.size() == 0) {
             return;
         }
 
         try {
             FileWriter writer = new FileWriter(outputFolder.getAbsoluteFile(), true);
-            for (OutputCsvModelItem item : csvFileData) {
+            for (IOutputModel item : csvFileData) {
                 //String[] data = new String[]{item.getCountry(), item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()};
-                //CSVUtils.writeLine(writer, Arrays.asList(data), ',', '"');
+                CSVUtils.writeLine(writer, item.toCsvRowString());
             }
             writer.flush();
             writer.close();
@@ -65,17 +64,19 @@ public class OutputDataService {
         }
     }
 
-    public <T extends GoogleSearchResultItem> ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(List<T> results) {
-        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
-        if (results.size() == 0) {
-            return null;
-        }
-
-        for (GoogleSearchResultItem item : results) {
-            //outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
-        }
-        return outputItems;
-    }
+//    public <T extends GoogleSearchResultItem> ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(List<T> results) {
+//        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
+//        if (results.size() == 0) {
+//            return null;
+//        }
+//
+//        for (GoogleSearchResultItem item : results) {
+//            OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(item.getMainHeader(), item.getLink(), item.);
+//
+//            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
+//        }
+//        return outputItems;
+//    }
 
     public void clearOutputFile() {
         outputFolder = null;

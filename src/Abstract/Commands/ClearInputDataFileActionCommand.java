@@ -3,6 +3,7 @@ package Abstract.Commands;
 import Services.DIResolver;
 import Services.GuiService;
 import Services.InputDataService;
+import Services.PropertiesService;
 import Utils.StrUtils;
 import org.tinylog.Logger;
 
@@ -16,9 +17,12 @@ public class ClearInputDataFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Input data file removed");
         GuiService guiService = diResolver.getGuiService();
         InputDataService inputDataService = diResolver.getInputDataService();
+        PropertiesService propertiesService = new PropertiesService();
 
         inputDataService.clearInputDataFile();
         guiService.clearInputDataFilePath();
+        propertiesService.saveInputFilePath(null);
+
     }
 
     public ClearInputDataFileActionCommand(DIResolver diResolver) {

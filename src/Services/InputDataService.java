@@ -60,10 +60,6 @@ public class InputDataService {
         }
     }
 
-    public List<InputCsvModelItem> getInputFileData() {
-        return inputCsvModelItems;
-    }
-
     public void clearInputDataFile() {
         inputDataFile = null;
     }

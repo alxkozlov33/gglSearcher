@@ -2,7 +2,7 @@ package Abstract.OutputModels;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class OutputRegularCSVItem extends OutputCsvModelItem {
+public class OutputRegularCSVItem implements IOutputModel {
 
     @CsvBindByName(column = "GalleryName")
     private String galleryName;
@@ -10,14 +10,17 @@ public class OutputRegularCSVItem extends OutputCsvModelItem {
     @CsvBindByName(column = "Website")
     private String website;
 
-    @CsvBindByName(column = "NotSure")
+    @CsvBindByName(column = "Not sure")
     private String notSure;
 
-    public OutputRegularCSVItem(String GalleryName, String Website, String City, String notSureLink, String Country) {
-        super(City, Country);
-        this.galleryName = GalleryName;
-        this.website = Website;
+    @CsvBindByName(column = "Html page title")
+    private String htmlPageTitle;
+
+    public OutputRegularCSVItem(String galleryName, String webSite, String notSureLink, String htmlPageTitle) {
+        this.galleryName = galleryName;
+        this.website = webSite;
         this.notSure = notSureLink;
+        this.htmlPageTitle = htmlPageTitle;
     }
 
     public String getGalleryName() {
@@ -39,6 +42,13 @@ public class OutputRegularCSVItem extends OutputCsvModelItem {
         return notSure;
     }
 
+    public String getHtmlPageTittle() {
+        if (htmlPageTitle == null) {
+            return "";
+        }
+        return htmlPageTitle;
+    }
+
     public void setGalleryName(String galleryName) {
         this.galleryName = galleryName;
     }
@@ -49,5 +59,12 @@ public class OutputRegularCSVItem extends OutputCsvModelItem {
 
     public void setNotSure(String notSure) {
         this.notSure = notSure;
+    }
+
+    public void setHtmlPageTitle(String htmlPageTitle) { this.htmlPageTitle = htmlPageTitle; }
+
+    @Override
+    public String toCsvRowString() {
+        return String.format("\"%s\",\"s\",\"%s\",\"%s\"", galleryName, website, notSure, htmlPageTitle);
     }
 }

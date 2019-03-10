@@ -17,12 +17,12 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Select input data file button action performed");
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
-        //InputDataService inputDataService = diResolver.getInputDataService();
 
         File inputDataAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select CSV data file", "csv");
-        guiService.setInputFilePath(inputDataAbsolutePath);
-        propertiesService.saveInputFilePath(inputDataAbsolutePath);
-        //new Thread(() -> inputDataService.initCSVItems(inputDataAbsolutePath)).start();
+        if (DirUtils.isFileOk(inputDataAbsolutePath, "csv")) {
+            guiService.setInputFilePath(inputDataAbsolutePath);
+            propertiesService.saveInputFilePath(inputDataAbsolutePath);
+        }
     }
 
     public SelectInputDataFileActionCommand(DIResolver diResolver) {

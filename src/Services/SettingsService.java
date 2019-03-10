@@ -32,12 +32,12 @@ public class SettingsService {
         }
     }
 
-    public void initSettingsFileData(File settingsFilePath) {
-        initSettingsFile(settingsFilePath);
-        if(!DirUtils.isFileOk(settingsFilePath, "txt")) {
-            return;
-        }
-        SearchSettings searchSettings = new SearchSettings();
+    public void initSettingsFileData() {
+//        initSettingsFile(settingsFilePath);
+//        if(!DirUtils.isFileOk(settingsFilePath, "txt")) {
+//            return;
+//        }
+
         searchSettings.domainExceptions = new ArrayList<>();
         searchSettings.URLExceptions = new ArrayList<>();
         searchSettings.metaTagsExceptions = new ArrayList<>();

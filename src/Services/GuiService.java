@@ -2,13 +2,11 @@ package Services;
 
 import GUI.*;
 import Utils.DirUtils;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.awt.*;
 import java.io.File;
 
 public class GuiService {
-    private Bootstrapper bootstrapper;
+    private static Bootstrapper bootstrapper;
 
     public GuiService() {
     }
@@ -97,6 +95,8 @@ public class GuiService {
     }
 
     public void setOutputFolder(File outputFolder) {
-        bootstrapper.getSelectedOutputFolderData().setText(cutPath(outputFolder.getAbsolutePath()));
+        if (DirUtils.isDirOk(outputFolder)) {
+            bootstrapper.getSelectedOutputFolderData().setText(cutPath(outputFolder.getAbsolutePath()));
+        }
     }
 }

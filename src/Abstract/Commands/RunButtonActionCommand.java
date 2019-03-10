@@ -26,7 +26,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
 
         propertiesService.saveWorkState(true);
         propertiesService.saveInputFilePath(inputDataService.getInputDataFile());
-        propertiesService.saveExceptionsFilePath(settingsService.getSettingsDataFile());
+        propertiesService.saveSettingsFilePath(settingsService.getSettingsDataFile());
         propertiesService.savePlaceHolder(guiService.getSearchPlaceholderText());
         propertiesService.saveOutputFolderPath(outputDataService.getOutputFile());
 
@@ -34,7 +34,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
 
         Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
-            searchingProcessor.StartWork(guiService);
+            searchingProcessor.StartWork();
             guiService.changeApplicationStateToWork(false);
             Logger.tag("SYSTEM").info("Finished");
             guiService.setStatusText("Finished...");

@@ -9,9 +9,6 @@ import java.io.IOException;
 
 public class ProxyEngine extends WebEngine {
 
-    String URL = "";
-    String userAgeng = "";
-
     private final int requestDelay = 60000;
     private final int attempts = 50;
 

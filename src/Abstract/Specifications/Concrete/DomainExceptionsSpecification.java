@@ -20,6 +20,6 @@ public class DomainExceptionsSpecification extends AbstractSpecification<GoogleS
                 return false;
             }
         }
-        return false;
+        return true;
     }
 }

@@ -1,12 +1,11 @@
 package Abstract.Strategies.Concrete;
 
 import Abstract.Strategies.ISearchModeStrategy;
-import Services.GuiService;
 
 public class SingleSearchModeStrategy implements ISearchModeStrategy {
 
     @Override
-    public void processData(GuiService guiService) {
+    public void processData() {
         System.out.println("test");
 //        Element body = getQueryBody(null);
 //        if (body != null) {

@@ -27,6 +27,13 @@ public class CSVUtils {
 
     }
 
+    public static void writeLine(Writer w, String row) throws IOException {
+        StringBuilder stringBuilder = new StringBuilder(row);
+        stringBuilder.append("\n");
+        w.append(stringBuilder.toString());
+
+    }
+
     public static void writeLine(Writer w, List<String> values, char separators, char customQuote) throws IOException {
 
         boolean first = true;

@@ -8,8 +8,8 @@ import org.tinylog.Logger;
 
 public class SearchingProcessor {
 
-    private boolean isWorkFlag;
-    public void StartWork(GuiService guiService) {
+    public void StartWork() {
+        GuiService guiService = new GuiService();
         String placeHolderText = guiService.getSearchPlaceholderText();
         try {
             if (StringUtils.isEmpty(placeHolderText)) {
@@ -17,22 +17,17 @@ public class SearchingProcessor {
                 return;
             }
 
+            SettingsService settingsService = new SettingsService();
+            settingsService.initSettingsFileData();
+
             SearchingModeFactory searchingModeFactory = new SearchingModeFactory();
             ISearchModeStrategy searchModeStrategy =  searchingModeFactory.createSearchModeStrategy(placeHolderText);
 
-            searchModeStrategy.processData(guiService);
+            searchModeStrategy.processData();
 
         } catch (Exception e) {
             guiService.changeApplicationStateToWork(false);
             Logger.tag("SYSTEM").error(e, "Application stopped");
         }
     }
-
-    public void setWorkStateToStop() {
-        isWorkFlag = false;
-    }
-    public void setWorkFlagToRun() {
-        isWorkFlag = true;
-    }
-
 }

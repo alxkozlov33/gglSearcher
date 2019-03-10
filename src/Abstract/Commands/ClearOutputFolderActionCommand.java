@@ -1,9 +1,6 @@
 package Abstract.Commands;
 
-import Services.DIResolver;
-import Services.GuiService;
-import Services.OutputDataService;
-import Services.SettingsService;
+import Services.*;
 import org.tinylog.Logger;
 
 import java.awt.event.ActionEvent;
@@ -22,8 +19,10 @@ public class ClearOutputFolderActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Output folder removed");
         GuiService guiService = diResolver.getGuiService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
 
         guiService.clearOutputFolderPath();
         outputDataService.clearOutputFile();
+        propertiesService.saveOutputFolderPath(null);
     }
 }

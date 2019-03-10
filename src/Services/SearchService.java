@@ -11,7 +11,6 @@ import Models.RequestData;
 import Utils.ResultsUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +19,15 @@ public class SearchService {
     public WebPageObject getWebSitePageSource(GoogleSearchResultItem item) {
         ProxyService proxyService = new ProxyService();
         UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
-
         RequestData requestData = new RequestData(item.getLink(), userAgentsRotatorService.getRandomUserAgent(), proxyService.getNewProxyAddress());
-
         Element element = new WebUrlEngine().getWebSourceData(requestData);
         return parseSourceData(element);
     }
 
     private WebPageObject parseSourceData(Element html){
+        if (html == null) {
+            return null;
+        }
         String siteDescription = html.select("meta[name=description]").attr("content");
         String siteKeywords = html.select("meta[name=keywords]").attr("content");
         String siteName = html.select("meta[property=og:title]").attr("content");

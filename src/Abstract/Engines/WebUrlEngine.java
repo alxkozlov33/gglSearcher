@@ -1,39 +1,56 @@
 package Abstract.Engines;
 
 import Models.RequestData;
-import com.jcabi.aspects.RetryOnFailure;
+import Services.ProxyService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
-
 import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
-    private final int requestDelay = 100000;
+    private final ProxyService proxyService;
+    private final int attempts = 5;
+
+    public WebUrlEngine() {
+        this.proxyService = new ProxyService();
+    }
+
     public Element getWebSourceData(RequestData requestData) {
-        Connection.Response response = null;
-        try {
-            response = makeRequest(requestData);
-            if (isValidResponse(response)) {
-                return response.parse();
+        for (int i = 1; i <= attempts; i++) {
+            try {
+                Connection.Response response = makeRequest(requestData);
+                if (isValidResponse(response)) {
+                    return response.parse();
+                }
+            } catch (Exception ex) {
+                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL);
+                Logger.tag("SYSTEM").error(ex.getMessage());
             }
-        } catch (IOException e) {
-            Logger.tag("SYSTEM").error(e, "Error while request executing");
+            isThreadSleep(i);
         }
         return null;
     }
 
+    private void isThreadSleep(int currentAttempt) {
+        try {
+            if (currentAttempt <= attempts) {
+                Thread.sleep(5000);
+            }
+        } catch (InterruptedException e) {
+            Logger.tag("SYSTEM").error("Interrupt exception");
+        }
+    }
+
     @Override
-    @RetryOnFailure(delay = requestDelay)
     protected Connection.Response makeRequest(RequestData requestData) throws IOException {
         return Jsoup.connect(requestData.requestURL)
                 .followRedirects(true)
                 .userAgent(requestData.userAgent)
-                .proxy(requestData.proxy)
+                .proxy(proxyService.getNewProxyAddress())
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
-                .timeout(requestDelay)
+                .timeout(60 * 1000)
                 .execute();
     }
 }

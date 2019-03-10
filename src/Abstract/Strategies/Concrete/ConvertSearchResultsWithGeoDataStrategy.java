@@ -1,5 +1,7 @@
 package Abstract.Strategies.Concrete;
 
+import Abstract.OutputModels.IOutputModel;
+import Abstract.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.OutputModels.OutputRegularCSVItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.WebPageObject;
@@ -9,11 +11,10 @@ import Services.SearchService;
 import Services.SettingsService;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsConvertStrategy<GoogleSearchResultItem, OutputRegularCSVItem> {
+public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsConvertStrategy<GoogleSearchResultItem, IOutputModel> {
 
     private String city;
     private String country;
@@ -24,8 +25,8 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
     }
 
     @Override
-    public List<OutputRegularCSVItem> convertResultData(List<GoogleSearchResultItem> searchItems) {
-        ArrayList<OutputRegularCSVItem> outputItems = new ArrayList<>();
+    public List<IOutputModel> convertResultData(List<GoogleSearchResultItem> searchItems) {
+        ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
             return null;
         }
@@ -34,22 +35,28 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
 
         for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
-
             WebPageObject webPageObject = searchService.getWebSitePageSource(googleSearchResultItem);
-            metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject);
-
-            if (metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
+            if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
                 String galleryName = getGalleryName(webPageObject, googleSearchResultItem);
                 String notSureLink = getNotSureLink(googleSearchResultItem);
                 String webSite = getWebSite(googleSearchResultItem);
-                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, city, notSureLink, country);
-                outputItems.add(outputRegularCSVItem);
+                String htmlPageTitle = getHtmlPageTitle(webPageObject, googleSearchResultItem);
+                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, notSureLink, htmlPageTitle);
+                OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
+                outputItems.add(outputModelGeoDataDecorator);
             }
         }
         return outputItems;
     }
 
     private String getGalleryName(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
+        if (StringUtils.isEmpty(webPageObject.getSiteName())) {
+            return webPageObject.getSiteName();
+        }
+        return googleSearchResultItem.getMainHeader();
+    }
+
+    private String getHtmlPageTitle(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
         if (StringUtils.isEmpty(webPageObject.getSiteName())) {
             return webPageObject.getSiteName();
         }

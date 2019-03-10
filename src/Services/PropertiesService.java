@@ -16,7 +16,7 @@ public class PropertiesService {
     private String selectedCsvInputFileString = "selectedCsvInputFile";
     private String indexString = "index";
     private String placeholderPropertyString = "placeholder";
-    private String selectedExceptionsInputFileString = "exceptionsInputFile";
+    private String selectedSettingsInputFileString = "settingsInputFile";
     private String outputFolderPathString = "outputFolderPath";
 
     public PropertiesService() {
@@ -50,12 +50,16 @@ public class PropertiesService {
     public void saveInputFilePath(File inputFile) {
         if (DirUtils.isFileOk(inputFile, "csv")) {
             saveProperty(selectedCsvInputFileString, inputFile.getAbsolutePath());
+        } else {
+            saveProperty(selectedCsvInputFileString, "");
         }
     }
 
-    public void saveExceptionsFilePath(File inputFile) {
+    public void saveSettingsFilePath(File inputFile) {
         if (DirUtils.isFileOk(inputFile, "txt")) {
-            saveProperty(selectedExceptionsInputFileString, inputFile.getAbsolutePath());
+            saveProperty(selectedSettingsInputFileString, inputFile.getAbsolutePath());
+        } else {
+            saveProperty(selectedSettingsInputFileString, "");
         }
     }
 
@@ -84,7 +88,7 @@ public class PropertiesService {
         return restoreProperty(placeholderPropertyString);
     }
     public File getSettingsFilePath() {
-        return new File(restoreProperty(selectedExceptionsInputFileString));
+        return new File(restoreProperty(selectedSettingsInputFileString));
     }
 
     private void createNewFileIfNotExists() {
@@ -102,7 +106,7 @@ public class PropertiesService {
                 saveIndex(0);
                 saveWorkState(false);
                 saveInputFilePath(null);
-                saveExceptionsFilePath(null);
+                saveSettingsFilePath(null);
                 savePlaceHolder(null);
                 properties.store(output, null);
             }
@@ -145,7 +149,11 @@ public class PropertiesService {
     }
 
     public void saveOutputFolderPath(File outputFolder) {
-        properties.setProperty(outputFolderPathString, outputFolder.getAbsolutePath());
+        if (DirUtils.isDirOk(outputFolder)) {
+            saveProperty(outputFolderPathString, outputFolder.getAbsolutePath());
+        } else {
+            saveProperty(outputFolderPathString, "");
+        }
     }
 
     public File getOutputFolderPath() {

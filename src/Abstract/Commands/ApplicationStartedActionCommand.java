@@ -1,6 +1,7 @@
 package Abstract.Commands;
 
 import Services.*;
+import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
 
@@ -30,12 +31,15 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
         guiService.setInputFilePath(inputDataService.getInputDataFile());
         guiService.setSettingsFilePath(settingsService.getSettingsDataFile());
-        guiService.setOutputFolder(outputDataService.getOutputFile());
-        guiService.setPlaceholder( propertiesService.getPlaceHolder());
+        guiService.setOutputFolder(outputDataService.getOutputFolder());
+        guiService.setPlaceholder(propertiesService.getPlaceHolder());
 
         SearchingProcessor searchingProcessor = new SearchingProcessor();
-        if (propertiesService.getWorkState()) {
-            searchingProcessor.StartWork(guiService);
+        if (propertiesService.getWorkState()
+               && DirUtils.isFileOk(inputDataService.getInputDataFile(), "csv")
+               && DirUtils.isDirOk(outputDataService.getOutputFolder())
+               && DirUtils.isFileOk(settingsService.getSettingsDataFile(), "txt")) {
+            searchingProcessor.StartWork();
         }
     }
 }
