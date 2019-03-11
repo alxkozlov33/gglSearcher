@@ -67,10 +67,10 @@ public class DirUtils {
     }
 
     public static boolean isFileOk(File file, String extension) {
-        if (file == null || StringUtils.isEmpty(file.getAbsolutePath()) || !file.exists() || !file.isFile() || !FilenameUtils.isExtension(file.getAbsolutePath(), extension)) {
-            return false;
+        if (file != null && !StringUtils.isEmpty(file.getAbsolutePath()) && file.exists() && file.isFile() && FilenameUtils.isExtension(file.getAbsolutePath(), extension)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static boolean isDirOk(File dir) {

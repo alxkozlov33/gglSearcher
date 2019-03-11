@@ -79,16 +79,22 @@ public class PropertiesService {
         return Boolean.valueOf(restoreProperty(isWorkStateString));
     }
     public File getInputFile() {
-        return new File(restoreProperty(selectedCsvInputFileString));
+        String restoredPath = restoreProperty(selectedCsvInputFileString);
+        return new File(restoredPath);
     }
     public int getIndex() {
-        return Integer.parseInt(restoreProperty(indexString));
+        String index = restoreProperty(indexString);
+        if (StringUtils.isEmpty(index)) {
+            return 0;
+        }
+        return Integer.parseInt(index);
     }
     public String getPlaceHolder() {
         return restoreProperty(placeholderPropertyString);
     }
     public File getSettingsFilePath() {
-        return new File(restoreProperty(selectedSettingsInputFileString));
+        String restoredPath = restoreProperty(selectedSettingsInputFileString);
+        return new File(restoredPath);
     }
 
     private void createNewFileIfNotExists() {
@@ -157,6 +163,9 @@ public class PropertiesService {
     }
 
     public File getOutputFolderPath() {
+        if (StringUtils.isEmpty(properties.getProperty(outputFolderPathString))) {
+            return null;
+        }
         return new File(properties.getProperty(outputFolderPathString));
     }
 }

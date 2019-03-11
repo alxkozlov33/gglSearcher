@@ -3,6 +3,7 @@ package Abstract.Commands;
 import Services.DIResolver;
 import Services.GuiService;
 import Services.PropertiesService;
+import Services.SettingsService;
 import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
@@ -22,11 +23,13 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Select input settings file button action performed");
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
+        SettingsService settingsService = new SettingsService();
 
         File settingsFile = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select settings text file", "txt");
         if (DirUtils.isFileOk(settingsFile, "txt")) {
             guiService.setSettingsFilePath(settingsFile);
             propertiesService.saveSettingsFilePath(settingsFile);
+            settingsService.initSettingsFile(settingsFile);
             //Thread worker = new Thread(() -> settingsService.initSettingsFileData(settingsFile));
             //worker.start();
         }

@@ -33,11 +33,6 @@ public class SettingsService {
     }
 
     public void initSettingsFileData() {
-//        initSettingsFile(settingsFilePath);
-//        if(!DirUtils.isFileOk(settingsFilePath, "txt")) {
-//            return;
-//        }
-
         searchSettings.domainExceptions = new ArrayList<>();
         searchSettings.URLExceptions = new ArrayList<>();
         searchSettings.metaTagsExceptions = new ArrayList<>();
