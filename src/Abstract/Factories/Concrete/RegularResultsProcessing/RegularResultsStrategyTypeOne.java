@@ -14,7 +14,7 @@ public class RegularResultsStrategyTypeOne implements IRegularSearchItemsProcess
     public List<RegularSearchResultItem> processBody(Element body) {
         ArrayList<RegularSearchResultItem> results = new ArrayList<>();
         Elements items = body.select("#ires");
-        Elements resultDivs = items.select("div[class=g]").select("div:not(:contains(Images for))");
+        Elements resultDivs = items.select("div[class=g]:not(:contains(Images for))");
         Logger.tag("SYSTEM").info("Parsed: " + resultDivs.size() + " links");
         for (Element div : resultDivs) {
             String mainHeader = div.select("h3.r > a").text();

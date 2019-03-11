@@ -50,7 +50,7 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
     }
 
     private String getGalleryName(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
-        if (StringUtils.isEmpty(webPageObject.getSiteName())) {
+        if (StringUtils.isEmpty(googleSearchResultItem.getMainHeader())) {
             return webPageObject.getSiteName();
         }
         return googleSearchResultItem.getMainHeader();
@@ -58,9 +58,9 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
 
     private String getHtmlPageTitle(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
         if (StringUtils.isEmpty(webPageObject.getSiteName())) {
-            return webPageObject.getSiteName();
+            return googleSearchResultItem.getMainHeader();
         }
-        return googleSearchResultItem.getMainHeader();
+        return webPageObject.getSiteName();
     }
 
     private String getNotSureLink(GoogleSearchResultItem googleSearchResultItem) {

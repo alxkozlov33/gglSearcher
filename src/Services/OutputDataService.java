@@ -52,7 +52,6 @@ public class OutputDataService {
         if (csvFileData == null || csvFileData.size() == 0) {
             return;
         }
-
         try {
             FileWriter writer = new FileWriter(outputFile.getAbsoluteFile(), true);
             for (IOutputModel item : csvFileData) {
@@ -60,7 +59,6 @@ public class OutputDataService {
             }
             writer.flush();
             writer.close();
-
         } catch (IOException e) {
             Logger.tag("SYSTEM").error(e, "Cannot save data to output file");
         }
