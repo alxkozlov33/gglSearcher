@@ -18,7 +18,6 @@
     <orderEntry type="library" name="com.jcabi:jcabi-aspects:0.22.6" level="project" />
     <orderEntry type="library" name="org.tinylog:tinylog-api:2.0.0-M3" level="project" />
     <orderEntry type="library" name="org.tinylog:tinylog-impl:2.0.0-M3" level="project" />
-    <orderEntry type="module" module-name="Keys" />
     <orderEntry type="library" name="Keys" level="project" />
   </component>
 </module>
