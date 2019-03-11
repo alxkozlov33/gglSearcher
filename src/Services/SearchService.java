@@ -17,9 +17,8 @@ import java.util.List;
 public class SearchService {
 
     public WebPageObject getWebSitePageSource(GoogleSearchResultItem item) {
-        ProxyService proxyService = new ProxyService();
         UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
-        RequestData requestData = new RequestData(item.getLink(), userAgentsRotatorService.getRandomUserAgent(), proxyService.getNewProxyAddress());
+        RequestData requestData = new RequestData(item.getLink(), userAgentsRotatorService.getRandomUserAgent());
         Element element = new WebUrlEngine().getWebSourceData(requestData);
         return parseSourceData(element);
     }

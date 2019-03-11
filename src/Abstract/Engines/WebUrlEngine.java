@@ -1,7 +1,6 @@
 package Abstract.Engines;
 
 import Models.RequestData;
-import Services.ProxyService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -9,11 +8,11 @@ import org.tinylog.Logger;
 import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
-    private final ProxyService proxyService;
+    private final ProxyEngine proxyEngine;
     private final int attempts = 5;
 
     public WebUrlEngine() {
-        this.proxyService = new ProxyService();
+        this.proxyEngine = new ProxyEngine();
     }
 
     public Element getWebSourceData(RequestData requestData) {
@@ -47,7 +46,7 @@ public class WebUrlEngine extends WebEngine {
         return Jsoup.connect(requestData.requestURL)
                 .followRedirects(true)
                 .userAgent(requestData.userAgent)
-                .proxy(proxyService.getNewProxyAddress())
+                .proxy(proxyEngine.getNewProxy())
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
                 .timeout(60 * 1000)
