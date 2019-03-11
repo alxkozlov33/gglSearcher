@@ -2,6 +2,8 @@ package Services;
 
 import GUI.*;
 import Utils.DirUtils;
+import org.tinylog.Logger;
+
 import java.awt.*;
 import java.io.File;
 
@@ -70,7 +72,6 @@ public class GuiService {
         } else if (path.length() > size) {
             return "..."+path.substring(path.length() - (size - 3));
         } else {
-            // whatever is appropriate in this case
             throw new IllegalArgumentException("Something wrong with file path cut");
         }
     }
@@ -90,7 +91,7 @@ public class GuiService {
         try {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Logger.tag("SYSTEM").error(e, "Interrupt exception");
         }
     }
 

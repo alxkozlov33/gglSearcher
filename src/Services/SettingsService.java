@@ -1,6 +1,6 @@
 package Services;
 
-import Models.SearchSettings;
+import Abstract.Models.SearchSettings;
 import Utils.DirUtils;
 import org.tinylog.Logger;
 

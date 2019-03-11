@@ -1,6 +1,6 @@
 package Abstract.Strategies;
 
-import Abstract.OutputModels.IOutputModel;
+import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import java.util.List;
 

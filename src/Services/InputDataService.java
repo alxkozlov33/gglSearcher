@@ -1,6 +1,6 @@
 package Services;
 
-import Models.InputCsvModelItem;
+import Abstract.Models.InputModels.InputCsvModelItem;
 import Utils.DirUtils;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;

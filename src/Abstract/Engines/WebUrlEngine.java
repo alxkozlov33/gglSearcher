@@ -1,6 +1,6 @@
 package Abstract.Engines;
 
-import Models.RequestData;
+import Abstract.Models.RequestData;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;

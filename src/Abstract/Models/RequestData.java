@@ -1,4 +1,4 @@
-package Models;
+package Abstract.Models;
 
 import java.net.Proxy;
 

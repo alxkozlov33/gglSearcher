@@ -1,6 +1,6 @@
 package Abstract.Strategies.Concrete;
 
-import Abstract.OutputModels.OutputRegularCSVItem;
+import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
 

@@ -1,0 +1,16 @@
+22:56:52 INFO: Services.DIResolver.<init>()
+ Application started...
+22:56:53 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+22:56:54 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 10 record
+22:56:57 INFO: Abstract.Commands.ClearInputDataFileActionCommand.actionPerformed()
+ Input data file removed
+22:57:00 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+22:57:00 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 10 record
+22:57:10 INFO: Abstract.Commands.StopButtonActionCommand.actionPerformed()
+ Stop button action performed
+22:57:10 INFO: Abstract.Commands.StopButtonActionCommand.actionPerformed()
+ Stopping...

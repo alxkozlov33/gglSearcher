@@ -1,7 +1,7 @@
 package Abstract.Engines;
 
 import ApiKeys.Keys;
-import Models.RequestData;
+import Abstract.Models.RequestData;
 import com.jcabi.aspects.RetryOnFailure;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;

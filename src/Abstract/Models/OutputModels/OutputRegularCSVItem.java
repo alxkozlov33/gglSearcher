@@ -1,4 +1,4 @@
-package Abstract.OutputModels;
+package Abstract.Models.OutputModels;
 
 import com.opencsv.bean.CsvBindByName;
 

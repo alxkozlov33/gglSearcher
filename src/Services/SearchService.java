@@ -1,16 +1,20 @@
 package Services;
 
 import Abstract.Engines.WebUrlEngine;
+import Abstract.Factories.Concrete.SearchingModeFactory;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.WebPageObject;
 import Abstract.Specifications.AbstractSpecification;
 import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.URLExceptionsSpecification;
-import Models.RequestData;
+import Abstract.Models.RequestData;
+import Abstract.Strategies.ISearchModeStrategy;
 import Utils.ResultsUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
+import org.tinylog.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,29 @@ public class SearchService {
         RequestData requestData = new RequestData(item.getLink(), userAgentsRotatorService.getRandomUserAgent());
         Element element = new WebUrlEngine().getWebSourceData(requestData);
         return parseSourceData(element);
+    }
+
+    public void StartWork() {
+        GuiService guiService = new GuiService();
+        String placeHolderText = guiService.getSearchPlaceholderText();
+        try {
+            if (StringUtils.isEmpty(placeHolderText)) {
+                Logger.tag("SYSTEM").error("Placeholder text empty");
+                return;
+            }
+
+            SettingsService settingsService = new SettingsService();
+            settingsService.initSettingsFileData();
+
+            SearchingModeFactory searchingModeFactory = new SearchingModeFactory();
+            ISearchModeStrategy searchModeStrategy =  searchingModeFactory.createSearchModeStrategy(placeHolderText);
+
+            searchModeStrategy.processData();
+
+        } catch (Exception e) {
+            guiService.changeApplicationStateToWork(false);
+            Logger.tag("SYSTEM").error(e, "Application stopped");
+        }
     }
 
     private WebPageObject parseSourceData(Element html){

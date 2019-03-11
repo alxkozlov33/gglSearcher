@@ -1,4 +1,4 @@
-package Models;
+package Abstract.Models.InputModels;
 
 import com.opencsv.bean.CsvBindByPosition;
 

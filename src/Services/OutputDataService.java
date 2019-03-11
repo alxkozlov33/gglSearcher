@@ -1,6 +1,6 @@
 package Services;
 
-import Abstract.OutputModels.IOutputModel;
+import Abstract.Models.OutputModels.IOutputModel;
 import Utils.CSVUtils;
 import Utils.DirUtils;
 import com.opencsv.CSVWriter;

@@ -1,8 +1,8 @@
 package Abstract.Strategies.Concrete;
 
-import Abstract.OutputModels.IOutputModel;
-import Abstract.OutputModels.OutputModelGeoDataDecorator;
-import Abstract.OutputModels.OutputRegularCSVItem;
+import Abstract.Models.OutputModels.IOutputModel;
+import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
+import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;

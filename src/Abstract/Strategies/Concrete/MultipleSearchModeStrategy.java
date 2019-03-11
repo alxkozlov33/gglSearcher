@@ -2,13 +2,13 @@ package Abstract.Strategies.Concrete;
 
 import Abstract.Engines.WebUrlEngine;
 import Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsFactory;
-import Abstract.OutputModels.IOutputModel;
+import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.RegularSearchResultItem;
 import Abstract.Strategies.ISearchModeStrategy;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
-import Models.InputCsvModelItem;
-import Models.RequestData;
+import Abstract.Models.InputModels.InputCsvModelItem;
+import Abstract.Models.RequestData;
 import Services.*;
 import Utils.StrUtils;
 import org.jsoup.nodes.Element;
