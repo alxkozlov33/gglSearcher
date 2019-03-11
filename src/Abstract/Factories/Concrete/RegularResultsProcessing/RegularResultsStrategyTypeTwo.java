@@ -24,7 +24,7 @@ public class RegularResultsStrategyTypeTwo implements IRegularSearchItemsProcess
         Logger.tag("SYSTEM").info("Parsed: " + elements.size() + " links");
         for (Element div : elements) {
             String mainHeader = div.select("div.r").select("h3").text();
-            String link = div.select("div.r > a").attr("href");
+            String link = div.select("div.r > a").attr("href").replaceFirst("/*$", "");
             String description = div.select("div.s").select("span.st").text();
 
             RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, link, description);

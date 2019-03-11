@@ -14,14 +14,14 @@ public class RegularResultsStrategyTypeOne implements IRegularSearchItemsProcess
     public List<RegularSearchResultItem> processBody(Element body) {
         ArrayList<RegularSearchResultItem> results = new ArrayList<>();
         Elements items = body.select("#ires");
-        Elements resultDivs = items.select("div.g");
+        Elements resultDivs = items.select("div[class=g]").select("div:not(:contains(Images for))");
         Logger.tag("SYSTEM").info("Parsed: " + resultDivs.size() + " links");
         for (Element div : resultDivs) {
             String mainHeader = div.select("h3.r > a").text();
-            String link = div.select("h3.r > a").attr("href");
+            String link = div.select("h3.r > a").attr("href").replaceFirst("/*$", "");
             String description = div.select("div.s").select("span.st").text();
 
-            RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, "www.google.com"+link, description);
+            RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, "http://www.google.com"+link, description);
             results.add(regularSearchResultItem);
         }
         return results;

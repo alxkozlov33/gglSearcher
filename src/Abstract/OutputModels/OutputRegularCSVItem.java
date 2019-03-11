@@ -4,7 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 
 public class OutputRegularCSVItem implements IOutputModel {
 
-    @CsvBindByName(column = "GalleryName")
+    @CsvBindByName(column = "Gallery name")
     private String galleryName;
 
     @CsvBindByName(column = "Website")
@@ -65,6 +65,6 @@ public class OutputRegularCSVItem implements IOutputModel {
 
     @Override
     public String toCsvRowString() {
-        return String.format("\"%s\",\"s\",\"%s\",\"%s\"", galleryName, website, notSure, htmlPageTitle);
+        return String.format("\"%s\",\"%s\",\"%s\",\"%s\"", galleryName, website, notSure, htmlPageTitle);
     }
 }

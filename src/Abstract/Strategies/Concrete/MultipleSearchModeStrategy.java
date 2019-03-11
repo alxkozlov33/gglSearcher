@@ -54,6 +54,7 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
             RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
             //TODO: Business list implementation there:
             List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.processBody(body);
+
             List filteredRegularSearchResultItems = searchService.filterGoogleResultData(regularSearchResultItems);
 
             ISearchResultsConvertStrategy<GoogleSearchResultItem, IOutputModel> convertStrategy

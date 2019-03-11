@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Keys/Keys.iml" filepath="$PROJECT_DIR$/Keys/Keys.iml" />
       <module fileurl="file://$PROJECT_DIR$/gglSearcher.iml" filepath="$PROJECT_DIR$/gglSearcher.iml" />
     </modules>
   </component>

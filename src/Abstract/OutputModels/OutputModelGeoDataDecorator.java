@@ -19,7 +19,7 @@ public class OutputModelGeoDataDecorator implements IOutputModel {
     }
 
     public String toCsvRowString() {
-        return String.format("\"%s\",\"%s\",\"%s\"", decorated.toCsvRowString(), city, country);
+        return String.format("%s,\"%s\",\"%s\"", decorated.toCsvRowString(), city, country);
     }
 
     public String getCity() {

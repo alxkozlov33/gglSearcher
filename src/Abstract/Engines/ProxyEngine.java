@@ -1,13 +1,12 @@
 package Abstract.Engines;
 
+import ApiKeys.Keys;
 import Models.RequestData;
 import com.jcabi.aspects.RetryOnFailure;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -18,8 +17,9 @@ public class ProxyEngine extends WebEngine {
     private final int attempts = 50;
 
     Proxy getNewProxy() {
+
         RequestData requestData = new RequestData(
-                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=ZlBnbzgzUnhvUjBqbytFa1dZTzAzdz09&format=txt",
+                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt&country=US,CA,UK",
                 "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)");
         for (int i = 1; i <= attempts; i++) {
             try {
@@ -31,8 +31,7 @@ public class ProxyEngine extends WebEngine {
                     }
                 }
             } catch (Exception ex) {
-                Logger.tag("SYSTEM").error("Cannot get proxy, waiting for next attempt");
-                Logger.tag("SYSTEM").error(ex.getMessage());
+                Logger.tag("SYSTEM").error("Cannot get proxy, " + ex.getMessage() + ", waiting for next attempt.");
             }
             isThreadSleep(i);
         }
@@ -57,7 +56,9 @@ public class ProxyEngine extends WebEngine {
                 .userAgent(requestData.userAgent)
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
-                .timeout(requestDelay)
+                .ignoreContentType(true)
+                .timeout(requestDelay * 12)
+                .validateTLSCertificates(false)
                 .execute();
     }
 }

@@ -27,6 +27,7 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
         inputDataService.initInputDataFile(propertiesService.getInputFile());
         outputDataService.setOutputFile(propertiesService.getOutputFolderPath());
+        outputDataService.createOutputFile(propertiesService.getPlaceHolder());
         settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
 
         guiService.setInputFilePath(inputDataService.getInputDataFile());

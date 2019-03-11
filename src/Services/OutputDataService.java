@@ -3,6 +3,7 @@ package Services;
 import Abstract.OutputModels.IOutputModel;
 import Utils.CSVUtils;
 import Utils.DirUtils;
+import com.opencsv.CSVWriter;
 import org.tinylog.Logger;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,31 +18,33 @@ public class OutputDataService {
     public OutputDataService() {
     }
 
-//    private void createEmptyCSVFile(File outputFile) {
-//        FileWriter mFileWriter = null;
-//        try {
-//            mFileWriter = new FileWriter(outputFile.getAbsoluteFile(), true);
-//            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-//            mCsvWriter.writeNext(new String[]{"Country", "City", "GalleryName", "Website", "NotSure"});
-//            mCsvWriter.close();
-//            mFileWriter.close();
-//        } catch (IOException e) {
-//            Logger.tag("SYSTEM").error(e, "Cannot create empty output file");
-//        }
-//    }
+    private void createEmptyCSVFile(File outputFile) {
+        FileWriter mFileWriter;
+        try {
+            mFileWriter = new FileWriter(outputFile.getAbsoluteFile());
+            CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
+            mCsvWriter.writeNext(new String[]{"Gallery name", "Website", "Not sure", "Html page title", "City", "Country"});
+            mCsvWriter.close();
+            mFileWriter.close();
+        } catch (IOException e) {
+            Logger.tag("SYSTEM").error(e, "Cannot create empty output file");
+        }
+    }
 
     public void createOutputFile(String placeHolder) {
         String fileNameFromPlaceHolder = placeHolder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         outputFile = new File(outputFolder + File.separator + fileNameFromPlaceHolder + ".csv");
+        createEmptyCSVFile(outputFile);
     }
 
     public File getOutputFolder() {
         return outputFolder;
     }
 
-    public void setOutputFile(File outputFolder) { //TODO: Set manually output folder
+    public void setOutputFile(File outputFolder) {
         if (DirUtils.isDirOk(outputFolder)) {
             this.outputFolder = outputFolder;
+
         }
     }
 
@@ -51,9 +54,8 @@ public class OutputDataService {
         }
 
         try {
-            FileWriter writer = new FileWriter(outputFolder.getAbsoluteFile(), true);
+            FileWriter writer = new FileWriter(outputFile.getAbsoluteFile(), true);
             for (IOutputModel item : csvFileData) {
-                //String[] data = new String[]{item.getCountry(), item.getCity(), item.getGalleryName(), item.getWebsite(), item.getNotSure()};
                 CSVUtils.writeLine(writer, item.toCsvRowString());
             }
             writer.flush();
@@ -64,26 +66,8 @@ public class OutputDataService {
         }
     }
 
-//    public <T extends GoogleSearchResultItem> ArrayList<OutputCsvModelItem> mapSearchResultsToOutputCSVModels(List<T> results) {
-//        ArrayList<OutputCsvModelItem> outputItems = new ArrayList<>();
-//        if (results.size() == 0) {
-//            return null;
-//        }
-//
-//        for (GoogleSearchResultItem item : results) {
-//            OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(item.getMainHeader(), item.getLink(), item.);
-//
-//            outputItems.add(new OutputCsvModelItem(item.getGalleryName(), item.getWebsite(), item.getCity(), item.getNotSureLink(), item.getCountry()));
-//        }
-//        return outputItems;
-//    }
-
     public void clearOutputFile() {
         outputFolder = null;
         outputFile = null;
-    }
-
-    public File getOutputFile() {
-        return outputFolder;
     }
 }

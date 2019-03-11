@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
     private final ProxyEngine proxyEngine;
-    private final int attempts = 5;
+    private final int attempts = 10;
 
     public WebUrlEngine() {
         this.proxyEngine = new ProxyEngine();
@@ -23,8 +23,7 @@ public class WebUrlEngine extends WebEngine {
                     return response.parse();
                 }
             } catch (Exception ex) {
-                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL);
-                Logger.tag("SYSTEM").error(ex.getMessage());
+                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL + "\n" + ex.getMessage());
             }
             isThreadSleep(i);
         }
@@ -49,7 +48,9 @@ public class WebUrlEngine extends WebEngine {
                 .proxy(proxyEngine.getNewProxy())
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
+                .ignoreContentType(true)
                 .timeout(60 * 1000)
+                .validateTLSCertificates(false)
                 .execute();
     }
 }
