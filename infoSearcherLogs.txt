@@ -1,1629 +1,552 @@
-01:08:03.153 ERROR: Check search placeholder and input file. Application cannot start.
-01:09:38.370 ERROR: Check search placeholder and input file. Application cannot start.
-01:11:43.623 ERROR: Check search placeholder and input file. Application cannot start.
-01:19:06.453 ERROR: Check search placeholder and input file. Application cannot start.
-16:42:14.919 ERROR: Check search placeholder and input file. Application cannot start.
-16:45:58.205 ERROR: Check search placeholder and input file. Application cannot start.
-16:56:29.152 INFO: Services.DIResolver.<init>()
-	Application started...
-16:56:29.509 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
-	Application started
-16:56:29.600 INFO: Services.InputDataService.initCSVItems()
-	Input data file path empty
-16:56:29.607 INFO: Services.SettingsService.initSettingsFile()
-	Exceptions file path empty
-16:56:29.615 ERROR: Services.OutputDataService.setOutputFile()
-	Check search placeholder and input file. Application cannot start.
-16:56:49.412 INFO: Services.DIResolver.<init>()
- Application started...
-16:56:49.750 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:56:49.779 INFO: Services.InputDataService.initCSVItems()
- Input data file path empty
-16:56:49.808 INFO: Services.SettingsService.initSettingsFile()
- Exceptions file path empty
-16:56:49.825 ERROR: Services.OutputDataService.setOutputFile()
- Check search placeholder and input file. Application cannot start.
-16:57:29.814 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-16:57:29.820 INFO: Services.InputDataService.initCSVItems()
- Input data file path empty
-16:57:36.605 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-16:57:36.606 INFO: Services.InputDataService.initCSVItems()
- Input data file path empty
-17:09:22.212 INFO: Services.DIResolver.<init>()
- Application started...
-17:09:22.599 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-17:09:22.689 INFO: Services.InputDataService.initInputDataFile()
- Input data file path empty
-17:09:22.693 INFO: Services.SettingsService.initSettingsFile()
- Settings file path empty
-17:09:22.701 ERROR: Services.OutputDataService.setOutputFile()
- Check search placeholder and input file. Application cannot start.
-17:24:42.512 INFO: Services.DIResolver.<init>()
- Application started...
-17:24:42.846 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-17:24:42.901 INFO: Services.InputDataService.initInputDataFile()
- Input data file path empty
-17:24:42.906 INFO: Services.SettingsService.initSettingsFile()
- Settings file path empty
-17:24:42.915 ERROR: Services.OutputDataService.setOutputFile()
- Check search placeholder and input file. Application cannot start.
-17:24:48.000 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-23:12:23.060 INFO: Services.DIResolver.<init>()
- Application started...
-23:12:23.667 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:12:23.719 ERROR: Services.OutputDataService.setOutputFile()
- Check search placeholder and input file. Application cannot start.
-23:12:23.763 ERROR: Services.SearchingProcessor.StartWork()
- Placeholder text empty
-23:12:26.915 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-23:12:33.321 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-23:12:51.207 INFO: Services.DIResolver.<init>()
- Application started...
-23:12:51.666 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:12:51.765 ERROR: Services.OutputDataService.setOutputFile()
- Check search placeholder and input file. Application cannot start.
-23:12:51.771 ERROR: Services.SearchingProcessor.StartWork()
- Placeholder text empty
-23:13:55.641 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
- Run button action performed
-23:14:29.674 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
- Finished
-23:46:40.175 INFO: Services.DIResolver.<init>()
- Application started...
-23:46:40.626 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:47:32.200 INFO: Services.DIResolver.<init>()
- Application started...
-23:47:32.720 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:49:41.857 INFO: Services.DIResolver.<init>()
- Application started...
-23:49:42.600 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:49:46.452 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-23:52:24.899 INFO: Services.DIResolver.<init>()
- Application started...
-23:52:25.407 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:52:41.438 INFO: Services.DIResolver.<init>()
- Application started...
-23:52:41.966 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:53:23.754 INFO: Services.DIResolver.<init>()
- Application started...
-23:53:24.332 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:55:28.130 INFO: Services.DIResolver.<init>()
- Application started...
-23:55:28.800 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:56:29.588 INFO: Services.DIResolver.<init>()
- Application started...
-23:56:30.082 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:58:56.139 INFO: Services.DIResolver.<init>()
- Application started...
-23:58:56.641 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:59:49.230 INFO: Services.DIResolver.<init>()
- Application started...
-23:59:49.724 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:59:54.113 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:13:11.469 INFO: Services.DIResolver.<init>()
- Application started...
-00:13:11.973 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:24:30.630 INFO: Services.DIResolver.<init>()
- Application started...
-00:24:31.136 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:25:12.675 INFO: Services.DIResolver.<init>()
- Application started...
-00:25:13.161 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:25:29.405 INFO: Services.DIResolver.<init>()
- Application started...
-00:25:29.901 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:27:23.822 INFO: Services.DIResolver.<init>()
- Application started...
-00:27:24.531 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:27:53.534 INFO: Services.DIResolver.<init>()
- Application started...
-00:27:54.054 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:29:29.036 INFO: Services.DIResolver.<init>()
- Application started...
-00:29:29.577 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:31:29.707 INFO: Services.DIResolver.<init>()
- Application started...
-00:31:30.215 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:31:33.962 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:31:51.566 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:33:56.915 INFO: Services.DIResolver.<init>()
- Application started...
-00:33:57.470 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:36:09.505 INFO: Services.DIResolver.<init>()
- Application started...
-00:36:10.027 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:37:42.220 INFO: Services.DIResolver.<init>()
- Application started...
-00:37:42.782 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:37:48.912 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:37:58.083 INFO: Abstract.Commands.ClearInputDataFileActionCommand.actionPerformed()
- Input data file removed
-00:37:59.760 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:38:03.340 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:38:05.590 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:39:03.454 INFO: Services.DIResolver.<init>()
- Application started...
-00:39:03.989 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:39:10.385 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:40:21.875 INFO: Services.DIResolver.<init>()
- Application started...
-00:40:22.469 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:40:24.930 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:40:36.414 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:40:46.051 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:51:19.032 INFO: Services.DIResolver.<init>()
- Application started...
-00:51:19.544 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:51:22.494 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:51:27.836 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:53:06.908 INFO: Services.DIResolver.<init>()
- Application started...
-00:53:07.444 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:53:10.102 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:53:34.206 INFO: Services.DIResolver.<init>()
- Application started...
-00:53:34.712 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:53:36.689 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:53:40.166 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:53:45.473 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:53:53.682 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:54:01.739 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:55:00.580 INFO: Services.DIResolver.<init>()
- Application started...
-00:55:01.120 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:55:05.076 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:56:35.806 INFO: Services.DIResolver.<init>()
- Application started...
-00:56:36.578 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:56:40.073 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:56:53.994 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-00:57:04.969 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-00:57:22.481 INFO: Services.DIResolver.<init>()
- Application started...
-00:57:22.999 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:58:03.678 INFO: Services.DIResolver.<init>()
- Application started...
-00:58:04.195 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-00:58:14.846 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-00:58:28.801 INFO: Services.DIResolver.<init>()
- Application started...
-00:58:29.285 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:00:23.881 INFO: Services.DIResolver.<init>()
- Application started...
-01:00:24.425 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:07:06.945 INFO: Services.DIResolver.<init>()
- Application started...
-01:07:07.438 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:07:52.520 INFO: Services.DIResolver.<init>()
- Application started...
-01:07:53.003 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:08:53.557 INFO: Services.DIResolver.<init>()
- Application started...
-01:08:54.078 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:09:57.465 INFO: Services.DIResolver.<init>()
- Application started...
-01:09:58.025 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:10:00.900 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-01:10:09.675 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-01:10:46.600 INFO: Services.DIResolver.<init>()
- Application started...
-01:10:47.090 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:10:52.053 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-01:12:05.685 INFO: Services.DIResolver.<init>()
- Application started...
-01:12:06.250 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-01:12:13.520 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-01:12:20.590 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-01:12:37.614 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-12:44:50.658 INFO: Services.DIResolver.<init>()
- Application started...
-12:44:51.202 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:03:47.168 INFO: Services.DIResolver.<init>()
- Application started...
-13:03:47.661 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:03:51.616 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:03:57.796 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:04:06.590 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:05:05.031 INFO: Services.DIResolver.<init>()
- Application started...
-13:05:05.497 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:05:08.025 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:05:10.664 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:10:10.631 INFO: Services.DIResolver.<init>()
- Application started...
-13:10:11.142 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:13:02.002 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:13:03.413 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:13:26.201 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
- Run button action performed
-13:14:23.583 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
- Finished
-13:14:54.176 INFO: Services.DIResolver.<init>()
- Application started...
-13:14:54.755 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:15:26.258 INFO: Services.DIResolver.<init>()
- Application started...
-13:15:26.716 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:16:32.969 INFO: Services.DIResolver.<init>()
- Application started...
-13:16:33.505 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:17:19.194 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-13:18:40.850 INFO: Services.DIResolver.<init>()
- Application started...
-13:18:41.332 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:52:20.293 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-13:54:15.443 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketTimeoutException: Read timeout
-	at org.jsoup.internal.ConstrainableInputStream.read(ConstrainableInputStream.java:58)
-	at java.io.FilterInputStream.read(FilterInputStream.java:107)
-	at org.jsoup.internal.ConstrainableInputStream.readToByteBuffer(ConstrainableInputStream.java:87)
-	at org.jsoup.helper.DataUtil.readToByteBuffer(DataUtil.java:175)
-	at org.jsoup.helper.DataUtil.parseInputStream(DataUtil.java:104)
-	at org.jsoup.helper.HttpConnection$Response.parse(HttpConnection.java:851)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:19)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-13:55:28.135 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:17)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-13:55:41.598 INFO: Services.DIResolver.<init>()
- Application started...
-13:55:42.169 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:55:56.686 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-13:56:28.297 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 0 links
-13:56:28.313 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 0 results will be saved.
-13:56:28.325 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-14:06:06.595 INFO: Services.DIResolver.<init>()
- Application started...
-14:06:07.200 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-14:06:16.621 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-14:07:28.235 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-14:08:29.022 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-14:08:29.024 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-14:08:43.226 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:55)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-14:13:31.370 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
- Run button action performed
-14:13:38.384 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-14:13:48.078 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketException: Connection reset
-	at java.net.SocketInputStream.read(SocketInputStream.java:210)
-	at java.net.SocketInputStream.read(SocketInputStream.java:141)
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
-	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
-	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:735)
-	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:678)
-	at sun.net.www.protocol.http.HttpURLConnection.doTunneling(HttpURLConnection.java:2037)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:37)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:17)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0(RunButtonActionCommand.java:37)
-	at java.lang.Thread.run(Thread.java:748)
-14:13:54.646 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0(RunButtonActionCommand.java:37)
-	at java.lang.Thread.run(Thread.java:748)
-14:13:54.657 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
- Finished
-16:10:57.463 INFO: Services.DIResolver.<init>()
- Application started...
-16:10:58.327 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:10:59.293 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-16:11:05.328 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
- Run button action performed
-16:11:05.633 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-16:11:34.072 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.ConnectException: Connection timed out: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:37)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:17)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:11:34.104 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-16:11:35.585 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:11:35.722 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-16:11:35.724 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-16:14:29.055 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:55)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0(RunButtonActionCommand.java:37)
-	at java.lang.Thread.run(Thread.java:748)
-16:14:32.280 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
- Finished
-16:14:39.769 INFO: Services.DIResolver.<init>()
- Application started...
-16:14:40.306 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:15:16.198 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-16:15:42.014 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.ConnectException: Connection timed out: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:37)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:17)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:18:54.302 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:19:01.898 INFO: Services.DIResolver.<init>()
- Application started...
-16:19:02.407 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:19:24.193 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-16:20:14.441 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:21:49.540 INFO: Services.DIResolver.<init>()
- Application started...
-16:21:50.232 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:21:56.326 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-16:22:29.310 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketException: Connection reset
-	at java.net.SocketInputStream.read(SocketInputStream.java:210)
-	at java.net.SocketInputStream.read(SocketInputStream.java:141)
-	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
-	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
-	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
-	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:735)
-	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:678)
-	at sun.net.www.protocol.http.HttpURLConnection.doTunneling(HttpURLConnection.java:2037)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:37)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:17)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:23:29.220 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:23:48.420 INFO: Services.DIResolver.<init>()
- Application started...
-16:23:48.927 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:23:49.672 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-16:25:05.296 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-16:25:05.435 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-16:25:05.439 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-16:26:35.799 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:55)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-02:57:56.208 INFO: Services.DIResolver.<init>()
- Application started...
-02:57:57.161 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-02:57:58.147 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-02:59:52.582 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.ConnectException: Connection timed out: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:37)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:17)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:00:24.344 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:00:34.942 INFO: Services.DIResolver.<init>()
- Application started...
-03:00:35.537 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:00:36.366 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:01:12.055 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-03:01:16.045 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-03:01:16.047 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-03:01:31.996 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification.isSatisfiedBy(TopLevelDomainExceptionsSpecification.java:16)
-	at Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification.isSatisfiedBy(TopLevelDomainExceptionsSpecification.java:7)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:55)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:02:18.070 INFO: Services.DIResolver.<init>()
- Application started...
-03:02:18.590 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:02:19.211 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:02:45.774 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.ConnectException: Connection timed out: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:39)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:19)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:02:48.759 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:02:10.941 INFO: Services.DIResolver.<init>()
- Application started...
-03:02:11.487 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:02:12.062 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:02:19.083 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:23)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:27:52.656 INFO: Services.DIResolver.<init>()
- Application started...
-03:27:53.201 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:27:54.075 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:28:18.013 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.ConnectException: Connection timed out: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:39)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:19)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:28:33.198 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:31:57.629 INFO: Services.DIResolver.<init>()
- Application started...
-03:31:58.261 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:31:59.000 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:36:13.507 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Factories.Concrete.RegularResultsFactory.processBody(RegularResultsFactory.java:16)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:53)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:36:21.753 INFO: Services.DIResolver.<init>()
- Application started...
-03:36:22.228 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:36:22.950 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:39:39.230 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-03:39:44.694 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-03:39:44.697 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-03:41:06.616 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:58)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:41:13.371 INFO: Services.DIResolver.<init>()
- Application started...
-03:41:13.913 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:41:14.607 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:41:34.592 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-03:41:34.636 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-03:41:34.640 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-03:48:48.336 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:48)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:58)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-03:48:56.913 INFO: Services.DIResolver.<init>()
- Application started...
-03:48:57.900 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:48:58.862 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-03:49:12.716 INFO: Services.DIResolver.<init>()
- Application started...
-03:49:13.214 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-03:49:13.970 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-12:56:01.098 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketTimeoutException: Read timeout
-	at org.jsoup.internal.ConstrainableInputStream.read(ConstrainableInputStream.java:58)
-	at java.io.FilterInputStream.read(FilterInputStream.java:107)
-	at org.jsoup.internal.ConstrainableInputStream.readToByteBuffer(ConstrainableInputStream.java:87)
-	at org.jsoup.helper.DataUtil.readToByteBuffer(DataUtil.java:175)
-	at org.jsoup.helper.DataUtil.parseInputStream(DataUtil.java:104)
-	at org.jsoup.helper.HttpConnection$Response.parse(HttpConnection.java:851)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:21)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:38)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-12:56:10.031 INFO: Services.DIResolver.<init>()
- Application started...
-12:56:10.539 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-12:56:11.470 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-13:09:54.640 INFO: Services.DIResolver.<init>()
- Application started...
-13:09:55.318 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:10:27.097 INFO: Services.DIResolver.<init>()
- Application started...
-13:10:28.020 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:15:52.064 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-13:20:10.906 INFO: Services.DIResolver.<init>()
- Application started...
-13:20:11.434 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:20:20.690 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:20:38.928 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:20:41.156 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:21:04.703 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-13:21:16.911 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-13:22:57.716 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:23:46.212 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:24:35.190 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:25:52.563 INFO: Services.DIResolver.<init>()
- Application started...
-13:25:53.135 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:26:05.192 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:26:06.577 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:26:26.857 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:26:34.808 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-13:28:46.835 INFO: Services.DIResolver.<init>()
- Application started...
-13:28:47.408 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:31:34.685 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:31:37.506 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-13:31:44.661 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-13:31:47.614 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:32:06.237 INFO: Services.DIResolver.<init>()
- Application started...
-13:32:06.793 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:32:33.305 INFO: Services.DIResolver.<init>()
- Application started...
-13:32:34.041 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:32:38.058 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:32:47.106 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:32:47.915 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:33:00.441 INFO: Services.DIResolver.<init>()
- Application started...
-13:33:01.109 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:33:41.615 INFO: Services.DIResolver.<init>()
- Application started...
-13:33:42.127 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:33:46.780 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:33:52.600 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:34:07.819 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:34:59.302 INFO: Services.DIResolver.<init>()
- Application started...
-13:34:59.814 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:35:02.991 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:35:20.511 INFO: Services.DIResolver.<init>()
- Application started...
-13:35:21.147 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:35:58.059 INFO: Services.DIResolver.<init>()
- Application started...
-13:35:58.837 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:36:31.882 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:37:25.030 INFO: Services.DIResolver.<init>()
- Application started...
-13:37:25.801 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:40:06.135 INFO: Services.DIResolver.<init>()
- Application started...
-13:40:06.918 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:40:11.993 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:41:02.197 INFO: Services.DIResolver.<init>()
- Application started...
-13:41:02.814 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:41:05.173 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:41:26.415 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:43:09.112 INFO: Services.DIResolver.<init>()
- Application started...
-13:43:09.635 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:43:19.167 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:43:40.910 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:44:39.889 INFO: Services.DIResolver.<init>()
- Application started...
-13:44:40.468 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:44:45.212 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:45:30.264 INFO: Services.DIResolver.<init>()
- Application started...
-13:45:30.768 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:45:32.489 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:45:42.880 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:45:44.087 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:45:47.736 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:45:50.544 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-13:45:52.906 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-13:45:55.491 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-13:46:09.750 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:46:17.068 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-13:46:19.022 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:46:23.407 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:47:13.826 INFO: Services.DIResolver.<init>()
- Application started...
-13:47:14.508 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:47:20.270 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:47:30.457 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:47:36.407 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:47:42.745 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-13:47:46.853 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-13:55:54.839 INFO: Services.DIResolver.<init>()
- Application started...
-13:55:55.375 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-13:56:00.886 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-13:56:13.104 INFO: Abstract.Commands.ClearSettingsFileActionCommand.actionPerformed()
- Settings data file removed
-15:40:36.488 INFO: Services.DIResolver.<init>()
- Application started...
-15:40:37.312 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-15:40:40.228 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-15:40:59.572 INFO: Abstract.Commands.ClearInputDataFileActionCommand.actionPerformed()
- Input data file removed
-15:41:03.582 INFO: Abstract.Commands.ClearSettingsFileActionCommand.actionPerformed()
- Settings data file removed
-15:41:06.915 INFO: Abstract.Commands.ClearOutputFolderActionCommand.actionPerformed()
- Output folder removed
-15:42:36.291 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
- Select input data file button action performed
-15:42:44.764 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
- Select input settings file button action performed
-15:42:57.516 INFO: Abstract.Commands.SelectOutputFolderActionCommand.actionPerformed()
- Select input data file button action performed
-15:43:13.802 INFO: Abstract.Commands.ClearSettingsFileActionCommand.actionPerformed()
- Settings data file removed
-15:43:19.826 INFO: Abstract.Commands.ClearSettingsFileActionCommand.actionPerformed()
- Settings data file removed
-15:43:36.502 INFO: Abstract.Commands.ClearSettingsFileActionCommand.actionPerformed()
- Settings data file removed
-15:43:54.337 INFO: Services.DIResolver.<init>()
- Application started...
-15:43:54.927 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-15:43:55.852 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-15:44:50.800 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 0 links
-15:44:50.808 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 0 results will be saved.
-15:44:50.811 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-15:50:24.598 INFO: Services.DIResolver.<init>()
- Application started...
-15:50:25.187 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-15:54:12.719 INFO: Services.DIResolver.<init>()
- Application started...
-15:54:13.263 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-15:54:58.382 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-15:55:25.985 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 101 links
-15:55:26.059 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 101 results will be saved.
-15:55:26.085 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-15:56:03.400 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.URLExceptionsSpecification.isSatisfiedBy(URLExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:49)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:58)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-15:56:12.475 INFO: Services.DIResolver.<init>()
- Application started...
-15:56:13.014 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-15:56:18.053 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 0 record
-15:56:31.831 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 101 links
-15:56:31.896 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 101 results will be saved.
-15:56:31.898 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-15:57:10.711 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:18)
-	at Abstract.Specifications.Concrete.DomainExceptionsSpecification.isSatisfiedBy(DomainExceptionsSpecification.java:8)
-	at Abstract.Specifications.AndSpecification.isSatisfiedBy(AndSpecification.java:17)
-	at Utils.ResultsUtils.filterResults(ResultsUtils.java:12)
-	at Services.SearchService.filterGoogleResultData(SearchService.java:49)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:58)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:22)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-16:04:42.939 INFO: Services.DIResolver.<init>()
- Application started...
-16:04:43.529 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:13:50.963 INFO: Services.DIResolver.<init>()
- Application started...
-16:13:51.498 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:15:06.919 INFO: Services.DIResolver.<init>()
- Application started...
-16:15:07.598 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-16:15:21.067 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 2 record
-16:15:42.620 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 0 links
-16:15:42.626 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 0 results will be saved.
-16:15:42.630 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-16:17:07.480 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 0 links
-16:17:07.483 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 0 results will be saved.
-16:17:07.490 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-19:30:33.272 INFO: Services.DIResolver.<init>()
- Application started...
-19:30:34.073 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-19:30:39.683 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 3 record
-19:34:50.194 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 0 links
-19:34:50.202 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 0 results will be saved.
-19:34:50.209 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-19:35:00.802 INFO: Services.DIResolver.<init>()
- Application started...
-19:35:01.322 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-19:35:41.124 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 3 record
-19:35:56.057 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:47)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:26)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-19:36:12.457 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:47)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:26)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-19:36:27.473 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:47)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:26)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:50)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-19:37:58.418 INFO: Services.DIResolver.<init>()
- Application started...
-19:37:58.990 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-19:38:05.553 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 6 record
-19:38:29.133 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.SocketTimeoutException: connect timed out
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:47)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:26)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:48)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-19:38:48.061 INFO: Services.DIResolver.<init>()
- Application started...
-19:38:48.623 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-19:38:49.569 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 6 record
-19:40:21.601 INFO: Services.DIResolver.<init>()
- Application started...
-19:40:22.152 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-19:40:22.944 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 6 record
-19:41:14.773 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Error while request executing: java.net.ConnectException: Connection timed out: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
-	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
-	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
-	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
-	at java.net.Socket.connect(Socket.java:589)
-	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:515)
-	at sun.net.www.http.HttpClient$1.run(HttpClient.java:513)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at sun.net.www.http.HttpClient.privilegedOpenServer(HttpClient.java:512)
-	at sun.net.www.http.HttpClient.openServer(HttpClient.java:553)
-	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264)
-	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1181)
-	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1032)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:773)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
-	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:47)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:26)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:48)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-19:50:44.532 INFO: Services.DIResolver.<init>()
- Application started...
-19:50:45.131 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-19:50:45.835 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 7 record
-19:52:18.363 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
+01:03:32.387 INFO: Services.DIResolver.<init>()
+ Application started...
+01:03:33.064 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:03:34.010 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:03:42.130 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+01:03:42.137 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+01:05:11.420 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeOne.processBody()
  Parsed: 58 links
-19:52:18.631 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 58 results will be saved.
-19:52:18.636 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-19:57:04.325 INFO: Services.DIResolver.<init>()
+01:05:21.177 INFO: Services.DIResolver.<init>()
  Application started...
-19:57:04.867 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+01:05:21.678 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
  Application started
-19:57:05.631 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 7 record
-19:58:10.249 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-19:58:10.637 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-19:58:10.643 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-22:44:38.068 INFO: Services.DIResolver.<init>()
+01:05:22.426 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:06:03.339 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+01:06:03.346 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+01:17:44.112 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 52 links
+01:20:00.589 INFO: Services.DIResolver.<init>()
  Application started...
-22:44:38.869 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+01:20:01.131 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
  Application started
-22:44:39.647 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 8 record
-22:45:08.862 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-22:45:09.306 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-22:45:09.314 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-22:58:46.697 ERROR: Services.SearchService.getWebSitePageSource()
- Cannot get page source
-22:58:46.827 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification.isSatisfiedBy(MetaTagsExceptionsSpecification.java:18)
-	at Abstract.Strategies.Concrete.ConvertSearchResultsWithGeoDataStrategy.convertResultData(ConvertSearchResultsWithGeoDataStrategy.java:40)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:68)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-23:01:49.635 INFO: Services.DIResolver.<init>()
- Application started...
-23:01:50.415 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:01:51.164 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 8 record
-23:02:08.443 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-23:02:08.486 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-23:02:08.509 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-23:02:49.981 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:03:19.107 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:04:44.527 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:12:19.014 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:13:07.406 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:13:46.742 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.NullPointerException
-	at Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification.isSatisfiedBy(MetaTagsExceptionsSpecification.java:18)
-	at Abstract.Strategies.Concrete.ConvertSearchResultsWithGeoDataStrategy.convertResultData(ConvertSearchResultsWithGeoDataStrategy.java:40)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:65)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-23:15:22.879 INFO: Services.DIResolver.<init>()
- Application started...
-23:15:23.440 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:15:24.371 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 8 record
-23:15:56.799 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:16:56.354 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-23:16:56.754 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- 100 results will be saved.
-23:16:56.760 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- ________________________________________
-23:17:19.929 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:20:32.715 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:21:14.147 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:28:44.594 INFO: Services.DIResolver.<init>()
- Application started...
-23:28:45.103 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:28:46.102 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 8 record
-23:29:26.824 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:29:53.205 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:30:21.338 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 100 links
-23:31:00.444 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:31:06.168 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:31:59.548 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:33:14.267 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.lang.IllegalArgumentException: Must supply a valid URL
-	at org.jsoup.helper.Validate.notEmpty(Validate.java:102)
-	at org.jsoup.helper.HttpConnection.url(HttpConnection.java:132)
-	at org.jsoup.helper.HttpConnection.connect(HttpConnection.java:76)
-	at org.jsoup.Jsoup.connect(Jsoup.java:73)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:46)
-	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:22)
-	at Services.SearchService.getWebSitePageSource(SearchService.java:23)
-	at Abstract.Strategies.Concrete.ConvertSearchResultsWithGeoDataStrategy.convertResultData(ConvertSearchResultsWithGeoDataStrategy.java:38)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:65)
-	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
-	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
-	at Main.start(Main.java:37)
-	at Main.main(Main.java:12)
-23:35:39.368 INFO: Services.DIResolver.<init>()
- Application started...
-23:35:39.889 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
- Application started
-23:35:40.821 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 8 record
-23:36:14.267 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:37:45.827 INFO: Abstract.Factories.Concrete.RegularResultsFactory.processBody()
- Parsed: 62 links
-23:38:04.690 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:38:10.815 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:38:25.902 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:38:30.906 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:38:35.909 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:38:40.912 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:38:45.915 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:39:18.201 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:39:24.333 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:39:37.660 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:39:47.563 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:40:30.403 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:40:55.533 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:41:02.735 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:41:12.680 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:48:38.999 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:49:33.282 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:49:38.285 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:49:43.288 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:49:48.292 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source. Problem with URL: 
-23:50:26.012 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:51:12.120 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:51:28.066 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:51:44.525 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:51:50.800 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:52:18.926 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:52:26.222 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:52:52.575 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:53:07.738 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:53:16.270 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:53:37.043 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:53:43.314 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:53:52.916 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:54:20.678 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:54:29.016 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Cannot get page source, waiting for next attempt
-23:54:37.997 ERROR: Services.SearchingProcessor.StartWork()
- Application stopped: java.util.NoSuchElementException
-	at java.util.StringTokenizer.nextToken(StringTokenizer.java:349)
-	at sun.net.www.protocol.http.HttpURLConnection.doTunneling(HttpURLConnection.java:2054)
-	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)
-	at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
-	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:746)
+01:20:01.889 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:20:33.701 ERROR: Services.ProxyService.getNewProxyAddress()
+ Error while proxy request executing: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:735)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:678)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1569)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1474)
+	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:480)
+	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:750)
 	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
 	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
-	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:55)
+	at Abstract.Engines.ProxyEngine.makeRequest(ProxyEngine.java:24)
+	at Services.ProxyService.getNewProxyAddress(ProxyService.java:27)
+	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:50)
 	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:22)
-	at Services.SearchService.getWebSitePageSource(SearchService.java:23)
-	at Abstract.Strategies.Concrete.ConvertSearchResultsWithGeoDataStrategy.convertResultData(ConvertSearchResultsWithGeoDataStrategy.java:38)
-	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:65)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:49)
 	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
 	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
 	at Main.start(Main.java:37)
 	at Main.main(Main.java:12)
+01:21:29.871 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 47 links
+01:22:39.669 INFO: Services.DIResolver.<init>()
+ Application started...
+01:22:40.209 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:22:40.943 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:23:19.466 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeOne.processBody()
+ Parsed: 61 links
+01:23:32.292 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:32.303 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:37.343 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:37.357 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:42.392 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:42.399 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:47.409 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:47.418 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:52.436 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:52.444 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggUMAA&usg=AOvVaw1lYTRr_wRvzbLGQTUHzako
+01:23:57.848 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:23:57.856 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:02.865 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:02.875 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:07.889 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:07.897 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:12.910 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:12.918 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:17.928 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:17.936 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggXMAE&usg=AOvVaw0hM-xZyvx0pn5e4TkXM-T6
+01:24:23.281 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:23.288 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:28.298 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:28.305 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:33.314 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:33.321 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:38.331 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:38.338 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:43.345 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:43.353 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford,_London&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggcMAI&usg=AOvVaw1ReZC8841KneTbQVoqfMQG
+01:24:49.549 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:24:49.558 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:24:54.568 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:24:54.576 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:24:59.588 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:24:59.596 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:25:04.606 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:25:04.618 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:25:09.633 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:25:09.640 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://en.wikipedia.org/wiki/Woodford_Green&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFggiMAM&usg=AOvVaw3ZnLDZkVsj9cs3AhzMNc58
+01:25:15.006 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: 
+01:25:15.016 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Must supply a valid URL
+01:25:20.024 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: 
+01:25:20.032 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Must supply a valid URL
+01:25:25.044 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: 
+01:25:25.049 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Must supply a valid URL
+01:25:30.057 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: 
+01:25:30.063 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Must supply a valid URL
+01:25:35.071 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: 
+01:25:35.077 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Must supply a valid URL
+01:25:40.422 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:40.429 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:45.438 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:45.446 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:50.456 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:50.463 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:55.471 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:25:55.478 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:26:00.488 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:26:00.496 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://theartssociety.org/woodfordgreen&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghFMAc&usg=AOvVaw0lNEO2wTM9qvY1OVvwpPSj
+01:26:05.855 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:05.862 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:10.873 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:10.880 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:15.889 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:15.896 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:20.905 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:20.912 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:25.927 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:25.939 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://thenewschoolart.org/art-courses/art-courses-woodford-green/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghKMAg&usg=AOvVaw06aI1teNnV_yTSV5U025av
+01:26:31.298 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghQMAk&usg=AOvVaw0IfqoeTeoQieJLbhIhOg8O
+01:26:31.304 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghQMAk&usg=AOvVaw0IfqoeTeoQieJLbhIhOg8O
+01:26:36.314 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghQMAk&usg=AOvVaw0IfqoeTeoQieJLbhIhOg8O
+01:26:36.322 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghQMAk&usg=AOvVaw0IfqoeTeoQieJLbhIhOg8O
+01:26:41.333 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: /url?q=https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghQMAk&usg=AOvVaw0IfqoeTeoQieJLbhIhOg8O
+01:26:41.340 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Malformed URL: /url?q=https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/&sa=U&ved=0ahUKEwi41KOS6fjgAhVIErkGHdkGC24QFghQMAk&usg=AOvVaw0IfqoeTeoQieJLbhIhOg8O
+01:26:54.149 INFO: Services.DIResolver.<init>()
+ Application started...
+01:26:54.709 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:26:55.389 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:27:27.184 ERROR: Services.ProxyService.getNewProxyAddress()
+ Error while proxy request executing: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:735)
+	at sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:678)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1569)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1474)
+	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:480)
+	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:750)
+	at org.jsoup.helper.HttpConnection$Response.execute(HttpConnection.java:722)
+	at org.jsoup.helper.HttpConnection.execute(HttpConnection.java:306)
+	at Abstract.Engines.ProxyEngine.makeRequest(ProxyEngine.java:24)
+	at Services.ProxyService.getNewProxyAddress(ProxyService.java:27)
+	at Abstract.Engines.WebUrlEngine.makeRequest(WebUrlEngine.java:50)
+	at Abstract.Engines.WebUrlEngine.getWebSourceData(WebUrlEngine.java:22)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:49)
+	at Services.SearchingProcessor.StartWork(SearchingProcessor.java:26)
+	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:42)
+	at Main.start(Main.java:37)
+	at Main.main(Main.java:12)
+01:28:11.351 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 2 links
+01:33:56.026 INFO: Services.DIResolver.<init>()
+ Application started...
+01:33:56.549 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:33:57.277 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:34:45.163 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeOne.processBody()
+ Parsed: 55 links
+01:35:04.108 INFO: Services.DIResolver.<init>()
+ Application started...
+01:35:04.682 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:35:05.578 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+01:35:41.975 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+01:35:41.981 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+01:37:00.151 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeOne.processBody()
+ Parsed: 50 links
+01:55:02.835 INFO: Services.DIResolver.<init>()
+ Application started...
+01:55:03.308 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+01:55:04.074 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:00:49.750 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 0 links
+02:00:58.010 INFO: Services.DIResolver.<init>()
+ Application started...
+02:00:58.575 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:00:59.345 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:01:28.078 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 0 links
+02:01:38.267 INFO: Services.DIResolver.<init>()
+ Application started...
+02:01:38.770 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:01:39.471 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:02:17.088 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+02:02:17.094 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:05:30.529 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 47 links
+02:09:33.428 INFO: Services.DIResolver.<init>()
+ Application started...
+02:09:33.913 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:09:34.600 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:09:57.299 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 46 links
+02:15:08.404 INFO: Services.DIResolver.<init>()
+ Application started...
+02:15:08.901 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:15:09.666 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:15:26.708 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 58 links
+02:19:39.615 INFO: Services.DIResolver.<init>()
+ Application started...
+02:19:40.091 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:19:40.835 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:20:13.512 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+02:20:13.518 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:20:35.267 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 50 links
+02:20:42.504 INFO: Services.DIResolver.<init>()
+ Application started...
+02:20:42.997 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:20:43.710 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:21:16.838 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 52 links
+02:21:23.676 INFO: Services.DIResolver.<init>()
+ Application started...
+02:21:24.160 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:21:24.839 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:21:28.316 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+02:21:28.323 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:21:48.018 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 50 links
+02:21:55.063 INFO: Services.DIResolver.<init>()
+ Application started...
+02:21:55.593 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:21:56.270 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:22:43.631 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 50 links
+02:22:48.619 INFO: Services.DIResolver.<init>()
+ Application started...
+02:22:49.100 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:22:49.865 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:23:13.501 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+02:23:13.507 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:23:32.209 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 45 links
+02:23:39.861 INFO: Services.DIResolver.<init>()
+ Application started...
+02:23:40.367 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:23:41.067 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:24:04.795 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+02:24:04.801 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:24:31.610 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 45 links
+02:26:35.765 INFO: Services.DIResolver.<init>()
+ Application started...
+02:26:36.299 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+02:26:37.111 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 9 record
+02:26:44.188 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.google.com/search?q=fine+art+Woodford+Green+England&pws=0&gl=us&gws_rd=cr&num=150
+02:26:44.196 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 502 Bad Gateway"
+02:28:20.832 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 55 links
+02:29:10.393 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green
+02:29:10.396 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:29:16.163 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green
+02:29:16.166 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:29:22.028 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green
+02:29:22.030 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.1 407 Proxy Authentication Required"
+02:29:28.007 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green
+02:29:28.010 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:29:34.070 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.indeed.co.uk/Art-Technician-jobs-in-Woodford-Green
+02:29:34.073 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:29:40.884 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://en.wikipedia.org/wiki/Woodford,_London
+02:29:40.886 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:29:52.416 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://en.wikipedia.org/wiki/Woodford_Green
+02:29:52.418 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 407 Proxy Authentication Required"
+02:30:00.379 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html
+02:30:00.381 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 407 Proxy Authentication Required"
+02:30:26.730 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://woodford-green.cylex-uk.co.uk/company/hoyland---mathews-fine-art-limited-24524720.html
+02:30:26.732 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:30:36.956 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://theartssociety.org/woodfordgreen
+02:30:36.961 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ 
+02:30:47.867 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://thenewschoolart.org/art-courses/art-courses-woodford-green/
+02:30:47.869 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Filtered"
+02:30:56.992 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.hotels.com/de553424/hotels-woodford-green-united-kingdom/
+02:30:56.994 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:32:21.580 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.firsttutors.com/uk/music/town/woodford-green/piano-teachers.php
+02:32:21.582 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.1 407 Proxy Authentication Required"
+02:32:30.430 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.firsttutors.com/uk/music/town/woodford-green-teachers.php
+02:32:30.432 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unrecognized SSL message, plaintext connection?
+02:32:36.637 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.firsttutors.com/uk/music/town/woodford-green-teachers.php
+02:32:36.640 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.1 403 Forbidden"
+02:32:48.470 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.firsttutors.com/uk/music/town/woodford-green/violin-teachers.php
+02:32:48.472 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Filtered"
+02:33:18.267 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.diamondresorts.com/destinations/property/Woodford-Bridge-Country-Club
+02:33:18.268 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:33:25.797 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.diamondresorts.com/destinations/property/Woodford-Bridge-Country-Club
+02:33:25.798 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 502 Bad Gateway"
+02:33:42.448 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.diamondresorts.com/destinations/property/Woodford-Bridge-Country-Club
+02:33:42.450 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:33:51.374 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.diamondresorts.com/destinations/property/Woodford-Bridge-Country-Club
+02:33:51.376 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 502 Bad Gateway"
+02:33:57.749 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.diamondresorts.com/destinations/property/Woodford-Bridge-Country-Club
+02:33:57.751 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:34:04.758 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.bathspa.ac.uk/courses/pg-fine-art/
+02:34:04.760 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.1 403 Forbidden"
+02:34:13.758 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.bathspa.ac.uk/courses/pg-fine-art/
+02:34:13.761 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection reset
+02:34:20.171 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.bathspa.ac.uk/courses/pg-fine-art/
+02:34:20.173 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.1 403 Forbidden"
+02:34:26.530 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.bathspa.ac.uk/courses/pg-fine-art/
+02:34:26.532 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:34:52.867 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.bathspa.ac.uk/courses/pg-fine-art/
+02:34:52.868 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:35:19.549 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.totalgiving.co.uk/charity-directory/eastern/essex/woodford-green
+02:35:19.551 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection reset
+02:35:26.106 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.totalgiving.co.uk/charity-directory/eastern/essex/woodford-green
+02:35:26.107 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:35:52.462 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.totalgiving.co.uk/charity-directory/eastern/essex/woodford-green
+02:35:52.463 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:35:58.518 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.totalgiving.co.uk/charity-directory/eastern/essex/woodford-green
+02:35:58.520 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:36:04.076 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.totalgiving.co.uk/charity-directory/eastern/essex/woodford-green
+02:36:04.078 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unrecognized SSL message, plaintext connection?
+02:36:10.204 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.amazon.com/Coffee-House-Woodford-1890-1920-Appendix/dp/0954231414
+02:36:10.206 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 407 Proxy Authentication Required"
+02:36:36.549 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.amazon.com/Coffee-House-Woodford-1890-1920-Appendix/dp/0954231414
+02:36:36.551 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:37:04.875 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.kickstarter.com/discover/places/woodford-london-gb
+02:37:04.876 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection timed out: connect
+02:37:10.843 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.kickstarter.com/discover/places/woodford-london-gb
+02:37:10.845 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+02:37:16.929 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.kickstarter.com/discover/places/woodford-london-gb
+02:37:16.930 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.1 503 Service Unavailable"
+02:38:23.290 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.chelmerfineart.com/
+02:38:23.291 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Connection reset
+02:38:29.631 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.chelmerfineart.com/
+02:38:29.632 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Unable to tunnel through proxy. Proxy returns "HTTP/1.0 403 Forbidden"
+02:38:35.090 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.chelmerfineart.com/
+02:38:35.092 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ 
+02:39:03.497 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Cannot get page source, waiting for next attempt: https://www.starofservice.co.uk/dir/london/redbridge/woodford-green/fine-art-photography
+02:39:03.498 ERROR: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target

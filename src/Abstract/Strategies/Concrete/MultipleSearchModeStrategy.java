@@ -1,7 +1,7 @@
 package Abstract.Strategies.Concrete;
 
 import Abstract.Engines.WebUrlEngine;
-import Abstract.Factories.Concrete.RegularResultsFactory;
+import Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsFactory;
 import Abstract.OutputModels.IOutputModel;
 import Abstract.SearchResultModels.GoogleSearchResultItem;
 import Abstract.SearchResultModels.RegularSearchResultItem;
@@ -13,9 +13,6 @@ import Services.*;
 import Utils.StrUtils;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleSearchModeStrategy implements ISearchModeStrategy {
