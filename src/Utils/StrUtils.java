@@ -37,6 +37,14 @@ public class StrUtils {
         return result;
     }
 
+    public static String normalizeGoogleLink(String link) {
+        if (link.startsWith("http://") || link.startsWith("https://")) {
+            return link;
+        } else {
+            return "http://www.google.com"+link;
+        }
+    }
+
     public static boolean isPlaceholderHasSubstituteTerms(String placeholder) {
         String pattern = "\\$\\{column[A-z]\\}";
         Pattern r = Pattern.compile(pattern);
@@ -80,21 +88,6 @@ public class StrUtils {
             link = link.substring(0, link.indexOf("&"));
         }
         return link;
-    }
-
-    public static String normalizeLink(String link) {
-        if (StringUtils.isEmpty(link)) {
-            return "";
-        }
-        String result;
-        if (link.startsWith("http://")) {
-            result = link;
-        } else if (link.startsWith("www")) {
-            result = "http://" + link;
-        } else {
-            result = "http://www." + link;
-        }
-        return result;
     }
 
     public static String createQueryURL(InputCsvModelItem csvItem, String inputPlaceHolder) {

@@ -1,9 +1,18 @@
-18:22:47 INFO: Services.DIResolver.<init>()
+22:09:34 INFO: Services.DIResolver.<init>()
  Application started...
-18:22:47 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+22:09:35 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
  Application started
-18:22:48 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 8 record
-18:23:04 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
- Response  https://www.google.com/search?q=fine+art+Worcester+England&pws=0&gl=us&gws_rd=cr&num=15
-
+22:09:42 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed
+22:10:25 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+22:10:32 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+22:10:32 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
+ Finished
+22:13:33 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+22:13:35 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+22:13:43 INFO: Abstract.Commands.RunButtonActionCommand.lambda$actionPerformed$0()
+ Finished

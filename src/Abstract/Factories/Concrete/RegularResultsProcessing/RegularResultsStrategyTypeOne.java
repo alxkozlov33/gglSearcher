@@ -1,6 +1,7 @@
 package Abstract.Factories.Concrete.RegularResultsProcessing;
 
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
+import Utils.StrUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.tinylog.Logger;
@@ -20,17 +21,9 @@ public class RegularResultsStrategyTypeOne implements IRegularSearchItemsProcess
             String link = div.select("h3.r > a").attr("href").replaceFirst("/*$", "");
             String description = div.select("div.s").select("span.st").text();
 
-            RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, normalizeLink(link), description);
+            RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, StrUtils.normalizeGoogleLink(link), description);
             results.add(regularSearchResultItem);
         }
         return results;
-    }
-
-    private String normalizeLink(String link) {
-        if (link.startsWith("http://") || link.startsWith("https://")) {
-            return link;
-        } else {
-            return "http://www.google.com"+link;
-        }
     }
 }

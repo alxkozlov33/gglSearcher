@@ -6,7 +6,6 @@ import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.ListSearchResultItem;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tinylog.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class BussinesResultsStrategyTypeOne implements IBusinessResultItemsProce
         Element mapsBody = webUrlEngine.getWebSourceData(new RequestData(linkToMapsList));
 
         GoogleMapsResultsProcessor googleMapsResultsProcessor = new GoogleMapsResultsProcessor();
-        googleMapsResultsProcessor.processBody(mapsBody);
+        List bussinessList = googleMapsResultsProcessor.processBody(mapsBody);
 
 
         return results;

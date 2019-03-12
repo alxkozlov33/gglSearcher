@@ -1,0 +1,9 @@
+22:26:41 INFO: Services.DIResolver.<init>()
+ Application started...
+22:26:42 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+22:26:53 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 1 record
+22:27:14 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Response  https://www.google.com/search?q=fine+art+Yeovil+England&pws=0&gl=us&gws_rd=cr&num=15
+

@@ -23,7 +23,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         SettingsService settingsService = diResolver.getSettingsService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
-        SearchService searchService = new SearchService();
+        SearchService searchService = diResolver.getSearchService();
 
         propertiesService.saveWorkState(true);
         propertiesService.saveInputFilePath(inputDataService.getInputDataFile());
@@ -34,7 +34,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
 
         Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
-            searchService.StartWork();
+            searchService.StartWork(diResolver);
             guiService.changeApplicationStateToWork(false);
             Logger.tag("SYSTEM").info("Finished");
             guiService.setStatusText("Finished...");

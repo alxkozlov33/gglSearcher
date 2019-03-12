@@ -1,0 +1,12 @@
+22:20:23 INFO: Services.DIResolver.<init>()
+ Application started...
+22:20:23 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+22:20:36 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 0 record
+22:21:05 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Response  https://www.google.com/search?q=fine+art+York+England&pws=0&gl=us&gws_rd=cr&num=15
+
+22:21:31 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Response  http://www.google.com
+

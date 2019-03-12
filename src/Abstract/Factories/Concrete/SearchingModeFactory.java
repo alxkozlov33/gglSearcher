@@ -1,11 +1,14 @@
 package Abstract.Factories.Concrete;
-
 import Abstract.Strategies.ISearchModeStrategy;
 import Abstract.Strategies.Concrete.MultipleSearchModeStrategy;
 import Abstract.Strategies.Concrete.SingleSearchModeStrategy;
 import Utils.StrUtils;
 
 public class SearchingModeFactory {
+
+    public SearchingModeFactory() {
+    }
+
     public ISearchModeStrategy createSearchModeStrategy(String placeholderText) {
         ISearchModeStrategy searchModeStrategy = null;
 

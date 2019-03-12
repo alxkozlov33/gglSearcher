@@ -24,7 +24,7 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         OutputDataService outputDataService = diResolver.getOutputDataService();
         InputDataService inputDataService = diResolver.getInputDataService();
         SettingsService settingsService = diResolver.getSettingsService();
-        SearchService searchService = new SearchService();
+        SearchService searchService = diResolver.getSearchService();
 
         inputDataService.initInputDataFile(propertiesService.getInputFile());
         outputDataService.setOutputFile(propertiesService.getOutputFolderPath());
@@ -40,7 +40,7 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
                && DirUtils.isFileOk(inputDataService.getInputDataFile(), "csv")
                && DirUtils.isDirOk(outputDataService.getOutputFolder())
                && DirUtils.isFileOk(settingsService.getSettingsDataFile(), "txt")) {
-            searchService.StartWork();
+            searchService.StartWork(diResolver);
         }
     }
 }

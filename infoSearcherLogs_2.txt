@@ -1,0 +1,6 @@
+22:19:37 INFO: Services.DIResolver.<init>()
+ Application started...
+22:19:37 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+22:20:03 INFO: Abstract.Commands.SelectInputDataFileActionCommand.actionPerformed()
+ Select input data file button action performed

@@ -22,7 +22,7 @@ public class ClearSettingsFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Settings data file removed");
         SettingsService settingsService = diResolver.getSettingsService();
         GuiService guiService = diResolver.getGuiService();
-        PropertiesService propertiesService = new PropertiesService();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
 
         settingsService.clearSettingsFile();
         guiService.clearSettingsFilePath();
