@@ -1,0 +1,9 @@
+18:38:01 INFO: Services.DIResolver.<init>()
+ Application started...
+18:38:02 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+18:38:02 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 8 record
+18:38:07 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Response  https://www.google.com/search?q=fine+art+Worcester+England&pws=0&gl=us&gws_rd=cr&num=15
+

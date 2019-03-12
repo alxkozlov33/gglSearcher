@@ -1,5 +1,8 @@
 package Abstract.Factories.Concrete.BusinessListResultsProcessing;
 
+import Abstract.Engines.WebUrlEngine;
+import Abstract.Factories.Concrete.BusinessListResultsProcessing.GoogleMapsResultsProcessing.GoogleMapsResultsProcessor;
+import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.ListSearchResultItem;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -15,16 +18,15 @@ public class BussinesResultsStrategyTypeOne implements IBusinessResultItemsProce
 
         ArrayList<ListSearchResultItem> results = new ArrayList<>();
         Elements items = body.select("#ires");
-        Elements resultDivs = items.select("div[class=g]:not(:contains(Images for))");
-        Logger.tag("SYSTEM").info("Parsed: " + resultDivs.size() + " links");
-        for (Element div : resultDivs) {
-            String mainHeader = div.select("h3.r > a").text();
-            String link = div.select("h3.r > a").attr("href").replaceFirst("/*$", "");
-            String description = div.select("div.s").select("span.st").text();
+        String linkToMapsList = items.select("a[href^='https://maps.google.com/maps?']").attr("href");
 
-            ListSearchResultItem regularSearchResultItem = new ListSearchResultItem(mainHeader, "http://www.google.com" + link, description);
-            results.add(regularSearchResultItem);
-        }
+        WebUrlEngine webUrlEngine = new WebUrlEngine();
+        Element mapsBody = webUrlEngine.getWebSourceData(new RequestData(linkToMapsList));
+
+        GoogleMapsResultsProcessor googleMapsResultsProcessor = new GoogleMapsResultsProcessor();
+        googleMapsResultsProcessor.processBody(mapsBody);
+
+
         return results;
     }
 }

@@ -1,6 +1,7 @@
 package Abstract.Engines;
 
 import Abstract.Models.RequestData;
+import Services.UserAgentsRotatorService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -9,10 +10,12 @@ import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
     private final ProxyEngine proxyEngine;
+    private final UserAgentsRotatorService userAgentsRotatorService;
     private final int attempts = 10;
 
     public WebUrlEngine() {
         this.proxyEngine = new ProxyEngine();
+        this.userAgentsRotatorService = new UserAgentsRotatorService();
     }
 
     public Element getWebSourceData(RequestData requestData) {
@@ -20,10 +23,11 @@ public class WebUrlEngine extends WebEngine {
             try {
                 Connection.Response response = makeRequest(requestData);
                 if (isValidResponse(response)) {
+                    Logger.tag("SYSTEM").info("Response  " + requestData.requestURL + "\n");
                     return response.parse();
                 }
             } catch (Exception ex) {
-                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL + "\n" + ex.getMessage());
+                Logger.tag("SYSTEM").error(ex,"Cannot get page source, waiting for next attempt: " + requestData.requestURL + "\n");
             }
             isThreadSleep(i);
         }
@@ -44,7 +48,7 @@ public class WebUrlEngine extends WebEngine {
     protected Connection.Response makeRequest(RequestData requestData) throws IOException {
         return Jsoup.connect(requestData.requestURL)
                 .followRedirects(true)
-                .userAgent(requestData.userAgent)
+                .userAgent(userAgentsRotatorService.getRandomUserAgent())
                 .proxy(proxyEngine.getNewProxy())
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)

@@ -1,16 +1,9 @@
-22:56:52 INFO: Services.DIResolver.<init>()
+18:22:47 INFO: Services.DIResolver.<init>()
  Application started...
-22:56:53 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+18:22:47 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
  Application started
-22:56:54 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 10 record
-22:56:57 INFO: Abstract.Commands.ClearInputDataFileActionCommand.actionPerformed()
- Input data file removed
-22:57:00 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
- Run button action performed
-22:57:00 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
- Continue from: 10 record
-22:57:10 INFO: Abstract.Commands.StopButtonActionCommand.actionPerformed()
- Stop button action performed
-22:57:10 INFO: Abstract.Commands.StopButtonActionCommand.actionPerformed()
- Stopping...
+18:22:48 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 8 record
+18:23:04 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Response  https://www.google.com/search?q=fine+art+Worcester+England&pws=0&gl=us&gws_rd=cr&num=15
+

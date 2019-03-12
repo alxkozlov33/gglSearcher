@@ -2,6 +2,7 @@ package Abstract.Engines;
 
 import ApiKeys.Keys;
 import Abstract.Models.RequestData;
+import Services.UserAgentsRotatorService;
 import com.jcabi.aspects.RetryOnFailure;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
@@ -16,11 +17,12 @@ public class ProxyEngine extends WebEngine {
     private final int requestDelay = 5000;
     private final int attempts = 50;
 
-    Proxy getNewProxy() {
+    public ProxyEngine() {
+    }
 
+    Proxy getNewProxy() {
         RequestData requestData = new RequestData(
-                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt&country=US,CA,UK",
-                "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)");
+                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt&country=US,CA,UK");
         for (int i = 1; i <= attempts; i++) {
             try {
                 Connection.Response response = makeRequest(requestData);
@@ -53,7 +55,7 @@ public class ProxyEngine extends WebEngine {
     public Connection.Response makeRequest(RequestData requestData) throws IOException {
         return Jsoup.connect(requestData.requestURL)
                 .followRedirects(true)
-                .userAgent(requestData.userAgent)
+                .userAgent(UserAgentsRotatorService.getBotUserAgent())
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
                 .ignoreContentType(true)

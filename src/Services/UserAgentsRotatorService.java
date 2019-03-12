@@ -12,6 +12,10 @@ public class UserAgentsRotatorService {
         return givenList.get(rand.nextInt(givenList.size()));
     }
 
+    public static String getBotUserAgent() {
+        return "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)";
+    }
+
     public List<String> initList() {
         List<String> givenList = new ArrayList<>();
 

@@ -21,8 +21,7 @@ import java.util.List;
 public class SearchService {
 
     public WebPageObject getWebSitePageSource(GoogleSearchResultItem item) {
-        UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
-        RequestData requestData = new RequestData(item.getLink(), userAgentsRotatorService.getRandomUserAgent());
+        RequestData requestData = new RequestData(item.getLink());
         Element element = new WebUrlEngine().getWebSourceData(requestData);
         return parseSourceData(element);
     }
