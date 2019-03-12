@@ -1,6 +1,6 @@
 package Abstract.Factories;
 
-import Abstract.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import org.jsoup.nodes.Element;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package Abstract.Factories.Concrete.RegularResultsProcessing;
 
-import Abstract.SearchResultModels.RegularSearchResultItem;
-import org.apache.commons.lang.StringUtils;
+import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.tinylog.Logger;

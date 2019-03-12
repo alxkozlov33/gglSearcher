@@ -1,10 +1,12 @@
 package Abstract.Strategies.Concrete;
 
 import Abstract.Engines.WebUrlEngine;
-import Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsFactory;
+import Abstract.Factories.Concrete.BusinessListResultsFactory;
+import Abstract.Factories.Concrete.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.SearchResultModels.GoogleSearchResultItem;
-import Abstract.SearchResultModels.RegularSearchResultItem;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.ListSearchResultItem;
+import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Strategies.ISearchModeStrategy;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
@@ -13,6 +15,8 @@ import Services.*;
 import Utils.StrUtils;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultipleSearchModeStrategy implements ISearchModeStrategy {
@@ -52,16 +56,22 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
             }
 
             RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
+            BusinessListResultsFactory businessListResultsFactory = new BusinessListResultsFactory();
             //TODO: Business list implementation there:
             List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.processBody(body);
+            ArrayList<ListSearchResultItem> listSearchResultItems = businessListResultsFactory.processBody(body);
 
             List filteredRegularSearchResultItems = searchService.filterGoogleResultData(regularSearchResultItems);
+            List filteredListSearchResultItems = searchService.filterGoogleResultData(listSearchResultItems);
 
             ISearchResultsConvertStrategy<GoogleSearchResultItem, IOutputModel> convertStrategy
                     = new ConvertSearchResultsWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
 
-            List items = convertStrategy.convertResultData(filteredRegularSearchResultItems);
-            outputDataService.saveResultCsvItems(items);
+            List regularItems = convertStrategy.convertResultData(filteredRegularSearchResultItems);
+            List listItems = convertStrategy.convertResultData(filteredListSearchResultItems);
+
+            outputDataService.saveResultCsvItems(regularItems);
+            outputDataService.saveResultCsvItems(listItems);
         }
     }
 

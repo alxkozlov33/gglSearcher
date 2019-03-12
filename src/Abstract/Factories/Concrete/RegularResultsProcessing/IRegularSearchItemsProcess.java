@@ -1,6 +1,6 @@
 package Abstract.Factories.Concrete.RegularResultsProcessing;
 
-import Abstract.SearchResultModels.RegularSearchResultItem;
+import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import org.jsoup.nodes.Element;
 
 import java.util.List;

@@ -3,8 +3,8 @@ package Abstract.Strategies.Concrete;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
-import Abstract.SearchResultModels.GoogleSearchResultItem;
-import Abstract.SearchResultModels.WebPageObject;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
 import Services.SearchService;
@@ -19,7 +19,7 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
     private String city;
     private String country;
 
-    public ConvertSearchResultsWithGeoDataStrategy(String city, String country) {
+    ConvertSearchResultsWithGeoDataStrategy(String city, String country) {
         this.city = city;
         this.country = country;
     }

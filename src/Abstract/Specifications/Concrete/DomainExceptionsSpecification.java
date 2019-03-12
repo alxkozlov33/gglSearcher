@@ -1,6 +1,6 @@
 package Abstract.Specifications.Concrete;
 
-import Abstract.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Specifications.AbstractSpecification;
 import Utils.StrUtils;
 import java.util.ArrayList;

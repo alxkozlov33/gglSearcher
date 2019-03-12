@@ -2,8 +2,8 @@ package Services;
 
 import Abstract.Engines.WebUrlEngine;
 import Abstract.Factories.Concrete.SearchingModeFactory;
-import Abstract.SearchResultModels.GoogleSearchResultItem;
-import Abstract.SearchResultModels.WebPageObject;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.AbstractSpecification;
 import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;

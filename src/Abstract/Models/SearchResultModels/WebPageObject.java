@@ -1,4 +1,4 @@
-package Abstract.SearchResultModels;
+package Abstract.Models.SearchResultModels;
 
 public class WebPageObject {
 

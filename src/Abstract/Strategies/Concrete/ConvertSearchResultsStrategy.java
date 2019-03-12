@@ -1,7 +1,7 @@
 package Abstract.Strategies.Concrete;
 
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
-import Abstract.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
 
 import java.util.List;
