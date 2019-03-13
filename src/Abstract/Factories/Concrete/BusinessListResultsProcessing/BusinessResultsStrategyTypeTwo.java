@@ -11,20 +11,21 @@ public class BusinessResultsStrategyTypeTwo implements IBusinessResultItemsProce
     @Override
     public List<BusinessListSearchResultItem> processBody(Element body) {
         ArrayList<BusinessListSearchResultItem> results = new ArrayList<>();
-
         Elements items = body.select("#rso");
-        Element listContainer = items.select("h2:contains(Local Results)").first().parent();
+        Elements container = items.select("h2:contains(Local Results)");
+        if (container.size() > 0) {
+            Element listContainer = container.first().parent();
+            Elements namesElements = listContainer.select("div[aria-level=3][role=heading]");
+            Elements addressesElements = listContainer.select(".rllt__details").select("span:not([class]):not([style]):not(:contains(Their website mentions))");
 
-        Elements namesElements = listContainer.select("div[aria-level=3][role=heading]");
-        Elements addressesElements = listContainer.select(".rllt__details").select("span:not([class]):not([style]):not(:contains(Their website mentions))");
-
-        for (int i = 0; i < namesElements.size(); i++) {
-            String mainHeader = namesElements.get(i).text();
-            String city = addressesElements.get(i).text().split(",")[0];
-            String country = addressesElements.get(i).text().split(",")[1];
-            String description = "Item scraped from business list";
-            BusinessListSearchResultItem regularSearchResultItem = new BusinessListSearchResultItem(mainHeader, "", description, city, country);
-            results.add(regularSearchResultItem);
+            for (int i = 0; i < namesElements.size(); i++) {
+                String mainHeader = namesElements.get(i).text();
+                String city = addressesElements.get(i).text().split(",")[0];
+                String country = addressesElements.get(i).text().split(",")[1];
+                String description = "Item scraped from business list";
+                BusinessListSearchResultItem regularSearchResultItem = new BusinessListSearchResultItem(mainHeader, "", description, city, country);
+                results.add(regularSearchResultItem);
+            }
         }
         return results;
     }
