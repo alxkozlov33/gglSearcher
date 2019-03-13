@@ -21,8 +21,9 @@ public class BusinessResultsStrategyTypeTwo implements IBusinessResultItemsProce
         for (int i = 0; i < namesElements.size(); i++) {
             String mainHeader = namesElements.get(i).text();
             String city = addressesElements.get(i).text().split(",")[0];
+            String country = addressesElements.get(i).text().split(",")[1];
             String description = "Item scraped from business list";
-            BusinessListSearchResultItem regularSearchResultItem = new BusinessListSearchResultItem(mainHeader, "", description, city);
+            BusinessListSearchResultItem regularSearchResultItem = new BusinessListSearchResultItem(mainHeader, "", description, city, country);
             results.add(regularSearchResultItem);
         }
         return results;
