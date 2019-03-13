@@ -36,15 +36,15 @@ public class InputDataService {
         return inputCsvModelItems;
     }
 
-    public void initInputDataFile(File filePath) {
+    public void initInputFile(File filePath) {
         if (DirUtils.isFileOk(filePath, "csv")) {
             inputDataFile = filePath;
         }
     }
 
-    public void initCSVItems(File inputFilePath) {
-        initInputDataFile(inputFilePath);
-        if(!DirUtils.isFileOk(inputFilePath, "csv")) {
+    public void initInputFileData() {
+        initInputFile(inputDataFile);
+        if(!DirUtils.isFileOk(inputDataFile, "csv")) {
             return;
         }
         try {

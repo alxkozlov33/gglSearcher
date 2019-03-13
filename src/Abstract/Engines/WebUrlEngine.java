@@ -2,6 +2,8 @@ package Abstract.Engines;
 
 import Abstract.Models.RequestData;
 import Services.UserAgentsRotatorService;
+import com.sun.media.sound.InvalidFormatException;
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -23,11 +25,11 @@ public class WebUrlEngine extends WebEngine {
             try {
                 Connection.Response response = makeRequest(requestData);
                 if (isValidResponse(response)) {
-                    Logger.tag("SYSTEM").info("Response  " + requestData.requestURL + "\n");
+                    Logger.tag("SYSTEM").info("Response OK from: " + requestData.requestURL);
                     return response.parse();
                 }
             } catch (Exception ex) {
-                Logger.tag("SYSTEM").error(ex,"Cannot get page source, waiting for next attempt: " + requestData.requestURL + "\n");
+                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL +" Cause: " + ex.getMessage());
             }
             isThreadSleep(i);
         }

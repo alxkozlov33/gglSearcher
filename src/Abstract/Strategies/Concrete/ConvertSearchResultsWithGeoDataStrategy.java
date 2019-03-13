@@ -6,6 +6,7 @@ import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
@@ -17,11 +18,12 @@ import org.jsoup.nodes.Element;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsConvertStrategy<GoogleSearchResultItem, IOutputModel> {
+
+//TODO: remove getting additional page source data
+public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> {
 
     private String city;
     private String country;
-
     private final DIResolver diResolver;
 
     ConvertSearchResultsWithGeoDataStrategy(DIResolver diResolver, String city, String country) {
@@ -31,11 +33,12 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
     }
 
     @Override
-    public List<IOutputModel> convertResultData(List<GoogleSearchResultItem> searchItems) {
+    public List<IOutputModel> convertResultData(List<RegularSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
             return null;
         }
+
         SettingsService settingsService = diResolver.getSettingsService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
 

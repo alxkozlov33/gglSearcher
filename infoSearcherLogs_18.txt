@@ -1,0 +1,25 @@
+15:02:57 INFO: Services.DIResolver.<init>()
+ Application started...
+
+15:02:57 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+
+15:02:58 INFO: Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData()
+ Continue from: 1 record
+
+15:03:29 INFO: Abstract.Engines.WebUrlEngine.getWebSourceData()
+ Response  https://www.google.com/search?q=fine+art+Yeovil+England&pws=0&gl=us&gws_rd=cr&num=15
+
+15:03:30 INFO: Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo.processBody()
+ Parsed: 0 links
+
+15:03:30 ERROR: Services.SearchService.StartWork()
+ Application stopped: java.lang.NullPointerException
+	at Abstract.Factories.Concrete.BusinessListResultsProcessing.BusinessResultsStrategyTypeTwo.processBody(BusinessResultsStrategyTypeTwo.java:16)
+	at Abstract.Factories.Concrete.BusinessListResultsFactory.processBody(BusinessListResultsFactory.java:21)
+	at Abstract.Strategies.Concrete.MultipleSearchModeStrategy.processData(MultipleSearchModeStrategy.java:69)
+	at Services.SearchService.StartWork(SearchService.java:25)
+	at Abstract.Commands.ApplicationStartedActionCommand.actionPerformed(ApplicationStartedActionCommand.java:58)
+	at Main.start(Main.java:37)
+	at Main.main(Main.java:12)
+

@@ -4,6 +4,7 @@ import Services.*;
 import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
@@ -26,15 +27,29 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         SettingsService settingsService = diResolver.getSettingsService();
         SearchService searchService = diResolver.getSearchService();
 
-        inputDataService.initInputDataFile(propertiesService.getInputFile());
-        outputDataService.setOutputFile(propertiesService.getOutputFolderPath());
-        outputDataService.createOutputFile(propertiesService.getPlaceHolder());
-        settingsService.initSettingsFile(propertiesService.getSettingsFilePath());
+        String placeholder = propertiesService.getPlaceHolder();
+        guiService.setPlaceholder(placeholder);
 
-        guiService.setInputFilePath(inputDataService.getInputDataFile());
-        guiService.setSettingsFilePath(settingsService.getSettingsDataFile());
-        guiService.setOutputFolder(outputDataService.getOutputFolder());
-        guiService.setPlaceholder(propertiesService.getPlaceHolder());
+        File inputFile = propertiesService.getInputFile();
+        if (DirUtils.isFileOk(inputFile, "csv")) {
+            inputDataService.initInputFile(inputFile);
+            inputDataService.initInputFileData();
+            guiService.setInputFilePath(inputFile);
+        }
+
+        File outputFolderPath = propertiesService.getOutputFolderPath();
+        if (DirUtils.isDirOk(outputFolderPath)) {
+            guiService.setOutputFolder(outputFolderPath);
+            outputDataService.setOutputFolder(outputFolderPath);
+            outputDataService.createOutputFile(placeholder);
+        }
+
+        File settingsFile = propertiesService.getSettingsFilePath();
+        if (DirUtils.isFileOk(settingsFile, "txt")) {
+            guiService.setSettingsFilePath(settingsFile);
+            settingsService.initSettingsFile(settingsFile);
+            settingsService.initSettingsFileData();
+        }
 
         if (propertiesService.getWorkState()
                && DirUtils.isFileOk(inputDataService.getInputDataFile(), "csv")

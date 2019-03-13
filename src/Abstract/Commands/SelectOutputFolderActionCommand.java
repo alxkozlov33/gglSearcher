@@ -20,7 +20,7 @@ public class SelectOutputFolderActionCommand extends AbstractCommandAction {
 
         File outputFolder = DirUtils.selectFolderDialog(guiService.getMainFrame(), "Select output folder");
         if (DirUtils.isDirOk(outputFolder)) {
-            outputDataService.setOutputFile(outputFolder);
+            outputDataService.setOutputFolder(outputFolder);
             propertiesService.saveOutputFolderPath(outputFolder);
             guiService.setOutputFolder(outputDataService.getOutputFolder());
         }

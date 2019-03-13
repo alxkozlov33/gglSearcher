@@ -1,0 +1,9 @@
+14:39:00 INFO: Services.DIResolver.<init>()
+ Application started...
+
+14:39:00 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+
+14:39:07 INFO: Abstract.Commands.SelectSettingsFileActionCommand.actionPerformed()
+ Select input settings file button action performed
+

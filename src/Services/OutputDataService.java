@@ -12,8 +12,8 @@ import java.util.List;
 
 public class OutputDataService {
 
-    private static File outputFolder;
-    private static File outputFile;
+    private File outputFolder;
+    private File outputFile;
 
     public OutputDataService() {
     }
@@ -41,7 +41,7 @@ public class OutputDataService {
         return outputFolder;
     }
 
-    public void setOutputFile(File outputFolder) {
+    public void setOutputFolder(File outputFolder) {
         if (DirUtils.isDirOk(outputFolder)) {
             this.outputFolder = outputFolder;
 

@@ -3,7 +3,6 @@ package Services;
 import Utils.DirUtils;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
-
 import java.io.*;
 import java.util.Properties;
 
@@ -31,13 +30,13 @@ public class PropertiesService {
             properties.setProperty(propertyName, value);
             properties.store(output, null);
         } catch (IOException io) {
-            System.out.println(io.getMessage());
+            Logger.tag("SYSTEM").error(io);
         } finally {
             if (output != null) {
                 try {
                     output.close();
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
+                    Logger.tag("SYSTEM").error(e);
                 }
             }
         }
@@ -113,6 +112,7 @@ public class PropertiesService {
                 saveWorkState(false);
                 saveInputFilePath(null);
                 saveSettingsFilePath(null);
+                saveOutputFolderPath(null);
                 savePlaceHolder(null);
                 properties.store(output, null);
             }
