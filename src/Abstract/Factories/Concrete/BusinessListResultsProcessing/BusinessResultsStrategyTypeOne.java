@@ -34,24 +34,19 @@ public class BusinessResultsStrategyTypeOne implements IBusinessResultItemsProce
                 } else if (element.parent().childNodeSize() == 2) {
                     addressesElements.add(element.parent().child(1).child(1).select("span").first());
                 } else if (element.parent().childNodeSize() == 3) {
-                    if (element.parent().child(2).childNodeSize() == 1)
-                    {
-                        addressesElements.add(element.parent().child(2).child(1).select("span").first());
+                    if (element.parent().childNodeSize() == 4 || element.parent().childNodeSize() == 5) {
+                        addressesElements.add(element.parent().child(2).select("span").first());
+                    } else if (element.parent().childNodeSize() == 2) {
+                        addressesElements.add(element.parent().child(1).child(1).select("span").first());
+                    } else if (element.parent().childNodeSize() == 3) {
+                        if (element.parent().child(2).childNodeSize() == 1) {
+                            addressesElements.add(element.parent().child(2).child(1).select("span").first());
+                        } else if (element.parent().child(2).childNodeSize() == 2) {
+                            addressesElements.add(element.parent().child(2).child(1).select("span").first());
+                        } else if (element.parent().child(2).childNodeSize() == 3 || element.parent().child(2).childNodeSize() == 4) {
+                            addressesElements.add(element.parent().child(2).child(1).select("span").first());
+                        }
                     }
-                    else if (element.parent().child(2).childNodeSize() == 2)
-                    {
-                        addressesElements.add(element.parent().child(2).child(1).select("span").first());
-                    }
-                    else if (element.parent().child(2).childNodeSize() == 3 || element.parent().child(2).childNodeSize() == 4)
-                    {
-                        addressesElements.add(element.parent().child(2).child(1).select("span").first());
-                    }
-                    else {
-                        addressesElements.add(new Element("<div>No data</div>"));
-                    }
-                }
-                else {
-                    addressesElements.add(new Element("<div>No data</div>"));
                 }
             }
 
