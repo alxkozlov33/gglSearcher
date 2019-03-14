@@ -1,11 +1,10 @@
 package Abstract.Strategies.Concrete;
 
-import Abstract.Strategies.ISearchModeStrategy;
+import Abstract.Strategies.SearchModeStrategyBase;
 import Services.DIResolver;
 
-public class SingleSearchModeStrategy implements ISearchModeStrategy {
+public class SingleSearchModeStrategy extends SearchModeStrategyBase {
 
-    @Override
     public void processData(DIResolver diResolver) {
         System.out.println("test");
 //        Element body = getQueryBody(null);
@@ -18,7 +17,6 @@ public class SingleSearchModeStrategy implements ISearchModeStrategy {
 //        }
     }
 
-    @Override
     public void stopProcessing() {
 
     }

@@ -59,8 +59,8 @@ public class Bootstrapper extends JFrame {
         getOutputFolder().add(getClearOutputFolder());
 
         getMenubar().add(getInputData());
-        getMenubar().add(getSettingsFile());
         getMenubar().add(getOutputFolder());
+        getMenubar().add(getSettingsFile());
         setJMenuBar(getMenubar());
 
         runButton.setAction(new RunButtonActionCommand(diResolver));

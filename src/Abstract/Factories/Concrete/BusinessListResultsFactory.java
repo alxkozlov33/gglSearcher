@@ -6,18 +6,18 @@ import Abstract.Factories.Concrete.BusinessListResultsProcessing.IBusinessResult
 import Abstract.Factories.ISearchResultFactory;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.jsoup.nodes.Element;
-import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessListResultsFactory implements ISearchResultFactory {
 
     @Override
-    public ArrayList<BusinessListSearchResultItem> processBody(Element body) {
+    public List<BusinessListSearchResultItem> processBody(Element body) {
         IBusinessResultItemsProcess iBusinessResultItemsProcess;
         if (body.getElementsContainingText("All results").size() > 0) {
             iBusinessResultItemsProcess = new BusinessResultsStrategyTypeOne(); // "All results" page
         } else {
             iBusinessResultItemsProcess = new BusinessResultsStrategyTypeTwo();  //Regular simple page
         }
-        return new ArrayList<>(iBusinessResultItemsProcess.processBody(body));
+        return iBusinessResultItemsProcess.processBody(body);
     }
 }

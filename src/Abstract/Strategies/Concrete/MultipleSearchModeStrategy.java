@@ -4,32 +4,25 @@ import Abstract.Engines.WebUrlEngine;
 import Abstract.Factories.Concrete.BusinessListResultsFactory;
 import Abstract.Factories.Concrete.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
-import Abstract.Specifications.AbstractSpecification;
-import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
-import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
-import Abstract.Specifications.Concrete.URLExceptionsSpecification;
-import Abstract.Strategies.ISearchModeStrategy;
+import Abstract.Strategies.SearchModeStrategyBase;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
 import Services.*;
-import Utils.ResultsUtils;
 import Utils.StrUtils;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
-import java.util.ArrayList;
+
 import java.util.List;
 
-public class MultipleSearchModeStrategy implements ISearchModeStrategy {
-    private boolean isWorkFlag;
+public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
+    private boolean isWorkFlag;
     public MultipleSearchModeStrategy() {
     }
 
-    @Override
     public void processData(DIResolver diResolver) {
         GuiService guiService = new GuiService();
         InputDataService inputDataService = diResolver.getInputDataService();
@@ -38,7 +31,6 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
         WebUrlEngine webUrlEngine = new WebUrlEngine();
 
         List<InputCsvModelItem> inputCsvItems = inputDataService.getInputCsvModelItems();
-
         int index = propertiesService.getIndex();
 
         isWorkFlag = true;
@@ -51,7 +43,6 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
                 break;
             }
             propertiesService.saveIndex(i);
-
             String URL = StrUtils.createURL(inputCsvModelItem, guiService.getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL);
             Element body = webUrlEngine.getWebSourceData(requestData);
@@ -79,18 +70,6 @@ public class MultipleSearchModeStrategy implements ISearchModeStrategy {
         }
     }
 
-    private <T extends GoogleSearchResultItem> ArrayList filterGoogleResultData(List<T> googleSearchResults) {
-        SettingsService settingsService = new SettingsService();
-
-        AbstractSpecification<GoogleSearchResultItem> googleItemsSpec =
-                new DomainExceptionsSpecification(settingsService.getSearchSettings().domainExceptions)
-                        .and(new TopLevelDomainExceptionsSpecification(settingsService.getSearchSettings().topLevelDomainsExceptions))
-                        .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions));
-
-        return ResultsUtils.filterResults(googleSearchResults, googleItemsSpec);
-    }
-
-    @Override
     public void stopProcessing() {
         isWorkFlag = false;
     }

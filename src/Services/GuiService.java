@@ -59,10 +59,7 @@ public class GuiService {
         bootstrapper.getSearchingPlaceHolder().setEnabled(!isWorkState);
         bootstrapper.getSettingsFile().setEnabled(!isWorkState);
         bootstrapper.getInputData().setEnabled(!isWorkState);
-        //propertiesService.saveWorkState(isWorkState);
-        if (!isWorkState) {
-           // propertiesService.saveIndex(0);
-        }
+        bootstrapper.getOutputFolder().setEnabled(!isWorkState);
     }
 
     private String cutPath(String path) {

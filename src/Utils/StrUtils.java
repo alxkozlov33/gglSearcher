@@ -45,6 +45,20 @@ public class StrUtils {
         }
     }
 
+    public static String getCityFromAddress(String value) {
+        if (value.contains(",")){
+            return value.split(",")[0];
+        }
+        return value;
+    }
+
+    public static String getCountryFromAddress(String value) {
+        if (value.contains(",")){
+            return value.split(",")[1];
+        }
+        return value;
+    }
+
     public static boolean isPlaceholderHasSubstituteTerms(String placeholder) {
         String pattern = "\\$\\{column[A-z]\\}";
         Pattern r = Pattern.compile(pattern);

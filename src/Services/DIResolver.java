@@ -1,6 +1,6 @@
 package Services;
 
-
+import Abstract.Strategies.SearchModeStrategyBase;
 import org.tinylog.Logger;
 
 public class DIResolver {
@@ -12,6 +12,7 @@ public class DIResolver {
     private final InputDataService inputDataService;
     private final SearchService searchService;
     private final SettingsService settingsService;
+    private SearchModeStrategyBase currentWorker;
 
     public DIResolver(UserAgentsRotatorService userAgentsRotatorService,
                       PropertiesService propertiesService,
@@ -32,6 +33,10 @@ public class DIResolver {
         Logger.tag("SYSTEM").info("Application started...");
     }
 
+    public void setCurrentWorker(SearchModeStrategyBase currentWorker) { this.currentWorker = currentWorker; }
+
+    public SearchModeStrategyBase getCurrentWorker() { return this.currentWorker; }
+
     public UserAgentsRotatorService getUserAgentsRotatorService() {
         return userAgentsRotatorService;
     }
@@ -44,9 +49,7 @@ public class DIResolver {
         return guiService;
     }
 
-    public OutputDataService getOutputDataService() {
-        return outputDataService;
-    }
+    public OutputDataService getOutputDataService() { return outputDataService; }
 
     public InputDataService getInputDataService() {
         return inputDataService;

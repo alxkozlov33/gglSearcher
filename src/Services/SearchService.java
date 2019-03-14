@@ -1,7 +1,7 @@
 package Services;
 
 import Abstract.Factories.Concrete.SearchingModeFactory;
-import Abstract.Strategies.ISearchModeStrategy;
+import Abstract.Strategies.SearchModeStrategyBase;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
 
@@ -20,7 +20,7 @@ public class SearchService {
             settingsService.initSettingsFileData();
 
             SearchingModeFactory searchingModeFactory = new SearchingModeFactory();
-            ISearchModeStrategy searchModeStrategy =  searchingModeFactory.createSearchModeStrategy(placeHolderText);
+            SearchModeStrategyBase searchModeStrategy =  searchingModeFactory.createSearchModeStrategy(placeHolderText);
 
             searchModeStrategy.processData(diResolver);
 

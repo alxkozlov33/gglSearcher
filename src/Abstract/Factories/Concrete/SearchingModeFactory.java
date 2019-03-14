@@ -1,7 +1,7 @@
 package Abstract.Factories.Concrete;
-import Abstract.Strategies.ISearchModeStrategy;
 import Abstract.Strategies.Concrete.MultipleSearchModeStrategy;
 import Abstract.Strategies.Concrete.SingleSearchModeStrategy;
+import Abstract.Strategies.SearchModeStrategyBase;
 import Utils.StrUtils;
 
 public class SearchingModeFactory {
@@ -9,8 +9,8 @@ public class SearchingModeFactory {
     public SearchingModeFactory() {
     }
 
-    public ISearchModeStrategy createSearchModeStrategy(String placeholderText) {
-        ISearchModeStrategy searchModeStrategy = null;
+    public SearchModeStrategyBase createSearchModeStrategy(String placeholderText) {
+        SearchModeStrategyBase searchModeStrategy = null;
 
         if (StrUtils.isPlaceholderHasSubstituteTerms(placeholderText)) {
             searchModeStrategy = new MultipleSearchModeStrategy();

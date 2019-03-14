@@ -1,5 +1,7 @@
 package Abstract.Commands;
 
+import Abstract.Factories.Concrete.SearchingModeFactory;
+import Abstract.Strategies.SearchModeStrategyBase;
 import Services.*;
 import Utils.DirUtils;
 import org.tinylog.Logger;
@@ -51,11 +53,30 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
             settingsService.initSettingsFileData();
         }
 
+        guiService.setStatusText("Ready to start");
         if (propertiesService.getWorkState()
                && DirUtils.isFileOk(inputDataService.getInputDataFile(), "csv")
                && DirUtils.isDirOk(outputDataService.getOutputFolder())
                && DirUtils.isFileOk(settingsService.getSettingsDataFile(), "txt")) {
-            searchService.StartWork(diResolver);
+
+            Thread worker = new Thread(() -> {
+                guiService.changeApplicationStateToWork(true);
+                SearchingModeFactory searchingModeFactory = new SearchingModeFactory();
+                SearchModeStrategyBase searchModeStrategy =  searchingModeFactory.createSearchModeStrategy(placeholder);
+                try {
+                    diResolver.setCurrentWorker(searchModeStrategy);
+                    searchModeStrategy.processData(diResolver);
+                    Logger.tag("SYSTEM").info("Finished");
+                    guiService.setStatusText("Finished...");
+                    propertiesService.saveWorkState(false);
+                    propertiesService.saveIndex(0);
+                } catch (Exception ex) {
+                    Logger.tag("SYSTEM").error(ex, "Application stopped");
+                }
+                guiService.changeApplicationStateToWork(false);
+            });
+            worker.start();
         }
+
     }
 }
