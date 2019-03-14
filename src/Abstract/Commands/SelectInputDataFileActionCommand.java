@@ -2,6 +2,7 @@ package Abstract.Commands;
 
 import Services.DIResolver;
 import Services.GuiService;
+import Services.InputDataService;
 import Services.PropertiesService;
 import Utils.DirUtils;
 import org.tinylog.Logger;
@@ -17,11 +18,13 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Select input data file button action performed");
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
+        InputDataService inputDataService = diResolver.getInputDataService();
 
         File inputDataAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select CSV data file", "csv");
         if (DirUtils.isFileOk(inputDataAbsolutePath, "csv")) {
             guiService.setInputFilePath(inputDataAbsolutePath);
             propertiesService.saveInputFilePath(inputDataAbsolutePath);
+            inputDataService.clearInputDataFile();
         }
     }
 

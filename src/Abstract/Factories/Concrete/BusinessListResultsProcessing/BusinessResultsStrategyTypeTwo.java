@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Regular simple page
-public class BusinessResultsStrategyTypeTwo implements IBusinessResultItemsProcess {
+public class BusinessResultsStrategyTypeTwo extends BusinessResultItemsProcess {
     @Override
     public List<BusinessListSearchResultItem> processBody(Element body) {
         ArrayList<BusinessListSearchResultItem> results = new ArrayList<>();
@@ -25,25 +25,15 @@ public class BusinessResultsStrategyTypeTwo implements IBusinessResultItemsProce
         if (container.size() > 0) {
             Element listContainer = container.first().parent();
             Elements namesElements = listContainer.select("div[aria-level=3][role=heading]");
-            Elements addressesElements = new Elements();
-            for (Element element: namesElements) {
-                if (element.parent().childNodeSize() == 4 || element.parent().childNodeSize() == 5) {
-                    addressesElements.add(element.parent().child(2).select("span").first());
-                } else if (element.parent().childNodeSize() == 2) {
-                    addressesElements.add(element.parent().child(1).child(1).select("span").first());
-                } else if (element.parent().childNodeSize() == 3) {
-                    if (element.parent().child(2).childNodeSize() == 1) {
-                        addressesElements.add(element.parent().child(2).child(1).select("span").first());
-                    } else if (element.parent().child(2).childNodeSize() == 2) {
-                        addressesElements.add(element.parent().child(2).child(1).select("span").first());
-                    } else if (element.parent().child(2).childNodeSize() == 3 || element.parent().child(2).childNodeSize() == 4) {
-                        addressesElements.add(element.parent().child(2).child(1).select("span").first());
-                    }
-                }
-            }
+            Elements addressesElements = findBussinessGeoDataByNames(namesElements);
             for (int i = 0; i < namesElements.size(); i++) {
                 String mainHeader = namesElements.get(i).text();
-                String city = StrUtils.getCityFromAddress(addressesElements.get(i).text());
+                String city;
+                if (addressesElements.get(i) == null) {
+                    city = "";
+                } else {
+                    city = StrUtils.getCityFromAddress(addressesElements.get(i).text());
+                }
                 String country = StrUtils.getCountryFromAddress(addressesElements.get(i).text());
                 if (country.equalsIgnoreCase("") || city.equalsIgnoreCase("")) {
                     Logger.debug("Problem");

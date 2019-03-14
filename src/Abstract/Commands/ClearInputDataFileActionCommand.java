@@ -22,7 +22,6 @@ public class ClearInputDataFileActionCommand extends AbstractCommandAction {
         inputDataService.clearInputDataFile();
         guiService.clearInputDataFilePath();
         propertiesService.saveInputFilePath(null);
-
     }
 
     public ClearInputDataFileActionCommand(DIResolver diResolver) {

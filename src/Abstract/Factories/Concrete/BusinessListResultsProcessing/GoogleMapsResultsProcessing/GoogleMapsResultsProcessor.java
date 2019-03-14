@@ -1,13 +1,13 @@
 package Abstract.Factories.Concrete.BusinessListResultsProcessing.GoogleMapsResultsProcessing;
 
-import Abstract.Factories.Concrete.BusinessListResultsProcessing.IBusinessResultItemsProcess;
+import Abstract.Factories.Concrete.BusinessListResultsProcessing.BusinessResultItemsProcess;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoogleMapsResultsProcessor implements IBusinessResultItemsProcess {
+public class GoogleMapsResultsProcessor extends BusinessResultItemsProcess {
     @Override
     public List<BusinessListSearchResultItem> processBody(Element body) {
         ArrayList<BusinessListSearchResultItem> results = new ArrayList<>();
