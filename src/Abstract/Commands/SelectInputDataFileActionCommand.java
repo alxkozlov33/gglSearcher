@@ -24,7 +24,7 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
         if (DirUtils.isFileOk(inputDataAbsolutePath, "csv")) {
             guiService.setInputFilePath(inputDataAbsolutePath);
             propertiesService.saveInputFilePath(inputDataAbsolutePath);
-            inputDataService.clearInputDataFile();
+            inputDataService.initInputFile(inputDataAbsolutePath);
         }
     }
 
