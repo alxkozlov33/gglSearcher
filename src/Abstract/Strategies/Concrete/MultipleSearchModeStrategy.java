@@ -62,10 +62,10 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             ISearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                     = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
 
-            //List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
+            List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
             List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
 
-            //outputDataService.saveResultCsvItems(regularItems);
+            outputDataService.saveResultCsvItems(regularItems);
             outputDataService.saveResultCsvItems(listItems);
         }
     }

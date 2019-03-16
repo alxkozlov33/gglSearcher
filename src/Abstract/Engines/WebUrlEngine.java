@@ -29,7 +29,7 @@ public class WebUrlEngine extends WebEngine {
                     return response.parse();
                 }
             } catch (Exception ex) {
-                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL +" Cause: " + ex.getMessage());
+                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL +" \nCause: " + ex.getMessage());
             }
             isThreadSleep(i);
         }

@@ -18,7 +18,7 @@ public abstract class BusinessResultItemsProcess {
                 addressesElements.add(element.parent().child(1).child(1).select("span").first());
             } else if (element.parent().childNodeSize() == 3) {
                 if (element.parent().child(2).childNodeSize() == 1) {
-                    if (element.parent().child(2).child(1).childNodeSize() == 1) {
+                    if (element.parent().child(2).child(0).childNodeSize() == 1) {
                         addressesElements.add(element.parent().child(2).child(0).select("span").first());
                     } else if (element.parent().child(2).child(1).childNodeSize() > 1) {
                         addressesElements.add(element.parent().child(2).child(1).select("span").first());

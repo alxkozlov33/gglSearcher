@@ -32,7 +32,7 @@ public class BusinessResultsStrategyTypeOne extends BusinessResultItemsProcess {
             for (int i = 0; i < addressesElements.size(); i++) {
                 String mainHeader = namesElements.get(i).text();
                 String city;
-                if (addressesElements.get(i) == null) {
+                if (addressesElements.size() == i || addressesElements.get(i) == null) {
                     city = "";
                 } else {
                     city = StrUtils.getCityFromAddress(addressesElements.get(i).text());
