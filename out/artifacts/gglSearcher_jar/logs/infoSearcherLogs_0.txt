@@ -1,0 +1,6 @@
+22:40:17 INFO: Services.DIResolver.<init>()
+ Application started...
+
+22:40:17 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+

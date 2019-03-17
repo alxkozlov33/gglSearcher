@@ -100,7 +100,8 @@ public class PropertiesService {
     private void createNewFileIfNotExists() {
         OutputStream output = null;
         try {
-            File file = new File(PropertiesService.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath() + File.separator + "configGGLS.properties");
+            //File propFile = new File(PropertiesService.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+            File file = new File("configGGLS.properties");
             if (file.exists() && !file.isDirectory()) {
                 propertiesFile = file;
             } else {
@@ -116,7 +117,7 @@ public class PropertiesService {
                     properties.store(output, null);
                 }
             }
-        } catch (IOException | URISyntaxException io) {
+        } catch (IOException io) {
             Logger.tag("SYSTEM").error(io);
         } finally {
             if (output != null) {
@@ -133,7 +134,6 @@ public class PropertiesService {
         String result = "";
         InputStream input = null;
         try {
-            //createNewFileIfNotExists();
             input = new FileInputStream(propertiesFile.getAbsoluteFile());
             properties.load(input);
             if (properties.get(propertyName) != null) {
