@@ -10,7 +10,6 @@ public class DIResolver {
     private final GuiService guiService;
     private final OutputDataService outputDataService;
     private final InputDataService inputDataService;
-    private final SearchService searchService;
     private final SettingsService settingsService;
     private SearchModeStrategyBase currentWorker;
 
@@ -19,7 +18,6 @@ public class DIResolver {
                       GuiService guiService,
                       OutputDataService outputDataService,
                       InputDataService inputDataService,
-                      SearchService searchService,
                       SettingsService settingsService) {
 
         this.userAgentsRotatorService = userAgentsRotatorService;
@@ -27,7 +25,6 @@ public class DIResolver {
         this.guiService = guiService;
         this.outputDataService = outputDataService;
         this.inputDataService = inputDataService;
-        this.searchService = searchService;
         this.settingsService = settingsService;
 
         Logger.tag("SYSTEM").info("Application started...");
@@ -53,10 +50,6 @@ public class DIResolver {
 
     public InputDataService getInputDataService() {
         return inputDataService;
-    }
-
-    public SearchService getSearchService() {
-        return searchService;
     }
 
     public SettingsService getSettingsService() {

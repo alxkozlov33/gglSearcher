@@ -1,4 +1,4 @@
-package Abstract.Strategies.Concrete;
+package Abstract.Strategies.Concrete.MultipleSearchResultsDataConvertStrategy;
 
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
@@ -13,7 +13,7 @@ public class ConvertBusinessSearchWithGeoDataStrategy implements ISearchResultsC
     private String city;
     private String country;
 
-    ConvertBusinessSearchWithGeoDataStrategy(String city, String country) {
+    public ConvertBusinessSearchWithGeoDataStrategy(String city, String country) {
         this.city = city;
         this.country = country;
     }

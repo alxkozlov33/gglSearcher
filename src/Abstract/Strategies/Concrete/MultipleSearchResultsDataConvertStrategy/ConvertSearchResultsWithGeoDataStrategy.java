@@ -1,4 +1,4 @@
-package Abstract.Strategies.Concrete;
+package Abstract.Strategies.Concrete.MultipleSearchResultsDataConvertStrategy;
 
 import Abstract.Engines.WebUrlEngine;
 import Abstract.Models.OutputModels.IOutputModel;
@@ -26,7 +26,7 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
     private String country;
     private final DIResolver diResolver;
 
-    ConvertSearchResultsWithGeoDataStrategy(DIResolver diResolver, String city, String country) {
+    public ConvertSearchResultsWithGeoDataStrategy(DIResolver diResolver, String city, String country) {
         this.city = city;
         this.country = country;
         this.diResolver = diResolver;

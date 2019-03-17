@@ -6,6 +6,8 @@ import Abstract.Factories.Concrete.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
+import Abstract.Strategies.Concrete.MultipleSearchResultsDataConvertStrategy.ConvertBusinessSearchWithGeoDataStrategy;
+import Abstract.Strategies.Concrete.MultipleSearchResultsDataConvertStrategy.ConvertSearchResultsWithGeoDataStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Abstract.Strategies.ISearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
@@ -43,7 +45,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
                 break;
             }
             propertiesService.saveIndex(i);
-            String URL = StrUtils.createURL(inputCsvModelItem, guiService.getSearchPlaceholderText());
+            String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL);
             Element body = webUrlEngine.getWebSourceData(requestData);
             if (body == null) {

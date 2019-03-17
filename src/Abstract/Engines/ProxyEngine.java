@@ -22,7 +22,7 @@ public class ProxyEngine extends WebEngine {
 
     Proxy getNewProxy() {
         RequestData requestData = new RequestData(
-                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt&country=US,CA,UK");
+                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt&country=US,CA,UK&user_agent=true&type=http&level=anonymous");
         for (int i = 1; i <= attempts; i++) {
             try {
                 Connection.Response response = makeRequest(requestData);

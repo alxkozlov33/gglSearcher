@@ -3,6 +3,7 @@ package Utils;
 import Abstract.Models.InputModels.InputCsvModelItem;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
+import org.tinylog.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -13,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StrUtils {
-    public static String createURL(InputCsvModelItem csvItem, String inputPlaceHolder) {
+    public static String createUrlForMultipleSearch(InputCsvModelItem csvItem, String inputPlaceHolder) {
         String result = null;
         if (StringUtils.isEmpty(inputPlaceHolder)) {
             return "";
@@ -32,7 +33,23 @@ public class StrUtils {
                     URLEncoder.encode(queryTerm, "UTF-8") +
                     "&pws=0&gl=us&gws_rd=cr&num=150";
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            Logger.tag("SYSTEM").error(e);
+        }
+        return result;
+    }
+
+    public static String createUrlForSingleSearch(String inputPlaceHolder) {
+        String result = null;
+        if (StringUtils.isEmpty(inputPlaceHolder)) {
+            return "";
+        }
+
+        try {
+            result = "https://www.google.com/search?q=" +
+                    URLEncoder.encode(inputPlaceHolder, "UTF-8") +
+                    "&pws=0&gl=us&gws_rd=cr&num=150";
+        } catch (UnsupportedEncodingException e) {
+            Logger.tag("SYSTEM").error(e);
         }
         return result;
     }

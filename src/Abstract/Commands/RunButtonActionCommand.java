@@ -7,6 +7,7 @@ import Utils.DirUtils;
 import org.tinylog.Logger;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class RunButtonActionCommand extends AbstractCommandAction {
 
@@ -21,37 +22,53 @@ public class RunButtonActionCommand extends AbstractCommandAction {
     public void actionPerformed(ActionEvent e) {
         Logger.tag("SYSTEM").info("Run button action performed");
 
+        diResolver.getUserAgentsRotatorService().initList();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
-        String placeHolderText = guiService.getSearchPlaceholderText();
-        propertiesService.saveWorkState(true);
-
-        InputDataService inputDataService = diResolver.getInputDataService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
+        InputDataService inputDataService = diResolver.getInputDataService();
         SettingsService settingsService = diResolver.getSettingsService();
 
-        if (propertiesService.getWorkState()
-                && DirUtils.isFileOk(inputDataService.getInputDataFile(), "csv")
-                && DirUtils.isDirOk(outputDataService.getOutputFolder())
-                && DirUtils.isFileOk(settingsService.getSettingsDataFile(), "txt")) {
+        String placeholder = guiService.getSearchPlaceholderText();
 
-            Thread worker = new Thread(() -> {
-                guiService.changeApplicationStateToWork(true);
-                SearchingModeFactory searchingModeFactory = new SearchingModeFactory();
-                SearchModeStrategyBase searchModeStrategy = searchingModeFactory.createSearchModeStrategy(placeHolderText);
-                try {
-                    diResolver.setCurrentWorker(searchModeStrategy);
-                    searchModeStrategy.processData(diResolver);
-                    Logger.tag("SYSTEM").info("Finished");
-                    guiService.setStatusText("Finished...");
-                    propertiesService.saveWorkState(false);
-                    propertiesService.saveIndex(0);
-                } catch (Exception ex) {
-                    Logger.tag("SYSTEM").error(ex, "Application stopped");
-                }
-                guiService.changeApplicationStateToWork(false);
-            });
-            worker.start();
+        File inputFile = propertiesService.getInputFile();
+        if (DirUtils.isFileOk(inputFile, "csv")) {
+            inputDataService.initInputFile(inputFile);
+            inputDataService.initInputFileData();
+            guiService.setInputFilePath(inputFile);
         }
+
+        File outputFolderPath = propertiesService.getOutputFolderPath();
+        if (DirUtils.isDirOk(outputFolderPath)) {
+            guiService.setOutputFolder(outputFolderPath);
+            outputDataService.setOutputFolder(outputFolderPath);
+            outputDataService.createOutputFile(placeholder);
+        }
+
+        File settingsFile = propertiesService.getSettingsFilePath();
+        if (DirUtils.isFileOk(settingsFile, "txt")) {
+            guiService.setSettingsFilePath(settingsFile);
+            settingsService.initSettingsFile(settingsFile);
+            settingsService.initSettingsFileData();
+        }
+
+        propertiesService.saveWorkState(true);
+        Thread worker = new Thread(() -> {
+            guiService.changeApplicationStateToWork(true);
+            SearchingModeFactory searchingModeFactory = new SearchingModeFactory(diResolver);
+            SearchModeStrategyBase searchModeStrategy = searchingModeFactory.createSearchModeStrategy();
+            try {
+                diResolver.setCurrentWorker(searchModeStrategy);
+                searchModeStrategy.processData(diResolver);
+                Logger.tag("SYSTEM").info("Finished");
+                guiService.setStatusText("Finished...");
+                propertiesService.saveWorkState(false);
+                propertiesService.saveIndex(0);
+            } catch (Exception ex) {
+                Logger.tag("SYSTEM").error(ex, "Application stopped");
+            }
+            guiService.changeApplicationStateToWork(false);
+        });
+        worker.start();
     }
 }
