@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
 Main-Class: Main
+Class-Path: tinylog-api-2.0.0-M3.jar
+Class-Path: tinylog-impl-2.0.0-M3.jar
 
