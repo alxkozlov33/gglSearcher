@@ -1,4 +1,4 @@
-package Abstract.Factories.Concrete.RegularResultsProcessing;
+package Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing;
 
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Utils.StrUtils;

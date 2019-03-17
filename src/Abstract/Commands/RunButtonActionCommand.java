@@ -1,6 +1,6 @@
 package Abstract.Commands;
 
-import Abstract.Factories.Concrete.SearchingModeFactory;
+import Abstract.Factories.SearchingModeStrategyFactory.SearchingModeFactory;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Services.*;
 import Utils.DirUtils;

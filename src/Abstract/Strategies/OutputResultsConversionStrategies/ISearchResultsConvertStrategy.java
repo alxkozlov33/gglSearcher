@@ -1,4 +1,4 @@
-package Abstract.Strategies;
+package Abstract.Strategies.OutputResultsConversionStrategies;
 
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;

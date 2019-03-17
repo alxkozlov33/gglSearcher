@@ -1,6 +1,6 @@
-package Abstract.Factories.Concrete;
-import Abstract.Strategies.Concrete.MultipleSearchModeStrategy;
-import Abstract.Strategies.Concrete.SingleSearchModeStrategy;
+package Abstract.Factories.SearchingModeStrategyFactory;
+import Abstract.Strategies.SearchingModeStrategies.MultipleSearchModeStrategy;
+import Abstract.Strategies.SearchingModeStrategies.SingleSearchModeStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Services.DIResolver;
 import Utils.DirUtils;

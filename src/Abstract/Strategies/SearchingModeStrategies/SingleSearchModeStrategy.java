@@ -1,15 +1,15 @@
-package Abstract.Strategies.Concrete;
+package Abstract.Strategies.SearchingModeStrategies;
 
 import Abstract.Engines.WebUrlEngine;
-import Abstract.Factories.Concrete.BusinessListResultsFactory;
-import Abstract.Factories.Concrete.RegularResultsFactory;
+import Abstract.Factories.EngineResultsInterpretersFactory.BusinessListResultsFactory;
+import Abstract.Factories.EngineResultsInterpretersFactory.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
-import Abstract.Strategies.Concrete.SingleSearchResultsDataConvertStrategy.ConvertBusinessSearchDataStrategy;
-import Abstract.Strategies.Concrete.SingleSearchResultsDataConvertStrategy.ConvertSearchResultsDataStrategy;
-import Abstract.Strategies.ISearchResultsConvertStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy.ConvertBusinessSearchDataStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy.ConvertSearchResultsDataStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Services.DIResolver;
 import Services.GuiService;

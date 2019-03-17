@@ -1,4 +1,4 @@
-package Abstract.Factories.Concrete.BusinessListResultsProcessing;
+package Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing;
 
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.jsoup.nodes.Element;

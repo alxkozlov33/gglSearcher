@@ -1,6 +1,6 @@
-package Abstract.Factories.Concrete.BusinessListResultsProcessing.GoogleMapsResultsProcessing;
+package Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.GoogleMapsResultsProcessing;
 
-import Abstract.Factories.Concrete.BusinessListResultsProcessing.BusinessResultItemsProcess;
+import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

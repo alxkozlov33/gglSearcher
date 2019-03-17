@@ -1,9 +1,8 @@
-package Abstract.Factories.Concrete;
+package Abstract.Factories.EngineResultsInterpretersFactory;
 
-import Abstract.Factories.Concrete.BusinessListResultsProcessing.BusinessResultsStrategyTypeOne;
-import Abstract.Factories.Concrete.BusinessListResultsProcessing.BusinessResultsStrategyTypeTwo;
-import Abstract.Factories.Concrete.BusinessListResultsProcessing.BusinessResultItemsProcess;
-import Abstract.Factories.ISearchResultFactory;
+import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultsStrategyTypeOne;
+import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultsStrategyTypeTwo;
+import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.jsoup.nodes.Element;
 import java.util.List;

@@ -1,21 +1,17 @@
-package Abstract.Strategies.Concrete.MultipleSearchResultsDataConvertStrategy;
+package Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy;
 
 import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Abstract.Strategies.ISearchResultsConvertStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertBusinessSearchWithGeoDataStrategy implements ISearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
+public class ConvertBusinessSearchDataStrategy implements ISearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
 
-    private String city;
-    private String country;
 
-    public ConvertBusinessSearchWithGeoDataStrategy(String city, String country) {
-        this.city = city;
-        this.country = country;
+    public ConvertBusinessSearchDataStrategy() {
     }
 
     @Override
@@ -30,11 +26,8 @@ public class ConvertBusinessSearchWithGeoDataStrategy implements ISearchResultsC
                 String notSureLink = "";
                 String webSite = "";
                 String htmlPageTitle = "";
-                this.city = businessListSearchResultItem.getCity();
-                this.country = businessListSearchResultItem.getCountry();
                 OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, notSureLink, htmlPageTitle);
-                OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
-                outputItems.add(outputModelGeoDataDecorator);
+                outputItems.add(outputRegularCSVItem);
             }
         return outputItems;
     }

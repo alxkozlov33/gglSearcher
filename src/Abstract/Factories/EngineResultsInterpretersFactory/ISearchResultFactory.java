@@ -1,4 +1,4 @@
-package Abstract.Factories;
+package Abstract.Factories.EngineResultsInterpretersFactory;
 
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import org.jsoup.nodes.Element;

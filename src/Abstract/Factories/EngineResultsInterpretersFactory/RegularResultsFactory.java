@@ -1,9 +1,8 @@
-package Abstract.Factories.Concrete;
+package Abstract.Factories.EngineResultsInterpretersFactory;
 
-import Abstract.Factories.Concrete.RegularResultsProcessing.IRegularSearchItemsProcess;
-import Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeOne;
-import Abstract.Factories.Concrete.RegularResultsProcessing.RegularResultsStrategyTypeTwo;
-import Abstract.Factories.ISearchResultFactory;
+import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.IRegularSearchItemsProcess;
+import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsStrategyTypeOne;
+import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsStrategyTypeTwo;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import org.jsoup.nodes.Element;
 import java.util.ArrayList;
