@@ -18,5 +18,6 @@ public class StopButtonActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Stop button action performed");
         diResolver.getCurrentWorker().stopProcessing();
         diResolver.getGuiService().setStatusText("Stopping...");
+        diResolver.getPropertiesService().saveWorkState(false);
     }
 }

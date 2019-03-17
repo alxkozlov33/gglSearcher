@@ -11,6 +11,7 @@ import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
 import Services.DIResolver;
 import Services.GuiService;
+import Services.PropertiesService;
 import Services.SettingsService;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
@@ -34,19 +35,22 @@ public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertSt
         }
         GuiService guiService = diResolver.getGuiService();
         SettingsService settingsService = diResolver.getSettingsService();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
         int searchedItemsSize = searchItems.size();
 
         for (int i = 0; i < searchedItemsSize; i++) {
-            guiService.updateCountItemsStatus(i, searchedItemsSize);
-            WebPageObject webPageObject = getWebSitePageSource(searchItems.get(i));
-            if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
-                String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
-                String notSureLink = getNotSureLink(searchItems.get(i));
-                String webSite = getWebSite(searchItems.get(i));
-                String htmlPageTitle = getHtmlPageTitle(webPageObject, searchItems.get(i));
-                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(mainHeader, webSite, notSureLink, htmlPageTitle);
-                outputItems.add(outputRegularCSVItem);
+            if(propertiesService.getWorkState()) {
+                guiService.updateCountItemsStatus(i, searchedItemsSize);
+                WebPageObject webPageObject = getWebSitePageSource(searchItems.get(i));
+                if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
+                    String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
+                    String notSureLink = getNotSureLink(searchItems.get(i));
+                    String webSite = getWebSite(searchItems.get(i));
+                    String htmlPageTitle = getHtmlPageTitle(webPageObject, searchItems.get(i));
+                    OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(mainHeader, webSite, notSureLink, htmlPageTitle);
+                    outputItems.add(outputRegularCSVItem);
+                }
             }
         }
         return outputItems;

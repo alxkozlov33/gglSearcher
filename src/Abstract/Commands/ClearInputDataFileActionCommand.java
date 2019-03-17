@@ -17,7 +17,7 @@ public class ClearInputDataFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Input data file removed");
         GuiService guiService = diResolver.getGuiService();
         InputDataService inputDataService = diResolver.getInputDataService();
-        PropertiesService propertiesService = new PropertiesService();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
 
         inputDataService.clearInputDataFile();
         guiService.clearInputDataFilePath();

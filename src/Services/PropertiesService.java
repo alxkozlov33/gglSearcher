@@ -4,6 +4,7 @@ import Utils.DirUtils;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 public class PropertiesService {
@@ -99,25 +100,23 @@ public class PropertiesService {
     private void createNewFileIfNotExists() {
         OutputStream output = null;
         try {
-            File propertiesFileTemp = File.createTempFile("configGGLS", ".properties");
-            String propPath = propertiesFileTemp.getAbsolutePath().substring(0, propertiesFileTemp.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + "configGGLS.properties";
-            File f = new File(propPath);
-            if (f.exists() && !f.isDirectory()) {
-                propertiesFile = f;
+            File file = new File(PropertiesService.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath() + File.separator + "configGGLS.properties");
+            if (file.exists() && !file.isDirectory()) {
+                propertiesFile = file;
             } else {
-                propertiesFile = f;
-                f.createNewFile();
-                output = new FileOutputStream(propertiesFile.getAbsoluteFile());
-                saveIndex(0);
-                saveWorkState(false);
-                saveInputFilePath(null);
-                saveSettingsFilePath(null);
-                saveOutputFolderPath(null);
-                savePlaceHolder(null);
-                properties.store(output, null);
+                propertiesFile = file;
+                if (file.createNewFile()) {
+                    output = new FileOutputStream(propertiesFile.getAbsoluteFile());
+                    saveIndex(0);
+                    saveWorkState(false);
+                    saveInputFilePath(null);
+                    saveSettingsFilePath(null);
+                    saveOutputFolderPath(null);
+                    savePlaceHolder(null);
+                    properties.store(output, null);
+                }
             }
-            propertiesFileTemp.delete();
-        } catch (IOException io) {
+        } catch (IOException | URISyntaxException io) {
             Logger.tag("SYSTEM").error(io);
         } finally {
             if (output != null) {
@@ -134,7 +133,7 @@ public class PropertiesService {
         String result = "";
         InputStream input = null;
         try {
-            createNewFileIfNotExists();
+            //createNewFileIfNotExists();
             input = new FileInputStream(propertiesFile.getAbsoluteFile());
             properties.load(input);
             if (properties.get(propertyName) != null) {

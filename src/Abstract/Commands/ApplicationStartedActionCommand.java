@@ -31,23 +31,22 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
 
         File inputFile = propertiesService.getInputFile();
         if (DirUtils.isFileOk(inputFile, "csv")) {
-            inputDataService.initInputFile(inputFile);
-            inputDataService.initInputFileData();
+            //inputDataService.initInputFile(inputFile);
+            //inputDataService.initInputFileData();
             guiService.setInputFilePath(inputFile);
         }
 
         File outputFolderPath = propertiesService.getOutputFolderPath();
         if (DirUtils.isDirOk(outputFolderPath)) {
             guiService.setOutputFolder(outputFolderPath);
-            outputDataService.setOutputFolder(outputFolderPath);
-            //outputDataService.createOutputFile(placeholder);
+            //outputDataService.setOutputFolder(outputFolderPath);
         }
 
         File settingsFile = propertiesService.getSettingsFilePath();
         if (DirUtils.isFileOk(settingsFile, "txt")) {
             guiService.setSettingsFilePath(settingsFile);
-            settingsService.initSettingsFile(settingsFile);
-            settingsService.initSettingsFileData();
+            //settingsService.initSettingsFile(settingsFile);
+            //settingsService.initSettingsFileData();
         }
 
         if (propertiesService.getWorkState()) {

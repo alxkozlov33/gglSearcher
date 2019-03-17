@@ -11,6 +11,7 @@ import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
 import Services.DIResolver;
+import Services.PropertiesService;
 import Services.SettingsService;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
@@ -40,18 +41,21 @@ public class ConvertSearchResultsWithGeoDataStrategy implements ISearchResultsCo
         }
 
         SettingsService settingsService = diResolver.getSettingsService();
+        PropertiesService propertiesService = diResolver.getPropertiesService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
 
         for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
-            WebPageObject webPageObject = getWebSitePageSource(googleSearchResultItem);
-            if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
-                String galleryName = getGalleryName(webPageObject, googleSearchResultItem);
-                String notSureLink = getNotSureLink(googleSearchResultItem);
-                String webSite = getWebSite(googleSearchResultItem);
-                String htmlPageTitle = getHtmlPageTitle(webPageObject, googleSearchResultItem);
-                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, notSureLink, htmlPageTitle);
-                OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
-                outputItems.add(outputModelGeoDataDecorator);
+            if(propertiesService.getWorkState()) {
+                WebPageObject webPageObject = getWebSitePageSource(googleSearchResultItem);
+                if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
+                    String galleryName = getGalleryName(webPageObject, googleSearchResultItem);
+                    String notSureLink = getNotSureLink(googleSearchResultItem);
+                    String webSite = getWebSite(googleSearchResultItem);
+                    String htmlPageTitle = getHtmlPageTitle(webPageObject, googleSearchResultItem);
+                    OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, notSureLink, htmlPageTitle);
+                    OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
+                    outputItems.add(outputModelGeoDataDecorator);
+                }
             }
         }
         return outputItems;

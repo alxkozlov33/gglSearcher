@@ -1,8 +1,6 @@
 package Services;
 
 import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
-import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Utils.CSVUtils;
 import Utils.DirUtils;
 import com.opencsv.CSVWriter;

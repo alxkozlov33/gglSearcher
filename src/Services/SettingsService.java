@@ -79,10 +79,6 @@ public class SettingsService {
         return searchSettings;
     }
 
-    public static SearchSettings getSearchSettingsStatic() {
-        return searchSettings;
-    }
-
     public void clearSettingsFile() {
         settingsDataFile = null;
     }
