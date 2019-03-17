@@ -10,6 +10,7 @@ import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
 import Services.DIResolver;
+import Services.GuiService;
 import Services.SettingsService;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
@@ -31,17 +32,19 @@ public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertSt
         if (searchItems.size() == 0) {
             return null;
         }
-
+        GuiService guiService = diResolver.getGuiService();
         SettingsService settingsService = diResolver.getSettingsService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
+        int searchedItemsSize = searchItems.size();
 
-        for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
-            WebPageObject webPageObject = getWebSitePageSource(googleSearchResultItem);
+        for (int i = 0; i < searchedItemsSize; i++) {
+            guiService.updateCountItemsStatus(i, searchedItemsSize);
+            WebPageObject webPageObject = getWebSitePageSource(searchItems.get(i));
             if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
-                String mainHeader = getMainHeader(webPageObject, googleSearchResultItem);
-                String notSureLink = getNotSureLink(googleSearchResultItem);
-                String webSite = getWebSite(googleSearchResultItem);
-                String htmlPageTitle = getHtmlPageTitle(webPageObject, googleSearchResultItem);
+                String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
+                String notSureLink = getNotSureLink(searchItems.get(i));
+                String webSite = getWebSite(searchItems.get(i));
+                String htmlPageTitle = getHtmlPageTitle(webPageObject, searchItems.get(i));
                 OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(mainHeader, webSite, notSureLink, htmlPageTitle);
                 outputItems.add(outputRegularCSVItem);
             }

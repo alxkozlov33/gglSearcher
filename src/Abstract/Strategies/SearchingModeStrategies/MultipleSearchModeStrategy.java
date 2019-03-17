@@ -67,8 +67,8 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
             List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
 
-            outputDataService.saveResultCsvItems(regularItems);
-            outputDataService.saveResultCsvItems(listItems);
+            outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
+            outputDataService.saveResultCsvItemsByMultipleSearch(listItems);
         }
     }
 

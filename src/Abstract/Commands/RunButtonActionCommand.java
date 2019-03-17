@@ -42,7 +42,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         if (DirUtils.isDirOk(outputFolderPath)) {
             guiService.setOutputFolder(outputFolderPath);
             outputDataService.setOutputFolder(outputFolderPath);
-            outputDataService.createOutputFile(placeholder);
+            outputDataService.createOutputFileForMultipleSearchOutput(placeholder);
         }
 
         File settingsFile = propertiesService.getSettingsFilePath();

@@ -1,6 +1,8 @@
 package Services;
 
 import Abstract.Models.OutputModels.IOutputModel;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Utils.CSVUtils;
 import Utils.DirUtils;
 import com.opencsv.CSVWriter;
@@ -18,23 +20,29 @@ public class OutputDataService {
     public OutputDataService() {
     }
 
-    private void createEmptyCSVFile(File outputFile) {
+    private void createEmptyCSVFile(File outputFile, String[] columns) {
         FileWriter mFileWriter;
         try {
             mFileWriter = new FileWriter(outputFile.getAbsoluteFile());
             CSVWriter mCsvWriter = new CSVWriter(mFileWriter);
-            mCsvWriter.writeNext(new String[]{"Gallery name", "Website", "Not sure", "Html page title", "City", "Country"});
+            mCsvWriter.writeNext(columns);
             mCsvWriter.close();
             mFileWriter.close();
         } catch (IOException e) {
-            Logger.tag("SYSTEM").error(e, "Cannot create empty output file");
+            Logger.tag("SYSTEM").error(e, "Cannot create empty output multiple searching results file");
         }
     }
 
-    public void createOutputFile(String placeHolder) {
+    public void createOutputFileForMultipleSearchOutput(String placeHolder) {
         String fileNameFromPlaceHolder = placeHolder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
         outputFile = new File(outputFolder + File.separator + fileNameFromPlaceHolder + ".csv");
-        createEmptyCSVFile(outputFile);
+        createEmptyCSVFile(outputFile, new String[]{"Gallery name", "Website", "Not sure", "Html page title", "City", "Country"});
+    }
+
+    public void createOutputFileForSingleSearchOutput(String placeHolder) {
+        String fileNameFromPlaceHolder = placeHolder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
+        outputFile = new File(outputFolder + File.separator + fileNameFromPlaceHolder + ".csv");
+        createEmptyCSVFile(outputFile, new String[]{"Main header", "Website", "Not sure", "Html page title"});
     }
 
     public File getOutputFolder() {
@@ -45,6 +53,22 @@ public class OutputDataService {
         if (DirUtils.isDirOk(outputFolder)) {
             this.outputFolder = outputFolder;
 
+        }
+    }
+
+    public void saveResultCsvItemsByMultipleSearch(List<IOutputModel> csvFileData) {
+        if (csvFileData == null || csvFileData.size() == 0) {
+            return;
+        }
+        try {
+            FileWriter writer = new FileWriter(outputFile.getAbsoluteFile(), true);
+            for (IOutputModel item : csvFileData) {
+                CSVUtils.writeLine(writer, item.toCsvRowString());
+            }
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            Logger.tag("SYSTEM").error(e, "Cannot save data to output file");
         }
     }
 

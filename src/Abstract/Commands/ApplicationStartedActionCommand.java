@@ -40,7 +40,7 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         if (DirUtils.isDirOk(outputFolderPath)) {
             guiService.setOutputFolder(outputFolderPath);
             outputDataService.setOutputFolder(outputFolderPath);
-            outputDataService.createOutputFile(placeholder);
+            //outputDataService.createOutputFile(placeholder);
         }
 
         File settingsFile = propertiesService.getSettingsFilePath();

@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ConvertBusinessSearchDataStrategy implements ISearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
 
-
     public ConvertBusinessSearchDataStrategy() {
     }
 
