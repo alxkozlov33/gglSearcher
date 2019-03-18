@@ -6,6 +6,14 @@ import java.io.IOException;
 
 abstract class WebEngine {
 
+    boolean isWorkInterrupted = true;
+    final int requestDelay = 5000;
+    final int attempts = 50;
+
+    protected void interruptWork() {
+        isWorkInterrupted = false;
+    }
+
     boolean isValidResponse(Connection.Response response) {
         return response != null && response.statusCode() == 200;
     }

@@ -14,10 +14,7 @@ import java.net.Proxy;
 
 public class ProxyEngine extends WebEngine {
 
-    private final int requestDelay = 5000;
-    private final int attempts = 50;
-
-    public ProxyEngine() {
+    ProxyEngine() {
     }
 
     Proxy getNewProxy() {
@@ -26,7 +23,7 @@ public class ProxyEngine extends WebEngine {
         for (int i = 1; i <= attempts; i++) {
             try {
                 Connection.Response response = makeRequest(requestData);
-                if (isValidResponse(response)) {
+                if (isValidResponse(response) || !isWorkInterrupted) {
                     String textProxy = response.parse().text();
                     if (!StringUtils.isEmpty(textProxy)) {
                         return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(textProxy.split(":")[0], Integer.parseInt(textProxy.split(":")[1])));
@@ -36,6 +33,7 @@ public class ProxyEngine extends WebEngine {
             } catch (Exception ex) {
                 Logger.tag("SYSTEM").error("Cannot get proxy, " + ex.getMessage() + ", waiting for next attempt.");
             }
+
             isThreadSleep(i);
         }
         return null;
@@ -52,7 +50,6 @@ public class ProxyEngine extends WebEngine {
     }
 
     @Override
-    @RetryOnFailure(delay = requestDelay, attempts = attempts)
     public Connection.Response makeRequest(RequestData requestData) throws IOException {
         return Jsoup.connect(requestData.requestURL)
                 .followRedirects(true)

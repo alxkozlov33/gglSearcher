@@ -11,7 +11,6 @@ import java.io.IOException;
 public class WebUrlEngine extends WebEngine {
     private final ProxyEngine proxyEngine;
     private final UserAgentsRotatorService userAgentsRotatorService;
-    private final int attempts = 10;
 
     public WebUrlEngine() {
         this.proxyEngine = new ProxyEngine();
@@ -22,7 +21,7 @@ public class WebUrlEngine extends WebEngine {
         for (int i = 1; i <= attempts; i++) {
             try {
                 Connection.Response response = makeRequest(requestData);
-                if (isValidResponse(response)) {
+                if (isValidResponse(response) || !isWorkInterrupted) {
                     Logger.tag("SYSTEM").info("Response OK from: " + requestData.requestURL);
                     return response.parse();
                 }
