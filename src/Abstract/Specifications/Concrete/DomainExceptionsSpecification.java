@@ -14,6 +14,9 @@ public class DomainExceptionsSpecification extends AbstractSpecification<GoogleS
 
     @Override
     public boolean isSatisfiedBy(GoogleSearchResultItem googleSearchResultItem) {
+        if (domainExceptions.size() == 0) {
+            return true;
+        }
         String domainName = StrUtils.extractDomainName(googleSearchResultItem.getLink());
         for (String domainNameException: domainExceptions) {
             if (domainName.toLowerCase().contains(domainNameException.toLowerCase())) {

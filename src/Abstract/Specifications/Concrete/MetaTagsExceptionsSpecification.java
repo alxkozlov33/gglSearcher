@@ -14,6 +14,9 @@ public class MetaTagsExceptionsSpecification extends AbstractSpecification<WebPa
 
     @Override
     public boolean isSatisfiedBy(WebPageObject webPageObject) {
+        if (metaTagsExceptions.size() == 0) {
+            return true;
+        }
         for (String metaExceptionKeyword : metaTagsExceptions) {
             if (webPageObject.getSiteDescription().toLowerCase().contains(metaExceptionKeyword.toLowerCase())) {
                 return false;

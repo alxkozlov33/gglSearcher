@@ -13,6 +13,9 @@ public class TopLevelDomainExceptionsSpecification extends AbstractSpecification
 
     @Override
     public boolean isSatisfiedBy(GoogleSearchResultItem googleSearchResultItem) {
+        if (topLevelDomainsExceptions.size() == 0) {
+            return true;
+        }
         for (String topLevelDomainException: topLevelDomainsExceptions) {
             if (googleSearchResultItem.getLink().toLowerCase().contains(topLevelDomainException.toLowerCase())) {
                 return false;
