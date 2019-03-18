@@ -4,7 +4,6 @@ import Utils.DirUtils;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.Properties;
 
 public class PropertiesService {
@@ -17,7 +16,6 @@ public class PropertiesService {
     private String indexString = "index";
     private String placeholderPropertyString = "placeholder";
     private String selectedSettingsInputFileString = "settingsInputFile";
-    private String outputFolderPathString = "outputFolderPath";
 
     public PropertiesService() {
         properties = new Properties();
@@ -112,7 +110,6 @@ public class PropertiesService {
                     saveWorkState(false);
                     saveInputFilePath(null);
                     saveSettingsFilePath(null);
-                    saveOutputFolderPath(null);
                     savePlaceHolder(null);
                     properties.store(output, null);
                 }
@@ -151,20 +148,5 @@ public class PropertiesService {
             }
         }
         return result;
-    }
-
-    public void saveOutputFolderPath(File outputFolder) {
-        if (DirUtils.isDirOk(outputFolder)) {
-            saveProperty(outputFolderPathString, outputFolder.getAbsolutePath());
-        } else {
-            saveProperty(outputFolderPathString, "");
-        }
-    }
-
-    public File getOutputFolderPath() {
-        if (StringUtils.isEmpty(properties.getProperty(outputFolderPathString))) {
-            return null;
-        }
-        return new File(properties.getProperty(outputFolderPathString));
     }
 }

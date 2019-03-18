@@ -25,20 +25,12 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         diResolver.getUserAgentsRotatorService().initList();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
-        OutputDataService outputDataService = diResolver.getOutputDataService();
         SettingsService settingsService = diResolver.getSettingsService();
 
         guiService.setStatusText("Starting...");
 
         String placeholder = guiService.getSearchPlaceholderText();
         propertiesService.savePlaceHolder(placeholder);
-
-        File outputFolderPath = propertiesService.getOutputFolderPath();
-        if (DirUtils.isDirOk(outputFolderPath)) {
-            guiService.setOutputFolder(outputFolderPath);
-            outputDataService.setOutputFolder(outputFolderPath);
-            outputDataService.createOutputFileForMultipleSearchOutput(placeholder);
-        }
 
         File settingsFile = propertiesService.getSettingsFilePath();
         if (DirUtils.isFileOk(settingsFile, "txt")) {

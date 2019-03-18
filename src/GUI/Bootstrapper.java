@@ -32,9 +32,6 @@ public class Bootstrapper extends JFrame {
     private JMenuItem chooseInputFile;
     private JMenuItem clearInputFile;
 
-    private JMenuItem chooseOutputFolder;
-    private JMenuItem clearOutputFolder;
-
     public Bootstrapper(DIResolver diResolver) {
         setVisible(false);
         this.setContentPane(mainPanel);
@@ -52,14 +49,7 @@ public class Bootstrapper extends JFrame {
         clearSettingsFile = new JMenuItem("Clear settings file");
         getSettingsFile().add(getClearSettingsFile());
 
-        outputFolder = new JMenu("Output folder");
-        chooseOutputFolder = new JMenuItem("Choose output folder");
-        getOutputFolder().add(getChooseOutputFolder());
-        clearOutputFolder = new JMenuItem("Clear output folder");
-        getOutputFolder().add(getClearOutputFolder());
-
         getMenubar().add(getInputData());
-        getMenubar().add(getOutputFolder());
         getMenubar().add(getSettingsFile());
         setJMenuBar(getMenubar());
 
@@ -71,9 +61,6 @@ public class Bootstrapper extends JFrame {
 
         chooseInputFile.setAction(new SelectInputDataFileActionCommand(diResolver));
         clearInputFile.setAction(new ClearInputDataFileActionCommand(diResolver));
-
-        chooseOutputFolder.setAction(new SelectOutputFolderActionCommand(diResolver));
-        clearOutputFolder.setAction(new ClearOutputFolderActionCommand(diResolver));
     }
 
     public JLabel getLabelStatusData() {
@@ -155,18 +142,6 @@ public class Bootstrapper extends JFrame {
 
     public JMenu getInputData() {
         return inputData;
-    }
-
-    public JMenu getOutputFolder() {
-        return outputFolder;
-    }
-
-    public JMenuItem getChooseOutputFolder() {
-        return chooseOutputFolder;
-    }
-
-    public JMenuItem getClearOutputFolder() {
-        return clearOutputFolder;
     }
 
     public JLabel getSelectedOutputFolderData() {

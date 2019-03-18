@@ -22,31 +22,18 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         diResolver.getUserAgentsRotatorService().initList();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
-        OutputDataService outputDataService = diResolver.getOutputDataService();
-        InputDataService inputDataService = diResolver.getInputDataService();
-        SettingsService settingsService = diResolver.getSettingsService();
 
         String placeholder = propertiesService.getPlaceHolder();
         guiService.setPlaceholder(placeholder);
 
         File inputFile = propertiesService.getInputFile();
         if (DirUtils.isFileOk(inputFile, "csv")) {
-            //inputDataService.initInputFile(inputFile);
-            //inputDataService.initInputFileData();
             guiService.setInputFilePath(inputFile);
-        }
-
-        File outputFolderPath = propertiesService.getOutputFolderPath();
-        if (DirUtils.isDirOk(outputFolderPath)) {
-            guiService.setOutputFolder(outputFolderPath);
-            //outputDataService.setOutputFolder(outputFolderPath);
         }
 
         File settingsFile = propertiesService.getSettingsFilePath();
         if (DirUtils.isFileOk(settingsFile, "txt")) {
             guiService.setSettingsFilePath(settingsFile);
-            //settingsService.initSettingsFile(settingsFile);
-            //settingsService.initSettingsFileData();
         }
 
         if (propertiesService.getWorkState()) {

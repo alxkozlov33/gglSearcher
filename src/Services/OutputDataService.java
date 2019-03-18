@@ -2,7 +2,6 @@ package Services;
 
 import Abstract.Models.OutputModels.IOutputModel;
 import Utils.CSVUtils;
-import Utils.DirUtils;
 import com.opencsv.CSVWriter;
 import org.tinylog.Logger;
 import java.io.File;
@@ -12,7 +11,6 @@ import java.util.List;
 
 public class OutputDataService {
 
-    private File outputFolder;
     private File outputFile;
 
     public OutputDataService() {
@@ -33,25 +31,14 @@ public class OutputDataService {
 
     public void createOutputFileForMultipleSearchOutput(String placeHolder) {
         String fileNameFromPlaceHolder = placeHolder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
-        outputFile = new File(outputFolder + File.separator + fileNameFromPlaceHolder + ".csv");
+        outputFile = new File(fileNameFromPlaceHolder + ".csv");
         createEmptyCSVFile(outputFile, new String[]{"Gallery name", "Website", "Not sure", "Html page title", "City", "Country"});
     }
 
     public void createOutputFileForSingleSearchOutput(String placeHolder) {
         String fileNameFromPlaceHolder = placeHolder.replace("$", "").replace("{", "").replace("}", "").replace("*", "").replace("\"", "");
-        outputFile = new File(outputFolder + File.separator + fileNameFromPlaceHolder + ".csv");
+        outputFile = new File(fileNameFromPlaceHolder + ".csv");
         createEmptyCSVFile(outputFile, new String[]{"Main header", "Website", "Not sure", "Html page title"});
-    }
-
-    public File getOutputFolder() {
-        return outputFolder;
-    }
-
-    public void setOutputFolder(File outputFolder) {
-        if (DirUtils.isDirOk(outputFolder)) {
-            this.outputFolder = outputFolder;
-
-        }
     }
 
     public void saveResultCsvItemsByMultipleSearch(List<IOutputModel> csvFileData) {
@@ -84,10 +71,5 @@ public class OutputDataService {
         } catch (IOException e) {
             Logger.tag("SYSTEM").error(e, "Cannot save data to output file");
         }
-    }
-
-    public void clearOutputFile() {
-        outputFolder = null;
-        outputFile = null;
     }
 }
