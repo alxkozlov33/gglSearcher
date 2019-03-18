@@ -26,7 +26,6 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
         SettingsService settingsService = diResolver.getSettingsService();
-
         guiService.setStatusText("Starting...");
 
         String placeholder = guiService.getSearchPlaceholderText();
@@ -34,7 +33,6 @@ public class RunButtonActionCommand extends AbstractCommandAction {
 
         File settingsFile = propertiesService.getSettingsFilePath();
         if (DirUtils.isFileOk(settingsFile, "txt")) {
-            guiService.setSettingsFilePath(settingsFile);
             settingsService.initSettingsFile(settingsFile);
             settingsService.initSettingsFileData();
         }

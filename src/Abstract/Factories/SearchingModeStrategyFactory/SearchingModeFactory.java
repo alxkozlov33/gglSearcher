@@ -25,15 +25,20 @@ public class SearchingModeFactory {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         String placeHolder = diResolver.getGuiService().getSearchPlaceholderText();
 
+        File inputDataFile = propertiesService.getInputFile();
+        if (DirUtils.isFileOk(inputDataFile, "csv")) {
+            inputDataService.initInputFile(inputDataFile);
+        }
+
+        File inputFile = propertiesService.getInputFile();
+
         if (diResolver.getPropertiesService().getWorkState()
                 && DirUtils.isFileOk(diResolver.getSettingsService().getSettingsDataFile(), "txt")) {
 
-            if (DirUtils.isFileOk(diResolver.getInputDataService().getInputDataFile(), "csv") && StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
+            if (DirUtils.isFileOk(inputFile, "csv") && StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
                 searchModeStrategy = new MultipleSearchModeStrategy();
-                File inputFile = propertiesService.getInputFile();
                 inputDataService.initInputFile(inputFile);
                 inputDataService.initInputFileData();
-                guiService.setInputFilePath(inputFile);
                 outputDataService.createOutputFileForMultipleSearchOutput(guiService.getSearchPlaceholderText());
             }
             else if (!DirUtils.isFileOk(diResolver.getInputDataService().getInputDataFile(), "csv") && !StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
