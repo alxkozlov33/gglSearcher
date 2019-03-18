@@ -5,6 +5,8 @@ import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 
 import java.util.List;
 
+
+//TODO: Refactor
 public interface ISearchResultsConvertStrategy<T extends GoogleSearchResultItem, U extends IOutputModel> {
 
     List<U> convertResultData(List<T> searchItems);

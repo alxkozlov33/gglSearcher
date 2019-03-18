@@ -37,6 +37,9 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         RequestData requestData = new RequestData(URL);
         Element body = webUrlEngine.getWebSourceData(requestData);
 
+        if (body == null) {
+            return;
+        }
         RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
         List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.processBody(body);
         List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);

@@ -8,6 +8,7 @@ import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
+import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
 import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
 import Services.DIResolver;
 import Services.GuiService;
@@ -37,13 +38,14 @@ public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertSt
         SettingsService settingsService = diResolver.getSettingsService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
+        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().specificWordsToSearch);
         int searchedItemsSize = searchItems.size();
 
         for (int i = 0; i < searchedItemsSize; i++) {
             if(propertiesService.getWorkState()) {
                 guiService.updateCountItemsStatus(i, searchedItemsSize);
                 WebPageObject webPageObject = getWebSitePageSource(searchItems.get(i));
-                if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject)) {
+                if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
                     String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
                     String notSureLink = getNotSureLink(searchItems.get(i));
                     String webSite = getWebSite(searchItems.get(i));
@@ -69,17 +71,17 @@ public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertSt
         return parseSourceData(element);
     }
 
-    private WebPageObject parseSourceData(Element html){
-        if (html == null) {
+    private WebPageObject parseSourceData(Element pageSourceData){
+        if (pageSourceData == null) {
             return null;
         }
-        String siteDescription = html.select("meta[name=description]").attr("content");
-        String siteKeywords = html.select("meta[name=keywords]").attr("content");
-        String siteName = html.select("meta[property=og:title]").attr("content");
+        String siteDescription = pageSourceData.select("meta[name=description]").attr("content");
+        String siteKeywords = pageSourceData.select("meta[name=keywords]").attr("content");
+        String siteName = pageSourceData.select("meta[property=og:title]").attr("content");
         if (StringUtils.isEmpty(siteName)) {
-            siteName = html.select("title").text();
+            siteName = pageSourceData.select("title").text();
         }
-        return new WebPageObject(siteDescription, siteKeywords, siteName);
+        return new WebPageObject(siteDescription, siteKeywords, siteName, pageSourceData.text());
     }
 
     private String getHtmlPageTitle(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {

@@ -3,7 +3,6 @@ package Services;
 import Abstract.Models.SearchSettings;
 import Utils.DirUtils;
 import org.tinylog.Logger;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -33,10 +32,6 @@ public class SettingsService {
     }
 
     public void initSettingsFileData() {
-        searchSettings.domainExceptions = new ArrayList<>();
-        searchSettings.URLExceptions = new ArrayList<>();
-        searchSettings.metaTagsExceptions = new ArrayList<>();
-        searchSettings.topLevelDomainsExceptions = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(getSettingsDataFile().toPath(), StandardCharsets.UTF_8);
             lines.removeIf(l -> l.equals(""));
@@ -55,6 +50,14 @@ public class SettingsService {
 
                 if (lines.get(i).contains("# Exceptions for top level domains:")) {
                     searchSettings.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
+                }
+
+                if (lines.get(i).contains("# Specific words searching:")) {
+                    searchSettings.specificWordsToSearch = new ArrayList<>(collectTerms(i, lines));
+                }
+
+                if (lines.get(i).contains("# Specific words in domain URLs:")) {
+                    searchSettings.URLSpecificWordsSearching = new ArrayList<>(collectTerms(i, lines));
                 }
             }
         } catch (IOException e) {

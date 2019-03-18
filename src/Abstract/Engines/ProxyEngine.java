@@ -32,6 +32,7 @@ public class ProxyEngine extends WebEngine {
                         return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(textProxy.split(":")[0], Integer.parseInt(textProxy.split(":")[1])));
                     }
                 }
+                throw new Exception();
             } catch (Exception ex) {
                 Logger.tag("SYSTEM").error("Cannot get proxy, " + ex.getMessage() + ", waiting for next attempt.");
             }

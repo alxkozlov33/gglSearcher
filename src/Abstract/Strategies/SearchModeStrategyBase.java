@@ -5,6 +5,7 @@ import Abstract.Specifications.AbstractSpecification;
 import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.TopLevelDomainExceptionsSpecification;
 import Abstract.Specifications.Concrete.URLExceptionsSpecification;
+import Abstract.Specifications.Concrete.URLSpecificWordsSearchSpecification;
 import Services.DIResolver;
 import Services.SettingsService;
 import Utils.ResultsUtils;
@@ -22,7 +23,8 @@ public abstract class SearchModeStrategyBase {
         AbstractSpecification<GoogleSearchResultItem> googleItemsSpec =
                 new DomainExceptionsSpecification(settingsService.getSearchSettings().domainExceptions)
                         .and(new TopLevelDomainExceptionsSpecification(settingsService.getSearchSettings().topLevelDomainsExceptions))
-                        .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions));
+                        .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions))
+                        .and(new URLSpecificWordsSearchSpecification(settingsService.getSearchSettings().URLSpecificWordsSearching));
 
         return ResultsUtils.filterResults(googleSearchResults, googleItemsSpec);
     }

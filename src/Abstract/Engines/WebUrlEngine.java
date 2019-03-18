@@ -26,6 +26,7 @@ public class WebUrlEngine extends WebEngine {
                     Logger.tag("SYSTEM").info("Response OK from: " + requestData.requestURL);
                     return response.parse();
                 }
+                throw new Exception();
             } catch (Exception ex) {
                 Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL +" \nCause: " + ex.getMessage());
             }
