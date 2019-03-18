@@ -2,8 +2,8 @@ package Abstract.Engines;
 
 import ApiKeys.Keys;
 import Abstract.Models.RequestData;
+import Services.DIResolver;
 import Services.UserAgentsRotatorService;
-import com.jcabi.aspects.RetryOnFailure;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,16 +14,22 @@ import java.net.Proxy;
 
 public class ProxyEngine extends WebEngine {
 
-    ProxyEngine() {
+    private final DIResolver diResolver;
+    ProxyEngine(DIResolver diResolver) {
+        this.diResolver = diResolver;
     }
 
     Proxy getNewProxy() {
         RequestData requestData = new RequestData(
                 "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt&country=US,CA,UK");
         for (int i = 1; i <= attempts; i++) {
+            boolean isContinueWork = diResolver.getPropertiesService().getWorkState();
+            if(!isContinueWork) {
+                return null;
+            }
             try {
                 Connection.Response response = makeRequest(requestData);
-                if (isValidResponse(response) || !isWorkInterrupted) {
+                if (isValidResponse(response)) {
                     String textProxy = response.parse().text();
                     if (!StringUtils.isEmpty(textProxy)) {
                         return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(textProxy.split(":")[0], Integer.parseInt(textProxy.split(":")[1])));

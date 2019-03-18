@@ -4,11 +4,11 @@ import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertBusinessSearchWithGeoDataStrategy implements ISearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
+public class ConvertBusinessSearchWithGeoDataStrategy extends SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
 
     private String city;
     private String country;

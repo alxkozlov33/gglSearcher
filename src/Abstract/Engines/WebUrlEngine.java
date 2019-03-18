@@ -1,6 +1,7 @@
 package Abstract.Engines;
 
 import Abstract.Models.RequestData;
+import Services.DIResolver;
 import Services.UserAgentsRotatorService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -9,19 +10,26 @@ import org.tinylog.Logger;
 import java.io.IOException;
 
 public class WebUrlEngine extends WebEngine {
+
     private final ProxyEngine proxyEngine;
     private final UserAgentsRotatorService userAgentsRotatorService;
+    private final DIResolver diResolver;
 
-    public WebUrlEngine() {
-        this.proxyEngine = new ProxyEngine();
+    public WebUrlEngine(DIResolver diResolver) {
+        this.proxyEngine = new ProxyEngine(diResolver);
         this.userAgentsRotatorService = new UserAgentsRotatorService();
+        this.diResolver = diResolver;
     }
 
     public Element getWebSourceData(RequestData requestData) {
         for (int i = 1; i <= attempts; i++) {
+            boolean isContinueWork = diResolver.getPropertiesService().getWorkState();
+            if(!isContinueWork) {
+                return null;
+            }
             try {
                 Connection.Response response = makeRequest(requestData);
-                if (isValidResponse(response) || !isWorkInterrupted) {
+                if (isValidResponse(response)) {
                     Logger.tag("SYSTEM").info("Response OK from: " + requestData.requestURL);
                     return response.parse();
                 }

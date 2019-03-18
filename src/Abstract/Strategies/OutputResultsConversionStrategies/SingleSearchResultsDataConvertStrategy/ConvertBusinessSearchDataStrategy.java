@@ -3,12 +3,12 @@ package Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResult
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertBusinessSearchDataStrategy implements ISearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
+public class ConvertBusinessSearchDataStrategy extends SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> {
 
     public ConvertBusinessSearchDataStrategy() {
     }

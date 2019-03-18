@@ -1,27 +1,25 @@
 package Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy;
 
-import Abstract.Engines.WebUrlEngine;
+import Abstract.Models.CancelationToken;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
-import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
-import Abstract.Strategies.OutputResultsConversionStrategies.ISearchResultsConvertStrategy;
+import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Services.DIResolver;
 import Services.GuiService;
 import Services.PropertiesService;
 import Services.SettingsService;
-import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> {
+public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> {
 
     private final DIResolver diResolver;
     public ConvertSearchResultsDataStrategy(DIResolver diResolver) {
@@ -44,7 +42,8 @@ public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertSt
         for (int i = 0; i < searchedItemsSize; i++) {
             if(propertiesService.getWorkState()) {
                 guiService.updateCountItemsStatus(i, searchedItemsSize);
-                WebPageObject webPageObject = getWebSitePageSource(searchItems.get(i));
+                Element pageSourceData = getWebSitePageSource(searchItems.get(i), diResolver);
+                WebPageObject webPageObject = parseSourceData(pageSourceData);
                 if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
                     String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
                     String notSureLink = getNotSureLink(searchItems.get(i));
@@ -65,47 +64,5 @@ public class ConvertSearchResultsDataStrategy implements ISearchResultsConvertSt
         return googleSearchResultItem.getMainHeader();
     }
 
-    private WebPageObject getWebSitePageSource(GoogleSearchResultItem item) {
-        RequestData requestData = new RequestData(item.getLink());
-        Element element = new WebUrlEngine().getWebSourceData(requestData);
-        return parseSourceData(element);
-    }
 
-    private WebPageObject parseSourceData(Element pageSourceData){
-        if (pageSourceData == null) {
-            return null;
-        }
-        String siteDescription = pageSourceData.select("meta[name=description]").attr("content");
-        String siteKeywords = pageSourceData.select("meta[name=keywords]").attr("content");
-        String siteName = pageSourceData.select("meta[property=og:title]").attr("content");
-        if (StringUtils.isEmpty(siteName)) {
-            siteName = pageSourceData.select("title").text();
-        }
-        return new WebPageObject(siteDescription, siteKeywords, siteName, pageSourceData.text());
-    }
-
-    private String getHtmlPageTitle(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
-        if (StringUtils.isEmpty(webPageObject.getSiteName())) {
-            return googleSearchResultItem.getMainHeader();
-        }
-        return webPageObject.getSiteName();
-    }
-
-    private String getNotSureLink(GoogleSearchResultItem googleSearchResultItem) {
-        String notSureLink = "";
-        String urlPath = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
-        if (urlPath.length() > 15){
-            notSureLink = googleSearchResultItem.getLink();
-        }
-        return notSureLink;
-    }
-
-    private String getWebSite(GoogleSearchResultItem googleSearchResultItem) {
-        String webSite = "";
-        String urlPath = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
-        if (urlPath.length() < 15){
-            webSite = StrUtils.extractDomainName(googleSearchResultItem.getLink());
-        }
-        return webSite;
-    }
 }
