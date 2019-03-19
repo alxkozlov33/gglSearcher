@@ -61,7 +61,7 @@ public class WebUrlEngine extends WebEngine {
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
                 .ignoreContentType(true)
-                .timeout(60 * 1000)
+                .timeout(10 * 1000)
                 .validateTLSCertificates(false)
                 .execute();
     }
