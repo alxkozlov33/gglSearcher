@@ -52,11 +52,11 @@ public class SettingsService {
                     searchSettings.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
                 }
 
-                if (lines.get(i).contains("# Specific words searching:")) {
+                if (lines.get(i).contains("# Look for keywords in search results (operator “or”):")) {
                     searchSettings.specificWordsToSearch = new ArrayList<>(collectTerms(i, lines));
                 }
 
-                if (lines.get(i).contains("# Specific words in domain URLs:")) {
+                if (lines.get(i).contains("# Specific words in domain URLs (operator “or”):")) {
                     searchSettings.URLSpecificWordsSearching = new ArrayList<>(collectTerms(i, lines));
                 }
             }
