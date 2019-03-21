@@ -15,6 +15,7 @@ import java.net.Proxy;
 public class ProxyEngine extends WebEngine {
 
     private final DIResolver diResolver;
+    final int attempts = 50;
     ProxyEngine(DIResolver diResolver) {
         this.diResolver = diResolver;
     }

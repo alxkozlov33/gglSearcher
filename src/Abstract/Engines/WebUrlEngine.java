@@ -14,6 +14,7 @@ public class WebUrlEngine extends WebEngine {
     private final ProxyEngine proxyEngine;
     private final UserAgentsRotatorService userAgentsRotatorService;
     private final DIResolver diResolver;
+    private final int attempts = 5;
 
     public WebUrlEngine(DIResolver diResolver) {
         this.proxyEngine = new ProxyEngine(diResolver);
@@ -61,7 +62,7 @@ public class WebUrlEngine extends WebEngine {
                 .method(Connection.Method.GET)
                 .ignoreHttpErrors(true)
                 .ignoreContentType(true)
-                .timeout(10 * 1000)
+                .timeout(30 * 1000)
                 .validateTLSCertificates(false)
                 .execute();
     }

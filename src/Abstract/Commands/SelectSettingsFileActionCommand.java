@@ -30,8 +30,6 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
             guiService.setSettingsFilePath(settingsFile);
             propertiesService.saveSettingsFilePath(settingsFile);
             settingsService.initSettingsFile(settingsFile);
-            //Thread worker = new Thread(() -> settingsService.initSettingsFileData(settingsFile));
-            //worker.start();
         }
     }
 }
