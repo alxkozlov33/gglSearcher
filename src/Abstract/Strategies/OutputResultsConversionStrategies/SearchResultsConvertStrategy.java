@@ -1,7 +1,6 @@
 package Abstract.Strategies.OutputResultsConversionStrategies;
 
-import Abstract.Engines.WebUrlEngine;
-import Abstract.Models.CancelationToken;
+import Abstract.Engines.ProxyWebClient;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
@@ -20,8 +19,8 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
     public abstract List<U> convertResultData(List<T> searchItems);
 
     protected Element getWebSitePageSource(GoogleSearchResultItem item, DIResolver diResolver) {
-        RequestData requestData = new RequestData(item.getLink());
-        return new WebUrlEngine(diResolver).getWebSourceData(requestData);
+        RequestData requestData = new RequestData(item.getLink(), 10, 10000);
+        return new ProxyWebClient(diResolver).request(requestData);
     }
 
     protected WebPageObject parseSourceData(Element pageSourceData){

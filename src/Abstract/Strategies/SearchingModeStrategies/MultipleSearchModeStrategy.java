@@ -1,5 +1,6 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
+import Abstract.Engines.ProxyWebClient;
 import Abstract.Engines.WebUrlEngine;
 import Abstract.Factories.EngineResultsInterpretersFactory.BusinessListResultsFactory;
 import Abstract.Factories.EngineResultsInterpretersFactory.RegularResultsFactory;
@@ -30,7 +31,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         InputDataService inputDataService = diResolver.getInputDataService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
-        WebUrlEngine webUrlEngine = new WebUrlEngine(diResolver);
+        ProxyWebClient proxyWebClient = new ProxyWebClient(diResolver);
 
         List<InputCsvModelItem> inputCsvItems = inputDataService.getInputCsvModelItems();
         int index = propertiesService.getIndex();
@@ -46,8 +47,8 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             }
             propertiesService.saveIndex(i);
             String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
-            RequestData requestData = new RequestData(URL);
-            Element body = webUrlEngine.getWebSourceData(requestData);
+            RequestData requestData = new RequestData(URL, 10, 10000);
+            Element body = proxyWebClient.request(requestData);
             if (body == null) {
                 continue;
             }

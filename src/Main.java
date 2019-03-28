@@ -55,6 +55,7 @@ public class Main {
         applicationStartedActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
 
         //"https://www.google.com/search?q=%22art+gallery%22+York+England&pws=0&gl=us&gws_rd=cr&num=30"
+
         HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {
@@ -75,19 +76,7 @@ public class Main {
         WebElement mapsButton = driver.findElement(By.id("lu_map"));
         mapsButton.click();
 
-        HttpHost super_proxy = new HttpHost("zproxy.luminati.io", port);
-        CredentialsProvider cred_provider = new BasicCredentialsProvider();
-        cred_provider.setCredentials(new AuthScope(super_proxy),
-                new UsernamePasswordCredentials(login, password));
-        ProxyConfig proxyConfig = new ProxyConfig("zproxy.luminati.io", port);
-
-        driver.setAutoProxy("");
-        Proxy proxy = new Proxy();
-
         driver.getPageSource();
-
-
-
     }
 
     private void initLookAndFeel() {

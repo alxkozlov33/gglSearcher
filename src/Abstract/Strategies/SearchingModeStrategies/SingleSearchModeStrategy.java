@@ -1,6 +1,6 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
-import Abstract.Engines.WebUrlEngine;
+import Abstract.Engines.ProxyWebClient;
 import Abstract.Factories.EngineResultsInterpretersFactory.BusinessListResultsFactory;
 import Abstract.Factories.EngineResultsInterpretersFactory.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
@@ -25,7 +25,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
 
     public void processData(DIResolver diResolver) {
         OutputDataService outputDataService = diResolver.getOutputDataService();
-        WebUrlEngine webUrlEngine = new WebUrlEngine(diResolver);
+        ProxyWebClient proxyWebClient = new ProxyWebClient(diResolver);
         GuiService guiService = diResolver.getGuiService();
 
         if (StringUtils.isEmpty(guiService.getSearchPlaceholderText())) {
@@ -34,8 +34,8 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         }
 
         String URL = StrUtils.createUrlForSingleSearch(guiService.getSearchPlaceholderText());
-        RequestData requestData = new RequestData(URL);
-        Element body = webUrlEngine.getWebSourceData(requestData);
+        RequestData requestData = new RequestData(URL, 10, 10000);
+        Element body = proxyWebClient.request(requestData);
 
         if (body == null) {
             return;

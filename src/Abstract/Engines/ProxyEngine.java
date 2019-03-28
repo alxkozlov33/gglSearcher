@@ -22,7 +22,7 @@ public class ProxyEngine extends WebEngine {
 
     Proxy getNewProxy() {
         RequestData requestData = new RequestData(
-                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt");
+                "http://pubproxy.com/api/proxy?google=true&last_check=3&api=" + Keys.getProxyKey() + "&format=txt", 10, 15000);
         for (int i = 1; i <= attempts; i++) {
             boolean isContinueWork = diResolver.getPropertiesService().getWorkState();
             if(!isContinueWork) {
