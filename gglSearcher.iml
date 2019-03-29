@@ -10,7 +10,6 @@
     <orderEntry type="library" name="org.jsoup:jsoup:1.11.3" level="project" />
     <orderEntry type="library" name="com.opencsv:opencsv:4.4" level="project" />
     <orderEntry type="library" name="org.apache.commons:commons-lang3:3.8.1" level="project" />
-    <orderEntry type="library" name="org.apache.commons:commons-io:1.3.2" level="project" />
     <orderEntry type="library" name="commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="com.jcabi:jcabi-aspects:0.22.6" level="project" />
@@ -18,5 +17,6 @@
     <orderEntry type="library" name="org.tinylog:tinylog-api:2.0.0-M3" level="project" />
     <orderEntry type="library" name="org.tinylog:tinylog-impl:2.0.0-M3" level="project" />
     <orderEntry type="library" name="org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0" level="project" />
+    <orderEntry type="library" name="commons-io-2.6" level="project" />
   </component>
 </module>

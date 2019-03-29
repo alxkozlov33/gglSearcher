@@ -1,5 +1,6 @@
 package Abstract.Factories.EngineResultsInterpretersFactory;
 
+import Abstract.Engines.ProxyWebEngine;
 import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.IRegularSearchItemsProcess;
 import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsStrategyTypeOne;
 import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsStrategyTypeTwo;
@@ -9,6 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegularResultsFactory implements ISearchResultFactory {
+    @Override
+    public List processBody(ProxyWebEngine proxyWebEngine) {
+        return null;
+    }
+
     @Override
     public List<RegularSearchResultItem> processBody(Element body) {
 

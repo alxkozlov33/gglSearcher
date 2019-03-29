@@ -56,27 +56,27 @@ public class Main {
 
         //"https://www.google.com/search?q=%22art+gallery%22+York+England&pws=0&gl=us&gws_rd=cr&num=30"
 
-        HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38) {
-            @Override
-            protected WebClient modifyWebClient(WebClient client) {
-                String login = username+"-session-" + session_id;
-
-                HttpHost super_proxy = new HttpHost("zproxy.luminati.io", port);
-                CredentialsProvider cred_provider = new BasicCredentialsProvider();
-                cred_provider.setCredentials(new AuthScope(super_proxy),
-                        new UsernamePasswordCredentials(login, password));
-                client.setCredentialsProvider(cred_provider);
-                return client;
-            }
-        };
-
-        driver.setJavascriptEnabled(true);
-        driver.navigate().to("https://www.google.com/search?q=art+gallery+Paris&pws=0&gl=us&gws_rd=cr&num=30");
-
-        WebElement mapsButton = driver.findElement(By.id("lu_map"));
-        mapsButton.click();
-
-        driver.getPageSource();
+//        HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38) {
+//            @Override
+//            protected WebClient modifyWebClient(WebClient client) {
+//                String login = username+"-session-" + session_id;
+//
+//                HttpHost super_proxy = new HttpHost("zproxy.luminati.io", port);
+//                CredentialsProvider cred_provider = new BasicCredentialsProvider();
+//                cred_provider.setCredentials(new AuthScope(super_proxy),
+//                        new UsernamePasswordCredentials(login, password));
+//                client.setCredentialsProvider(cred_provider);
+//                return client;
+//            }
+//        };
+//
+//        driver.setJavascriptEnabled(true);
+//        driver.navigate().to("https://www.google.com/search?q=art+gallery+Paris&pws=0&gl=us&gws_rd=cr&num=30");
+//
+//        WebElement mapsButton = driver.findElement(By.id("lu_map"));
+//        mapsButton.click();
+//
+//        driver.getPageSource();
     }
 
     private void initLookAndFeel() {

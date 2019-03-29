@@ -1,5 +1,6 @@
 package Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.GoogleMapsResultsProcessing;
 
+import Abstract.Engines.ProxyWebEngine;
 import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.jsoup.nodes.Element;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleMapsResultsProcessor extends BusinessResultItemsProcess {
-    @Override
+
     public List<BusinessListSearchResultItem> processBody(Element body) {
         ArrayList<BusinessListSearchResultItem> results = new ArrayList<>();
         Elements items = body.select("div.section-result-text-content");
@@ -23,5 +24,10 @@ public class GoogleMapsResultsProcessor extends BusinessResultItemsProcess {
             results.add(regularSearchResultItem);
         }
         return results;
+    }
+
+    @Override
+    public List<BusinessListSearchResultItem> processBody(ProxyWebEngine proxyWebEngine) {
+        return null;
     }
 }

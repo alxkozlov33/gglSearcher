@@ -7,15 +7,15 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class ProxyWebEngine extends BaseEngine {
-    final HtmlUnitDriver driver;
+    public final HtmlUnitDriver webDriver;
 
     public ProxyWebEngine() {
-        driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38) {
+        webDriver = new HtmlUnitDriver(BrowserVersion.FIREFOX_38) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {
                 String login = username+"-session-" + session_id;
@@ -25,14 +25,14 @@ public class ProxyWebEngine extends BaseEngine {
                 cred_provider.setCredentials(new AuthScope(super_proxy),
                         new UsernamePasswordCredentials(login, password));
                 client.setCredentialsProvider(cred_provider);
+
+                client.waitForBackgroundJavaScript(30000);
+                client.waitForBackgroundJavaScriptStartingBefore(30000);
+
                 return client;
             }
         };
+        webDriver.setJavascriptEnabled(true);
+        webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
-//        driver.navigate().to("https://www.google.com/search?q=art+gallery+Paris&pws=0&gl=us&gws_rd=cr&num=30");
-//
-//    WebElement mapsButton = driver.findElement(By.id("lu_map"));
-//        mapsButton.click();
-//
-//        driver.getPageSource();
 }

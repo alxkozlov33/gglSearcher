@@ -1,6 +1,7 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
 import Abstract.Engines.ProxyWebClient;
+import Abstract.Engines.ProxyWebEngine;
 import Abstract.Engines.WebUrlEngine;
 import Abstract.Factories.EngineResultsInterpretersFactory.BusinessListResultsFactory;
 import Abstract.Factories.EngineResultsInterpretersFactory.RegularResultsFactory;
@@ -48,28 +49,28 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             propertiesService.saveIndex(i);
             String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL, 10, 10000);
-            Element body = proxyWebClient.request(requestData);
-            if (body == null) {
-                continue;
-            }
+            //Element body = proxyWebClient.request(requestData);
+            ProxyWebEngine webEngine = new ProxyWebEngine();
+            webEngine.webDriver.navigate().to(requestData.requestURL);
 
             try {
-                RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
-                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.processBody(body);
-                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
-                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
-                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
+//                RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
+//                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.processBody(body);
+//                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
+//                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
+//                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
+//                List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
 
                 BusinessListResultsFactory businessListResultsFactory = new BusinessListResultsFactory();
-                List<BusinessListSearchResultItem> businessListSearchResultItems = businessListResultsFactory.processBody(body);
+                List<BusinessListSearchResultItem> businessListSearchResultItems = businessListResultsFactory.processBody(webEngine);
                 List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
                 SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                         = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
 
-                List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
+
                 List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
 
-                outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
+//              outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
                 outputDataService.saveResultCsvItemsByMultipleSearch(listItems);
             }
             catch (Exception ex) {
