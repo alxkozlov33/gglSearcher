@@ -2,7 +2,6 @@ package Utils;
 
 import Abstract.Models.InputModels.InputCsvModelItem;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.text.StrSubstitutor;
 import org.tinylog.Logger;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -19,8 +18,8 @@ public class StrUtils {
         }
         String queryTerm;
         if (csvItem != null) {
-            //StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
             StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
+            //StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
             queryTerm = sub.replace(inputPlaceHolder);
         }
         else {
@@ -53,6 +52,20 @@ public class StrUtils {
         return result;
     }
 
+    public static String createUrlForMapsSearching(String queryTerm) {
+        String result = null;
+        if (StringUtils.isEmpty(queryTerm)) {
+            return "";
+        }
+        try {
+            result = "https://www.google.com/maps/search/" +
+                    URLEncoder.encode(queryTerm, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            Logger.tag("SYSTEM").error(e);
+        }
+        return result;
+    }
+
     public static String normalizeGoogleLink(String link) {
         if (link.startsWith("http://") || link.startsWith("https://")) {
             return link;
@@ -76,7 +89,7 @@ public class StrUtils {
     }
 
     public static boolean isPlaceholderHasSubstituteTerms(String placeholder) {
-        String pattern = "\\$\\{column[A-z]\\}";
+        String pattern = "\\{column[A-z]}";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(placeholder);
         return m.find();

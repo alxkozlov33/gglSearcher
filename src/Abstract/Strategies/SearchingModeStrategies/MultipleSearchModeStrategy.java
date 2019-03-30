@@ -16,7 +16,6 @@ import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
 import Services.*;
 import Utils.StrUtils;
-import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 
 import java.util.List;
@@ -32,7 +31,6 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         InputDataService inputDataService = diResolver.getInputDataService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
-        ProxyWebClient proxyWebClient = new ProxyWebClient(diResolver);
 
         List<InputCsvModelItem> inputCsvItems = inputDataService.getInputCsvModelItems();
         int index = propertiesService.getIndex();

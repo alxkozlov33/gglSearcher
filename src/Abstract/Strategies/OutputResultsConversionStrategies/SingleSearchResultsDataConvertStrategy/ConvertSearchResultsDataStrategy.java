@@ -1,6 +1,5 @@
 package Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy;
 
-import Abstract.Models.CancelationToken;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
