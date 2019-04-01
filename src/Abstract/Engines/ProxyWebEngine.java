@@ -1,7 +1,6 @@
 package Abstract.Engines;
 
 import com.gargoylesoftware.htmlunit.*;
-import com.gargoylesoftware.htmlunit.javascript.host.fetch.Response;
 import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
