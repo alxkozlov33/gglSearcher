@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="DJNativeSwing-SWT">
+    <CLASSES>
+      <root url="jar://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/DJNativeSwing-SWT.jar!/" />
+      <root url="jar://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/DJNativeSwing.jar!/" />
+      <root url="jar://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/DJNativeSwing-SWTDemo.jar!/" />
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/api" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/src/DJNativeSwing" />
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/src/DJNativeSwing-SWT" />
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/src/DJNativeSwing-SWTCore" />
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/src/DJNativeSwing-SWTDemo" />
+      <root url="jar://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708/DJNativeSwing-SWTDemo.jar!/src" />
+      <root url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708" />
+    </SOURCES>
+    <jarDirectory url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708" recursive="false" />
+    <jarDirectory url="file://F:/Downloads/DJNativeSwing-SWT-1-0-3-20140708" recursive="false" type="SOURCES" />
+  </library>
+</component>

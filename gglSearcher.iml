@@ -18,5 +18,6 @@
     <orderEntry type="library" name="org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0" level="project" />
     <orderEntry type="library" name="commons-io-2.6" level="project" />
     <orderEntry type="library" name="io.github.bonigarcia:webdrivermanager:3.4.0" level="project" />
+    <orderEntry type="library" name="DJNativeSwing-SWT" level="project" />
   </component>
 </module>

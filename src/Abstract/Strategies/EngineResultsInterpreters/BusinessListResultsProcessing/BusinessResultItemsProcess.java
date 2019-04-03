@@ -6,15 +6,23 @@ import Utils.StrUtils;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import javafx.scene.web.WebEngine;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.tinylog.Logger;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BusinessResultItemsProcess {
     public abstract List<BusinessListSearchResultItem> processBody(ProxyWebEngine proxyWebEngine);
@@ -52,26 +60,41 @@ public abstract class BusinessResultItemsProcess {
 
     List<BusinessListSearchResultItem> requestToGoogleMaps(ProxyWebEngine proxyWebEngine) {
         List results = new ArrayList<>();
+        WebElement link = proxyWebEngine.webDriver.findElementByXPath("//*[@id=\"rso\"]/div[1]/div/div/div[2]/div/div[1]/a");
+        link.click();
+        proxyWebEngine.webClient.waitForBackgroundJavaScript(30000);
+        WebElement nextButton = null;
         try {
-            String queryTerm = proxyWebEngine.webDriver.findElementByName("q").getAttribute("value");
-            String requestURL = StrUtils.createUrlForMapsSearching(queryTerm);
-            HtmlPage page = proxyWebEngine.webClient.getPage(requestURL);
-            proxyWebEngine.webClient.waitForBackgroundJavaScript(30000);
-            HtmlDivision first = page.getFirstByXPath("//*[@id=\"pane\"]/div/div[1]/div/div/div[2]/div[1]");
-            String firstText = first.asText();
-            first.click();
-
-            proxyWebEngine.webClient.waitForBackgroundJavaScript(30000);
-            HtmlDivision details  = page.getFirstByXPath("//*[@id=\"pane\"]/div/div[1]/div/div");
-            String detailsText = details.asText();
-            //link.getWebResponse(true);
-            //List images = page.getByXPath("//img");
-            //image.getImageReader();
-            //String test = Jsoup.connect(requestURL).execute().body();
-            //results = processMapsPage(proxyWebEngine);
-        } catch (IOException e) {
-            Logger.error(e);
+            nextButton = proxyWebEngine.webDriver.findElement(By.id("pnnext"));
+        } catch(NoSuchElementException ex) {
+            Logger.error(ex);
         }
+        do {
+            List<WebElement> elements = proxyWebEngine.webDriver.findElements((By.cssSelector("a.rllt__link")));
+            for (WebElement item : elements) {
+                String galleryName = item.getText();
+                new Actions(proxyWebEngine.webDriver).moveToElement(item).click().perform();
+
+                WebEngine webEngine = new WebEngine();
+                WebDriver driver = proxyWebEngine.webDriver;
+                By detailsContainer = By.xpath("//*[@id=\"rhs_block\"]/div/div[2]");
+                Wait<WebDriver> wait = new FluentWait<>(driver)
+                        .withTimeout(60, TimeUnit.SECONDS)
+                        .pollingEvery(5, TimeUnit.SECONDS)
+                        .ignoring(NoSuchElementException.class);
+                wait.until(ExpectedConditions
+                        .presenceOfElementLocated(detailsContainer));
+
+                proxyWebEngine.webDriver.navigate().to(proxyWebEngine.webDriver.getCurrentUrl());
+                System.out.println(proxyWebEngine.webDriver.getPageSource());
+
+                nextButton = proxyWebEngine.webDriver.findElement(By.id("pnnext"));
+                nextButton.click();
+            }
+            //BusinessListSearchResultItem regularSearchResultItem = new BusinessListSearchResultItem(galleryName, webSite, "", address, StrUtils.getCountryFromAddress(address));
+            //results.add(regularSearchResultItem);
+        } while (nextButton != null);
+
         return results;
     }
 
