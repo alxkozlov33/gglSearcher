@@ -41,17 +41,14 @@ public class Main {
     }
 
     private void tests() {
-        Browser browser = new Browser();
-        browser.setTitle("Info searcher v3.3.2 [GGL] Browser");
-        browser.setVisible(true);
-        browser.setResizable(false);
-        browser.setSize(800, 700);
+//        Browser browser = new Browser();
+//        browser.setTitle("Info searcher v3.3.2 [GGL] Browser");
+//        browser.setVisible(true);
+//        browser.setResizable(false);
+//        browser.setSize(800, 700);
     }
 
     private void initLookAndFeel() {
-        UIUtils.setPreferredLookAndFeel();
-        NativeInterface.initialize();
-        NativeInterface.open();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

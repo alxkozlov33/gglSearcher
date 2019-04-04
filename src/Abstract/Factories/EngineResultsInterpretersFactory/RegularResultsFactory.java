@@ -6,8 +6,11 @@ import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.Re
 import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsStrategyTypeTwo;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RegularResultsFactory implements ISearchResultFactory {
     @Override
@@ -17,13 +20,17 @@ public class RegularResultsFactory implements ISearchResultFactory {
 
     @Override
     public List<RegularSearchResultItem> processBody(Element body) {
+        IRegularSearchItemsProcess iRegularSearchItemsProcess = null;
+        Elements items;
 
-        IRegularSearchItemsProcess iRegularSearchItemsProcess;
-        if (body.getElementsContainingText("All results").size() > 0) {
-            iRegularSearchItemsProcess = new RegularResultsStrategyTypeOne(); // "All results" page
-        } else {
-            iRegularSearchItemsProcess = new RegularResultsStrategyTypeTwo();  //Regular simple page
+        items = body.select("#ires");
+        if (items != null) {
+            iRegularSearchItemsProcess = new RegularResultsStrategyTypeOne();
         }
-        return new ArrayList<>(iRegularSearchItemsProcess.processBody(body));
+        items = body.select("#rso");
+        if (items != null) {
+            iRegularSearchItemsProcess = new RegularResultsStrategyTypeTwo();
+        }
+        return new ArrayList<>(Objects.requireNonNull(iRegularSearchItemsProcess).processBody(body));
     }
 }

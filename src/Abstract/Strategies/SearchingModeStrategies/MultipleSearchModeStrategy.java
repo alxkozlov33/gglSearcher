@@ -1,15 +1,10 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
-import Abstract.Engines.ProxyWebClient;
 import Abstract.Engines.ProxyWebEngine;
-import Abstract.Engines.WebUrlEngine;
-import Abstract.Factories.EngineResultsInterpretersFactory.BusinessListResultsFactory;
-import Abstract.Factories.EngineResultsInterpretersFactory.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Abstract.Models.SearchResultModels.RegularSearchResultItem;
+import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
 import Abstract.Strategies.OutputResultsConversionStrategies.MultipleSearchResultsDataConvertStrategy.ConvertBusinessSearchWithGeoDataStrategy;
-import Abstract.Strategies.OutputResultsConversionStrategies.MultipleSearchResultsDataConvertStrategy.ConvertSearchResultsWithGeoDataStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
@@ -17,7 +12,6 @@ import Abstract.Models.RequestData;
 import Services.*;
 import Utils.StrUtils;
 import org.tinylog.Logger;
-
 import java.util.List;
 
 public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
@@ -59,12 +53,10 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 //                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
 //                List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
 
-                BusinessListResultsFactory businessListResultsFactory = new BusinessListResultsFactory();
-                List<BusinessListSearchResultItem> businessListSearchResultItems = businessListResultsFactory.processBody(webEngine);
+                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processBody(webEngine);
                 List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
                 SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                         = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
-
 
                 List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
 

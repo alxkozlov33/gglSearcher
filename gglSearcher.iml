@@ -19,5 +19,6 @@
     <orderEntry type="library" name="commons-io-2.6" level="project" />
     <orderEntry type="library" name="io.github.bonigarcia:webdrivermanager:3.4.0" level="project" />
     <orderEntry type="library" name="DJNativeSwing-SWT" level="project" />
+    <orderEntry type="library" name="com.vladsch.javafx-webview-debugger:javafx-webview-debugger:0.7.0" level="project" />
   </component>
 </module>
