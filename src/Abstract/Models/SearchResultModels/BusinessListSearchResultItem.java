@@ -1,5 +1,7 @@
 package Abstract.Models.SearchResultModels;
 
+import Abstract.Models.InputModels.InputCsvModelItem;
+
 public class BusinessListSearchResultItem extends GoogleSearchResultItem {
 
     private String city;
@@ -9,6 +11,14 @@ public class BusinessListSearchResultItem extends GoogleSearchResultItem {
         super(mainHeader, link, description);
         this.city = city;
         this.country = country;
+    }
+
+    public BusinessListSearchResultItem(String mainHeader, String link, String description, InputCsvModelItem inputCsvModelItem) {
+        super(mainHeader, link, description);
+        if (inputCsvModelItem != null) {
+            this.city = inputCsvModelItem.getColumnA();
+            this.country = inputCsvModelItem.getColumnC();
+        }
     }
 
     public String getCity() {

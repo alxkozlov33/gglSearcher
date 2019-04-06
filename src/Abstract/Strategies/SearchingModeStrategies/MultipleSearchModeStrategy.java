@@ -15,6 +15,7 @@ import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
 import Services.*;
 import Utils.StrUtils;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 import java.util.List;
@@ -47,8 +48,8 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL, 10, 10000);
             ProxyWebEngine webEngine = new ProxyWebEngine();
-            Element body = new ProxyWebClient(diResolver).request(requestData);
             webEngine.webDriver.navigate().to(requestData.requestURL);
+            Element body = Jsoup.parse(webEngine.webDriver.getPageSource());
 
             try {
                 RegularResultsFactory regularResultsFactory = new RegularResultsFactory();

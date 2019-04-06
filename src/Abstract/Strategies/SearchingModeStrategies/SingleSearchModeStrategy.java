@@ -17,6 +17,7 @@ import Services.GuiService;
 import Services.OutputDataService;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 
@@ -36,8 +37,8 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         String URL = StrUtils.createUrlForSingleSearch(guiService.getSearchPlaceholderText());
         RequestData requestData = new RequestData(URL, 10, 10000);
         ProxyWebEngine webEngine = new ProxyWebEngine();
-        Element body = new ProxyWebClient(diResolver).request(requestData);
         webEngine.webDriver.navigate().to(requestData.requestURL);
+        Element body = Jsoup.parse(webEngine.webDriver.getPageSource());
 
         RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
         List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.getRegularSearchStrategy(body);
@@ -46,7 +47,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
                 = new ConvertSearchResultsDataStrategy(diResolver);
         List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
 
-        List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine);
+        List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine, null);
         List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
         SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                 = new ConvertBusinessSearchDataStrategy();
