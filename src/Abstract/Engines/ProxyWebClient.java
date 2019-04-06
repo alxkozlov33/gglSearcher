@@ -1,7 +1,6 @@
 package Abstract.Engines;
 
 import java.io.*;
-import java.util.Random;
 import Abstract.Models.RequestData;
 import Services.DIResolver;
 import org.apache.http.HttpHost;

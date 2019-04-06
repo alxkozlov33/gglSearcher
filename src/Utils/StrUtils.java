@@ -1,6 +1,7 @@
 package Utils;
 
 import Abstract.Models.InputModels.InputCsvModelItem;
+import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
 import java.io.UnsupportedEncodingException;
@@ -52,14 +53,17 @@ public class StrUtils {
         return result;
     }
 
-    public static String createUrlForMapsSearching(String queryTerm) {
+    public static String createUrlForAdditionalPlacesSearch(BusinessListSearchResultItem businessListSearchResultItem) {
+        String inputPlaceHolder = "\""+businessListSearchResultItem.getMainHeader() + "\" " + businessListSearchResultItem.getCity() +", "+ businessListSearchResultItem.getCountry();
         String result = null;
-        if (StringUtils.isEmpty(queryTerm)) {
+        if (StringUtils.isEmpty(inputPlaceHolder)) {
             return "";
         }
+
         try {
-            result = "https://www.google.com/maps/search/" +
-                    URLEncoder.encode(queryTerm, "UTF-8");
+            result = "https://www.google.com/search?q=" +
+                    URLEncoder.encode(inputPlaceHolder, "UTF-8") +
+                    "&pws=0&gl=us&gws_rd=cr&num=150";
         } catch (UnsupportedEncodingException e) {
             Logger.tag("SYSTEM").error(e);
         }

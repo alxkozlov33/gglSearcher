@@ -23,4 +23,6 @@ public class GoogleSearchResultItem {
     public String getDescription() {
         return description;
     }
+
+    public void setLink(String link) { this.link = link; }
 }
