@@ -52,12 +52,12 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             Element body = Jsoup.parse(webEngine.webDriver.getPageSource());
 
             try {
-                RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
-                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.getRegularSearchStrategy(body);
-                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
-                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
-                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
-                List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
+//                RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
+//                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.getRegularSearchStrategy(body);
+//                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
+//                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
+//                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
+//                List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
 
                 List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine, inputCsvModelItem);
                 List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
@@ -66,7 +66,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
                 List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
 
-                outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
+                //outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
                 outputDataService.saveResultCsvItemsByMultipleSearch(listItems);
             }
             catch (Exception ex) {

@@ -21,7 +21,7 @@ public class BusinessResultItemsProcess {
         this.proxyWebEngine = proxyWebEngine;
 
         List<BusinessListSearchResultItem> results = new ArrayList<>();
-        WebElement linkToMaps = proxyWebEngine.webDriver.findElementByXPath("//*[@id=\"rso\"]/div[1]/div/div/div[2]/div/div[1]/a");
+        WebElement linkToMaps = proxyWebEngine.webDriver.findElementByCssSelector("#lu_map"); ////*[@id="rso"]/div[2]/div/div/div[2]/div/div[1]/a
         linkToMaps.click();
 
         WebElement nextButton;

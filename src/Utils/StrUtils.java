@@ -12,6 +12,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StrUtils {
+    private static String webSiteUrlRegex = "(http://www\\.|https://www\\.|http://|https://)?[a-z0-9]+([\\-.][a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?";
+
+    public static String extractWebSiteFromURL(String url) {
+        Pattern pattern = Pattern.compile(webSiteUrlRegex);
+        Matcher matcher = pattern.matcher(url);
+        if (matcher.find()) {
+            return matcher.group(0);
+        }
+        return url;
+    }
+
     public static String createUrlForMultipleSearch(InputCsvModelItem csvItem, String inputPlaceHolder) {
         String result = null;
         if (StringUtils.isEmpty(inputPlaceHolder)) {
@@ -54,7 +65,8 @@ public class StrUtils {
     }
 
     public static String createUrlForAdditionalPlacesSearch(BusinessListSearchResultItem businessListSearchResultItem) {
-        String inputPlaceHolder = "\""+businessListSearchResultItem.getMainHeader() + "\" " + businessListSearchResultItem.getCity() +", "+ businessListSearchResultItem.getCountry();
+        String inputPlaceHolder = "\""+businessListSearchResultItem.getMainHeader() + "\" "+ businessListSearchResultItem.getCity() +", "+ businessListSearchResultItem.getCountry()
+                +" | "+businessListSearchResultItem.getMainHeader()+ " " + businessListSearchResultItem.getCity() +", "+ businessListSearchResultItem.getCountry();
         String result = null;
         if (StringUtils.isEmpty(inputPlaceHolder)) {
             return "";
