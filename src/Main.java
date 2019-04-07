@@ -7,6 +7,7 @@ import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,9 @@ public class Main {
         initLookAndFeel();
 
         tests();
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
         GuiService guiService = new GuiService();
         UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();

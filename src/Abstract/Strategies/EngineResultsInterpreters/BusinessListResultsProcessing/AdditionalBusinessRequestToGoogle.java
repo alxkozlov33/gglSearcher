@@ -33,6 +33,7 @@ class AdditionalBusinessRequestToGoogle {
         try {
             resultsAbout = proxyWebEngine.webDriver.findElementByXPath("//*[@id=\"rhs_block\"]/div/div/div/div[1]/div[2]/div[2]/div/a");
             resultsAbout.click();
+            element = Jsoup.parse(proxyWebEngine.webDriver.getPageSource());
         } catch (NoSuchElementException ex) {
             Logger.error(ex, "Cannot locate \"results about\" button");
         }

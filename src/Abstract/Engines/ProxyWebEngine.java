@@ -9,8 +9,8 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class ProxyWebEngine extends BaseEngine {
     public final HtmlUnitDriver webDriver;
@@ -18,6 +18,10 @@ public class ProxyWebEngine extends BaseEngine {
     public final WebDriverWait wait;
 
     public ProxyWebEngine() {
+
+
+
+
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {
