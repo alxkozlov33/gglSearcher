@@ -1,13 +1,10 @@
 import Abstract.Commands.ApplicationStartedActionCommand;
 import GUI.Bootstrapper;
-import GUI.Browser;
 import Services.*;
-import chrriis.common.UIUtils;
-import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,11 +14,6 @@ public class Main {
 
     private void start() {
         initLookAndFeel();
-
-        tests();
-        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
-        java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
-        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
         GuiService guiService = new GuiService();
         UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
@@ -44,13 +36,7 @@ public class Main {
         applicationStartedActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
     }
 
-    private void tests() {
-//        Browser browser = new Browser();
-//        browser.setTitle("Info searcher v3.3.2 [GGL] Browser");
-//        browser.setVisible(true);
-//        browser.setResizable(false);
-//        browser.setSize(800, 700);
-    }
+
 
     private void initLookAndFeel() {
         try {

@@ -1,15 +1,25 @@
 package Abstract.Engines;
 
 import com.gargoylesoftware.htmlunit.*;
+import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.ErrorHandler;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 
 public class ProxyWebEngine extends BaseEngine {
@@ -18,9 +28,10 @@ public class ProxyWebEngine extends BaseEngine {
     public final WebDriverWait wait;
 
     public ProxyWebEngine() {
+        LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
 
-
-
+        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
 
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
@@ -37,14 +48,12 @@ public class ProxyWebEngine extends BaseEngine {
                 client.waitForBackgroundJavaScriptStartingBefore(30000);
 
                 client.getOptions().setUseInsecureSSL(true); //ignore ssl certificate
-                client.getOptions().setThrowExceptionOnScriptError(false);
-                client.getOptions().setThrowExceptionOnFailingStatusCode(false);
                 client.getOptions().setPrintContentOnFailingStatusCode(true);
                 client.setCssErrorHandler(new SilentCssErrorHandler());
                 client.setAjaxController(new NicelyResynchronizingAjaxController());
                 client.setJavaScriptTimeout(30000);
                 client.getOptions().setUseInsecureSSL(true);
-                client.getOptions().setCssEnabled(true);
+                client.getOptions().setCssEnabled(false);
                 client.getOptions().setJavaScriptEnabled(true);
 
                 client.setWebConnection(new WebConnectionWrapper(client) {
@@ -55,11 +64,59 @@ public class ProxyWebEngine extends BaseEngine {
                     }
                 });
 
+                shutUpDirtyMouth(client);
                 webClient = client;
                 return client;
             }
         };
 
         wait = new WebDriverWait(webDriver, 40);
+    }
+
+    private void shutUpDirtyMouth(WebClient webClient) {
+
+        webClient.setIncorrectnessListener((arg0, arg1) -> {
+            // TODO Auto-generated method stub
+        });
+
+        webClient.setCssErrorHandler(new SilentCssErrorHandler());
+
+        webClient.setJavaScriptErrorListener(new JavaScriptErrorListener() {
+
+            @Override
+            public void scriptException(InteractivePage interactivePage, ScriptException e) {
+
+            }
+
+            @Override
+            public void timeoutError(InteractivePage interactivePage, long l, long l1) {
+
+            }
+
+            @Override
+            public void malformedScriptURL(InteractivePage interactivePage, String s, MalformedURLException e) {
+
+            }
+
+            @Override
+            public void loadScriptError(InteractivePage interactivePage, URL url, Exception e) {
+
+            }
+        });
+        webClient.setHTMLParserListener(new HTMLParserListener() {
+
+            @Override
+            public void error(String s, URL url, String s1, int i, int i1, String s2) {
+
+            }
+
+            @Override
+            public void warning(String s, URL url, String s1, int i, int i1, String s2) {
+
+            }
+        });
+
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
     }
 }
