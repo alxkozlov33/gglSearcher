@@ -1,7 +1,6 @@
 import Abstract.Commands.ApplicationStartedActionCommand;
 import GUI.Bootstrapper;
 import Services.*;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

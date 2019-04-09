@@ -52,22 +52,22 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             Element body = Jsoup.parse(webEngine.webDriver.getPageSource());
 
             try {
-//                RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
-//                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.getRegularSearchStrategy(body);
+                RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
+                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.getRegularSearchStrategy(body);
 //                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
 //                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
 //                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
 //                List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
 
-                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine, inputCsvModelItem);
-                List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
-                SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
-                        = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
-
-                List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
+//                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine, inputCsvModelItem);
+//                List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
+//                SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
+//                        = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
+//
+//                List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
 
                 //outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
-                outputDataService.saveResultCsvItemsByMultipleSearch(listItems);
+                //outputDataService.saveResultCsvItemsByMultipleSearch(listItems);
             }
             catch (Exception ex) {
                 Logger.tag("SYSTEM").error(ex);

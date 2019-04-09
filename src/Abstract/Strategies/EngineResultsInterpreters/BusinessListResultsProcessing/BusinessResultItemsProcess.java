@@ -21,7 +21,13 @@ public class BusinessResultItemsProcess {
         this.proxyWebEngine = proxyWebEngine;
 
         List<BusinessListSearchResultItem> results = new ArrayList<>();
-        WebElement linkToMaps = proxyWebEngine.webDriver.findElementByCssSelector("#lu_map"); ////*[@id="rso"]/div[2]/div/div/div[2]/div/div[1]/a
+        WebElement linkToMaps;
+        try {
+            linkToMaps = proxyWebEngine.webDriver.findElementByCssSelector("#lu_map"); ////*[@id="rso"]/div[2]/div/div/div[2]/div/div[1]/a
+        } catch(NoSuchElementException ex) {
+            Logger.error(ex, "Cannot locate map in google results");
+            return results;
+        }
         linkToMaps.click();
 
         WebElement nextButton;
