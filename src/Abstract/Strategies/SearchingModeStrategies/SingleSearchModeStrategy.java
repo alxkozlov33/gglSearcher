@@ -1,13 +1,12 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
-import Abstract.Engines.ProxyWebClient;
 import Abstract.Engines.ProxyWebEngine;
-import Abstract.Factories.EngineResultsInterpretersFactory.RegularResultsFactory;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
+import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsItemsProcess;
 import Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy.ConvertBusinessSearchDataStrategy;
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy.ConvertSearchResultsDataStrategy;
@@ -40,18 +39,18 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         webEngine.webDriver.navigate().to(requestData.requestURL);
         Element body = Jsoup.parse(webEngine.webDriver.getPageSource());
 
-        RegularResultsFactory regularResultsFactory = new RegularResultsFactory();
-        List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.getRegularSearchStrategy(body);
+        RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
+        List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
         List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
         SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
                 = new ConvertSearchResultsDataStrategy(diResolver);
-        List regularItems = regularConvertStrategy.convertResultData(filteredRegularSearchResultItems);
+        List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
 
         List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine, null);
         List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
         SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                 = new ConvertBusinessSearchDataStrategy();
-        List listItems = businessListConvertStrategy.convertResultData(filteredListSearchResultItems);
+        List listItems = businessListConvertStrategy.convertResultDataToOutputModels(filteredListSearchResultItems);
 
         outputDataService.saveResultCsvItems(regularItems);
         outputDataService.saveResultCsvItems(listItems);

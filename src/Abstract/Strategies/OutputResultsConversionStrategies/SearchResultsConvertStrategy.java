@@ -16,7 +16,7 @@ import java.util.List;
 //TODO: Refactor
 public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultItem, U extends IOutputModel> {
 
-    public abstract List<U> convertResultData(List<T> searchItems);
+    public abstract List<U> convertResultDataToOutputModels(List<T> searchItems);
 
     protected Element getWebSitePageSource(GoogleSearchResultItem item, DIResolver diResolver) {
         RequestData requestData = new RequestData(item.getLink(), 10, 10000);

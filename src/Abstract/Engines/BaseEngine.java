@@ -11,4 +11,8 @@ abstract class BaseEngine {
     final int port = 22225;
     String session_id = Integer.toString(new Random().nextInt(Integer.MAX_VALUE));
     CloseableHttpClient client;
+
+    String getLoginName() {
+        return username+"-session-" + session_id;
+    }
 }

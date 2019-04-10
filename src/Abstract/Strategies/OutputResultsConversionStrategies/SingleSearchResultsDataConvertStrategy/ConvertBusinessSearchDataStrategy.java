@@ -4,7 +4,6 @@ import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class ConvertBusinessSearchDataStrategy extends SearchResultsConvertStrat
     }
 
     @Override
-    public List<IOutputModel> convertResultData(List<BusinessListSearchResultItem> searchItems) {
+    public List<IOutputModel> convertResultDataToOutputModels(List<BusinessListSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
             return null;

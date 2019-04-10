@@ -2,7 +2,6 @@ package Abstract.Engines;
 
 import com.gargoylesoftware.htmlunit.*;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
 import org.apache.commons.logging.LogFactory;
@@ -12,11 +11,6 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.remote.ErrorHandler;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.w3c.css.sac.CSSException;
-import org.w3c.css.sac.CSSParseException;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,19 +18,12 @@ import java.util.logging.Level;
 
 public class ProxyWebEngine extends BaseEngine {
     public final HtmlUnitDriver webDriver;
-    public WebClient webClient;
-    public final WebDriverWait wait;
 
     public ProxyWebEngine() {
-        LogFactory.getFactory().setAttribute("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
-
-        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(Level.OFF);
-        java.util.logging.Logger.getLogger("org.apache.commons.httpclient").setLevel(Level.OFF);
-
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {
-                String login = username+"-session-" + session_id;
+                String login = getLoginName();
 
                 HttpHost super_proxy = new HttpHost(hostName, port);
                 CredentialsProvider cred_provider = new BasicCredentialsProvider();
@@ -46,8 +33,7 @@ public class ProxyWebEngine extends BaseEngine {
                 client.setCookieManager(new CookieManager());
                 client.waitForBackgroundJavaScript(30000);
                 client.waitForBackgroundJavaScriptStartingBefore(30000);
-
-                client.getOptions().setUseInsecureSSL(true); //ignore ssl certificate
+                client.getOptions().setUseInsecureSSL(true);
                 client.getOptions().setPrintContentOnFailingStatusCode(true);
                 client.setCssErrorHandler(new SilentCssErrorHandler());
                 client.setAjaxController(new NicelyResynchronizingAjaxController());
@@ -65,12 +51,9 @@ public class ProxyWebEngine extends BaseEngine {
                 });
 
                 shutUpDirtyMouth(client);
-                webClient = client;
                 return client;
             }
         };
-
-        wait = new WebDriverWait(webDriver, 40);
     }
 
     private void shutUpDirtyMouth(WebClient webClient) {

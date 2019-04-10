@@ -33,7 +33,7 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
     }
 
     @Override
-    public List<IOutputModel> convertResultData(List<RegularSearchResultItem> searchItems) {
+    public List<IOutputModel> convertResultDataToOutputModels(List<RegularSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
             return null;

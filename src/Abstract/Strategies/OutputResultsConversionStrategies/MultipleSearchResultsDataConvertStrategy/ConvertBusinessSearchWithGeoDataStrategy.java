@@ -19,7 +19,7 @@ public class ConvertBusinessSearchWithGeoDataStrategy extends SearchResultsConve
     }
 
     @Override
-    public List<IOutputModel> convertResultData(List<BusinessListSearchResultItem> searchItems) {
+    public List<IOutputModel> convertResultDataToOutputModels(List<BusinessListSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
             return null;

@@ -1,4 +1,4 @@
-package Abstract.Factories.SearchingModeStrategyFactory;
+package Abstract.Factories;
 import Abstract.Strategies.SearchingModeStrategies.MultipleSearchModeStrategy;
 import Abstract.Strategies.SearchingModeStrategies.SingleSearchModeStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
