@@ -1,0 +1,15 @@
+17:30:34 INFO: Services.DIResolver.<init>()
+ Application started...
+
+17:30:34 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+
+17:30:34 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+
+17:30:35 INFO: Abstract.Strategies.SearchingModeStrategies.MultipleSearchModeStrategy.processData()
+ Continue from: 25 record
+
+17:31:31 INFO: Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsItemsProcess.translateBodyToModels()
+ Parsed: 29 links
+

@@ -1,6 +1,8 @@
 package Abstract.Engines;
 
 import java.io.*;
+import java.util.Random;
+
 import Abstract.Models.RequestData;
 import Services.DIResolver;
 import org.apache.http.HttpHost;
@@ -20,7 +22,7 @@ public class ProxyWebClient extends BaseEngine {
 
     public ProxyWebClient(DIResolver diResolver) {
         this.diResolver = diResolver;
-        String login = username + "-session-" + session_id;
+        String login = username + "-session-" + Integer.toString(new Random().nextInt(Integer.MAX_VALUE));
 
         HttpHost super_proxy = new HttpHost(hostName, port);
         CredentialsProvider cred_provider = new BasicCredentialsProvider();

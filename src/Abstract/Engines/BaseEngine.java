@@ -9,10 +9,9 @@ abstract class BaseEngine {
     static final String password = "qs38hp672p1l";
     static final String hostName = "zproxy.lum-superproxy.io";
     final int port = 22225;
-    String session_id = Integer.toString(new Random().nextInt(Integer.MAX_VALUE));
     CloseableHttpClient client;
 
     String getLoginName() {
-        return username+"-session-" + session_id;
+        return username+"-session-" + Integer.toString(new Random().nextInt(Integer.MAX_VALUE));
     }
 }

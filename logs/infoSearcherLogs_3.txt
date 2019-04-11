@@ -1,0 +1,12 @@
+17:34:06 INFO: Services.DIResolver.<init>()
+ Application started...
+
+17:34:06 INFO: Abstract.Commands.ApplicationStartedActionCommand.actionPerformed()
+ Application started
+
+17:34:06 INFO: Abstract.Commands.RunButtonActionCommand.actionPerformed()
+ Run button action performed
+
+17:34:07 INFO: Abstract.Strategies.SearchingModeStrategies.MultipleSearchModeStrategy.processData()
+ Continue from: 25 record
+

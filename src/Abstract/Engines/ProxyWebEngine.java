@@ -4,22 +4,19 @@ import com.gargoylesoftware.htmlunit.*;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
 
-public class ProxyWebEngine extends BaseEngine {
+class ProxyWebEngine extends BaseEngine {
     public final HtmlUnitDriver webDriver;
 
-    public ProxyWebEngine() {
+    private ProxyWebEngine() {
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {
@@ -29,6 +26,7 @@ public class ProxyWebEngine extends BaseEngine {
                 CredentialsProvider cred_provider = new BasicCredentialsProvider();
                 cred_provider.setCredentials(new AuthScope(super_proxy),
                         new UsernamePasswordCredentials(login, password));
+
                 client.setCredentialsProvider(cred_provider);
                 client.setCookieManager(new CookieManager());
                 client.waitForBackgroundJavaScript(30000);
@@ -42,13 +40,7 @@ public class ProxyWebEngine extends BaseEngine {
                 client.getOptions().setCssEnabled(false);
                 client.getOptions().setJavaScriptEnabled(true);
 
-                client.setWebConnection(new WebConnectionWrapper(client) {
-                    @Override
-                    public WebResponse getResponse(final WebRequest request) throws IOException {
-                        WebResponse response = super.getResponse(request);
-                        return response;
-                    }
-                });
+                client.setWebConnection(new WebConnectionWrapper(client));
 
                 shutUpDirtyMouth(client);
                 return client;
