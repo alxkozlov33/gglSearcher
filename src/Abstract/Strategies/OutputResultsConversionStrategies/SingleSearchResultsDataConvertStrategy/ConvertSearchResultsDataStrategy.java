@@ -41,7 +41,7 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         for (int i = 0; i < searchedItemsSize; i++) {
             if(propertiesService.getWorkState()) {
                 guiService.updateCountItemsStatus(i, searchedItemsSize);
-                Element pageSourceData = getWebSitePageSource(searchItems.get(i), diResolver);
+                Element pageSourceData = getWebSitePageSource(searchItems.get(i));
                 WebPageObject webPageObject = parseSourceData(pageSourceData);
                 if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
                     String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
@@ -62,6 +62,4 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         }
         return googleSearchResultItem.getMainHeader();
     }
-
-
 }

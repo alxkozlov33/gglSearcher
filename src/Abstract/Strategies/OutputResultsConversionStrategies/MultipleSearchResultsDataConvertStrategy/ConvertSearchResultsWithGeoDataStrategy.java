@@ -46,7 +46,7 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
 
         for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
             if(propertiesService.getWorkState()) {
-                Element pageSourceData = getWebSitePageSource(googleSearchResultItem, diResolver);
+                Element pageSourceData = getWebSitePageSource(googleSearchResultItem);
                 WebPageObject webPageObject = parseSourceData(pageSourceData);
                 if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
                     String galleryName = getGalleryName(webPageObject, googleSearchResultItem);

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="us.codecraft:xsoup:0.3.1" type="repository">
+    <properties maven-id="us.codecraft:xsoup:0.3.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/xsoup-0.3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jsoup-1.8.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/assertj-core-1.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

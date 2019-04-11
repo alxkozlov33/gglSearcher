@@ -13,10 +13,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-class ProxyWebEngine extends BaseEngine {
+public class ProxyWebEngine extends BaseEngine {
     public final HtmlUnitDriver webDriver;
 
-    private ProxyWebEngine() {
+    public ProxyWebEngine() {
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {

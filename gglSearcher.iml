@@ -17,8 +17,6 @@
     <orderEntry type="library" name="org.tinylog:tinylog-impl:2.0.0-M3" level="project" />
     <orderEntry type="library" name="org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0" level="project" />
     <orderEntry type="library" name="commons-io-2.6" level="project" />
-    <orderEntry type="library" name="io.github.bonigarcia:webdrivermanager:3.4.0" level="project" />
-    <orderEntry type="library" name="DJNativeSwing-SWT" level="project" />
-    <orderEntry type="library" name="com.vladsch.javafx-webview-debugger:javafx-webview-debugger:0.7.0" level="project" />
+    <orderEntry type="library" name="us.codecraft:xsoup:0.3.1" level="project" />
   </component>
 </module>

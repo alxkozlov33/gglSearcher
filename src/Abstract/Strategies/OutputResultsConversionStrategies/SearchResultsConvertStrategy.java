@@ -18,9 +18,9 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
 
     public abstract List<U> convertResultDataToOutputModels(List<T> searchItems);
 
-    protected Element getWebSitePageSource(GoogleSearchResultItem item, DIResolver diResolver) {
-        RequestData requestData = new RequestData(item.getLink(), 10, 10000);
-        return new ProxyWebClient(diResolver).request(requestData);
+    protected Element getWebSitePageSource(GoogleSearchResultItem item) {
+        RequestData requestData = new RequestData(item.getLink(), 3, 2000);
+        return new ProxyWebClient().request(requestData);
     }
 
     protected WebPageObject parseSourceData(Element pageSourceData){

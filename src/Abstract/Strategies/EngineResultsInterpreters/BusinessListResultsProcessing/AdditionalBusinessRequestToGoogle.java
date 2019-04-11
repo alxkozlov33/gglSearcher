@@ -7,18 +7,16 @@ import Abstract.Specifications.AbstractSpecification;
 import Abstract.Specifications.Concrete.WebsiteSpecifications.IsFacebookSpecification;
 import Abstract.Specifications.Concrete.WebsiteSpecifications.IsInstagramSpecification;
 import Abstract.Specifications.Concrete.WebsiteSpecifications.IsTwitterSpecification;
-import Services.DIResolver;
 import Utils.StrUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.tinylog.Logger;
 
 class AdditionalBusinessRequestToGoogle {
     private final AbstractSpecification<String> socialMediaSpecification;
 
-    AdditionalBusinessRequestToGoogle(DIResolver diResolver) {
+    AdditionalBusinessRequestToGoogle() {
         this.socialMediaSpecification = new IsFacebookSpecification().or(new IsInstagramSpecification()).or(new IsTwitterSpecification());
     }
 

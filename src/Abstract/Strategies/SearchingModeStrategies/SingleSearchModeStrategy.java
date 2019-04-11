@@ -46,7 +46,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
                 = new ConvertSearchResultsDataStrategy(diResolver);
         List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
 
-        List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess(diResolver).processData(webEngine, null);
+        List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, null);
         List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
         SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                 = new ConvertBusinessSearchDataStrategy();

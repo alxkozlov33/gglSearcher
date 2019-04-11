@@ -12,7 +12,7 @@ public class RegularResultsItemsProcess {
 
     public List<RegularSearchResultItem> translateBodyToModels(Element body) {
         ArrayList<RegularSearchResultItem> results = new ArrayList<>();
-        Elements items = body.select("#ires");
+        Element items = body.selectFirst("#ires");
         if (items == null) {
             return results;
         }
@@ -23,7 +23,7 @@ public class RegularResultsItemsProcess {
             String link = div.select("h3.r > a").attr("href").replaceFirst("/*$", "");
             String description = div.select("div.s").select("span.st").text();
 
-            RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, StrUtils.normalizeGoogleLink(link), description);
+            RegularSearchResultItem regularSearchResultItem = new RegularSearchResultItem(mainHeader, StrUtils.extractWebSiteFromURL(link), description);
             results.add(regularSearchResultItem);
         }
         return results;

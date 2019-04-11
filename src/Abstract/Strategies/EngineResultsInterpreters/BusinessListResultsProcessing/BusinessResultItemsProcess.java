@@ -1,62 +1,61 @@
 package Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing;
 
-import Abstract.Engines.ProxyWebEngine;
+import Abstract.Engines.ProxyWebClient;
 import Abstract.Models.InputModels.InputCsvModelItem;
+import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Services.DIResolver;
-import org.openqa.selenium.*;
+import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
+import us.codecraft.xsoup.Xsoup;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessResultItemsProcess {
-    private ProxyWebEngine proxyWebEngine;
-    private final DIResolver diResolver;
 
-    public BusinessResultItemsProcess(DIResolver diResolver) {
-        this.diResolver = diResolver;
+    public BusinessResultItemsProcess() {
     }
 
-    public List<BusinessListSearchResultItem> processData(ProxyWebEngine proxyWebEngine, InputCsvModelItem inputCsvModelItem) {
-        this.proxyWebEngine = proxyWebEngine;
+    public List<BusinessListSearchResultItem> processData(Element body, InputCsvModelItem inputCsvModelItem) {
 
         List<BusinessListSearchResultItem> results = new ArrayList<>();
-        WebElement linkToMaps;
+        String linkToMaps;
         try {
-            linkToMaps = proxyWebEngine.webDriver.findElementByCssSelector("#lu_map"); ////*[@id="rso"]/div[2]/div/div/div[2]/div/div[1]/a
-        } catch(NoSuchElementException ex) {
+            linkToMaps = body.select("#lu_map").attr("a");
+        } catch(Exception ex) {
             Logger.error(ex, "Cannot locate map in google results");
             return results;
         }
-        linkToMaps.click();
+        ProxyWebClient proxyWebClient = new ProxyWebClient();
+        Element mapsPage = proxyWebClient.request(new RequestData(linkToMaps, 3, 2000));
 
-        WebElement nextButton;
-        AdditionalBusinessRequestToGoogle additionalBusinessRequestToGoogle = new AdditionalBusinessRequestToGoogle(diResolver);
+        URL nextButton;
+        AdditionalBusinessRequestToGoogle additionalBusinessRequestToGoogle = new AdditionalBusinessRequestToGoogle();
         do {
-            nextButton = getNextButton();
-            int placesSize = proxyWebEngine.webDriver.findElements((By.cssSelector("a.rllt__link"))).size();
+            nextButton = getNextButton(mapsPage);
+            int placesSize = mapsPage.select("a.rllt__link").size();
             for (int i = 1; i <= placesSize; i++) {
-                String placeName = proxyWebEngine.webDriver.findElement((By.xpath("//*[@id=\"rl_ist0\"]/div[1]/div[4]/div[" + i + "]/div/div[3]/div/a/div/div[2]/div"))).getText();
+                String placeName = Xsoup.compile("//*[@id=\"rl_ist0\"]/div[1]/div[4]/div[" + i + "]/div/div[3]/div/a/div/div[2]/div").evaluate(mapsPage).get();
                 BusinessListSearchResultItem regularSearchResultItem = new BusinessListSearchResultItem(placeName, "", "", inputCsvModelItem);
                 additionalBusinessRequestToGoogle.processData(regularSearchResultItem);
                 results.add(regularSearchResultItem);
             }
 
             if (nextButton != null) {
-                nextButton.click();
+                mapsPage = proxyWebClient.request(new RequestData(linkToMaps, 3, 2000));
             }
         } while (nextButton != null);
         return results;
     }
 
-    private WebElement getNextButton() {
-        WebElement nextButton = null;
+    private URL getNextButton(Element body) {
+        URL nextButton = null;
         try {
-            nextButton = proxyWebEngine.webDriver.findElement(By.id("pnnext"));
-        } catch(NoSuchElementException ex) {
-            Logger.error(ex);
+            nextButton = new URL(body.select("#pnnext").attr("href"));
+        } catch (MalformedURLException e) {
+            Logger.error(e);
         }
-
         return nextButton;
     }
 }

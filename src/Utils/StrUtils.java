@@ -12,9 +12,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StrUtils {
-    private static String webSiteUrlRegex = "(http://www\\.|https://www\\.|http://|https://)?[a-z0-9]+([\\-.][a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?";
 
-    public static String extractWebSiteFromURL(String url) {
+    public synchronized static String extractWebSiteFromURL(String url) {
+        String webSiteUrlRegex = "(http://www\\.|https://www\\.|http://|https://)?[a-z0-9]+([\\-.][a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?";
         Pattern pattern = Pattern.compile(webSiteUrlRegex);
         Matcher matcher = pattern.matcher(url);
         if (matcher.find()) {
