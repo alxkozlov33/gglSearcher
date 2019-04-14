@@ -3,15 +3,12 @@ package Abstract.Engines;
 import com.gargoylesoftware.htmlunit.*;
 import com.gargoylesoftware.htmlunit.html.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
+import com.gargoylesoftware.htmlunit.util.WebClientUtils;
 import com.gargoylesoftware.htmlunit.util.WebConnectionWrapper;
-import org.apache.http.HttpHost;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 public class ProxyWebEngine extends BaseEngine {
     public final HtmlUnitDriver webDriver;
@@ -20,15 +17,16 @@ public class ProxyWebEngine extends BaseEngine {
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {
-                String login = getLoginName();
 
-                HttpHost super_proxy = new HttpHost(hostName, port);
-                CredentialsProvider cred_provider = new BasicCredentialsProvider();
-                cred_provider.setCredentials(new AuthScope(super_proxy),
-                        new UsernamePasswordCredentials(login, password));
+                String login = username + "-session-" + new Random().nextInt(Integer.MAX_VALUE);
 
-                client.setCredentialsProvider(cred_provider);
-                client.setCookieManager(new CookieManager());
+//                HttpHost super_proxy = new HttpHost(hostName, port);
+//                CredentialsProvider cred_provider = new BasicCredentialsProvider();
+//                cred_provider.setCredentials(new AuthScope(super_proxy),
+//                        new UsernamePasswordCredentials(login, password));
+//
+//                client.setCredentialsProvider(cred_provider);
+
                 client.waitForBackgroundJavaScript(30000);
                 client.waitForBackgroundJavaScriptStartingBefore(30000);
                 client.getOptions().setUseInsecureSSL(true);
@@ -40,12 +38,22 @@ public class ProxyWebEngine extends BaseEngine {
                 client.getOptions().setCssEnabled(false);
                 client.getOptions().setJavaScriptEnabled(true);
 
-                client.setWebConnection(new WebConnectionWrapper(client));
+                DefaultCredentialsProvider credentialsProvider = new
+                        DefaultCredentialsProvider();
+
+                credentialsProvider.addNTLMCredentials(username, password, hostName, port, "work", "domain");
+                client.setCredentialsProvider(credentialsProvider);
 
                 shutUpDirtyMouth(client);
+                client.setWebConnection(new WebConnectionWrapper(client));
+
                 return client;
             }
         };
+
+        webDriver.navigate().to("http://lumtest.com/myip.json");
+        String str = webDriver.getPageSource();
+        System.out.println(str);
     }
 
     private void shutUpDirtyMouth(WebClient webClient) {

@@ -4,18 +4,14 @@ import Abstract.Engines.ProxyWebClient;
 import Abstract.Engines.ProxyWebEngine;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
-import Abstract.Strategies.EngineResultsInterpreters.RegularResultsProcessing.RegularResultsItemsProcess;
 import Abstract.Strategies.OutputResultsConversionStrategies.MultipleSearchResultsDataConvertStrategy.ConvertBusinessSearchWithGeoDataStrategy;
-import Abstract.Strategies.OutputResultsConversionStrategies.MultipleSearchResultsDataConvertStrategy.ConvertSearchResultsWithGeoDataStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
 import Services.*;
 import Utils.StrUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 import java.util.List;
@@ -39,15 +35,17 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         Logger.tag("SYSTEM").info("Continue from: " + index + " record");
         for (int i = index; i < inputCsvItems.size(); i++) {
             InputCsvModelItem inputCsvModelItem = inputCsvItems.get(i);
-
             guiService.updateCountItemsStatus(i, inputCsvItems.size());
             if (!isWorkFlag) {
                 break;
             }
+
             propertiesService.saveIndex(i);
             String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL, 5, 3000);
-            Element body = new ProxyWebClient().request(requestData);
+            ProxyWebClient proxyWebClient = new ProxyWebClient();
+            Element body = proxyWebClient.request(requestData);
+
 
             try {
 //                RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
@@ -57,9 +55,8 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 //                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
 //                List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
 
-
                 //TODO: Debug.
-                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, inputCsvModelItem);
+                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, inputCsvModelItem, proxyWebClient);
                 List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
                 SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                         = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());

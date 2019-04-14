@@ -1,9 +1,12 @@
 package Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing;
 
 import Abstract.Engines.ProxyWebClient;
+import Abstract.Engines.ProxyWebEngine;
 import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
+import Utils.StrUtils;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 import us.codecraft.xsoup.Xsoup;
@@ -17,18 +20,17 @@ public class BusinessResultItemsProcess {
     public BusinessResultItemsProcess() {
     }
 
-    public List<BusinessListSearchResultItem> processData(Element body, InputCsvModelItem inputCsvModelItem) {
+    public List<BusinessListSearchResultItem> processData(Element body, InputCsvModelItem inputCsvModelItem, ProxyWebClient proxyWebClient) {
 
         List<BusinessListSearchResultItem> results = new ArrayList<>();
         String linkToMaps;
         try {
-            linkToMaps = body.select("#lu_map").attr("a");
+            linkToMaps = Jsoup.parse(Xsoup.compile("//*[@id=\"ires\"]/ol/div[1]/a").evaluate(body).get()).body().select("a").attr("href");
         } catch(Exception ex) {
             Logger.error(ex, "Cannot locate map in google results");
             return results;
         }
-        ProxyWebClient proxyWebClient = new ProxyWebClient();
-        Element mapsPage = proxyWebClient.request(new RequestData(linkToMaps, 3, 2000));
+        Element mapsPage = new ProxyWebClient().request(new RequestData(StrUtils.createUrlForGoogleMaps(linkToMaps), 3, 2000));
 
         URL nextButton;
         AdditionalBusinessRequestToGoogle additionalBusinessRequestToGoogle = new AdditionalBusinessRequestToGoogle();

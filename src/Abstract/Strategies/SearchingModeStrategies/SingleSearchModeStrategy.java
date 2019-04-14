@@ -46,14 +46,14 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
                 = new ConvertSearchResultsDataStrategy(diResolver);
         List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
 
-        List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, null);
-        List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
-        SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
-                = new ConvertBusinessSearchDataStrategy();
-        List listItems = businessListConvertStrategy.convertResultDataToOutputModels(filteredListSearchResultItems);
+//        List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, null);
+//        List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
+//        SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
+//                = new ConvertBusinessSearchDataStrategy();
+//        List listItems = businessListConvertStrategy.convertResultDataToOutputModels(filteredListSearchResultItems);
 
         outputDataService.saveResultCsvItems(regularItems);
-        outputDataService.saveResultCsvItems(listItems);
+       // outputDataService.saveResultCsvItems(listItems);
     }
 
     public void stopProcessing() {

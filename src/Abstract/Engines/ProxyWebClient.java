@@ -4,16 +4,10 @@ import java.io.*;
 import java.util.Random;
 
 import Abstract.Models.RequestData;
-import Services.DIResolver;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.*;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
-import org.apache.http.client.params.ClientPNames;
-import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.impl.client.*;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;

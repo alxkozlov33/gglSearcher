@@ -64,6 +64,27 @@ public class StrUtils {
         return result;
     }
 
+    public static String createUrlForGoogleMaps(String inputPlaceHolder) {
+        String result = null;
+        if (StringUtils.isEmpty(inputPlaceHolder)) {
+            return "";
+        }
+
+        String pattern = "(?<=&q=)(.*)(?=&)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(inputPlaceHolder);
+        if (m.find()) {
+            try {
+                result = "https://maps.google.com/maps?q=" +
+                        URLEncoder.encode(m.group(0), "UTF-8") +
+                        "&pws=0&gl=us&gws_rd=cr&num=150";
+            } catch (UnsupportedEncodingException e) {
+                Logger.tag("SYSTEM").error(e);
+            }
+        }
+        return result;
+    }
+
     public static String createUrlForAdditionalPlacesSearch(BusinessListSearchResultItem businessListSearchResultItem) {
         String inputPlaceHolder = "\""+businessListSearchResultItem.getMainHeader() + "\" "+ businessListSearchResultItem.getCity() +", "+ businessListSearchResultItem.getCountry()
                 +" | "+businessListSearchResultItem.getMainHeader()+ " " + businessListSearchResultItem.getCity() +", "+ businessListSearchResultItem.getCountry();
