@@ -5,11 +5,11 @@ import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
-import Services.DIResolver;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
-
+import org.tinylog.Logger;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -20,7 +20,13 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
 
     protected Element getWebSitePageSource(GoogleSearchResultItem item) {
         RequestData requestData = new RequestData(item.getLink(), 3, 2000);
-        return new ProxyWebClient().request(requestData);
+        Element result = null;
+        try {
+            result = new ProxyWebClient().request(requestData);
+        } catch (IOException e) {
+            Logger.error(e);
+        }
+        return result;
     }
 
     protected WebPageObject parseSourceData(Element pageSourceData){

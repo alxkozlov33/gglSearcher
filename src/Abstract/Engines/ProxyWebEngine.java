@@ -10,10 +10,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
-public class ProxyWebEngine extends BaseEngine {
-    public final HtmlUnitDriver webDriver;
+class ProxyWebEngine extends BaseEngine {
+    private final HtmlUnitDriver webDriver;
 
-    public ProxyWebEngine() {
+    private ProxyWebEngine() {
         webDriver = new HtmlUnitDriver(BrowserVersion.CHROME, true) {
             @Override
             protected WebClient modifyWebClient(WebClient client) {

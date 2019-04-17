@@ -1,7 +1,6 @@
 package Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing;
 
 import Abstract.Engines.ProxyWebClient;
-import Abstract.Engines.ProxyWebEngine;
 import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
@@ -10,6 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 import us.codecraft.xsoup.Xsoup;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,13 +24,14 @@ public class BusinessResultItemsProcess {
 
         List<BusinessListSearchResultItem> results = new ArrayList<>();
         String linkToMaps;
+        Element mapsPage;
         try {
             linkToMaps = Jsoup.parse(Xsoup.compile("//*[@id=\"ires\"]/ol/div[1]/a").evaluate(body).get()).body().select("a").attr("href");
         } catch(Exception ex) {
             Logger.error(ex, "Cannot locate map in google results");
             return results;
         }
-        Element mapsPage = new ProxyWebClient().request(new RequestData(StrUtils.createUrlForGoogleMaps(linkToMaps), 3, 2000));
+        mapsPage = getMapsPage(linkToMaps);
 
         URL nextButton;
         AdditionalBusinessRequestToGoogle additionalBusinessRequestToGoogle = new AdditionalBusinessRequestToGoogle();
@@ -45,11 +46,22 @@ public class BusinessResultItemsProcess {
             }
 
             if (nextButton != null) {
-                mapsPage = proxyWebClient.request(new RequestData(linkToMaps, 3, 2000));
+                mapsPage = getMapsPage(linkToMaps);
             }
         } while (nextButton != null);
         return results;
     }
+
+    private Element getMapsPage(String linkToMaps) {
+        Element mapsPage = null;
+        try {
+            mapsPage = new ProxyWebClient().request(new RequestData(StrUtils.createUrlForGoogleMaps(linkToMaps), 500, 5000));
+        } catch (IOException ex) {
+            Logger.error(ex);
+        }
+        return mapsPage;
+    }
+
 
     private URL getNextButton(Element body) {
         URL nextButton = null;

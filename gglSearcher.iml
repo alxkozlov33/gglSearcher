@@ -16,7 +16,6 @@
     <orderEntry type="library" name="org.tinylog:tinylog-api:2.0.0-M3" level="project" />
     <orderEntry type="library" name="org.tinylog:tinylog-impl:2.0.0-M3" level="project" />
     <orderEntry type="library" name="org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0" level="project" />
-    <orderEntry type="library" name="commons-io-2.6" level="project" />
     <orderEntry type="library" name="us.codecraft:xsoup:0.3.1" level="project" />
   </component>
 </module>

@@ -1,7 +1,6 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
 import Abstract.Engines.ProxyWebClient;
-import Abstract.Engines.ProxyWebEngine;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
 import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
@@ -44,10 +43,9 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL, 5, 3000);
             ProxyWebClient proxyWebClient = new ProxyWebClient();
-            Element body = proxyWebClient.request(requestData);
-
 
             try {
+                Element body = proxyWebClient.request(requestData);
 //                RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
 //                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
 //                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);

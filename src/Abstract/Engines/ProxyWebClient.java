@@ -29,31 +29,31 @@ public class ProxyWebClient extends BaseEngine {
                 .setConnectionManager(new BasicHttpClientConnectionManager())
                 .setProxy(super_proxy)
                 .setDefaultCredentialsProvider(cred_provider)
-                .setDefaultCookieStore(new BasicCookieStore())
                 .build();
     }
 
-    public synchronized Element request(RequestData requestData) {
+    public synchronized Element request(RequestData requestData) throws IOException {
         for (int i = 1; i <= requestData.attemptsCount; i++) {
 //            boolean isContinueWork = diResolver.getPropertiesService().getWorkState();
 //            if (!isContinueWork) {
 //                return null;
 //            }
             HttpGet request = new HttpGet(requestData.requestURL);
-            try (CloseableHttpResponse response = client.execute(request)) {
+            CloseableHttpResponse response = client.execute(request);
+            try {
                 if (isValidResponse(response)) {
                     Logger.info("Response OK from: " + requestData.requestURL);
                     String pageSource = EntityUtils.toString(response.getEntity());
+                    client.close();
                     return Jsoup.parse(pageSource);
                 }
-                throw new Exception();
             } catch (Exception ex) {
                 Logger.info("Attempt: " + i);
                 Logger.error("Cannot get page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + ex.getMessage());
             }
             isThreadSleep(i, requestData);
         }
-        return null;
+        throw new IOException("Cannot get source: "+ requestData.requestURL);
     }
 
     private void isThreadSleep(int currentAttempt, RequestData requestData) {
@@ -66,8 +66,11 @@ public class ProxyWebClient extends BaseEngine {
         }
     }
 
-    private boolean isValidResponse(CloseableHttpResponse response) {
-        return response != null && response.getStatusLine().getStatusCode() == 200;
+    private boolean isValidResponse(CloseableHttpResponse response) throws Exception {
+        if (response != null && response.getStatusLine().getStatusCode() == 200) {
+            return true;
+        }
+        throw new Exception();
     }
 
     void close() throws IOException {
