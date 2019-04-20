@@ -20,7 +20,7 @@ public class BusinessResultItemsProcess {
     public BusinessResultItemsProcess() {
     }
 
-    public List<BusinessListSearchResultItem> processData(Element body, InputCsvModelItem inputCsvModelItem, ProxyWebClient proxyWebClient) {
+    public List<BusinessListSearchResultItem> processData(Element body, InputCsvModelItem inputCsvModelItem) {
 
         List<BusinessListSearchResultItem> results = new ArrayList<>();
         String linkToMaps;

@@ -54,7 +54,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 //                List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
 
                 //TODO: Debug.
-                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, inputCsvModelItem, proxyWebClient);
+                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, inputCsvModelItem);
                 List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
                 SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
                         = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
