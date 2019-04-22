@@ -2,9 +2,9 @@ package Abstract.Strategies.SearchingModeStrategies;
 
 import Abstract.Engines.ProxyWebClient;
 import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.Models.SearchResultModels.BusinessListSearchResultItem;
-import Abstract.Strategies.EngineResultsInterpreters.BusinessListResultsProcessing.BusinessResultItemsProcess;
-import Abstract.Strategies.OutputResultsConversionStrategies.MultipleSearchResultsDataConvertStrategy.ConvertBusinessSearchWithGeoDataStrategy;
+import Abstract.Models.SearchResultModels.RegularSearchResultItem;
+import Abstract.Strategies.EngineResultsInterpreters.RegularResultsItemsProcess;
+import Abstract.Strategies.OutputResultsConversionStrategies.ConvertSearchResultsWithGeoDataStrategy;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
@@ -46,23 +46,14 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
             try {
                 Element body = proxyWebClient.request(requestData);
-//                RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
-//                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
-//                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
-//                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
-//                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
-//                List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
+                RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
+                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
+                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
+                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
+                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
+                List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
 
-                //TODO: Debug.
-                List<BusinessListSearchResultItem> businessListSearchResultItems = new BusinessResultItemsProcess().processData(body, inputCsvModelItem, proxyWebClient);
-                List filteredListSearchResultItems = filterGoogleResultData(businessListSearchResultItems);
-                SearchResultsConvertStrategy<BusinessListSearchResultItem, IOutputModel> businessListConvertStrategy
-                        = new ConvertBusinessSearchWithGeoDataStrategy(inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
-
-                List listItems = businessListConvertStrategy.convertResultDataToOutputModels(filteredListSearchResultItems);
-
-                //outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
-                outputDataService.saveResultCsvItemsByMultipleSearch(listItems);
+                outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
             }
             catch (Exception ex) {
                 Logger.tag("SYSTEM").error(ex);

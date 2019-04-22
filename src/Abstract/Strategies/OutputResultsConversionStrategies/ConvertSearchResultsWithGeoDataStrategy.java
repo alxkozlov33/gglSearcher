@@ -1,6 +1,7 @@
-package Abstract.Strategies.OutputResultsConversionStrategies.SingleSearchResultsDataConvertStrategy;
+package Abstract.Strategies.OutputResultsConversionStrategies;
 
 import Abstract.Models.OutputModels.IOutputModel;
+import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
@@ -9,19 +10,25 @@ import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Services.DIResolver;
-import Services.GuiService;
 import Services.PropertiesService;
 import Services.SettingsService;
+import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> {
 
+//TODO: remove getting additional page source data
+public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> {
+
+    private String city;
+    private String country;
     private final DIResolver diResolver;
-    public ConvertSearchResultsDataStrategy(DIResolver diResolver) {
+
+    public ConvertSearchResultsWithGeoDataStrategy(DIResolver diResolver, String city, String country) {
+        this.city = city;
+        this.country = country;
         this.diResolver = diResolver;
     }
 
@@ -31,32 +38,31 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         if (searchItems.size() == 0) {
             return null;
         }
-        GuiService guiService = diResolver.getGuiService();
+
         SettingsService settingsService = diResolver.getSettingsService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
         SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().specificWordsToSearch);
-        int searchedItemsSize = searchItems.size();
 
-        for (int i = 0; i < searchedItemsSize; i++) {
+        for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
             if(propertiesService.getWorkState()) {
-                guiService.updateCountItemsStatus(i, searchedItemsSize);
-                Element pageSourceData = getWebSitePageSource(searchItems.get(i));
+                Element pageSourceData = getWebSitePageSource(googleSearchResultItem);
                 WebPageObject webPageObject = parseSourceData(pageSourceData);
                 if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
-                    String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
-                    String notSureLink = getNotSureLink(searchItems.get(i));
-                    String webSite = getWebSite(searchItems.get(i));
-                    String htmlPageTitle = getHtmlPageTitle(webPageObject, searchItems.get(i));
-                    OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(mainHeader, webSite, notSureLink, htmlPageTitle);
-                    outputItems.add(outputRegularCSVItem);
+                    String galleryName = getGalleryName(webPageObject, googleSearchResultItem);
+                    String notSureLink = getNotSureLink(googleSearchResultItem);
+                    String webSite = getWebSite(googleSearchResultItem);
+                    String htmlPageTitle = getHtmlPageTitle(webPageObject, googleSearchResultItem);
+                    OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(galleryName, webSite, notSureLink, htmlPageTitle);
+                    OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
+                    outputItems.add(outputModelGeoDataDecorator);
                 }
             }
         }
         return outputItems;
     }
 
-    private String getMainHeader(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
+    private String getGalleryName(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
         if (StringUtils.isEmpty(googleSearchResultItem.getMainHeader())) {
             return webPageObject.getSiteName();
         }
