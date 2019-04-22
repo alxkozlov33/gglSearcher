@@ -11,17 +11,23 @@ import Abstract.Strategies.SearchModeStrategyBase;
 import Services.DIResolver;
 import Services.GuiService;
 import Services.OutputDataService;
+import Utils.ResultsUtils;
 import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
-
 import java.io.IOException;
 import java.util.List;
 
 public class SingleSearchModeStrategy extends SearchModeStrategyBase {
 
-    public void processData(DIResolver diResolver) {
+    private final DIResolver diResolver;
+    public SingleSearchModeStrategy(DIResolver diResolver) {
+        this.diResolver = diResolver;
+    }
+
+    @Override
+    public void processData() {
         OutputDataService outputDataService = diResolver.getOutputDataService();
         GuiService guiService = diResolver.getGuiService();
 
@@ -42,7 +48,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
 
         RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
         List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
-        List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
+        List filteredRegularSearchResultItems = ResultsUtils.filterResults(regularSearchResultItems, getSettingsSpecification());
         SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
                 = new ConvertSearchResultsDataStrategy(diResolver);
         List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);

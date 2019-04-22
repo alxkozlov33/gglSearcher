@@ -36,13 +36,13 @@ public class SearchingModeFactory {
                 && DirUtils.isFileOk(diResolver.getSettingsService().getSettingsDataFile(), "txt")) {
 
             if (DirUtils.isFileOk(inputFile, "csv") && StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
-                searchModeStrategy = new MultipleSearchModeStrategy();
+                searchModeStrategy = new MultipleSearchModeStrategy(diResolver);
                 inputDataService.initInputFile(inputFile);
                 inputDataService.initInputFileData();
                 outputDataService.createOutputFileForMultipleSearchOutput(guiService.getSearchPlaceholderText());
             }
             else if (!DirUtils.isFileOk(diResolver.getInputDataService().getInputDataFile(), "csv") && !StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
-                searchModeStrategy = new SingleSearchModeStrategy();
+                searchModeStrategy = new SingleSearchModeStrategy(diResolver);
                 outputDataService.createOutputFileForSingleSearchOutput(guiService.getSearchPlaceholderText());
             }
         }

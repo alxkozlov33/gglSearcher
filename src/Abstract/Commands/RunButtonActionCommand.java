@@ -1,5 +1,6 @@
 package Abstract.Commands;
 
+import Abstract.Exceptions.InputFileEmptyException;
 import Abstract.Factories.SearchingModeFactory;
 import Abstract.Strategies.SearchModeStrategyBase;
 import Services.*;
@@ -44,12 +45,12 @@ public class RunButtonActionCommand extends AbstractCommandAction {
             SearchModeStrategyBase searchModeStrategy = searchingModeFactory.createSearchModeStrategy();
             try {
                 diResolver.setCurrentWorker(searchModeStrategy);
-                searchModeStrategy.processData(diResolver);
+                searchModeStrategy.processData();
                 Logger.tag("SYSTEM").info("Finished");
                 guiService.setStatusText("Finished");
                 propertiesService.saveWorkState(false);
                 propertiesService.saveIndex(0);
-            } catch (Exception ex) {
+            } catch (Exception | InputFileEmptyException ex) {
                 Logger.tag("SYSTEM").error(ex);
                 Logger.tag("SYSTEM").info("Application aborted. Check your input files and placeholder.");
                 guiService.setStatusText("Application aborted. Check your input files and placeholder.");

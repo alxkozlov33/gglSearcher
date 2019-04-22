@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultsUtils {
-    public static <T> ArrayList<T> filterResults(List<T> set, Specification spec) {
+    public synchronized static <T> ArrayList<T> filterResults(List<T> set, Specification spec) {
         ArrayList<T> results = new ArrayList<>();
         for(T t : set) {
             if( spec.isSatisfiedBy(t) ) {

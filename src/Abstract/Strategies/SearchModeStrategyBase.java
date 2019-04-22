@@ -1,5 +1,6 @@
 package Abstract.Strategies;
 
+import Abstract.Exceptions.InputFileEmptyException;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Specifications.AbstractSpecification;
 import Abstract.Specifications.Concrete.DomainExceptionsSpecification;
@@ -14,18 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class SearchModeStrategyBase {
-    public abstract void processData(DIResolver diResolver);
+    public abstract void processData() throws InputFileEmptyException;
     public abstract void stopProcessing();
 
-    protected <T extends GoogleSearchResultItem> ArrayList filterGoogleResultData(List<T> googleSearchResults) {
+    protected AbstractSpecification<GoogleSearchResultItem> getSettingsSpecification() {
         SettingsService settingsService = new SettingsService();
-
-        AbstractSpecification<GoogleSearchResultItem> googleItemsSpec =
-                new DomainExceptionsSpecification(settingsService.getSearchSettings().domainExceptions)
-                        .and(new TopLevelDomainExceptionsSpecification(settingsService.getSearchSettings().topLevelDomainsExceptions))
-                        .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions))
-                        .and(new URLSpecificWordsSearchSpecification(settingsService.getSearchSettings().URLSpecificWordsSearching));
-
-        return ResultsUtils.filterResults(googleSearchResults, googleItemsSpec);
+        return new DomainExceptionsSpecification(settingsService.getSearchSettings().domainExceptions)
+                .and(new TopLevelDomainExceptionsSpecification(settingsService.getSearchSettings().topLevelDomainsExceptions))
+                .and(new URLExceptionsSpecification(settingsService.getSearchSettings().URLExceptions))
+                .and(new URLSpecificWordsSearchSpecification(settingsService.getSearchSettings().URLSpecificWordsSearching));
     }
 }

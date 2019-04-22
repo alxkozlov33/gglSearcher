@@ -41,7 +41,7 @@ public class OutputDataService {
         createEmptyCSVFile(outputFile, new String[]{"Main header", "Website", "Not sure", "Html page title"});
     }
 
-    public void saveResultCsvItemsByMultipleSearch(List<IOutputModel> csvFileData) {
+    public synchronized void saveResultCsvItemsByMultipleSearch(List<IOutputModel> csvFileData) {
         if (csvFileData == null || csvFileData.size() == 0) {
             return;
         }

@@ -1,67 +1,70 @@
 package Abstract.Strategies.SearchingModeStrategies;
 
-import Abstract.Engines.ProxyWebClient;
-import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.Models.SearchResultModels.RegularSearchResultItem;
-import Abstract.Strategies.EngineResultsInterpreters.RegularResultsItemsProcess;
-import Abstract.Strategies.OutputResultsConversionStrategies.ConvertSearchResultsWithGeoDataStrategy;
+import Abstract.Exceptions.InputFileEmptyException;
+import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
+import Abstract.Specifications.AbstractSpecification;
 import Abstract.Strategies.SearchModeStrategyBase;
-import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.RequestData;
+import Abstract.Tasks.Worker;
 import Services.*;
 import Utils.StrUtils;
-import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
     private boolean isWorkFlag;
-    public MultipleSearchModeStrategy() {
+    private ThreadPoolExecutor executor;
+    private final DIResolver diResolver;
+
+    public MultipleSearchModeStrategy(DIResolver diResolver) {
+        this.diResolver = diResolver;
     }
 
-    public void processData(DIResolver diResolver) {
-        GuiService guiService = new GuiService();
-        InputDataService inputDataService = diResolver.getInputDataService();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
-        OutputDataService outputDataService = diResolver.getOutputDataService();
+    @Override
+    public void processData() throws InputFileEmptyException {
 
-        List<InputCsvModelItem> inputCsvItems = inputDataService.getInputCsvModelItems();
-        int index = propertiesService.getIndex();
+        AbstractSpecification<GoogleSearchResultItem> googleItemsSpec = getSettingsSpecification();
 
-        isWorkFlag = true;
-        Logger.tag("SYSTEM").info("Continue from: " + index + " record");
-        for (int i = index; i < inputCsvItems.size(); i++) {
-            InputCsvModelItem inputCsvModelItem = inputCsvItems.get(i);
-            guiService.updateCountItemsStatus(i, inputCsvItems.size());
-            if (!isWorkFlag) {
-                break;
-            }
 
-            propertiesService.saveIndex(i);
-            String URL = StrUtils.createUrlForMultipleSearch(inputCsvModelItem, guiService.getSearchPlaceholderText());
+        isWorkFlag  = true;
+        diResolver.getGuiService().setStatusText("Processing started");
+        List<InputCsvModelItem> csvFileData = diResolver.getInputDataService().getInputCsvModelItems();
+        int size = diResolver.getInputDataService().getInputCsvModelItems().size();
+
+        if (size == 0) {
+            throw new InputFileEmptyException("Input data file doesn't contain elements");
+        }
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
+
+        for (int i = 0; i < size; i++) {
+            String URL = StrUtils.createUrlForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
             RequestData requestData = new RequestData(URL, 5, 3000);
-            ProxyWebClient proxyWebClient = new ProxyWebClient();
+            Runnable worker = new Worker(diResolver, requestData, googleItemsSpec);
+            executor.execute(worker);
+        }
 
+        while (!executor.isTerminated()) {
             try {
-                Element body = proxyWebClient.request(requestData);
-                RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
-                List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
-                List filteredRegularSearchResultItems = filterGoogleResultData(regularSearchResultItems);
-                SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
-                        = new ConvertSearchResultsWithGeoDataStrategy(diResolver, inputCsvModelItem.getColumnA(), inputCsvModelItem.getColumnC());
-                List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
-
-                outputDataService.saveResultCsvItemsByMultipleSearch(regularItems);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Logger.tag("SYSTEM").error(e);
             }
-            catch (Exception ex) {
-                Logger.tag("SYSTEM").error(ex);
+            if (isWorkFlag) {
+                diResolver.getGuiService().updateCountItemsStatus((int)executor.getCompletedTaskCount(), (int)executor.getTaskCount());
+            }
+            if (executor.getCompletedTaskCount() == size) {
+                stopProcessing();
             }
         }
     }
 
     public void stopProcessing() {
+        executor.shutdown();
         isWorkFlag = false;
+        diResolver.getPropertiesService().saveWorkState(isWorkFlag);
     }
 }
