@@ -12,7 +12,15 @@ public class RegularResultsItemsProcess {
 
     public List<RegularSearchResultItem> translateBodyToModels(Element body) {
         ArrayList<RegularSearchResultItem> results = new ArrayList<>();
-        Element items = body.selectFirst("#ires");
+        if(body == null) {
+            return results;
+        }
+        Elements elItems = body.select("#ires");
+        Element items = null;
+        if (elItems != null) {
+            items = elItems.first();
+        }
+
         if (items == null) {
             return results;
         }

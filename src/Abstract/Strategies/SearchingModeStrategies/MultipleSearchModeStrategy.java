@@ -26,9 +26,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
     @Override
     public void processData() throws InputFileEmptyException {
-
         AbstractSpecification<GoogleSearchResultItem> googleItemsSpec = getSettingsSpecification();
-
 
         isWorkFlag  = true;
         diResolver.getGuiService().setStatusText("Processing started");
@@ -42,7 +40,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
         for (int i = 0; i < size; i++) {
             String URL = StrUtils.createUrlForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
-            RequestData requestData = new RequestData(URL, 5, 3000);
+            RequestData requestData = new RequestData(URL, 5, 3000, csvFileData.get(i));
             Runnable worker = new Worker(diResolver, requestData, googleItemsSpec);
             executor.execute(worker);
         }

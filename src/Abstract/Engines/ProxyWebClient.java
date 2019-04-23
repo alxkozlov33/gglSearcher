@@ -7,6 +7,8 @@ import Abstract.Models.RequestData;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.*;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
@@ -17,7 +19,7 @@ import org.tinylog.Logger;
 
 public class ProxyWebClient extends BaseEngine {
 
-    public ProxyWebClient() {
+    private CloseableHttpClient getNewClient() {
         String login = username + "-session-" + new Random().nextInt(Integer.MAX_VALUE);
 
         HttpHost super_proxy = new HttpHost(hostName, port);
@@ -25,11 +27,17 @@ public class ProxyWebClient extends BaseEngine {
         cred_provider.setCredentials(new AuthScope(super_proxy),
                 new UsernamePasswordCredentials(login, password));
 
-        client = HttpClients.custom()
+        return HttpClients.custom()
                 .setConnectionManager(new BasicHttpClientConnectionManager())
                 .setProxy(super_proxy)
+                .setDefaultRequestConfig(RequestConfig.custom()
+                        .setCookieSpec(CookieSpecs.STANDARD).build())
                 .setDefaultCredentialsProvider(cred_provider)
                 .build();
+    }
+
+    public ProxyWebClient() {
+
     }
 
     public synchronized Element request(RequestData requestData) throws IOException {
@@ -39,11 +47,12 @@ public class ProxyWebClient extends BaseEngine {
 //                return null;
 //            }
             HttpGet request = new HttpGet(requestData.requestURL);
-            CloseableHttpResponse response = client.execute(request);
+            CloseableHttpResponse response = getNewClient().execute(request);
             try {
                 if (isValidResponse(response)) {
                     Logger.info("Response OK from: " + requestData.requestURL);
                     String pageSource = EntityUtils.toString(response.getEntity());
+                    response.close();
                     client.close();
                     return Jsoup.parse(pageSource);
                 }

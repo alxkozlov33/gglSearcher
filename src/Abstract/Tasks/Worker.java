@@ -21,8 +21,10 @@ public class Worker implements Runnable {
     private final RequestData requestData;
     private final DIResolver diResolver;
     private final AbstractSpecification<GoogleSearchResultItem> googleItemsSpec;
+    private final ProxyWebClient proxyWebClient;
 
     public Worker(DIResolver diResolver, RequestData requestData, AbstractSpecification specification) {
+        proxyWebClient = new ProxyWebClient();
         this.diResolver = diResolver;
         this.requestData = requestData;
         googleItemsSpec = specification;
@@ -33,7 +35,7 @@ public class Worker implements Runnable {
         if (diResolver.getPropertiesService().getWorkState()) {
             Element body = null;
             try {
-                body = new ProxyWebClient().request(requestData);
+                body = proxyWebClient.request(requestData);
             } catch (IOException e) {
                 Logger.tag("SYSTEM").error(e);
             }
