@@ -1,5 +1,6 @@
 package Abstract.Commands;
 
+import Abstract.Strategies.SearchModeStrategyBase;
 import Services.DIResolver;
 import org.tinylog.Logger;
 
@@ -16,8 +17,11 @@ public class StopButtonActionCommand extends AbstractCommandAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         Logger.tag("SYSTEM").info("Stop button action performed");
-        diResolver.getCurrentWorker().stopProcessing();
-        diResolver.getGuiService().setStatusText("Stopping...");
-        diResolver.getPropertiesService().saveWorkState(false);
+        SearchModeStrategyBase searchMode = diResolver.getCurrentWorker();
+        if (searchMode != null) {
+            searchMode.stopProcessing();
+            diResolver.getGuiService().setStatusText("Stopping...");
+            diResolver.getPropertiesService().saveWorkState(false);
+        }
     }
 }
