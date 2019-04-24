@@ -36,9 +36,9 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
             guiService.setSettingsFilePath(settingsFile);
         }
 
-        if (propertiesService.getWorkState()) {
-            RunButtonActionCommand runButtonActionCommand = new RunButtonActionCommand(diResolver);
-            runButtonActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
-        }
+//        if (propertiesService.getWorkState()) {
+//            RunButtonActionCommand runButtonActionCommand = new RunButtonActionCommand(diResolver);
+//            runButtonActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+//        }
     }
 }
