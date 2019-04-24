@@ -31,7 +31,7 @@ public class ProxyWebClient extends BaseEngine {
                 .setConnectionManager(new BasicHttpClientConnectionManager())
                 .setProxy(super_proxy)
                 .setDefaultRequestConfig(RequestConfig.custom()
-                        .setCookieSpec(CookieSpecs.STANDARD).build())
+                        .setCookieSpec(CookieSpecs.IGNORE_COOKIES).build())
                 .setDefaultCredentialsProvider(cred_provider)
                 .build();
     }
@@ -53,7 +53,6 @@ public class ProxyWebClient extends BaseEngine {
                     Logger.info("Response OK from: " + requestData.requestURL);
                     String pageSource = EntityUtils.toString(response.getEntity());
                     response.close();
-                    client.close();
                     return Jsoup.parse(pageSource);
                 }
             } catch (Exception ex) {

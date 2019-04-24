@@ -17,7 +17,7 @@ public class StrSubstitutor {
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
             String var = m.group(1);
-            String replacement = map.get(var);
+            String replacement = map.get(var.toLowerCase());
             m.appendReplacement(sb, replacement);
         }
         m.appendTail(sb);

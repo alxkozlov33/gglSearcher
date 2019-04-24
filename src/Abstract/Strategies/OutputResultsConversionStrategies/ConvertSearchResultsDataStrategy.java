@@ -26,7 +26,7 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
     }
 
     @Override
-    public List<IOutputModel> convertResultDataToOutputModels(List<RegularSearchResultItem> searchItems) {
+    public synchronized List<IOutputModel> convertResultDataToOutputModels(List<RegularSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
             return null;

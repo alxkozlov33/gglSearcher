@@ -40,7 +40,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
         for (int i = 0; i < size; i++) {
             String URL = StrUtils.createUrlForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
-            RequestData requestData = new RequestData(URL, 5, 3000, csvFileData.get(i));
+            RequestData requestData = new RequestData(URL, 30, 5000, csvFileData.get(i));
             Runnable worker = new Worker(diResolver, requestData, googleItemsSpec);
             executor.execute(worker);
         }

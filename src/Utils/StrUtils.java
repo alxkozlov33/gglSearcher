@@ -40,7 +40,7 @@ public class StrUtils {
         try {
             result = "https://www.google.com/search?q=" +
                     URLEncoder.encode(queryTerm, "UTF-8") +
-                    "&pws=0&gl=us&gws_rd=cr&num=30";
+                    "&pws=0&gl=us&gws_rd=cr&num=100";
         } catch (UnsupportedEncodingException e) {
             Logger.tag("SYSTEM").error(e);
         }
@@ -115,21 +115,21 @@ public class StrUtils {
 
     private static Map valuesMap(InputCsvModelItem csvItem) {
         Map valuesMap = new HashMap();
-        valuesMap.put("columnA", replaceCharacters(csvItem.getColumnA()));
-        valuesMap.put("columnB", replaceCharacters(csvItem.getColumnB()));
-        valuesMap.put("columnC", replaceCharacters(csvItem.getColumnC()));
-        valuesMap.put("columnD", replaceCharacters(csvItem.getColumnD()));
-        valuesMap.put("columnE", replaceCharacters(csvItem.getColumnE()));
-        valuesMap.put("columnF", replaceCharacters(csvItem.getColumnF()));
-        valuesMap.put("columnG", replaceCharacters(csvItem.getColumnG()));
-        valuesMap.put("columnH", replaceCharacters(csvItem.getColumnH()));
-        valuesMap.put("columnI", replaceCharacters(csvItem.getColumnI()));
-        valuesMap.put("columnJ", replaceCharacters(csvItem.getColumnJ()));
-        valuesMap.put("columnK", replaceCharacters(csvItem.getColumnK()));
-        valuesMap.put("columnL", replaceCharacters(csvItem.getColumnL()));
-        valuesMap.put("columnM", replaceCharacters(csvItem.getColumnM()));
-        valuesMap.put("columnN", replaceCharacters(csvItem.getColumnN()));
-        valuesMap.put("columnO", replaceCharacters(csvItem.getColumnO()));
+        valuesMap.put("columna", replaceCharacters(csvItem.getColumnA()));
+        valuesMap.put("columnb", replaceCharacters(csvItem.getColumnB()));
+        valuesMap.put("columnc", replaceCharacters(csvItem.getColumnC()));
+        valuesMap.put("columnd", replaceCharacters(csvItem.getColumnD()));
+        valuesMap.put("columne", replaceCharacters(csvItem.getColumnE()));
+        valuesMap.put("columnf", replaceCharacters(csvItem.getColumnF()));
+        valuesMap.put("columng", replaceCharacters(csvItem.getColumnG()));
+        valuesMap.put("columnh", replaceCharacters(csvItem.getColumnH()));
+        valuesMap.put("columni", replaceCharacters(csvItem.getColumnI()));
+        valuesMap.put("columnj", replaceCharacters(csvItem.getColumnJ()));
+        valuesMap.put("columnk", replaceCharacters(csvItem.getColumnK()));
+        valuesMap.put("columnl", replaceCharacters(csvItem.getColumnL()));
+        valuesMap.put("columnm", replaceCharacters(csvItem.getColumnM()));
+        valuesMap.put("columnn", replaceCharacters(csvItem.getColumnN()));
+        valuesMap.put("columno", replaceCharacters(csvItem.getColumnO()));
         return valuesMap;
     }
 

@@ -1,6 +1,7 @@
 package Abstract.Strategies.OutputResultsConversionStrategies;
 
 import Abstract.Engines.ProxyWebClient;
+import Abstract.Exceptions.InputFileEmptyException;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
@@ -19,7 +20,7 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
     public abstract List<U> convertResultDataToOutputModels(List<T> searchItems);
 
     protected Element getWebSitePageSource(GoogleSearchResultItem item) {
-        RequestData requestData = new RequestData(item.getLink(), 3, 2000);
+        RequestData requestData = new RequestData(item.getLink(), 5, 2000);
         Element result = null;
         try {
             result = new ProxyWebClient().request(requestData);
@@ -29,7 +30,7 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
         return result;
     }
 
-    protected WebPageObject parseSourceData(Element pageSourceData){
+    WebPageObject parseSourceData(Element pageSourceData){
         if (pageSourceData == null) {
             return null;
         }
@@ -42,14 +43,14 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
         return new WebPageObject(siteDescription, siteKeywords, siteName, pageSourceData.text());
     }
 
-    protected String getHtmlPageTitle(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
+    String getHtmlPageTitle(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
         if (StringUtils.isEmpty(webPageObject.getSiteName())) {
             return googleSearchResultItem.getMainHeader();
         }
         return webPageObject.getSiteName();
     }
 
-    protected String getNotSureLink(GoogleSearchResultItem googleSearchResultItem) {
+    String getNotSureLink(GoogleSearchResultItem googleSearchResultItem) {
         String notSureLink = "";
         String urlPath = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
         if (urlPath.length() > 15){
@@ -58,7 +59,7 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
         return notSureLink;
     }
 
-    protected String getWebSite(GoogleSearchResultItem googleSearchResultItem) {
+    String getWebSite(GoogleSearchResultItem googleSearchResultItem) {
         String webSite = "";
         String urlPath = StrUtils.getUnmatchedPartOfString(googleSearchResultItem.getLink());
         if (urlPath.length() < 15){
