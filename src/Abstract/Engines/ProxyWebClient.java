@@ -2,13 +2,10 @@ package Abstract.Engines;
 
 import java.io.*;
 import java.util.Random;
-
 import Abstract.Models.RequestData;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.*;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
@@ -30,8 +27,6 @@ public class ProxyWebClient extends BaseEngine {
         return HttpClients.custom()
                 .setConnectionManager(new BasicHttpClientConnectionManager())
                 .setProxy(super_proxy)
-                .setDefaultRequestConfig(RequestConfig.custom()
-                        .setCookieSpec(CookieSpecs.IGNORE_COOKIES).build())
                 .setDefaultCredentialsProvider(cred_provider)
                 .build();
     }
