@@ -7,8 +7,9 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.enums.CSVReaderNullFieldIndicator;
 import org.apache.commons.collections4.IteratorUtils;
 import org.tinylog.Logger;
-import java.io.File;
-import java.io.Reader;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -44,13 +45,14 @@ public class InputDataService {
             return;
         }
         try {
-            Reader reader = Files.newBufferedReader(Paths.get(getInputDataFile().getAbsolutePath()));
-            CsvToBean<InputCsvModelItem> csvToBean = new CsvToBeanBuilder(reader)
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(getInputDataFile().getAbsolutePath()), StandardCharsets.UTF_8));
+            CsvToBean csvToBean = new CsvToBeanBuilder(br)
                     .withType(InputCsvModelItem.class)
                     .withFieldAsNull(CSVReaderNullFieldIndicator.NEITHER)
+                    .withIgnoreLeadingWhiteSpace(true)
                     .build();
             inputCsvModelItems = new ArrayList(IteratorUtils.toList(csvToBean.iterator()));
-            reader.close();
+            br.close();
         } catch (Exception ex) {
             Logger.tag("SYSTEM").error(ex, "Something wrong with input file");
         }

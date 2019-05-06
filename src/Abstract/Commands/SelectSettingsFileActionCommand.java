@@ -26,17 +26,17 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
         PropertiesService propertiesService = diResolver.getPropertiesService();
         SettingsService settingsService = diResolver.getSettingsService();
 
-//        File settingsFile = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select settings text file", "txt");
-//        if (DirUtils.isFileOk(settingsFile, "txt")) {
-//            guiService.setSettingsFilePath(settingsFile);
-//            propertiesService.saveSettingsFilePath(settingsFile);
-//            settingsService.initSettingsFile(settingsFile);
-//        }
+        File settingsFile = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select settings text file", "txt");
+        if (DirUtils.isFileOk(settingsFile, "txt")) {
+            guiService.setSettingsFilePath(settingsFile);
+            propertiesService.saveSettingsFilePath(settingsFile);
+            settingsService.initSettingsFile(settingsFile);
+        }
 
-        SettingsDialog settingsDialog = new SettingsDialog();
-        settingsDialog.setSize(500, 600);
-        settingsDialog.setTitle("Settings");
-        settingsDialog.setVisible(true);
-        settingsDialog.setResizable(false);
+//        SettingsDialog settingsDialog = new SettingsDialog();
+//        settingsDialog.setSize(500, 600);
+//        settingsDialog.setTitle("Settings");
+//        settingsDialog.setVisible(true);
+//        settingsDialog.setResizable(false);
     }
 }
