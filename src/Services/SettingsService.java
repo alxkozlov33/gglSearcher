@@ -12,57 +12,18 @@ import java.util.List;
 
 public class SettingsService {
 
-    private static SearchSettings searchSettings;
-    private static File settingsDataFile;
+    private SearchSettings searchSettings;
 
     public SettingsService() {
-        if (searchSettings == null) {
-            this.searchSettings = new SearchSettings();
-        }
+
     }
 
-    public File getSettingsDataFile() {
-        return settingsDataFile;
+    public void initSettingsData(SearchSettings searchSettings) {
+       this.searchSettings = searchSettings;
     }
 
-    public void initSettingsFile(File file) {
-        if (DirUtils.isFileOk(file, "txt")) {
-            settingsDataFile = file;
-        }
-    }
-
-    public void initSettingsFileData() {
-        try {
-            List<String> lines = Files.readAllLines(getSettingsDataFile().toPath(), StandardCharsets.UTF_8);
-            lines.removeIf(l -> l.equals(""));
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).contains("# Exceptions for found domains:")) {
-                    searchSettings.domainExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for words in domain URLs:")) {
-                    searchSettings.URLExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions meta titles:")) {
-                    searchSettings.metaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Exceptions for top level domains:")) {
-                    searchSettings.topLevelDomainsExceptions = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Look for keywords in search results (operator “or”):")) {
-                    searchSettings.specificWordsToSearch = new ArrayList<>(collectTerms(i, lines));
-                }
-
-                if (lines.get(i).contains("# Specific words in domain URLs (operator “or”):")) {
-                    searchSettings.URLSpecificWordsSearching = new ArrayList<>(collectTerms(i, lines));
-                }
-            }
-        } catch (IOException e) {
-            Logger.tag("SYSTEM").error(e,"Cannot initialize input exceptions file");
-        }
+    public SearchSettings getSearchSettings() {
+        return searchSettings;
     }
 
     private ArrayList<String> collectTerms(int index, List<String> lines) {
@@ -75,14 +36,5 @@ public class SettingsService {
             buffer.add(lines.get(k).trim().toLowerCase());
         }
         return buffer;
-    }
-
-
-    public SearchSettings getSearchSettings() {
-        return searchSettings;
-    }
-
-    public void clearSettingsFile() {
-        settingsDataFile = null;
     }
 }

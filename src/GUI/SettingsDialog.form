@@ -98,7 +98,7 @@
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
-              <component id="b1827" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+              <component id="b1827" class="javax.swing.JTextArea" binding="SpecificWordsInDomainURLS">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
@@ -126,7 +126,7 @@
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
-              <component id="da9fe" class="javax.swing.JTextArea" default-binding="true">
+              <component id="da9fe" class="javax.swing.JTextArea" binding="ExceptionMetaTitles">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
@@ -154,7 +154,7 @@
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
-              <component id="c8e03" class="javax.swing.JTextArea" default-binding="true">
+              <component id="c8e03" class="javax.swing.JTextArea" binding="WordsInDomainURLSExceptions">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
@@ -182,7 +182,7 @@
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
-              <component id="16569" class="javax.swing.JTextArea" default-binding="true">
+              <component id="16569" class="javax.swing.JTextArea" binding="LookForKeywordsInSearchResults">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
@@ -210,7 +210,7 @@
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
-              <component id="925f1" class="javax.swing.JTextArea" default-binding="true">
+              <component id="925f1" class="javax.swing.JTextArea" binding="TopLevelDomainsExceptions">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
@@ -238,7 +238,7 @@
                   <verticalTextPosition value="1"/>
                 </properties>
               </component>
-              <component id="6f304" class="javax.swing.JTextArea" default-binding="true">
+              <component id="6f304" class="javax.swing.JTextArea" binding="FoundDomainsExceptions">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>

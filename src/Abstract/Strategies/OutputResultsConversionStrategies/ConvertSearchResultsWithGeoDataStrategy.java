@@ -40,7 +40,7 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
         SettingsService settingsService = diResolver.getSettingsService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
-        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().specificWordsToSearch);
+        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().keywordsInSearchResults);
 
         for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
             if(propertiesService.getWorkState()) {

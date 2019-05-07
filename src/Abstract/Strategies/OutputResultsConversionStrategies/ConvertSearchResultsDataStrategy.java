@@ -7,7 +7,6 @@ import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
-import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Services.DIResolver;
 import Services.GuiService;
 import Services.PropertiesService;
@@ -35,7 +34,7 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         SettingsService settingsService = diResolver.getSettingsService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().metaTagsExceptions);
-        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().specificWordsToSearch);
+        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().keywordsInSearchResults);
         int searchedItemsSize = searchItems.size();
 
         for (int i = 0; i < searchedItemsSize; i++) {
