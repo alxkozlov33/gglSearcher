@@ -11,6 +11,7 @@ public class DIResolver {
     private final OutputDataService outputDataService;
     private final InputDataService inputDataService;
     private final SettingsService settingsService;
+    private final DBConnectionService dbConnectionService;
     private SearchModeStrategyBase currentWorker;
 
     public DIResolver(UserAgentsRotatorService userAgentsRotatorService,
@@ -18,7 +19,8 @@ public class DIResolver {
                       GuiService guiService,
                       OutputDataService outputDataService,
                       InputDataService inputDataService,
-                      SettingsService settingsService) {
+                      SettingsService settingsService,
+                      DBConnectionService dbConnectionService) {
 
         this.userAgentsRotatorService = userAgentsRotatorService;
         this.propertiesService = propertiesService;
@@ -26,6 +28,7 @@ public class DIResolver {
         this.outputDataService = outputDataService;
         this.inputDataService = inputDataService;
         this.settingsService = settingsService;
+        this.dbConnectionService = dbConnectionService;
 
         Logger.tag("SYSTEM").info("Application started...");
     }
@@ -54,5 +57,9 @@ public class DIResolver {
 
     public SettingsService getSettingsService() {
         return settingsService;
+    }
+
+    public DBConnectionService getDbConnectionService() {
+        return dbConnectionService;
     }
 }

@@ -26,17 +26,17 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         diResolver.getUserAgentsRotatorService().initList();
         PropertiesService propertiesService = diResolver.getPropertiesService();
         GuiService guiService = diResolver.getGuiService();
-        SettingsService settingsService = diResolver.getSettingsService();
+        //SettingsService settingsService = diResolver.getSettingsService();
         guiService.setStatusText("Starting...");
 
         String placeholder = guiService.getSearchPlaceholderText();
         propertiesService.savePlaceHolder(placeholder);
 
-        File settingsFile = propertiesService.getSettingsFilePath();
-        if (DirUtils.isFileOk(settingsFile, "txt")) {
-            settingsService.initSettingsFile(settingsFile);
-            settingsService.initSettingsFileData();
-        }
+//        File settingsFile = propertiesService.getSettingsFilePath();
+//        if (DirUtils.isFileOk(settingsFile, "txt")) {
+//            settingsService.initSettingsFile(settingsFile);
+//            settingsService.initSettingsFileData();
+//        }
 
         propertiesService.saveWorkState(true);
         Thread worker = new Thread(() -> {

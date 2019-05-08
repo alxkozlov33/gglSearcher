@@ -19,8 +19,9 @@ public class Main {
         OutputDataService outputDataService = new OutputDataService();
         InputDataService inputDataService = new InputDataService();
         SettingsService settingsService = new SettingsService();
+        DBConnectionService dbConnectionService = new DBConnectionService();
 
-        DIResolver diResolver = new DIResolver(userAgentsRotatorService, propertiesService, guiService, outputDataService, inputDataService, settingsService);
+        DIResolver diResolver = new DIResolver(userAgentsRotatorService, propertiesService, guiService, outputDataService, inputDataService, settingsService, dbConnectionService);
 
         Bootstrapper bootstrapper = new Bootstrapper(diResolver);
         bootstrapper.setTitle("Info searcher v3.4.2 [GGL]");

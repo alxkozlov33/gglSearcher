@@ -32,8 +32,7 @@ public class SearchingModeFactory {
 
         File inputFile = propertiesService.getInputFile();
 
-        if (diResolver.getPropertiesService().getWorkState()
-                && DirUtils.isFileOk(diResolver.getSettingsService().getSettingsDataFile(), "txt")) {
+        if (diResolver.getPropertiesService().getWorkState()) {
 
             if (DirUtils.isFileOk(inputFile, "csv") && StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
                 searchModeStrategy = new MultipleSearchModeStrategy(diResolver);

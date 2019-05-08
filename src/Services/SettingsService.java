@@ -22,6 +22,8 @@ public class SettingsService {
        this.searchSettings = searchSettings;
     }
 
+
+
     public SearchSettings getSearchSettings() {
         return searchSettings;
     }

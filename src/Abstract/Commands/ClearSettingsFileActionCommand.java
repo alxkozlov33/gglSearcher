@@ -24,7 +24,7 @@ public class ClearSettingsFileActionCommand extends AbstractCommandAction {
         GuiService guiService = diResolver.getGuiService();
         PropertiesService propertiesService = diResolver.getPropertiesService();
 
-        settingsService.clearSettingsFile();
+        //settingsService.clearSettingsFile();
         guiService.clearSettingsFilePath();
         propertiesService.saveSettingsFilePath(null);
     }
