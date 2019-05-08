@@ -19,7 +19,7 @@ public class SettingsDao extends BaseDaoImpl<Settings, Long> implements ISetting
 
     @Override
     public List<Settings> findByKey(PropertyKeys propertyKey) throws SQLException {
-        return super.queryForEq("name", propertyKey.name());
+        return super.queryForEq("settingName", propertyKey.name());
     }
 
 }

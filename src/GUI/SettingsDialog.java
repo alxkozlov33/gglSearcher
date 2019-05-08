@@ -23,14 +23,17 @@ public class SettingsDialog extends JDialog {
     private JTextArea LookForKeywordsInSearchResults;
     private SearchSettings searchSettings;
 
-    public SettingsDialog() {
+    public SettingsDialog(SearchSettings searchSettings) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(e -> onOK());
 
-        searchSettings = new SearchSettings();
+        if (searchSettings != null) {
+
+        }
+
 
         buttonCancel.addActionListener(e -> onCancel());
 
