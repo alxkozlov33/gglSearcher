@@ -51,7 +51,7 @@ public class SettingsDialog extends JDialog {
 
     private void onOK() {
         // add your code here
-        SearchSettings searchSettings = new SearchSettings();
+        searchSettings = new SearchSettings();
         searchSettings.specificWordsInDomainURLs.addAll(separateTextBySemicolon(SpecificWordsInDomainURLS.getText()));
         searchSettings.metaTagsExceptions.addAll(separateTextBySemicolon(ExceptionMetaTitles.getText()));
         searchSettings.domainExceptions.addAll(separateTextBySemicolon(FoundDomainsExceptions.getText()));
