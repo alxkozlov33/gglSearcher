@@ -1,12 +1,6 @@
 package Services;
 
 import Abstract.Models.SearchSettings;
-import Utils.DirUtils;
-import org.tinylog.Logger;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +15,6 @@ public class SettingsService {
     public void initSettingsData(SearchSettings searchSettings) {
        this.searchSettings = searchSettings;
     }
-
-
 
     public SearchSettings getSearchSettings() {
         return searchSettings;
