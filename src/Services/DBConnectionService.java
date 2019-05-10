@@ -17,6 +17,7 @@ import java.util.Collections;
 public class DBConnectionService {
 
     private static JdbcPooledConnectionSource connectionSource;
+    private final String delimiter = ";";
 
     public DBConnectionService() {
         try {
@@ -31,12 +32,12 @@ public class DBConnectionService {
 
     public void saveSearchSettings(SearchSettings searchSettings) {
         try {
-           updatePropertyByKey(PropertyKeys.DomainExceptions, String.join(";", searchSettings.domainExceptions ));
-           updatePropertyByKey(PropertyKeys.KeywordsInSearchResults, String.join(";", searchSettings.keywordsInSearchResults ));
-           updatePropertyByKey(PropertyKeys.MetaTagsExceptions, String.join(";", searchSettings.metaTagsExceptions ));
-           updatePropertyByKey(PropertyKeys.SpecificWordsInDomainURLs, String.join(";", searchSettings.specificWordsInDomainURLs ));
-           updatePropertyByKey(PropertyKeys.TopLevelDomainsExceptions, String.join(";", searchSettings.topLevelDomainsExceptions ));
-           updatePropertyByKey(PropertyKeys.URLExceptions, String.join(";", searchSettings.URLExceptions ));
+           updatePropertyByKey(PropertyKeys.DomainExceptions, String.join(delimiter, searchSettings.domainExceptions ));
+           updatePropertyByKey(PropertyKeys.KeywordsInSearchResults, String.join(delimiter, searchSettings.keywordsInSearchResults ));
+           updatePropertyByKey(PropertyKeys.MetaTagsExceptions, String.join(delimiter, searchSettings.metaTagsExceptions ));
+           updatePropertyByKey(PropertyKeys.SpecificWordsInDomainURLs, String.join(delimiter, searchSettings.specificWordsInDomainURLs ));
+           updatePropertyByKey(PropertyKeys.TopLevelDomainsExceptions, String.join(delimiter, searchSettings.topLevelDomainsExceptions ));
+           updatePropertyByKey(PropertyKeys.URLExceptions, String.join(delimiter, searchSettings.URLExceptions ));
         }
         catch(SQLException | NullPointerException ex) {
             Logger.tag("SYSTEM").error(ex);
@@ -46,12 +47,12 @@ public class DBConnectionService {
     public SearchSettings getSearchSettings() {
         SearchSettings searchSettings = new SearchSettings();
         try {
-            Collections.addAll(searchSettings.domainExceptions, getPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(";"));
-            Collections.addAll(searchSettings.keywordsInSearchResults, getPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(";"));
-            Collections.addAll(searchSettings.metaTagsExceptions, getPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(";"));
-            Collections.addAll(searchSettings.specificWordsInDomainURLs, getPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(";"));
-            Collections.addAll(searchSettings.topLevelDomainsExceptions, getPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(";"));
-            Collections.addAll(searchSettings.URLExceptions, getPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(";"));
+            Collections.addAll(searchSettings.domainExceptions, getPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.keywordsInSearchResults, getPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.metaTagsExceptions, getPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.specificWordsInDomainURLs, getPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.topLevelDomainsExceptions, getPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.URLExceptions, getPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
         } catch (SQLException | NullPointerException ex) {
             Logger.error(ex);
         }
