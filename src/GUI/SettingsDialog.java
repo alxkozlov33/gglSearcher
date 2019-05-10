@@ -1,6 +1,7 @@
 package GUI;
 
 import Abstract.Models.SearchSettings;
+import Utils.PropertyKeys;
 import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
@@ -27,14 +28,17 @@ public class SettingsDialog extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
         buttonOK.addActionListener(e -> onOK());
 
         if (searchSettings != null) {
-
+            this.searchSettings = searchSettings;
+            SpecificWordsInDomainURLS.setText(String.join(";", searchSettings.specificWordsInDomainURLs));
+            ExceptionMetaTitles.setText(String.join(";", searchSettings.metaTagsExceptions));
+            FoundDomainsExceptions.setText(String.join(";", searchSettings.domainExceptions));
+            WordsInDomainURLSExceptions.setText(String.join(";", searchSettings.specificWordsInDomainURLs));
+            TopLevelDomainsExceptions.setText(String.join(";", searchSettings.topLevelDomainsExceptions));
+            LookForKeywordsInSearchResults.setText(String.join(";", searchSettings.keywordsInSearchResults));
         }
-
-
         buttonCancel.addActionListener(e -> onCancel());
 
         // call onCancel() when cross is clicked

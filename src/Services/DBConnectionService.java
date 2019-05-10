@@ -9,14 +9,10 @@ import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import org.apache.commons.lang.StringUtils;
 import org.tinylog.Logger;
-
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class DBConnectionService {
 
@@ -29,7 +25,7 @@ public class DBConnectionService {
                     + File.separator+"gglSearcherDb");
             createTableIfNotExists();
         } catch (SQLException | URISyntaxException e) {
-            Logger.error(e);
+            Logger.tag("SYSTEM").error(e);
         }
     }
 
@@ -43,7 +39,7 @@ public class DBConnectionService {
            updatePropertyByKey(PropertyKeys.URLExceptions, String.join(";", searchSettings.URLExceptions ));
         }
         catch(SQLException | NullPointerException ex) {
-            Logger.error(ex);
+            Logger.tag("SYSTEM").error(ex);
         }
     }
 
@@ -64,51 +60,51 @@ public class DBConnectionService {
     }
 
     private void createTableIfNotExists() throws SQLException {
-            TableUtils.createTableIfNotExists(connectionSource, Settings.class);
+        TableUtils.createTableIfNotExists(connectionSource, Settings.class);
 
-            SettingsDao settingsDao
-                    = DaoManager.createDao(connectionSource, Settings.class);
+        SettingsDao settingsDao
+                = DaoManager.createDao(connectionSource, Settings.class);
 
-            Settings SpecificWordsInDomainURLs = new Settings();
-            SpecificWordsInDomainURLs.setSettingName(PropertyKeys.SpecificWordsInDomainURLs);
-            settingsDao.createIfNotExists(SpecificWordsInDomainURLs);
+        Settings SpecificWordsInDomainURLs = new Settings();
+        SpecificWordsInDomainURLs.setSettingName(PropertyKeys.SpecificWordsInDomainURLs);
+        settingsDao.createIfNotExists(SpecificWordsInDomainURLs);
 
-            Settings MetaTagsExceptions = new Settings();
-            MetaTagsExceptions.setSettingName(PropertyKeys.MetaTagsExceptions);
-            settingsDao.createIfNotExists(MetaTagsExceptions);
+        Settings MetaTagsExceptions = new Settings();
+        MetaTagsExceptions.setSettingName(PropertyKeys.MetaTagsExceptions);
+        settingsDao.createIfNotExists(MetaTagsExceptions);
 
-            Settings DomainExceptions = new Settings();
-            DomainExceptions.setSettingName(PropertyKeys.DomainExceptions);
-            settingsDao.createIfNotExists(DomainExceptions);
+        Settings DomainExceptions = new Settings();
+        DomainExceptions.setSettingName(PropertyKeys.DomainExceptions);
+        settingsDao.createIfNotExists(DomainExceptions);
 
-            Settings TopLevelDomainsExceptions = new Settings();
-            TopLevelDomainsExceptions.setSettingName(PropertyKeys.TopLevelDomainsExceptions);
-            settingsDao.createIfNotExists(TopLevelDomainsExceptions);
+        Settings TopLevelDomainsExceptions = new Settings();
+        TopLevelDomainsExceptions.setSettingName(PropertyKeys.TopLevelDomainsExceptions);
+        settingsDao.createIfNotExists(TopLevelDomainsExceptions);
 
-            Settings KeywordsInSearchResults = new Settings();
-            KeywordsInSearchResults.setSettingName(PropertyKeys.KeywordsInSearchResults);
-            settingsDao.createIfNotExists(KeywordsInSearchResults);
+        Settings KeywordsInSearchResults = new Settings();
+        KeywordsInSearchResults.setSettingName(PropertyKeys.KeywordsInSearchResults);
+        settingsDao.createIfNotExists(KeywordsInSearchResults);
 
-            Settings URLExceptions = new Settings();
-            URLExceptions.setSettingName(PropertyKeys.URLExceptions);
-            settingsDao.createIfNotExists(URLExceptions);
+        Settings URLExceptions = new Settings();
+        URLExceptions.setSettingName(PropertyKeys.URLExceptions);
+        settingsDao.createIfNotExists(URLExceptions);
     }
 
-    public void updatePropertyByKey(PropertyKeys propertyKey, String value) throws SQLException {
+    private void updatePropertyByKey(PropertyKeys propertyKey, String value) throws SQLException {
         if (StringUtils.isEmpty(value) || propertyKey == null) {
             return;
         }
         SettingsDao settingsDao
                 = DaoManager.createDao(connectionSource, Settings.class);
 
-        Settings settings = new Settings();
+        Settings settings = getPropertyByKey(propertyKey);
         settings.setSettingName(propertyKey);
         settings.setSettingValue(value);
 
         settingsDao.update(settings);
     }
 
-    public Settings getPropertyByKey(PropertyKeys propertyKey) throws SQLException {
+    private Settings getPropertyByKey(PropertyKeys propertyKey) throws SQLException {
         if (propertyKey == null) {
             return null;
         }
@@ -119,9 +115,5 @@ public class DBConnectionService {
             settings.setSettingValue("");
         }
         return settings;
-    }
-
-    public void closeConnetion() throws IOException {
-        connectionSource.close();
     }
 }
