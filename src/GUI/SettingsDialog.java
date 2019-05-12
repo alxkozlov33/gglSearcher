@@ -1,9 +1,10 @@
 package GUI;
 
+import Abstract.Commands.ExportSettingsActionCommand;
+import Abstract.Commands.ImportSettingsActionCommand;
 import Abstract.Models.SearchSettings;
-import Utils.PropertyKeys;
+import Services.DIResolver;
 import org.apache.commons.lang.StringUtils;
-
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -23,23 +24,21 @@ public class SettingsDialog extends JDialog {
     private JTextArea TopLevelDomainsExceptions;
     private JTextArea LookForKeywordsInSearchResults;
     private SearchSettings searchSettings;
+    private final DIResolver diResolver;
 
-    public SettingsDialog(SearchSettings searchSettings) {
+    public SettingsDialog(DIResolver diResolver) {
+        this.diResolver = diResolver;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         buttonOK.addActionListener(e -> onOK());
-
-        if (searchSettings != null) {
-            this.searchSettings = searchSettings;
-            SpecificWordsInDomainURLS.setText(String.join(";", searchSettings.specificWordsInDomainURLs));
-            ExceptionMetaTitles.setText(String.join(";", searchSettings.metaTagsExceptions));
-            FoundDomainsExceptions.setText(String.join(";", searchSettings.domainExceptions));
-            WordsInDomainURLSExceptions.setText(String.join(";", searchSettings.specificWordsInDomainURLs));
-            TopLevelDomainsExceptions.setText(String.join(";", searchSettings.topLevelDomainsExceptions));
-            LookForKeywordsInSearchResults.setText(String.join(";", searchSettings.keywordsInSearchResults));
-        }
         buttonCancel.addActionListener(e -> onCancel());
+
+        SearchSettings searchSettings = diResolver.getDbConnectionService().getSearchSettings();
+        FillTextBoxesWithSearchSettings(searchSettings);
+
+        ImportSettings.setAction(new ImportSettingsActionCommand(diResolver));
+        ExportSettings.setAction(new ExportSettingsActionCommand(diResolver));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -53,15 +52,27 @@ public class SettingsDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    public void FillTextBoxesWithSearchSettings(SearchSettings searchSettings) {
+        if (searchSettings != null) {
+            this.searchSettings = searchSettings;
+            SpecificWordsInDomainURLS.setText(String.join(";", searchSettings.KeywordsForLookingInDomainURLs));
+            ExceptionMetaTitles.setText(String.join(";", searchSettings.MetaTagsExceptions));
+            FoundDomainsExceptions.setText(String.join(";", searchSettings.ExceptionsForFoundDomains));
+            WordsInDomainURLSExceptions.setText(String.join(";", searchSettings.ExceptionsForWordsInDomainURLs));
+            TopLevelDomainsExceptions.setText(String.join(";", searchSettings.ExceptionsForTopLevelDomains));
+            LookForKeywordsInSearchResults.setText(String.join(";", searchSettings.KeywordsForLookingInSearchResults));
+        }
+    }
+
     private void onOK() {
         // add your code here
         searchSettings = new SearchSettings();
-        searchSettings.specificWordsInDomainURLs.addAll(separateTextBySemicolon(SpecificWordsInDomainURLS.getText()));
-        searchSettings.metaTagsExceptions.addAll(separateTextBySemicolon(ExceptionMetaTitles.getText()));
-        searchSettings.domainExceptions.addAll(separateTextBySemicolon(FoundDomainsExceptions.getText()));
-        searchSettings.topLevelDomainsExceptions.addAll(separateTextBySemicolon(TopLevelDomainsExceptions.getText()));
-        searchSettings.keywordsInSearchResults.addAll(separateTextBySemicolon(LookForKeywordsInSearchResults.getText()));
-        searchSettings.URLExceptions.addAll(separateTextBySemicolon(WordsInDomainURLSExceptions.getText()));
+        searchSettings.KeywordsForLookingInDomainURLs.addAll(separateTextBySemicolon(SpecificWordsInDomainURLS.getText()));
+        searchSettings.MetaTagsExceptions.addAll(separateTextBySemicolon(ExceptionMetaTitles.getText()));
+        searchSettings.ExceptionsForFoundDomains.addAll(separateTextBySemicolon(FoundDomainsExceptions.getText()));
+        searchSettings.ExceptionsForTopLevelDomains.addAll(separateTextBySemicolon(TopLevelDomainsExceptions.getText()));
+        searchSettings.KeywordsForLookingInSearchResults.addAll(separateTextBySemicolon(LookForKeywordsInSearchResults.getText()));
+        searchSettings.ExceptionsForWordsInDomainURLs.addAll(separateTextBySemicolon(WordsInDomainURLSExceptions.getText()));
 
         dispose();
     }
@@ -83,5 +94,9 @@ public class SettingsDialog extends JDialog {
 
     public SearchSettings getSearchSettings() {
         return searchSettings;
+    }
+
+    public void makeDialogVisiable() {
+
     }
 }

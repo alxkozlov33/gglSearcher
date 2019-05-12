@@ -48,7 +48,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
 
         RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
         List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
-        List filteredRegularSearchResultItems = ResultsUtils.filterResults(regularSearchResultItems, getSettingsSpecification());
+        List filteredRegularSearchResultItems = ResultsUtils.filterResults(regularSearchResultItems, getSettingsSpecification(diResolver));
         SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
                 = new ConvertSearchResultsDataStrategy(diResolver);
         List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);

@@ -41,6 +41,22 @@ public class DirUtils {
         return result;
     }
 
+    public static File saveFileDialog(Frame frame, String title) {
+        File result = null;
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle(title);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setSelectedFile(new File("SearchSettings.txt"));
+
+        int returnVal = chooser.showDialog(frame, title);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File userSelectedFolder = chooser.getSelectedFile();
+            result = new File(userSelectedFolder.getAbsolutePath());
+        }
+        return result;
+    }
+
     public static File selectFolderDialog(Frame frame, String title) {
         String osName = System.getProperty("os.name");
         File result = null;

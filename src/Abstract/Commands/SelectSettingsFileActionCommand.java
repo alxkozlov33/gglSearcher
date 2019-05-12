@@ -4,8 +4,11 @@ import Abstract.Models.SearchSettings;
 import GUI.SettingsDialog;
 import Services.DBConnectionService;
 import Services.DIResolver;
+import Services.GuiService;
+import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class SelectSettingsFileActionCommand extends AbstractCommandAction {
 
@@ -21,14 +24,15 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Select input settings file button action performed");
         DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
 
-        SearchSettings settings = dbConnectionService.getSearchSettings();
-
-        SettingsDialog settingsDialog = new SettingsDialog(settings);
+        SettingsDialog settingsDialog = new SettingsDialog(diResolver);
         settingsDialog.setSize(500, 600);
         settingsDialog.setTitle("Settings");
         settingsDialog.setVisible(true);
         settingsDialog.setResizable(false);
+        diResolver.getGuiService().setSettingsDialog(settingsDialog);
 
         dbConnectionService.saveSearchSettings(settingsDialog.getSearchSettings());
+
+
     }
 }

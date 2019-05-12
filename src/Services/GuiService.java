@@ -8,6 +8,7 @@ import java.io.File;
 
 public class GuiService {
     private static Bootstrapper bootstrapper;
+    private static SettingsDialog settingsDialog;
 
     public GuiService() {
     }
@@ -15,9 +16,15 @@ public class GuiService {
     public Frame getMainFrame() {
         return bootstrapper;
     }
+    public SettingsDialog getSettingsDialog() {
+        return settingsDialog;
+    }
 
     public void setBootstrapper(Bootstrapper bootstrapper) {
         this.bootstrapper = bootstrapper;
+    }
+    public void setSettingsDialog(SettingsDialog settingsDialog) {
+        this.settingsDialog = settingsDialog;
     }
 
     public String getSearchPlaceholderText(){
@@ -26,10 +33,6 @@ public class GuiService {
 
     public void clearSettingsFilePath() {
         bootstrapper.getSettingsLabelFileData().setText("");
-    }
-
-    public void clearOutputFolderPath() {
-        bootstrapper.getSelectedOutputFolderData().setText("");
     }
 
     public void clearInputDataFilePath() {
@@ -64,10 +67,8 @@ public class GuiService {
         int size = 120;
         if (path.length() <= size) {
             return path;
-        } else if (path.length() > size) {
-            return "..."+path.substring(path.length() - (size - 3));
         } else {
-            throw new IllegalArgumentException("Something wrong with file path cut");
+            return "..."+path.substring(path.length() - (size - 3));
         }
     }
 

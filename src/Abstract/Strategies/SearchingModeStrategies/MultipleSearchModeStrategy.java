@@ -26,7 +26,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
     @Override
     public void processData() throws InputFileEmptyException {
-        AbstractSpecification<GoogleSearchResultItem> googleItemsSpec = getSettingsSpecification();
+        AbstractSpecification<GoogleSearchResultItem> googleItemsSpec = getSettingsSpecification(diResolver);
 
         isWorkFlag  = true;
         diResolver.getGuiService().setStatusText("Processing started");

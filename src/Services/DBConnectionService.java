@@ -32,12 +32,12 @@ public class DBConnectionService {
 
     public void saveSearchSettings(SearchSettings searchSettings) {
         try {
-           updatePropertyByKey(PropertyKeys.DomainExceptions, String.join(delimiter, searchSettings.domainExceptions ));
-           updatePropertyByKey(PropertyKeys.KeywordsInSearchResults, String.join(delimiter, searchSettings.keywordsInSearchResults ));
-           updatePropertyByKey(PropertyKeys.MetaTagsExceptions, String.join(delimiter, searchSettings.metaTagsExceptions ));
-           updatePropertyByKey(PropertyKeys.SpecificWordsInDomainURLs, String.join(delimiter, searchSettings.specificWordsInDomainURLs ));
-           updatePropertyByKey(PropertyKeys.TopLevelDomainsExceptions, String.join(delimiter, searchSettings.topLevelDomainsExceptions ));
-           updatePropertyByKey(PropertyKeys.URLExceptions, String.join(delimiter, searchSettings.URLExceptions ));
+           updatePropertyByKey(PropertyKeys.DomainExceptions, String.join(delimiter, searchSettings.ExceptionsForFoundDomains));
+           updatePropertyByKey(PropertyKeys.KeywordsInSearchResults, String.join(delimiter, searchSettings.KeywordsForLookingInSearchResults));
+           updatePropertyByKey(PropertyKeys.MetaTagsExceptions, String.join(delimiter, searchSettings.MetaTagsExceptions));
+           updatePropertyByKey(PropertyKeys.SpecificWordsInDomainURLs, String.join(delimiter, searchSettings.KeywordsForLookingInDomainURLs));
+           updatePropertyByKey(PropertyKeys.TopLevelDomainsExceptions, String.join(delimiter, searchSettings.ExceptionsForTopLevelDomains));
+           updatePropertyByKey(PropertyKeys.URLExceptions, String.join(delimiter, searchSettings.ExceptionsForWordsInDomainURLs));
         }
         catch(SQLException | NullPointerException ex) {
             Logger.tag("SYSTEM").error(ex);
@@ -47,12 +47,12 @@ public class DBConnectionService {
     public SearchSettings getSearchSettings() {
         SearchSettings searchSettings = new SearchSettings();
         try {
-            Collections.addAll(searchSettings.domainExceptions, getPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.keywordsInSearchResults, getPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.metaTagsExceptions, getPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.specificWordsInDomainURLs, getPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.topLevelDomainsExceptions, getPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.URLExceptions, getPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.ExceptionsForFoundDomains, getPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.KeywordsForLookingInSearchResults, getPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.MetaTagsExceptions, getPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.KeywordsForLookingInDomainURLs, getPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.ExceptionsForTopLevelDomains, getPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.ExceptionsForWordsInDomainURLs, getPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
         } catch (SQLException | NullPointerException ex) {
             Logger.error(ex);
         }
