@@ -23,7 +23,6 @@ public class SettingsDialog extends JDialog {
     private JTextArea WordsInDomainURLSExceptions;
     private JTextArea TopLevelDomainsExceptions;
     private JTextArea LookForKeywordsInSearchResults;
-    private JScrollPane exceptionsMetaTitles;
     private SearchSettings searchSettings;
 
     public SettingsDialog(DIResolver diResolver) {
@@ -97,9 +96,5 @@ public class SettingsDialog extends JDialog {
 
     public SearchSettings getSearchSettings() {
         return searchSettings;
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }

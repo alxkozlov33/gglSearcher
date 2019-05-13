@@ -31,7 +31,6 @@ public class Main {
         bootstrapper.setSize(800, 700);
 
         guiService.setBootstrapper(bootstrapper);
-        guiService.createNewSettingsDialog(diResolver);
 
         ApplicationStartedActionCommand applicationStartedActionCommand = new ApplicationStartedActionCommand(diResolver);
         applicationStartedActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
