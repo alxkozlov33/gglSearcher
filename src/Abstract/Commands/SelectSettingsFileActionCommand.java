@@ -1,14 +1,10 @@
 package Abstract.Commands;
 
-import Abstract.Models.SearchSettings;
 import GUI.SettingsDialog;
 import Services.DBConnectionService;
 import Services.DIResolver;
-import Services.GuiService;
-import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 public class SelectSettingsFileActionCommand extends AbstractCommandAction {
 
@@ -32,7 +28,5 @@ public class SelectSettingsFileActionCommand extends AbstractCommandAction {
         diResolver.getGuiService().setSettingsDialog(settingsDialog);
 
         dbConnectionService.saveSearchSettings(settingsDialog.getSearchSettings());
-
-
     }
 }

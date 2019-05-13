@@ -80,6 +80,7 @@ public class SettingsDialog extends JDialog {
     private List separateTextBySemicolon(String text) {
         ArrayList<String> settings = new ArrayList<>();
         if (StringUtils.isEmpty(text)) {
+            settings.add("");
             return settings;
         }
         String [] arrOfStr = text.split(";");
@@ -94,9 +95,5 @@ public class SettingsDialog extends JDialog {
 
     public SearchSettings getSearchSettings() {
         return searchSettings;
-    }
-
-    public void makeDialogVisiable() {
-
     }
 }
