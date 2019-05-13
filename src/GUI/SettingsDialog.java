@@ -23,16 +23,14 @@ public class SettingsDialog extends JDialog {
     private JTextArea WordsInDomainURLSExceptions;
     private JTextArea TopLevelDomainsExceptions;
     private JTextArea LookForKeywordsInSearchResults;
-    private JScrollPane exceptionsMetaTitles;
     private SearchSettings searchSettings;
+    private final DIResolver diResolver;
 
     public SettingsDialog(DIResolver diResolver) {
+        this.diResolver = diResolver;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        setResizable(false);
-
-
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
 
@@ -54,7 +52,7 @@ public class SettingsDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void FillTextBoxesWithSearchSettings(SearchSettings searchSettings) {
+    public void FillTextBoxesWithSearchSettings(SearchSettings searchSettings) {
         if (searchSettings != null) {
             this.searchSettings = searchSettings;
             SpecificWordsInDomainURLS.setText(String.join(";", searchSettings.KeywordsForLookingInDomainURLs));
@@ -82,7 +80,6 @@ public class SettingsDialog extends JDialog {
     private List separateTextBySemicolon(String text) {
         ArrayList<String> settings = new ArrayList<>();
         if (StringUtils.isEmpty(text)) {
-            settings.add("");
             return settings;
         }
         String [] arrOfStr = text.split(";");
@@ -90,7 +87,7 @@ public class SettingsDialog extends JDialog {
         return settings;
     }
 
-    public void onCancel() {
+    private void onCancel() {
         // add your code here if necessary
         dispose();
     }
@@ -99,7 +96,7 @@ public class SettingsDialog extends JDialog {
         return searchSettings;
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    public void makeDialogVisiable() {
+
     }
 }

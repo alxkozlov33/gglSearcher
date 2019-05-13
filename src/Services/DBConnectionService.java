@@ -92,7 +92,7 @@ public class DBConnectionService {
     }
 
     private void updatePropertyByKey(PropertyKeys propertyKey, String value) throws SQLException {
-        if (value == null || propertyKey == null) {
+        if (StringUtils.isEmpty(value) || propertyKey == null) {
             return;
         }
         SettingsDao settingsDao
