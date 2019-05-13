@@ -25,7 +25,7 @@ public class ClearInputDataFileActionCommand extends AbstractCommandAction {
     }
 
     public ClearInputDataFileActionCommand(DIResolver diResolver) {
-        super("Clear current file");
+        super("Clear existing file");
         this.diResolver = diResolver;
     }
 }

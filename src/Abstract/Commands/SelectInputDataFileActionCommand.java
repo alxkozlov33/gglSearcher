@@ -29,7 +29,7 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
     }
 
     public SelectInputDataFileActionCommand(DIResolver diResolver) {
-        super("Choose new input file");
+        super("Choose new data file");
         this.diResolver = diResolver;
     }
 }

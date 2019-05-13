@@ -30,7 +30,10 @@ public class SettingsDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         setResizable(false);
-
+        setSize(500, 700);
+        setTitle("Search settings");
+        setVisible(true);
+        setResizable(false);
 
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());

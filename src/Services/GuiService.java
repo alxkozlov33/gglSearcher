@@ -1,6 +1,5 @@
 package Services;
 
-import Abstract.Models.SearchSettings;
 import GUI.*;
 import Utils.DirUtils;
 import org.tinylog.Logger;
@@ -24,10 +23,6 @@ public class GuiService {
 
     public void createNewSettingsDialog(DIResolver diResolver) {
         settingsDialog = new SettingsDialog(diResolver);
-        settingsDialog.setSize(500, 700);
-        settingsDialog.setTitle("Settings");
-        settingsDialog.setVisible(true);
-        settingsDialog.setResizable(false);
     }
 
     public void closeSettingsDialog() {

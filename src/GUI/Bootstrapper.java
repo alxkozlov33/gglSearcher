@@ -56,7 +56,7 @@ public class Bootstrapper extends JFrame {
         runButton.setAction(new RunButtonActionCommand(diResolver));
         stopButton.setAction(new StopButtonActionCommand(diResolver));
 
-        chooseSettingsFile.setAction(new SelectSettingsFileActionCommand(diResolver));
+        chooseSettingsFile.setAction(new SelectSettingsActionCommand(diResolver));
         clearSettingsFile.setAction(new ClearSettingsFileActionCommand(diResolver));
 
         chooseInputFile.setAction(new SelectInputDataFileActionCommand(diResolver));
