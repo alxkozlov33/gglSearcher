@@ -4,14 +4,15 @@ import Services.DBConnectionService;
 import Services.DIResolver;
 import Services.GuiService;
 import org.tinylog.Logger;
+
 import java.awt.event.ActionEvent;
 
-public class SelectSettingsFileActionCommand extends AbstractCommandAction {
+public class SelectSearchSettingsActionCommand extends AbstractCommandAction {
 
     private final DIResolver diResolver;
 
-    public SelectSettingsFileActionCommand(DIResolver diResolver) {
-        super("Choose new settings file");
+    public SelectSearchSettingsActionCommand(DIResolver diResolver) {
+        super("Search settings");
         this.diResolver = diResolver;
     }
 

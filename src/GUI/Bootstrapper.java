@@ -26,7 +26,6 @@ public class Bootstrapper extends JFrame {
     private JMenu settingsFile;
     private JMenu inputData;
 
-    private JMenuItem clearSettingsFile;
     private JMenuItem chooseSettingsFile;
 
     private JMenuItem chooseInputFile;
@@ -43,11 +42,9 @@ public class Bootstrapper extends JFrame {
         clearInputFile = new JMenuItem("Clear existing file");
         getInputData().add(getClearInputFile());
 
-        settingsFile = new JMenu("Settings file");
-        chooseSettingsFile = new JMenuItem("Choose new settings file");
+        settingsFile = new JMenu("Options");
+        chooseSettingsFile = new JMenuItem("Search settings");
         getSettingsFile().add(getChooseSettingsFile());
-        clearSettingsFile = new JMenuItem("Clear settings file");
-        getSettingsFile().add(getClearSettingsFile());
 
         getMenubar().add(getInputData());
         getMenubar().add(getSettingsFile());
@@ -56,8 +53,7 @@ public class Bootstrapper extends JFrame {
         runButton.setAction(new RunButtonActionCommand(diResolver));
         stopButton.setAction(new StopButtonActionCommand(diResolver));
 
-        chooseSettingsFile.setAction(new SelectSettingsFileActionCommand(diResolver));
-        clearSettingsFile.setAction(new ClearSettingsFileActionCommand(diResolver));
+        chooseSettingsFile.setAction(new SelectSearchSettingsActionCommand(diResolver));
 
         chooseInputFile.setAction(new SelectInputDataFileActionCommand(diResolver));
         clearInputFile.setAction(new ClearInputDataFileActionCommand(diResolver));
@@ -118,10 +114,6 @@ public class Bootstrapper extends JFrame {
             menubar = new JMenuBar();
         }
         return menubar;
-    }
-
-    public JMenuItem getClearSettingsFile() {
-        return clearSettingsFile;
     }
 
     public JMenuItem getChooseSettingsFile() {
