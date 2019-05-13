@@ -31,6 +31,7 @@ public class SettingsService {
             reader.write("\r\n");
             for (String item : list) {
                 reader.write(item);
+                reader.write("\r\n");
             }
             reader.write("\r\n");
         } catch (Exception e) {

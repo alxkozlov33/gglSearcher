@@ -40,7 +40,6 @@ public class GuiService {
         this.bootstrapper = bootstrapper;
     }
 
-
     public String getSearchPlaceholderText(){
         return bootstrapper.getSearchingPlaceHolder().getText();
     }
