@@ -24,3 +24,5 @@ Keys.java
 hs_err_pid*
 Electron/gglSearcher/
 .idea/workspace.xml
+logs/
+out/production/gglSearcher/gglSearcherDb.mv.db
