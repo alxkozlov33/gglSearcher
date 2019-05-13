@@ -22,7 +22,6 @@ public class Bootstrapper extends JFrame {
     private JScrollBar verticalScroolBar;
     private JMenuBar menubar;
 
-    private JMenu outputFolder;
     private JMenu settingsFile;
     private JMenu inputData;
 

@@ -25,7 +25,7 @@ public class GuiService {
     public void createNewSettingsDialog(DIResolver diResolver) {
         settingsDialog = new SettingsDialog(diResolver);
         settingsDialog.setSize(500, 700);
-        settingsDialog.setTitle("Settings");
+        settingsDialog.setTitle("Search settings");
         settingsDialog.setVisible(true);
         settingsDialog.setResizable(false);
     }

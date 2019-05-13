@@ -21,9 +21,11 @@ public class DBConnectionService {
 
     public DBConnectionService() {
         try {
-            connectionSource = new JdbcPooledConnectionSource("jdbc:h2:"
-                    + new File(DBConnectionService.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath()
-                    + File.separator+"gglSearcherDb");
+            String dbPath = "jdbc:h2:"
+                    + new File(DBConnectionService.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath().replace(".jar", "")
+                    + File.separator+"gglSearcherDb";
+            Logger.tag("SYSTEM").info(dbPath);
+            connectionSource = new JdbcPooledConnectionSource(dbPath);
             createTableIfNotExists();
         } catch (SQLException | URISyntaxException e) {
             Logger.tag("SYSTEM").error(e);

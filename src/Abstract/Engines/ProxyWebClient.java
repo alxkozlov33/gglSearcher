@@ -51,8 +51,8 @@ public class ProxyWebClient extends BaseEngine {
                     return Jsoup.parse(pageSource);
                 }
             } catch (Exception ex) {
-                Logger.info("Attempt: " + i);
-                Logger.error("Cannot get page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + ex.getMessage());
+                Logger.tag("SYSTEM").info("Attempt: " + i);
+                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + ex.getMessage());
             }
             isThreadSleep(i, requestData);
         }
@@ -65,7 +65,7 @@ public class ProxyWebClient extends BaseEngine {
                 Thread.sleep(requestData.requestDelay);
             }
         } catch (InterruptedException e) {
-            Logger.error("Interrupt exception");
+            Logger.tag("SYSTEM").error("Interrupt exception");
         }
     }
 

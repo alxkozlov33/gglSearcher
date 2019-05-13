@@ -30,15 +30,5 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         if (DirUtils.isFileOk(inputFile, "csv")) {
             guiService.setInputFilePath(inputFile);
         }
-
-        File settingsFile = propertiesService.getSettingsFilePath();
-        if (DirUtils.isFileOk(settingsFile, "txt")) {
-            guiService.setSettingsFilePath(settingsFile);
-        }
-
-//        if (propertiesService.getWorkState()) {
-//            RunButtonActionCommand runButtonActionCommand = new RunButtonActionCommand(diResolver);
-//            runButtonActionCommand.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
-//        }
     }
 }
