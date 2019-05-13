@@ -1,5 +1,6 @@
 package Services;
 
+import Abstract.Models.SearchSettings;
 import GUI.*;
 import Utils.DirUtils;
 import org.tinylog.Logger;
@@ -16,16 +17,29 @@ public class GuiService {
     public Frame getMainFrame() {
         return bootstrapper;
     }
+
     public SettingsDialog getSettingsDialog() {
         return settingsDialog;
+    }
+
+    public void createNewSettingsDialog(DIResolver diResolver) {
+        settingsDialog = new SettingsDialog(diResolver);
+        settingsDialog.setSize(500, 600);
+        settingsDialog.setTitle("Settings");
+        settingsDialog.setVisible(true);
+        settingsDialog.setResizable(false);
+    }
+
+    public void closeSettingsDialog() {
+        if (settingsDialog != null) {
+            settingsDialog.onCancel();
+        }
     }
 
     public void setBootstrapper(Bootstrapper bootstrapper) {
         this.bootstrapper = bootstrapper;
     }
-    public void setSettingsDialog(SettingsDialog settingsDialog) {
-        this.settingsDialog = settingsDialog;
-    }
+
 
     public String getSearchPlaceholderText(){
         return bootstrapper.getSearchingPlaceHolder().getText();
@@ -88,12 +102,6 @@ public class GuiService {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             Logger.tag("SYSTEM").error(e, "Interrupt exception");
-        }
-    }
-
-    public void setOutputFolder(File outputFolder) {
-        if (DirUtils.isDirOk(outputFolder)) {
-            bootstrapper.getSelectedOutputFolderData().setText(cutPath(outputFolder.getAbsolutePath()));
         }
     }
 }

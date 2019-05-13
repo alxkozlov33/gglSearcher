@@ -23,14 +23,16 @@ public class SettingsDialog extends JDialog {
     private JTextArea WordsInDomainURLSExceptions;
     private JTextArea TopLevelDomainsExceptions;
     private JTextArea LookForKeywordsInSearchResults;
+    private JScrollPane exceptionsMetaTitles;
     private SearchSettings searchSettings;
-    private final DIResolver diResolver;
 
     public SettingsDialog(DIResolver diResolver) {
-        this.diResolver = diResolver;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        setResizable(false);
+
+
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
 
@@ -52,7 +54,7 @@ public class SettingsDialog extends JDialog {
         contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public void FillTextBoxesWithSearchSettings(SearchSettings searchSettings) {
+    private void FillTextBoxesWithSearchSettings(SearchSettings searchSettings) {
         if (searchSettings != null) {
             this.searchSettings = searchSettings;
             SpecificWordsInDomainURLS.setText(String.join(";", searchSettings.KeywordsForLookingInDomainURLs));
@@ -88,12 +90,16 @@ public class SettingsDialog extends JDialog {
         return settings;
     }
 
-    private void onCancel() {
+    public void onCancel() {
         // add your code here if necessary
         dispose();
     }
 
     public SearchSettings getSearchSettings() {
         return searchSettings;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
