@@ -15,7 +15,6 @@ public class PropertiesService {
     private String selectedCsvInputFileString = "selectedCsvInputFile";
     private String indexString = "index";
     private String placeholderPropertyString = "placeholder";
-    private String selectedSettingsInputFileString = "settingsInputFile";
 
     public PropertiesService() {
         properties = new Properties();
@@ -53,14 +52,6 @@ public class PropertiesService {
         }
     }
 
-    public void saveSettingsFilePath(File inputFile) {
-        if (DirUtils.isFileOk(inputFile, "txt")) {
-            saveProperty(selectedSettingsInputFileString, inputFile.getAbsolutePath());
-        } else {
-            saveProperty(selectedSettingsInputFileString, "");
-        }
-    }
-
     public void saveIndex(int index) {
         saveProperty(indexString, Integer.toString(index));
     }
@@ -90,10 +81,6 @@ public class PropertiesService {
     public String getPlaceHolder() {
         return restoreProperty(placeholderPropertyString);
     }
-    public File getSettingsFilePath() {
-        String restoredPath = restoreProperty(selectedSettingsInputFileString);
-        return new File(restoredPath);
-    }
 
     private void createNewFileIfNotExists() {
         OutputStream output = null;
@@ -109,7 +96,6 @@ public class PropertiesService {
                     saveIndex(0);
                     saveWorkState(false);
                     saveInputFilePath(null);
-                    saveSettingsFilePath(null);
                     savePlaceHolder(null);
                     properties.store(output, null);
                 }

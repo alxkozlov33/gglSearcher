@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="GSearch">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/GSearch.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

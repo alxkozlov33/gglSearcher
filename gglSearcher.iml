@@ -19,5 +19,6 @@
     <orderEntry type="library" name="com.opencsv:opencsv:4.6" level="project" />
     <orderEntry type="library" name="com.j256.ormlite:ormlite-jdbc:5.0" level="project" />
     <orderEntry type="library" name="h2-latest" level="project" />
+    <orderEntry type="library" name="GSearch" level="project" />
   </component>
 </module>
