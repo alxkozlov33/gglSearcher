@@ -11,6 +11,7 @@ import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
 import Services.DIResolver;
 import Services.PropertiesService;
 import Services.SettingsService;
+import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
     public synchronized List<IOutputModel> convertResultDataToOutputModels(List<RegularSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
-            return null;
+            return outputItems;
         }
 
         SettingsService settingsService = diResolver.getSettingsService();
@@ -55,6 +56,25 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
                     OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
                     outputItems.add(outputModelGeoDataDecorator);
                 }
+            }
+        }
+        return outputItems;
+    }
+
+    @Override
+    public List<IOutputModel> convertMapsResultDataToOutputModels(List<PlaceCard> searchItems) {
+        ArrayList<IOutputModel> outputItems = new ArrayList<>();
+        if (searchItems.size() == 0) {
+            return outputItems;
+        }
+
+        PropertiesService propertiesService = diResolver.getPropertiesService();
+
+        for (PlaceCard placeCard : searchItems) {
+            if (propertiesService.getWorkState()) {
+                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(placeCard.getName(), placeCard.getSite(), placeCard.getSite(), placeCard.getDescription());
+                OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
+                outputItems.add(outputModelGeoDataDecorator);
             }
         }
         return outputItems;

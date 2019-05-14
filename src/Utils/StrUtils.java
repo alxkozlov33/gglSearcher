@@ -47,6 +47,21 @@ public class StrUtils {
         return result;
     }
 
+    public static String createSearchTermForMultipleSearch(InputCsvModelItem csvItem, String inputPlaceHolder) {
+        if (StringUtils.isEmpty(inputPlaceHolder)) {
+            return "";
+        }
+        String queryTerm;
+        if (csvItem != null) {
+            StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
+            queryTerm = sub.replace(inputPlaceHolder);
+        }
+        else {
+            queryTerm = inputPlaceHolder;
+        }
+        return queryTerm;
+    }
+
     public static String createUrlForSingleSearch(String inputPlaceHolder) {
         String result = null;
         if (StringUtils.isEmpty(inputPlaceHolder)) {

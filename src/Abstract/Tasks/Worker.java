@@ -1,5 +1,6 @@
 package Abstract.Tasks;
 
+import Abstract.Engines.CustomProxyMapsClient;
 import Abstract.Engines.ProxyWebClient;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
@@ -11,6 +12,7 @@ import Abstract.Strategies.OutputResultsConversionStrategies.ConvertSearchResult
 import Abstract.Strategies.OutputResultsConversionStrategies.SearchResultsConvertStrategy;
 import Services.DIResolver;
 import Utils.ResultsUtils;
+import kbaa.gsearch.PlaceCard;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 import java.io.IOException;
@@ -22,9 +24,11 @@ public class Worker implements Runnable {
     private final DIResolver diResolver;
     private final AbstractSpecification<GoogleSearchResultItem> googleItemsSpec;
     private final ProxyWebClient proxyWebClient;
+    private final CustomProxyMapsClient customProxyMapsClient;
 
     public Worker(DIResolver diResolver, RequestData requestData, AbstractSpecification specification) {
-        proxyWebClient = new ProxyWebClient();
+        this.proxyWebClient = new ProxyWebClient();
+        this.customProxyMapsClient = new CustomProxyMapsClient();
         this.diResolver = diResolver;
         this.requestData = requestData;
         googleItemsSpec = specification;
@@ -35,16 +39,26 @@ public class Worker implements Runnable {
         if (diResolver.getPropertiesService().getWorkState()) {
             Element body = null;
             try {
-                body = proxyWebClient.request(requestData);
+                body = proxyWebClient.requestToSearchEngine(requestData);
             } catch (IOException e) {
                 Logger.tag("SYSTEM").error(e);
             }
+
+            List<PlaceCard> mapsItems = null;
+            try {
+                mapsItems = customProxyMapsClient.requestToMapsEngine(requestData);
+            } catch (IOException e) {
+                Logger.tag("SYSTEM").error(e);
+            }
+
             RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
             List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
             List filteredRegularSearchResultItems = ResultsUtils.filterResults(regularSearchResultItems, googleItemsSpec);
             SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
                     = new ConvertSearchResultsWithGeoDataStrategy(diResolver, requestData.inputCsvModelItem.getColumnA(), requestData.inputCsvModelItem.getColumnC());
             List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
+            List scrapedMapsItems = regularConvertStrategy.convertMapsResultDataToOutputModels(mapsItems);
+            regularItems.addAll(scrapedMapsItems);
 
             diResolver.getOutputDataService().saveResultCsvItemsByMultipleSearch(regularItems);
         }

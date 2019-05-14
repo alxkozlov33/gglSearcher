@@ -11,6 +11,7 @@ import Services.*;
 import Utils.StrUtils;
 import org.tinylog.Logger;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -36,11 +37,13 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         if (size == 0) {
             throw new InputFileEmptyException("Input data file doesn't contain elements");
         }
-        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
         for (int i = 0; i < size; i++) {
             String URL = StrUtils.createUrlForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
-            RequestData requestData = new RequestData(URL, 30, 5000, csvFileData.get(i));
+            String requestTerm = StrUtils.createSearchTermForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
+            RequestData requestData = new RequestData(URL, 30, getRandomNumberInRange(5000, 10000), csvFileData.get(i));
+            requestData.setRequestTerm(requestTerm);
             Runnable worker = new Worker(diResolver, requestData, googleItemsSpec);
             executor.execute(worker);
         }
@@ -64,5 +67,15 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         executor.shutdown();
         isWorkFlag = false;
         diResolver.getPropertiesService().saveWorkState(isWorkFlag);
+    }
+
+    private static int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 }

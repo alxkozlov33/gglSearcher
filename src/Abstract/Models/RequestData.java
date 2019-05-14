@@ -4,6 +4,7 @@ import Abstract.Models.InputModels.InputCsvModelItem;
 
 public class RequestData {
     public String requestURL;
+    private String requestTerm;
     public int attemptsCount;
     public int requestDelay;
     public InputCsvModelItem inputCsvModelItem;
@@ -19,5 +20,13 @@ public class RequestData {
         this.attemptsCount = attemptsCount;
         this.requestDelay = requestDelay;
         this.inputCsvModelItem = inputCsvModelItem;
+    }
+
+    public String getRequestTerm() {
+        return requestTerm;
+    }
+
+    public void setRequestTerm(String requestTerm) {
+        this.requestTerm = requestTerm;
     }
 }

@@ -1,6 +1,7 @@
 package Abstract.Strategies.OutputResultsConversionStrategies;
 
 import Abstract.Models.OutputModels.IOutputModel;
+import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
@@ -11,6 +12,7 @@ import Services.DIResolver;
 import Services.GuiService;
 import Services.PropertiesService;
 import Services.SettingsService;
+import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 
@@ -28,7 +30,7 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
     public synchronized List<IOutputModel> convertResultDataToOutputModels(List<RegularSearchResultItem> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
         if (searchItems.size() == 0) {
-            return null;
+            return outputItems;
         }
         GuiService guiService = diResolver.getGuiService();
         SettingsService settingsService = diResolver.getSettingsService();
@@ -55,6 +57,23 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         return outputItems;
     }
 
+    @Override
+    public List<IOutputModel> convertMapsResultDataToOutputModels(List<PlaceCard> searchItems) {
+        ArrayList<IOutputModel> outputItems = new ArrayList<>();
+        if (searchItems.size() == 0) {
+            return outputItems;
+        }
+
+        PropertiesService propertiesService = diResolver.getPropertiesService();
+
+        for (PlaceCard placeCard : searchItems) {
+            if (propertiesService.getWorkState()) {
+                OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(placeCard.getName(), placeCard.getSite(), placeCard.getSite(), placeCard.getDescription());
+                outputItems.add(outputRegularCSVItem);
+            }
+        }
+        return outputItems;
+    }
     private String getMainHeader(WebPageObject webPageObject, GoogleSearchResultItem googleSearchResultItem) {
         if (StringUtils.isEmpty(googleSearchResultItem.getMainHeader())) {
             return webPageObject.getSiteName();

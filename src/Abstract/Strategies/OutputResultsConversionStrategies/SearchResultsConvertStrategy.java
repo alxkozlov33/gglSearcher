@@ -1,12 +1,12 @@
 package Abstract.Strategies.OutputResultsConversionStrategies;
 
 import Abstract.Engines.ProxyWebClient;
-import Abstract.Exceptions.InputFileEmptyException;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Utils.StrUtils;
+import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
@@ -18,12 +18,13 @@ import java.util.List;
 public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultItem, U extends IOutputModel> {
 
     public abstract List<U> convertResultDataToOutputModels(List<T> searchItems);
+    public abstract List<U> convertMapsResultDataToOutputModels(List<PlaceCard> searchItems);
 
-    protected Element getWebSitePageSource(GoogleSearchResultItem item) {
+    Element getWebSitePageSource(GoogleSearchResultItem item) {
         RequestData requestData = new RequestData(item.getLink(), 5, 2000);
         Element result = null;
         try {
-            result = new ProxyWebClient().request(requestData);
+            result = new ProxyWebClient().requestToSearchEngine(requestData);
         } catch (IOException e) {
             Logger.error(e);
         }

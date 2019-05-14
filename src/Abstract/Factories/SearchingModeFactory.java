@@ -40,7 +40,7 @@ public class SearchingModeFactory {
                 inputDataService.initInputFileData();
                 outputDataService.createOutputFileForMultipleSearchOutput(guiService.getSearchPlaceholderText());
             }
-            else if (!DirUtils.isFileOk(diResolver.getInputDataService().getInputDataFile(), "csv") && !StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
+            else if (!StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
                 searchModeStrategy = new SingleSearchModeStrategy(diResolver);
                 outputDataService.createOutputFileForSingleSearchOutput(guiService.getSearchPlaceholderText());
             }
