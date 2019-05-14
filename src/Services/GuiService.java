@@ -1,6 +1,5 @@
 package Services;
 
-import Abstract.Models.SearchSettings;
 import GUI.*;
 import Utils.DirUtils;
 import org.tinylog.Logger;
@@ -44,18 +43,9 @@ public class GuiService {
         return bootstrapper.getSearchingPlaceHolder().getText();
     }
 
-    public void clearSettingsFilePath() {
-        bootstrapper.getSettingsLabelFileData().setText("");
-    }
 
     public void clearInputDataFilePath() {
         bootstrapper.getSelectedFileLabelData().setText("");
-    }
-
-    public void setSettingsFilePath(File file) {
-        if (DirUtils.isFileOk(file, "txt")) {
-            bootstrapper.getSettingsLabelFileData().setText(cutPath(file.getAbsolutePath()));
-        }
     }
 
     public void setInputFilePath(File file) {

@@ -33,8 +33,6 @@ public class ImportSettingsActionCommand extends AbstractCommandAction {
             SearchSettings searchSettings = settingsService.getSearchSettingsFromFile(settingsFile);
             dbConnectionService.saveSearchSettings(searchSettings);
             guiService.createNewSettingsDialog(diResolver);
-//            SettingsDialog settingsDialog = guiService.getSettingsDialog();
-//            settingsDialog.FillTextBoxesWithSearchSettings(searchSettings);
         }
     }
 }
