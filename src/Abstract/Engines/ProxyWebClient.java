@@ -2,6 +2,7 @@ package Abstract.Engines;
 
 import java.io.*;
 import Abstract.Models.RequestData;
+import Services.DIResolver;
 import org.apache.http.client.methods.*;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
@@ -13,12 +14,12 @@ public class ProxyWebClient extends BaseEngine {
     public ProxyWebClient() {
     }
 
-    public synchronized Element requestToSearchEngine(RequestData requestData) throws IOException {
+    public synchronized Element requestToSearchEngine(RequestData requestData, DIResolver diResolver) throws IOException {
         for (int i = 1; i <= requestData.attemptsCount; i++) {
-//            boolean isContinueWork = diResolver.getPropertiesService().getWorkState();
-//            if (!isContinueWork) {
-//                return null;
-//            }
+            boolean isContinueWork = diResolver.getDbConnectionService().getWorkStatus();
+            if (!isContinueWork) {
+                return null;
+            }
             try {
                 Thread.sleep(requestData.requestDelay);
             } catch (InterruptedException e) {

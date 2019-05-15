@@ -1,9 +1,6 @@
 package Abstract.Commands;
 
-import Services.DIResolver;
-import Services.GuiService;
-import Services.InputDataService;
-import Services.PropertiesService;
+import Services.*;
 import Utils.StrUtils;
 import org.tinylog.Logger;
 
@@ -17,11 +14,11 @@ public class ClearInputDataFileActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Input data file removed");
         GuiService guiService = diResolver.getGuiService();
         InputDataService inputDataService = diResolver.getInputDataService();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
 
         inputDataService.clearInputDataFile();
         guiService.clearInputDataFilePath();
-        propertiesService.saveInputFilePath(null);
+        dbConnectionService.updateFileDataPath("");
     }
 
     public ClearInputDataFileActionCommand(DIResolver diResolver) {

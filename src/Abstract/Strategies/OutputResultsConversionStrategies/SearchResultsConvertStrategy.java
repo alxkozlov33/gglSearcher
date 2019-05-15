@@ -5,6 +5,7 @@ import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.RequestData;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
+import Services.DIResolver;
 import Utils.StrUtils;
 import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
@@ -20,11 +21,11 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
     public abstract List<U> convertResultDataToOutputModels(List<T> searchItems);
     public abstract List<U> convertMapsResultDataToOutputModels(List<PlaceCard> searchItems);
 
-    Element getWebSitePageSource(GoogleSearchResultItem item) {
+    Element getWebSitePageSource(GoogleSearchResultItem item, DIResolver diResolver) {
         RequestData requestData = new RequestData(item.getLink(), 5, 2000);
         Element result = null;
         try {
-            result = new ProxyWebClient().requestToSearchEngine(requestData);
+            result = new ProxyWebClient().requestToSearchEngine(requestData, diResolver);
         } catch (IOException e) {
             Logger.error(e);
         }

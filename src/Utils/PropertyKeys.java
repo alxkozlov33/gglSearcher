@@ -8,5 +8,6 @@ public enum PropertyKeys {
     KeywordsInSearchResults,
     URLExceptions,
     WorkStatus,
-    DataFilePath
+    DataFilePath,
+    SearchPlaceholder
 }

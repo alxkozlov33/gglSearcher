@@ -22,17 +22,17 @@ public class SearchingModeFactory {
         GuiService guiService = diResolver.getGuiService();
         OutputDataService outputDataService = diResolver.getOutputDataService();
         InputDataService inputDataService = diResolver.getInputDataService();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         String placeHolder = diResolver.getGuiService().getSearchPlaceholderText();
 
-        File inputDataFile = propertiesService.getInputFile();
+        File inputDataFile = new File(dbConnectionService.getDataFilePath());
         if (DirUtils.isFileOk(inputDataFile, "csv")) {
             inputDataService.initInputFile(inputDataFile);
         }
 
-        File inputFile = propertiesService.getInputFile();
+        File inputFile = new File(dbConnectionService.getDataFilePath());
 
-        if (diResolver.getPropertiesService().getWorkState()) {
+        if (diResolver.getDbConnectionService().getWorkStatus()) {
 
             if (DirUtils.isFileOk(inputFile, "csv") && StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {
                 searchModeStrategy = new MultipleSearchModeStrategy(diResolver);

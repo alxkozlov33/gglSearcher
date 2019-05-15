@@ -37,12 +37,12 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         if (size == 0) {
             throw new InputFileEmptyException("Input data file doesn't contain elements");
         }
-        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
 
         for (int i = 0; i < size; i++) {
             String URL = StrUtils.createUrlForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
             String requestTerm = StrUtils.createSearchTermForMultipleSearch(csvFileData.get(i), diResolver.getGuiService().getSearchPlaceholderText());
-            RequestData requestData = new RequestData(URL, 30, getRandomNumberInRange(5000, 10000), csvFileData.get(i));
+            RequestData requestData = new RequestData(URL, 30, getRandomNumberInRange(2000, 4000), csvFileData.get(i));
             requestData.setRequestTerm(requestTerm);
             Runnable worker = new Worker(diResolver, requestData, googleItemsSpec);
             executor.execute(worker);
@@ -66,7 +66,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
     public void stopProcessing() {
         executor.shutdown();
         isWorkFlag = false;
-        diResolver.getPropertiesService().saveWorkState(isWorkFlag);
+        diResolver.getDbConnectionService().updateWorkStatus(isWorkFlag);
     }
 
     private static int getRandomNumberInRange(int min, int max) {

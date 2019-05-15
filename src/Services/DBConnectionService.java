@@ -78,6 +78,78 @@ public class DBConnectionService {
         ApplicationSettingsEntity dataFilePath = new ApplicationSettingsEntity();
         dataFilePath.setSettingName(PropertyKeys.DataFilePath);
         appSettingsDao.createIfNotExists(dataFilePath);
+
+        ApplicationSettingsEntity searchPlaceholder = new ApplicationSettingsEntity();
+        searchPlaceholder.setSettingName(PropertyKeys.SearchPlaceholder);
+        appSettingsDao.createIfNotExists(searchPlaceholder);
+    }
+
+    private void updatePropertyByKey(PropertyKeys propertyKey, String value) {
+        if (value == null || propertyKey == null) {
+            return;
+        }
+
+        try {
+            SearchSettingsDao searchSettingsDao = DaoManager.createDao(connectionSource, SearchSettingsEntity.class);
+            SearchSettingsEntity settings = getSearchSettingsPropertyByKey(propertyKey);
+            settings.setSettingName(propertyKey);
+            settings.setSettingValue(value);
+
+            searchSettingsDao.update(settings);
+        } catch (SQLException e) {
+            Logger.tag("SYSTEM").error(e, "Cannot update property: " + propertyKey);
+        }
+    }
+
+    private void updateApplicationSettingsPropertyByKey(PropertyKeys propertyKey, String value) {
+        if (value == null || propertyKey == null) {
+            return;
+        }
+
+        try {
+            AppSettingsDao searchSettingsDao = DaoManager.createDao(connectionSource, ApplicationSettingsEntity.class);
+            ApplicationSettingsEntity settings = getApplicationSettingsPropertyByKey(propertyKey);
+            settings.setSettingName(propertyKey);
+            settings.setSettingValue(value);
+
+            searchSettingsDao.update(settings);
+        } catch (SQLException e) {
+            Logger.tag("SYSTEM").error(e, "Cannot update property: " + propertyKey);
+        }
+    }
+
+    private SearchSettingsEntity getSearchSettingsPropertyByKey(PropertyKeys propertyKey) {
+        if (propertyKey == null) {
+            return null;
+        }
+        SearchSettingsEntity settings = null;
+        try {
+            SearchSettingsDao searchSettingsDao = DaoManager.createDao(connectionSource, SearchSettingsEntity.class);
+            settings = searchSettingsDao.findByKey(propertyKey).get(0);
+            if (StringUtils.isEmpty(settings.getSettingValue())) {
+                settings.setSettingValue("");
+            }
+        } catch (SQLException e) {
+            Logger.tag("SYSTEM").error(e, "Cannot update property: " + propertyKey);
+        }
+        return settings;
+    }
+
+    private ApplicationSettingsEntity getApplicationSettingsPropertyByKey(PropertyKeys propertyKey) {
+        if (propertyKey == null) {
+            return null;
+        }
+        ApplicationSettingsEntity settings = null;
+        try {
+            AppSettingsDao appSettingsDao = DaoManager.createDao(connectionSource, ApplicationSettingsEntity.class);
+            settings = appSettingsDao.findByKey(propertyKey).get(0);
+            if (StringUtils.isEmpty(settings.getSettingValue())) {
+                settings.setSettingValue("");
+            }
+        } catch (SQLException e) {
+            Logger.tag("SYSTEM").error(e, "Cannot update property: " + propertyKey);
+        }
+        return settings;
     }
 
     public void saveSearchSettings(SearchSettings searchSettings) {
@@ -97,12 +169,12 @@ public class DBConnectionService {
     public SearchSettings getSearchSettings() {
         SearchSettings searchSettings = new SearchSettings();
         try {
-            Collections.addAll(searchSettings.ExceptionsForFoundDomains, getPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.KeywordsForLookingInSearchResults, getPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.MetaTagsExceptions, getPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.KeywordsForLookingInDomainURLs, getPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.ExceptionsForTopLevelDomains, getPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.ExceptionsForWordsInDomainURLs, getPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.ExceptionsForFoundDomains, getSearchSettingsPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.KeywordsForLookingInSearchResults, getSearchSettingsPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.MetaTagsExceptions, getSearchSettingsPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.KeywordsForLookingInDomainURLs, getSearchSettingsPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.ExceptionsForTopLevelDomains, getSearchSettingsPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
+            Collections.addAll(searchSettings.ExceptionsForWordsInDomainURLs, getSearchSettingsPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
         } catch (NullPointerException ex) {
             Logger.error(ex);
         }
@@ -110,45 +182,30 @@ public class DBConnectionService {
         return searchSettings;
     }
 
-    public synchronized boolean getWorkStatus() {
-        return Boolean.valueOf(getPropertyByKey(PropertyKeys.WorkStatus).getSettingValue());
+
+    public boolean getWorkStatus() {
+        return Boolean.valueOf(getApplicationSettingsPropertyByKey(PropertyKeys.WorkStatus).getSettingValue());
     }
 
     public synchronized void updateWorkStatus(boolean status) {
-        updatePropertyByKey(PropertyKeys.WorkStatus, String.valueOf(status));
+        updateApplicationSettingsPropertyByKey(PropertyKeys.WorkStatus, String.valueOf(status));
     }
 
-    private void updatePropertyByKey(PropertyKeys propertyKey, String value) {
-        if (value == null || propertyKey == null) {
-            return;
-        }
 
-        try {
-            SearchSettingsDao searchSettingsDao = DaoManager.createDao(connectionSource, SearchSettingsEntity.class);
-            SearchSettingsEntity settings = getPropertyByKey(propertyKey);
-            settings.setSettingName(propertyKey);
-            settings.setSettingValue(value);
-
-            searchSettingsDao.update(settings);
-        } catch (SQLException e) {
-            Logger.tag("SYSTEM").error(e, "Cannot update property: " + propertyKey);
-        }
+    public String getSearchPlaceholder() {
+        return getApplicationSettingsPropertyByKey(PropertyKeys.SearchPlaceholder).getSettingValue();
     }
 
-    private SearchSettingsEntity getPropertyByKey(PropertyKeys propertyKey) {
-        if (propertyKey == null) {
-            return null;
-        }
-        SearchSettingsEntity settings = null;
-        try {
-            SearchSettingsDao searchSettingsDao = DaoManager.createDao(connectionSource, SearchSettingsEntity.class);
-            settings = searchSettingsDao.findByKey(propertyKey).get(0);
-            if (StringUtils.isEmpty(settings.getSettingValue())) {
-                settings.setSettingValue("");
-            }
-        } catch (SQLException e) {
-            Logger.tag("SYSTEM").error(e, "Cannot update property: " + propertyKey);
-        }
-        return settings;
+    public synchronized void updateSearchPlaceholder(String searchPlaceholder) {
+        updateApplicationSettingsPropertyByKey(PropertyKeys.SearchPlaceholder, searchPlaceholder);
+    }
+
+
+    public String getDataFilePath() {
+        return getApplicationSettingsPropertyByKey(PropertyKeys.DataFilePath).getSettingValue();
+    }
+
+    public void updateFileDataPath(String filePath) {
+        updateApplicationSettingsPropertyByKey(PropertyKeys.DataFilePath, filePath);
     }
 }

@@ -1,9 +1,6 @@
 package Abstract.Commands;
 
-import Services.DIResolver;
-import Services.GuiService;
-import Services.InputDataService;
-import Services.PropertiesService;
+import Services.*;
 import Utils.DirUtils;
 import org.tinylog.Logger;
 import java.awt.event.ActionEvent;
@@ -17,13 +14,13 @@ public class SelectInputDataFileActionCommand extends AbstractCommandAction {
     public void actionPerformed(ActionEvent e) {
         Logger.tag("SYSTEM").info("Select input data file button action performed");
         GuiService guiService = diResolver.getGuiService();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         InputDataService inputDataService = diResolver.getInputDataService();
 
         File inputDataAbsolutePath = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select CSV data file", "csv");
         if (DirUtils.isFileOk(inputDataAbsolutePath, "csv")) {
             guiService.setInputFilePath(inputDataAbsolutePath);
-            propertiesService.saveInputFilePath(inputDataAbsolutePath);
+            dbConnectionService.updateFileDataPath(inputDataAbsolutePath.getAbsolutePath());
             inputDataService.initInputFile(inputDataAbsolutePath);
         }
     }

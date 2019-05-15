@@ -41,10 +41,6 @@ public class DIResolver {
         return userAgentsRotatorService;
     }
 
-    public PropertiesService getPropertiesService() {
-        return propertiesService;
-    }
-
     public GuiService getGuiService() {
         return guiService;
     }

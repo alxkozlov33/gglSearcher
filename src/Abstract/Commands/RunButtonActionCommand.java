@@ -24,14 +24,14 @@ public class RunButtonActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Run button action performed");
 
         diResolver.getUserAgentsRotatorService().initList();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         GuiService guiService = diResolver.getGuiService();
         guiService.setStatusText("Starting...");
 
         String placeholder = guiService.getSearchPlaceholderText();
-        propertiesService.savePlaceHolder(placeholder);
+        dbConnectionService.updateSearchPlaceholder(placeholder);
 
-        propertiesService.saveWorkState(true);
+        dbConnectionService.updateWorkStatus(true);
         Thread worker = new Thread(() -> {
             guiService.changeApplicationStateToWork(true);
             SearchingModeFactory searchingModeFactory = new SearchingModeFactory(diResolver);
@@ -41,8 +41,7 @@ public class RunButtonActionCommand extends AbstractCommandAction {
                 searchModeStrategy.processData();
                 Logger.tag("SYSTEM").info("Finished");
                 guiService.setStatusText("Finished");
-                propertiesService.saveWorkState(false);
-                propertiesService.saveIndex(0);
+                dbConnectionService.updateWorkStatus(false);
             } catch (Exception | InputFileEmptyException ex) {
                 Logger.tag("SYSTEM").error(ex);
                 Logger.tag("SYSTEM").info("Application aborted. Check your input files and placeholder.");

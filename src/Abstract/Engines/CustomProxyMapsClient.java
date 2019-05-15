@@ -1,6 +1,7 @@
 package Abstract.Engines;
 
 import Abstract.Models.RequestData;
+import Services.DIResolver;
 import kbaa.gsearch.PlaceCard;
 import kbaa.gsearch.Search;
 import org.tinylog.Logger;
@@ -13,13 +14,13 @@ public class CustomProxyMapsClient extends BaseEngine {
     public CustomProxyMapsClient() {
     }
 
-    public synchronized List<PlaceCard> requestToMapsEngine(RequestData requestData) throws IOException {
+    public synchronized List<PlaceCard> requestToMapsEngine(RequestData requestData, DIResolver diResolver) throws IOException {
         List<PlaceCard> placeCards = new ArrayList<>();
         for (int i = 1; i <= requestData.attemptsCount; i++) {
-//            boolean isContinueWork = diResolver.getPropertiesService().getWorkState();
-//            if (!isContinueWork) {
-//                return null;
-//            }
+            boolean isContinueWork = diResolver.getDbConnectionService().getWorkStatus();
+            if (!isContinueWork) {
+                return placeCards;
+            }
 
             Search search = new Search(requestData.getRequestTerm(), getNewClient());
             try {

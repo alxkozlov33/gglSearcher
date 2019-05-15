@@ -8,6 +8,7 @@ import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
+import Services.DBConnectionService;
 import Services.DIResolver;
 import Services.PropertiesService;
 import Services.SettingsService;
@@ -39,13 +40,13 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
         }
 
         SettingsService settingsService = diResolver.getSettingsService();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().MetaTagsExceptions);
         SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().KeywordsForLookingInSearchResults);
 
         for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
-            if(propertiesService.getWorkState()) {
-                Element pageSourceData = getWebSitePageSource(googleSearchResultItem);
+            if(dbConnectionService.getWorkStatus()) {
+                Element pageSourceData = getWebSitePageSource(googleSearchResultItem, diResolver);
                 WebPageObject webPageObject = parseSourceData(pageSourceData);
                 if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
                     String galleryName = getGalleryName(webPageObject, googleSearchResultItem);
@@ -68,10 +69,10 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
             return outputItems;
         }
 
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
 
         for (PlaceCard placeCard : searchItems) {
-            if (propertiesService.getWorkState()) {
+            if (dbConnectionService.getWorkStatus()) {
                 OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(placeCard.getName(), placeCard.getSite(), placeCard.getSite(), placeCard.getDescription());
                 OutputModelGeoDataDecorator outputModelGeoDataDecorator = new OutputModelGeoDataDecorator(outputRegularCSVItem, city, country);
                 outputItems.add(outputModelGeoDataDecorator);

@@ -36,17 +36,17 @@ public class Worker implements Runnable {
 
     @Override
     public void run() {
-        if (diResolver.getPropertiesService().getWorkState()) {
+        if (diResolver.getDbConnectionService().getWorkStatus()) {
             Element body = null;
             try {
-                body = proxyWebClient.requestToSearchEngine(requestData);
+                body = proxyWebClient.requestToSearchEngine(requestData, diResolver);
             } catch (IOException e) {
                 Logger.tag("SYSTEM").error(e);
             }
 
             List<PlaceCard> mapsItems = null;
             try {
-                mapsItems = customProxyMapsClient.requestToMapsEngine(requestData);
+                mapsItems = customProxyMapsClient.requestToMapsEngine(requestData, diResolver);
             } catch (IOException e) {
                 Logger.tag("SYSTEM").error(e);
             }

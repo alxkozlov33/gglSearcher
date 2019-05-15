@@ -21,7 +21,7 @@ public class StopButtonActionCommand extends AbstractCommandAction {
         if (searchMode != null) {
             searchMode.stopProcessing();
             diResolver.getGuiService().setStatusText("Stopping...");
-            diResolver.getPropertiesService().saveWorkState(false);
+            diResolver.getDbConnectionService().updateWorkStatus(false);
         }
     }
 }

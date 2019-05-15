@@ -45,14 +45,14 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         CustomProxyMapsClient customProxyMapsClient = new CustomProxyMapsClient();
         Element body = null;
         try {
-            body = webClient.requestToSearchEngine(requestData);
+            body = webClient.requestToSearchEngine(requestData, diResolver);
         } catch (IOException e) {
             Logger.tag("SYSTEM").error(e);
         }
 
         List<PlaceCard> mapsItems = null;
         try {
-            mapsItems = customProxyMapsClient.requestToMapsEngine(requestData);
+            mapsItems = customProxyMapsClient.requestToMapsEngine(requestData,diResolver);
         } catch (IOException e) {
             Logger.tag("SYSTEM").error(e);
         }

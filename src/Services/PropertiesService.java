@@ -18,7 +18,7 @@ public class PropertiesService {
 
     public PropertiesService() {
         properties = new Properties();
-        createNewFileIfNotExists();
+        //createNewFileIfNotExists();
     }
 
     private void saveProperty(String propertyName, String value) {
@@ -40,11 +40,11 @@ public class PropertiesService {
         }
     }
 
-    public void saveWorkState(boolean workState) {
+    private void saveWorkState(boolean workState) {
         saveProperty(isWorkStateString, Boolean.toString(workState));
     }
 
-    public void saveInputFilePath(File inputFile) {
+    private void saveInputFilePath(File inputFile) {
         if (DirUtils.isFileOk(inputFile, "csv")) {
             saveProperty(selectedCsvInputFileString, inputFile.getAbsolutePath());
         } else {
@@ -52,11 +52,11 @@ public class PropertiesService {
         }
     }
 
-    public void saveIndex(int index) {
+    private void saveIndex(int index) {
         saveProperty(indexString, Integer.toString(index));
     }
 
-    public void savePlaceHolder(String placeholder) {
+    private void savePlaceHolder(String placeholder) {
         if (StringUtils.isEmpty(placeholder)) {
             saveProperty(placeholderPropertyString, "");
         } else {
@@ -64,21 +64,21 @@ public class PropertiesService {
         }
     }
 
-    public boolean getWorkState() {
+    private boolean getWorkState() {
         return Boolean.valueOf(restoreProperty(isWorkStateString));
     }
-    public File getInputFile() {
+    private File getInputFile() {
         String restoredPath = restoreProperty(selectedCsvInputFileString);
         return new File(restoredPath);
     }
-    public int getIndex() {
+    private int getIndex() {
         String index = restoreProperty(indexString);
         if (StringUtils.isEmpty(index)) {
             return 0;
         }
         return Integer.parseInt(index);
     }
-    public String getPlaceHolder() {
+    private String getPlaceHolder() {
         return restoreProperty(placeholderPropertyString);
     }
 

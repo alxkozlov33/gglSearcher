@@ -8,10 +8,7 @@ import Abstract.Models.SearchResultModels.RegularSearchResultItem;
 import Abstract.Models.SearchResultModels.WebPageObject;
 import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
-import Services.DIResolver;
-import Services.GuiService;
-import Services.PropertiesService;
-import Services.SettingsService;
+import Services.*;
 import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
@@ -34,15 +31,15 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         }
         GuiService guiService = diResolver.getGuiService();
         SettingsService settingsService = diResolver.getSettingsService();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().MetaTagsExceptions);
         SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().KeywordsForLookingInSearchResults);
         int searchedItemsSize = searchItems.size();
 
         for (int i = 0; i < searchedItemsSize; i++) {
-            if(propertiesService.getWorkState()) {
+            if(dbConnectionService.getWorkStatus()) {
                 guiService.updateCountItemsStatus(i, searchedItemsSize);
-                Element pageSourceData = getWebSitePageSource(searchItems.get(i));
+                Element pageSourceData = getWebSitePageSource(searchItems.get(i), diResolver);
                 WebPageObject webPageObject = parseSourceData(pageSourceData);
                 if (webPageObject != null && metaTagsExceptionsSpecification.isSatisfiedBy(webPageObject) && specificWordInPageSpecification.isSatisfiedBy(webPageObject)) {
                     String mainHeader = getMainHeader(webPageObject, searchItems.get(i));
@@ -64,10 +61,10 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
             return outputItems;
         }
 
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
 
         for (PlaceCard placeCard : searchItems) {
-            if (propertiesService.getWorkState()) {
+            if (dbConnectionService.getWorkStatus()) {
                 OutputRegularCSVItem outputRegularCSVItem = new OutputRegularCSVItem(placeCard.getName(), placeCard.getSite(), placeCard.getSite(), placeCard.getDescription());
                 outputItems.add(outputRegularCSVItem);
             }

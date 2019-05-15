@@ -20,13 +20,13 @@ public class ApplicationStartedActionCommand extends AbstractCommandAction {
         Logger.tag("SYSTEM").info("Application started");
 
         diResolver.getUserAgentsRotatorService().initList();
-        PropertiesService propertiesService = diResolver.getPropertiesService();
+        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         GuiService guiService = diResolver.getGuiService();
 
-        String placeholder = propertiesService.getPlaceHolder();
+        String placeholder = dbConnectionService.getSearchPlaceholder();
         guiService.setPlaceholder(placeholder);
 
-        File inputFile = propertiesService.getInputFile();
+        File inputFile = new File(dbConnectionService.getDataFilePath());
         if (DirUtils.isFileOk(inputFile, "csv")) {
             guiService.setInputFilePath(inputFile);
         }
