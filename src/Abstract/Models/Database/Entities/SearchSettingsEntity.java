@@ -1,12 +1,12 @@
-package Abstract.Models.Database;
+package Abstract.Models.Database.Entities;
 
-
+import Abstract.Models.Database.DAO.SearchSettingsDao;
 import Utils.PropertyKeys;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-@DatabaseTable(tableName = "settings", daoClass = SettingsDao.class)
-public class Settings {
+@DatabaseTable(tableName = "SearchSettings", daoClass = SearchSettingsDao.class)
+public class SearchSettingsEntity {
 
     @DatabaseField(generatedId = true)
     private long settingId;
@@ -17,7 +17,7 @@ public class Settings {
     @DatabaseField
     private String settingValue;
 
-    public Settings() {
+    public SearchSettingsEntity() {
 
     }
 

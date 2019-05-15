@@ -6,5 +6,7 @@ public enum PropertyKeys {
     DomainExceptions,
     TopLevelDomainsExceptions,
     KeywordsInSearchResults,
-    URLExceptions
+    URLExceptions,
+    WorkStatus,
+    DataFilePath
 }

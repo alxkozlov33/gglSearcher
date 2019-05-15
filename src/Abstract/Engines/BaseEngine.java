@@ -15,12 +15,14 @@ import org.tinylog.Logger;
 import java.util.Random;
 
 abstract class BaseEngine {
-    private static final String username = "lum-customer-ihouse_d-zone-static";
-    private static final String password = "qs38hp672p1l";
+    private static final String username = "lum-customer-ihouse_d-zone-static2";
+    private static final String password = "ssb5tj477097";
     private static final String hostName = "zproxy.lum-superproxy.io";
     private static final int port = 22225;
+    private final UserAgentsRotatorService userAgentsRotatorService;
 
     BaseEngine() {
+        userAgentsRotatorService = new UserAgentsRotatorService();
     }
 
     CloseableHttpClient getNewClient() {
@@ -36,6 +38,7 @@ abstract class BaseEngine {
                 .setConnectionManager(new BasicHttpClientConnectionManager())
                 .setProxy(super_proxy)
                 .setDefaultCredentialsProvider(cred_provider)
+                .setUserAgent(userAgentsRotatorService.getRandomUserAgent())
                 .build();
     }
 
