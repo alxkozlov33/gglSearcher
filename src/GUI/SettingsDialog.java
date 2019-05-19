@@ -24,12 +24,15 @@ public class SettingsDialog extends JDialog {
     private JTextArea TopLevelDomainsExceptions;
     private JTextArea LookForKeywordsInSearchResults;
     private SearchSettings searchSettings;
+    private DIResolver diResolver;
 
     public SettingsDialog(DIResolver diResolver) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         setResizable(false);
+
+        this.diResolver = diResolver;
 
 
         buttonOK.addActionListener(e -> onOK());
@@ -74,6 +77,8 @@ public class SettingsDialog extends JDialog {
         searchSettings.ExceptionsForTopLevelDomains.addAll(separateTextBySemicolon(TopLevelDomainsExceptions.getText()));
         searchSettings.KeywordsForLookingInSearchResults.addAll(separateTextBySemicolon(LookForKeywordsInSearchResults.getText()));
         searchSettings.ExceptionsForWordsInDomainURLs.addAll(separateTextBySemicolon(WordsInDomainURLSExceptions.getText()));
+
+        diResolver.getDbConnectionService().saveSearchSettings(searchSettings);
 
         dispose();
     }
