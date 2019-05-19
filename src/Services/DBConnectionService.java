@@ -169,12 +169,36 @@ public class DBConnectionService {
     public SearchSettings getSearchSettings() {
         SearchSettings searchSettings = new SearchSettings();
         try {
-            Collections.addAll(searchSettings.ExceptionsForFoundDomains, getSearchSettingsPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.KeywordsForLookingInSearchResults, getSearchSettingsPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.MetaTagsExceptions, getSearchSettingsPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.KeywordsForLookingInDomainURLs, getSearchSettingsPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.ExceptionsForTopLevelDomains, getSearchSettingsPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
-            Collections.addAll(searchSettings.ExceptionsForWordsInDomainURLs, getSearchSettingsPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
+
+            SearchSettingsEntity searchSettingsEntity = getSearchSettingsPropertyByKey(PropertyKeys.DomainExceptions);
+            if (!StringUtils.isEmpty(searchSettingsEntity.getSettingValue())) {
+                Collections.addAll(searchSettings.ExceptionsForFoundDomains, getSearchSettingsPropertyByKey(PropertyKeys.DomainExceptions).getSettingValue().split(delimiter));
+            }
+
+            searchSettingsEntity = getSearchSettingsPropertyByKey(PropertyKeys.KeywordsInSearchResults);
+            if (!StringUtils.isEmpty(searchSettingsEntity.getSettingValue())) {
+                Collections.addAll(searchSettings.KeywordsForLookingInSearchResults, getSearchSettingsPropertyByKey(PropertyKeys.KeywordsInSearchResults).getSettingValue().split(delimiter));
+            }
+
+            searchSettingsEntity = getSearchSettingsPropertyByKey(PropertyKeys.MetaTagsExceptions);
+            if (!StringUtils.isEmpty(searchSettingsEntity.getSettingValue())) {
+                Collections.addAll(searchSettings.MetaTagsExceptions, getSearchSettingsPropertyByKey(PropertyKeys.MetaTagsExceptions).getSettingValue().split(delimiter));
+            }
+
+            searchSettingsEntity = getSearchSettingsPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs);
+            if (!StringUtils.isEmpty(searchSettingsEntity.getSettingValue())) {
+                Collections.addAll(searchSettings.KeywordsForLookingInDomainURLs, getSearchSettingsPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs).getSettingValue().split(delimiter));
+            }
+
+            searchSettingsEntity = getSearchSettingsPropertyByKey(PropertyKeys.TopLevelDomainsExceptions);
+            if (!StringUtils.isEmpty(searchSettingsEntity.getSettingValue())) {
+                Collections.addAll(searchSettings.ExceptionsForTopLevelDomains, getSearchSettingsPropertyByKey(PropertyKeys.TopLevelDomainsExceptions).getSettingValue().split(delimiter));
+            }
+
+            searchSettingsEntity = getSearchSettingsPropertyByKey(PropertyKeys.URLExceptions);
+            if (!StringUtils.isEmpty(searchSettingsEntity.getSettingValue())) {
+                Collections.addAll(searchSettings.ExceptionsForWordsInDomainURLs, getSearchSettingsPropertyByKey(PropertyKeys.URLExceptions).getSettingValue().split(delimiter));
+            }
         } catch (NullPointerException ex) {
             Logger.error(ex);
         }
