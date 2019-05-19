@@ -39,10 +39,9 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
             return outputItems;
         }
 
-        SettingsService settingsService = diResolver.getSettingsService();
         DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
-        MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().MetaTagsExceptions);
-        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().KeywordsForLookingInSearchResults);
+        MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(dbConnectionService.getSearchSettings().MetaTagsExceptions);
+        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(dbConnectionService.getSearchSettings().KeywordsForLookingInSearchResults);
 
         for (GoogleSearchResultItem googleSearchResultItem : searchItems) {
             if(dbConnectionService.getWorkStatus()) {
