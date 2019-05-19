@@ -19,9 +19,7 @@ public class SelectSearchSettingsActionCommand extends AbstractCommandAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         Logger.tag("SYSTEM").info("Select input settings file button action performed");
-        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         GuiService guiService = diResolver.getGuiService();
         guiService.createNewSettingsDialog(diResolver);
-        dbConnectionService.saveSearchSettings(guiService.getSettingsDialog().getSearchSettings());
     }
 }
