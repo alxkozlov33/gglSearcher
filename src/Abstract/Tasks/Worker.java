@@ -42,6 +42,7 @@ public class Worker implements Runnable {
                 body = proxyWebClient.requestToSearchEngine(requestData, diResolver);
             } catch (IOException e) {
                 Logger.tag("SYSTEM").error(e);
+                Logger.error(e.getMessage());
             }
 
             List<PlaceCard> mapsItems = null;
@@ -49,6 +50,7 @@ public class Worker implements Runnable {
                 mapsItems = customProxyMapsClient.requestToMapsEngine(requestData, diResolver);
             } catch (IOException e) {
                 Logger.tag("SYSTEM").error(e);
+                Logger.error(e.getMessage());
             }
 
             RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();

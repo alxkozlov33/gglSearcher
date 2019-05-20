@@ -40,6 +40,9 @@ public class CustomProxyMapsClient extends BaseEngine {
                     }
                 } while (i < 20);
                 return placeCards;
+            } catch (Search.IncorrectPageException ex) {
+                Logger.tag("SYSTEM").error("Incorrect HTML page");
+                Logger.error("Incorrect HTML page \r\n" + ex.getPageSource());
             } catch (Exception e) {
                 Logger.tag("SYSTEM").info("Attempt: " + i);
                 Logger.tag("SYSTEM").error("Cannot get maps page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + e.getMessage());

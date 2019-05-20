@@ -29,7 +29,7 @@ public class ProxyWebClient extends BaseEngine {
             CloseableHttpResponse response = getNewClient().execute(request);
             try {
                 if (isValidResponse(response)) {
-                    Logger.info("Response OK from: " + requestData.requestURL);
+                    Logger.tag("SYSTEM").info("Response OK from: " + requestData.requestURL);
                     String pageSource = EntityUtils.toString(response.getEntity());
                     response.close();
                     return Jsoup.parse(pageSource);

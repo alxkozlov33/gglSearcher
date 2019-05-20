@@ -57,7 +57,7 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
     @Override
     public List<IOutputModel> convertMapsResultDataToOutputModels(List<PlaceCard> searchItems) {
         ArrayList<IOutputModel> outputItems = new ArrayList<>();
-        if (searchItems.size() == 0) {
+        if (searchItems == null || searchItems.size() == 0) {
             return outputItems;
         }
 

@@ -47,16 +47,17 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         try {
             body = webClient.requestToSearchEngine(requestData, diResolver);
         } catch (IOException e) {
-            Logger.tag("SYSTEM").error(e);
+            Logger.error(e);
+            Logger.tag("SYSTEM").error(e.getMessage());
         }
 
         List<PlaceCard> mapsItems = null;
         try {
             mapsItems = customProxyMapsClient.requestToMapsEngine(requestData,diResolver);
         } catch (IOException e) {
-            Logger.tag("SYSTEM").error(e);
+            Logger.error(e);
+            Logger.tag("SYSTEM").error(e.getMessage());
         }
-
 
         RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
         List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
