@@ -48,7 +48,7 @@ public class Worker implements Runnable {
             try {
                 mapsItems = customProxyMapsClient.requestToMapsEngine(requestData, diResolver);
             } catch (IOException e) {
-                Logger.tag("SYSTEM").error(e);
+                Logger.tag("SYSTEM").error(e); 
             }
 
             RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
