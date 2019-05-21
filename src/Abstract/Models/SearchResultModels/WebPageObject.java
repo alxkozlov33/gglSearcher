@@ -1,5 +1,7 @@
 package Abstract.Models.SearchResultModels;
 
+import org.tinylog.Logger;
+
 public class WebPageObject {
 
     public WebPageObject(String siteDescription, String siteKeywords, String siteName, String pagePlainText) {

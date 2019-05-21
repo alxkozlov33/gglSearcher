@@ -59,6 +59,7 @@ public class OutputDataService {
 
     public void saveResultCsvItems(List<IOutputModel> csvFileData) {
         if (csvFileData == null || csvFileData.size() == 0) {
+            Logger.warn("CSVFILEDATA EMPTY OR NULL: " + csvFileData);
             return;
         }
         try {

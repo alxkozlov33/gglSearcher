@@ -13,6 +13,8 @@ import Services.DIResolver;
 import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
+import org.tinylog.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
