@@ -6,7 +6,6 @@ import org.tinylog.Logger;
 public class DIResolver {
 
     private final UserAgentsRotatorService userAgentsRotatorService;
-    private final PropertiesService propertiesService;
     private final GuiService guiService;
     private final OutputDataService outputDataService;
     private final InputDataService inputDataService;
@@ -15,7 +14,6 @@ public class DIResolver {
     private SearchModeStrategyBase currentWorker;
 
     public DIResolver(UserAgentsRotatorService userAgentsRotatorService,
-                      PropertiesService propertiesService,
                       GuiService guiService,
                       OutputDataService outputDataService,
                       InputDataService inputDataService,
@@ -23,7 +21,6 @@ public class DIResolver {
                       DBConnectionService dbConnectionService) {
 
         this.userAgentsRotatorService = userAgentsRotatorService;
-        this.propertiesService = propertiesService;
         this.guiService = guiService;
         this.outputDataService = outputDataService;
         this.inputDataService = inputDataService;

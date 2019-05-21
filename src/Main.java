@@ -16,13 +16,12 @@ public class Main {
 
         GuiService guiService = new GuiService();
         UserAgentsRotatorService userAgentsRotatorService = new UserAgentsRotatorService();
-        PropertiesService propertiesService = new PropertiesService();
         OutputDataService outputDataService = new OutputDataService();
         InputDataService inputDataService = new InputDataService();
         SettingsService settingsService = new SettingsService();
         DBConnectionService dbConnectionService = new DBConnectionService();
 
-        DIResolver diResolver = new DIResolver(userAgentsRotatorService, propertiesService, guiService, outputDataService, inputDataService, settingsService, dbConnectionService);
+        DIResolver diResolver = new DIResolver(userAgentsRotatorService, guiService, outputDataService, inputDataService, settingsService, dbConnectionService);
 
         Bootstrapper bootstrapper = new Bootstrapper(diResolver);
         bootstrapper.setTitle("Info searcher v4.1 [GGL]");

@@ -41,9 +41,9 @@ public class CustomProxyMapsClient extends BaseEngine {
                 } while (i < 20);
                 return placeCards;
             } catch (Search.IncorrectPageException ex) {
-                Logger.tag("SYSTEM").error("HTML with problems. \r\n");
+                Logger.tag("SYSTEM").error("HTML with problems. \n");
                 Logger.error(ex.getPageSource());
-                return placeCards;
+                //return placeCards;
             } catch (Exception e) {
                 Logger.tag("SYSTEM").info("Attempt: " + i);
                 Logger.tag("SYSTEM").error("Cannot get maps page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + e.getMessage());

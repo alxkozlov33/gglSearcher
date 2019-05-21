@@ -10,8 +10,6 @@ import Abstract.Specifications.Concrete.MetaTagsExceptionsSpecification;
 import Abstract.Specifications.Concrete.SpecificWordInPageSpecification;
 import Services.DBConnectionService;
 import Services.DIResolver;
-import Services.PropertiesService;
-import Services.SettingsService;
 import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
