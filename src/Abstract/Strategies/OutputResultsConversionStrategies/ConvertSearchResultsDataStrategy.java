@@ -1,7 +1,6 @@
 package Abstract.Strategies.OutputResultsConversionStrategies;
 
 import Abstract.Models.OutputModels.IOutputModel;
-import Abstract.Models.OutputModels.OutputModelGeoDataDecorator;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
 import Abstract.Models.SearchResultModels.RegularSearchResultItem;
