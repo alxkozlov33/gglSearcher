@@ -3,7 +3,7 @@
   <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="48" y="54" width="843" height="625"/>
+      <xy x="48" y="54" width="843" height="650"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -112,7 +112,10 @@
                 <children>
                   <component id="b1827" class="javax.swing.JTextArea" binding="SpecificWordsInDomainURLS">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
@@ -150,7 +153,10 @@
                 <children>
                   <component id="da9fe" class="javax.swing.JTextArea" binding="ExceptionMetaTitles">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
@@ -188,7 +194,10 @@
                 <children>
                   <component id="c8e03" class="javax.swing.JTextArea" binding="WordsInDomainURLSExceptions">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
@@ -226,7 +235,10 @@
                 <children>
                   <component id="16569" class="javax.swing.JTextArea" binding="LookForKeywordsInSearchResults">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
@@ -264,7 +276,10 @@
                 <children>
                   <component id="925f1" class="javax.swing.JTextArea" binding="TopLevelDomainsExceptions">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
@@ -302,7 +317,10 @@
                 <children>
                   <component id="6f304" class="javax.swing.JTextArea" binding="FoundDomainsExceptions">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <lineWrap value="true"/>
+                      <wrapStyleWord value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
