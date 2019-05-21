@@ -23,7 +23,7 @@ public class DBConnectionService {
     public DBConnectionService() {
         try {
             String dbPath = "jdbc:h2:"
-                    + new File(DBConnectionService.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsolutePath().replace(".jar", "")
+                    + new File(DBConnectionService.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getAbsoluteFile().getParent() + File.separator + "gglSearcher"
                     + File.separator+"gglSearcherDb";
             Logger.tag("SYSTEM").info(dbPath);
             connectionSource = new JdbcPooledConnectionSource(dbPath);
