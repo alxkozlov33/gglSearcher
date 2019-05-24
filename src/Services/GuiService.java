@@ -81,8 +81,9 @@ public class GuiService {
 
     public void updateCountItemsStatus(int currentItem, int totalItems) {
 
+        totalItems = totalItems + 1;
         if (totalItems > 1) {
-            setStatusText("Processed " + currentItem + "/" + (totalItems - 1) +" items.");
+            setStatusText("Processed " + currentItem + "/" + (totalItems) +" items.");
         }
         else {
             setStatusText("Processed " + currentItem + "/" + (totalItems) +" items");

@@ -22,7 +22,7 @@ public abstract class SearchResultsConvertStrategy<T extends GoogleSearchResultI
     public abstract List<U> convertMapsResultDataToOutputModels(List<PlaceCard> searchItems);
 
     Element getWebSitePageSource(GoogleSearchResultItem item, DIResolver diResolver) {
-        RequestData requestData = new RequestData(item.getLink(), 5, 2000);
+        RequestData requestData = new RequestData(item.getLink(), 3, 500);
         Element result = null;
         try {
             result = new ProxyWebClient().requestToSearchEngine(requestData, diResolver);

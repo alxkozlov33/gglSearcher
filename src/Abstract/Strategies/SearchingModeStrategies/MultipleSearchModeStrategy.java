@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
@@ -56,15 +57,25 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
             }
             if (isWorkFlag) {
                 diResolver.getGuiService().updateCountItemsStatus((int)executor.getCompletedTaskCount(), (int)executor.getTaskCount());
-            }
-            if (executor.getCompletedTaskCount() == size) {
+            } else {
                 stopProcessing();
             }
+
+            if (executor.getActiveCount() == 0) {
+                break;
+            }
         }
+        stopProcessing();
     }
 
     public void stopProcessing() {
         executor.shutdown();
+        try {
+            while (!executor.awaitTermination(30, TimeUnit.SECONDS));
+        } catch (InterruptedException e) {
+            Logger.error(e);
+        }
+
         isWorkFlag = false;
         diResolver.getDbConnectionService().updateWorkStatus(isWorkFlag);
     }
