@@ -12,6 +12,10 @@ public class UserAgentsRotatorService {
         return givenList.get(rand.nextInt(givenList.size()));
     }
 
+    public String getUserAgent() {
+        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36";
+    }
+
     public static String getBotUserAgent() {
         return "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)";
     }

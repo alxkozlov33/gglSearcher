@@ -25,7 +25,7 @@ public class InputDataService {
         }
     }
 
-    public File getInputDataFile() {
+    private File getInputDataFile() {
         return inputDataFile;
     }
 

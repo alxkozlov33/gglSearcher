@@ -23,6 +23,7 @@ public class CustomProxyMapsClient extends BaseEngine {
             }
 
             Search search = new Search(requestData.getRequestTerm(), getNewClient());
+            search.setUserAgent(diResolver.getUserAgentsRotatorService().getUserAgent());
             try {
                 Thread.sleep(requestData.requestDelay);
                 search.perform();
@@ -42,7 +43,7 @@ public class CustomProxyMapsClient extends BaseEngine {
                 return placeCards;
             } catch (Search.IncorrectPageException ex) {
                 Logger.tag("SYSTEM").error("HTML with problems. \n");
-                Logger.error(ex.getPageSource());
+                //Logger.error(ex.getPageSource());
                 return placeCards;
             } catch (Exception e) {
                 Logger.tag("SYSTEM").info("Attempt: " + i);

@@ -42,7 +42,7 @@ abstract class BaseEngine {
                 .setDefaultCredentialsProvider(cred_provider)
                 .setDefaultRequestConfig(RequestConfig.custom()
                         .setCookieSpec(CookieSpecs.STANDARD).build())
-                .setUserAgent(userAgentsRotatorService.getRandomUserAgent())
+                .setUserAgent(userAgentsRotatorService.getUserAgent())
                 .build();
     }
 

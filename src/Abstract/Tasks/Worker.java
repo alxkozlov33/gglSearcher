@@ -53,6 +53,10 @@ public class Worker implements Runnable {
                 Logger.tag("SYSTEM").error(e.getMessage());
             }
 
+            if (body == null && mapsItems == null) {
+                return;
+            }
+
             RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
             List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
             Logger.info("regularSearchResultItems: " + regularSearchResultItems.size());

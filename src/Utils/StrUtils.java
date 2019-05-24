@@ -30,7 +30,6 @@ public class StrUtils {
         String queryTerm;
         if (csvItem != null) {
             StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
-            //StrSubstitutor sub = new StrSubstitutor(valuesMap(csvItem));
             queryTerm = sub.replace(inputPlaceHolder);
         }
         else {
