@@ -59,15 +59,11 @@ public class Worker implements Runnable {
 
             RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
             List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
-            Logger.info("regularSearchResultItems: " + regularSearchResultItems.size());
             List filteredRegularSearchResultItems = ResultsUtils.filterResults(regularSearchResultItems, googleItemsSpec);
-            Logger.info("filteredRegularSearchResultItems: " + filteredRegularSearchResultItems.size());
             SearchResultsConvertStrategy<RegularSearchResultItem, IOutputModel> regularConvertStrategy
                     = new ConvertSearchResultsWithGeoDataStrategy(diResolver, requestData.inputCsvModelItem.getColumnA(), requestData.inputCsvModelItem.getColumnC());
             List regularItems = regularConvertStrategy.convertResultDataToOutputModels(filteredRegularSearchResultItems);
-            Logger.info("regularItems: " + regularItems.size());
             List scrapedMapsItems = regularConvertStrategy.convertMapsResultDataToOutputModels(mapsItems);
-            Logger.info("scrapedMapsItems: " + scrapedMapsItems.size());
             regularItems.addAll(scrapedMapsItems);
 
             diResolver.getOutputDataService().saveResultCsvItemsByMultipleSearch(regularItems);

@@ -59,6 +59,10 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
             Logger.tag("SYSTEM").error(e.getMessage());
         }
 
+        if (body == null && mapsItems == null) {
+            return;
+        }
+
         RegularResultsItemsProcess regularResultsFactory = new RegularResultsItemsProcess();
         List<RegularSearchResultItem> regularSearchResultItems = regularResultsFactory.translateBodyToModels(body);
         List filteredRegularSearchResultItems = ResultsUtils.filterResults(regularSearchResultItems, getSettingsSpecification(diResolver));
