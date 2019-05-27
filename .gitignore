@@ -26,3 +26,5 @@ Electron/gglSearcher/
 .idea/workspace.xml
 logs/
 out/production/gglSearcher/gglSearcherDb.mv.db
+*.db
+*.csv
