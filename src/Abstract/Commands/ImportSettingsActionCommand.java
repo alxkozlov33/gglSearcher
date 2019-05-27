@@ -27,7 +27,7 @@ public class ImportSettingsActionCommand extends AbstractCommandAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         GuiService guiService = diResolver.getGuiService();
-        guiService.closeSettingsDialog();
+
         File settingsFile = DirUtils.selectFileDialog(guiService.getMainFrame(), "Select settings text file", "txt");
         if (DirUtils.isFileOk(settingsFile, "txt")) {
             SearchSettings searchSettings = settingsService.getSearchSettingsFromFile(settingsFile);

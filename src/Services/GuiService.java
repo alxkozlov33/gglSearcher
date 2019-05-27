@@ -17,11 +17,8 @@ public class GuiService {
         return bootstrapper;
     }
 
-    public SettingsDialog getSettingsDialog() {
-        return settingsDialog;
-    }
-
     public void createNewSettingsDialog(DIResolver diResolver) {
+        closeSettingsDialog();
         settingsDialog = new SettingsDialog(diResolver);
         settingsDialog.setSize(500, 700);
         settingsDialog.setTitle("Search settings");
@@ -29,7 +26,7 @@ public class GuiService {
         settingsDialog.setResizable(false);
     }
 
-    public void closeSettingsDialog() {
+    private void closeSettingsDialog() {
         if (settingsDialog != null) {
             settingsDialog.onCancel();
         }

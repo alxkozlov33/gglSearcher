@@ -24,7 +24,7 @@ public class Main {
         DIResolver diResolver = new DIResolver(userAgentsRotatorService, guiService, outputDataService, inputDataService, settingsService, dbConnectionService);
 
         Bootstrapper bootstrapper = new Bootstrapper(diResolver);
-        bootstrapper.setTitle("Info searcher v4.7 [GGL]");
+        bootstrapper.setTitle("Info searcher v4.8 [GGL]");
         bootstrapper.setVisible(true);
         bootstrapper.setResizable(false);
         bootstrapper.setSize(800, 700);

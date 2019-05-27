@@ -29,10 +29,9 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
             return outputItems;
         }
         GuiService guiService = diResolver.getGuiService();
-        SettingsService settingsService = diResolver.getSettingsService();
         DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
-        MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(settingsService.getSearchSettings().MetaTagsExceptions);
-        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(settingsService.getSearchSettings().KeywordsForLookingInSearchResults);
+        MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(dbConnectionService.getSearchSettings().MetaTagsExceptions);
+        SpecificWordInPageSpecification specificWordInPageSpecification = new SpecificWordInPageSpecification(dbConnectionService.getSearchSettings().KeywordsForLookingInSearchResults);
         int searchedItemsSize = searchItems.size();
 
         for (int i = 0; i < searchedItemsSize; i++) {

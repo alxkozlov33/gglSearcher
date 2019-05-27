@@ -21,7 +21,9 @@ public class ExportSettingsActionCommand  extends AbstractCommandAction {
         GuiService guiService = diResolver.getGuiService();
         File settingsFile = DirUtils.saveFileDialog(guiService.getMainFrame(), "Select settings text file");
 
-        DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
-        diResolver.getSettingsService().saveSearchSettingsToFile(dbConnectionService.getSearchSettings(), settingsFile);
+        if(settingsFile != null) {
+            DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
+            diResolver.getSettingsService().saveSearchSettingsToFile(dbConnectionService.getSearchSettings(), settingsFile);
+        }
     }
 }
