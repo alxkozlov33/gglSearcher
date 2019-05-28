@@ -9,6 +9,7 @@ import java.io.File;
 public class GuiService {
     private static Bootstrapper bootstrapper;
     private static SettingsDialog settingsDialog;
+    private static AppSettings appSettings;
 
     public GuiService() {
     }
@@ -24,6 +25,20 @@ public class GuiService {
         settingsDialog.setTitle("Search settings");
         settingsDialog.setVisible(true);
         settingsDialog.setResizable(false);
+    }
+
+    public void createNewAppSettingsDialog(DIResolver diResolver) {
+        appSettings = new AppSettings(diResolver);
+        appSettings.setSize(400, 500);
+        appSettings.setTitle("Preferences");
+        appSettings.setVisible(true);
+        appSettings.setResizable(false);
+    }
+
+    private void closeAppSettings() {
+        if (appSettings != null) {
+            appSettings.Dispose();
+        }
     }
 
     private void closeSettingsDialog() {

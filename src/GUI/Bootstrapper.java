@@ -26,6 +26,7 @@ public class Bootstrapper extends JFrame {
     private JMenu inputData;
 
     private JMenuItem chooseSettingsFile;
+    private JMenuItem chooseApplicationSettings;
 
     private JMenuItem chooseInputFile;
     private JMenuItem clearInputFile;
@@ -43,7 +44,9 @@ public class Bootstrapper extends JFrame {
 
         settingsFile = new JMenu("Options");
         chooseSettingsFile = new JMenuItem("Search settings");
+        chooseApplicationSettings = new JMenuItem("Preferences");
         getSettingsFile().add(getChooseSettingsFile());
+        getSettingsFile().add(getChooseApplicationSettings());
 
         getMenubar().add(getInputData());
         getMenubar().add(getSettingsFile());
@@ -53,6 +56,7 @@ public class Bootstrapper extends JFrame {
         stopButton.setAction(new StopButtonActionCommand(diResolver));
 
         chooseSettingsFile.setAction(new SelectSearchSettingsActionCommand(diResolver));
+        chooseApplicationSettings.setAction(new SelectApplicationSettingsActionCommand(diResolver));
 
         chooseInputFile.setAction(new SelectInputDataFileActionCommand(diResolver));
         clearInputFile.setAction(new ClearInputDataFileActionCommand(diResolver));
@@ -137,6 +141,10 @@ public class Bootstrapper extends JFrame {
 
     public JLabel getSelectedOutputFolderData() {
         return selectedOutputFolderData;
+    }
+
+    public JMenuItem getChooseApplicationSettings() {
+        return chooseApplicationSettings;
     }
 }
 
