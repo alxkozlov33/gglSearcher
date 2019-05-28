@@ -14,6 +14,8 @@ public abstract class SearchModeStrategyBase {
     public abstract void processData() throws InputFileEmptyException;
     public abstract void stopProcessing();
 
+    public String message;
+
     protected AbstractSpecification<GoogleSearchResultItem> getSettingsSpecification(DIResolver diResolver) {
         SearchSettings searchSettings = diResolver.getDbConnectionService().getSearchSettings();
         return new DomainExceptionsSpecification(searchSettings.ExceptionsForFoundDomains)

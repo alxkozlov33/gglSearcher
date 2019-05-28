@@ -30,13 +30,18 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
     public void processData() throws InputFileEmptyException {
         AbstractSpecification<GoogleSearchResultItem> googleItemsSpec = getSettingsSpecification(diResolver);
 
-        isWorkFlag  = true;
+        isWorkFlag = true;
         diResolver.getGuiService().setStatusText("Processing started");
         List<InputCsvModelItem> csvFileData = diResolver.getInputDataService().getInputCsvModelItems();
         int size = diResolver.getInputDataService().getInputCsvModelItems().size();
 
         if (size == 0) {
             throw new InputFileEmptyException("Input data file doesn't contain elements");
+        }
+
+        if (!diResolver.getDbConnectionService().getGoogleSearchEngine() && !diResolver.getDbConnectionService().getGoogleMapsEngine()) {
+            message = "No one search engine chosen";
+            return;
         }
         executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);
 
@@ -56,7 +61,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
                 Logger.tag("SYSTEM").error(e);
             }
             if (isWorkFlag) {
-                diResolver.getGuiService().updateCountItemsStatus((int)executor.getCompletedTaskCount(), (int)executor.getTaskCount());
+                diResolver.getGuiService().updateCountItemsStatus((int) executor.getCompletedTaskCount(), (int) executor.getTaskCount());
             } else {
                 stopProcessing();
             }
@@ -78,6 +83,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
         isWorkFlag = false;
         diResolver.getDbConnectionService().updateWorkStatus(isWorkFlag);
+        message = "Finished";
     }
 
     private static int getRandomNumberInRange(int min, int max) {

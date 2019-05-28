@@ -37,20 +37,15 @@ public class Worker implements Runnable {
     @Override
     public void run() {
         if (diResolver.getDbConnectionService().getWorkStatus()) {
+
             Element body = null;
-            try {
-                body = proxyWebClient.requestToSearchEngine(requestData, diResolver);
-            } catch (IOException e) {
-                Logger.error(e);
-                Logger.tag("SYSTEM").error(e.getMessage());
+            if (diResolver.getDbConnectionService().getGoogleSearchEngine()) {
+                body = getBodyOfSearchResults();
             }
 
             List<PlaceCard> mapsItems = null;
-            try {
-                mapsItems = customProxyMapsClient.requestToMapsEngine(requestData, diResolver);
-            } catch (IOException e) {
-                Logger.error(e);
-                Logger.tag("SYSTEM").error(e.getMessage());
+            if (diResolver.getDbConnectionService().getGoogleMapsEngine()) {
+                mapsItems = getPlacesOfMapsResults();
             }
 
             if (body == null && mapsItems == null) {
@@ -68,5 +63,27 @@ public class Worker implements Runnable {
 
             diResolver.getOutputDataService().saveResultCsvItemsByMultipleSearch(regularItems);
         }
+    }
+
+    private List<PlaceCard> getPlacesOfMapsResults() {
+        List<PlaceCard> mapsItems = null;
+        try {
+            mapsItems = customProxyMapsClient.requestToMapsEngine(requestData, diResolver);
+        } catch (IOException e) {
+            Logger.error(e);
+            Logger.tag("SYSTEM").error(e.getMessage());
+        }
+        return mapsItems;
+    }
+
+    private Element getBodyOfSearchResults() {
+        Element body = null;
+        try {
+            body = proxyWebClient.requestToSearchEngine(requestData, diResolver);
+        } catch (IOException e) {
+            Logger.error(e);
+            Logger.tag("SYSTEM").error(e.getMessage());
+        }
+        return body;
     }
 }

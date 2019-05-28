@@ -39,8 +39,8 @@ public class RunButtonActionCommand extends AbstractCommandAction {
             try {
                 diResolver.setCurrentWorker(searchModeStrategy);
                 searchModeStrategy.processData();
-                Logger.tag("SYSTEM").info("Finished");
-                guiService.setStatusText("Finished");
+                Logger.tag("SYSTEM").info(searchModeStrategy.message);
+                guiService.setStatusText(searchModeStrategy.message);
                 dbConnectionService.updateWorkStatus(false);
             } catch (Exception | InputFileEmptyException ex) {
                 Logger.tag("SYSTEM").error(ex);

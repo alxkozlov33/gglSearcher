@@ -1,7 +1,6 @@
 package Abstract.Commands;
 
 import Abstract.Models.SearchSettings;
-import GUI.SettingsDialog;
 import Services.DBConnectionService;
 import Services.DIResolver;
 import Services.GuiService;

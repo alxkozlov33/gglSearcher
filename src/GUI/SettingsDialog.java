@@ -34,7 +34,6 @@ public class SettingsDialog extends JDialog {
 
         this.diResolver = diResolver;
 
-
         buttonOK.addActionListener(e -> onOK());
         buttonCancel.addActionListener(e -> onCancel());
 

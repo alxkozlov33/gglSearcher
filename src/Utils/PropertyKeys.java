@@ -9,5 +9,7 @@ public enum PropertyKeys {
     URLExceptions,
     WorkStatus,
     DataFilePath,
-    SearchPlaceholder
+    SearchPlaceholder,
+    SearchInGoogleEngine,
+    SearchInGoogleMapsEngine
 }

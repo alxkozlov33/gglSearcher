@@ -37,26 +37,23 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
             Logger.tag("SYSTEM").error("Placeholder term not specified");
             return;
         }
+        if (!diResolver.getDbConnectionService().getGoogleSearchEngine() && !diResolver.getDbConnectionService().getGoogleMapsEngine()) {
+            message = "No one search engine chosen";
+            return;
+        }
 
         String URL = StrUtils.createUrlForSingleSearch(guiService.getSearchPlaceholderText());
-        RequestData requestData = new RequestData(URL, 10, 5000);
+        RequestData requestData = new RequestData(URL, 10, 3000);
         requestData.setRequestTerm(guiService.getSearchPlaceholderText());
-        ProxyWebClient webClient = new ProxyWebClient();
-        CustomProxyMapsClient customProxyMapsClient = new CustomProxyMapsClient();
+
         Element body = null;
-        try {
-            body = webClient.requestToSearchEngine(requestData, diResolver);
-        } catch (IOException e) {
-            Logger.error(e);
-            Logger.tag("SYSTEM").error(e.getMessage());
+        if (diResolver.getDbConnectionService().getGoogleSearchEngine()) {
+            body = getBodyOfSearchResults(requestData);
         }
 
         List<PlaceCard> mapsItems = null;
-        try {
-            mapsItems = customProxyMapsClient.requestToMapsEngine(requestData,diResolver);
-        } catch (IOException e) {
-            Logger.error(e);
-            Logger.tag("SYSTEM").error(e.getMessage());
+        if (diResolver.getDbConnectionService().getGoogleMapsEngine()) {
+            mapsItems = getPlacesOfMapsResults(requestData);
         }
 
         if (body == null && mapsItems == null) {
@@ -77,5 +74,29 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
     }
 
     public void stopProcessing() {
+    }
+
+    private List<PlaceCard> getPlacesOfMapsResults(RequestData requestData) {
+        List<PlaceCard> mapsItems = null;
+        try {
+            CustomProxyMapsClient customProxyMapsClient = new CustomProxyMapsClient();
+            mapsItems = customProxyMapsClient.requestToMapsEngine(requestData, diResolver);
+        } catch (IOException e) {
+            Logger.error(e);
+            Logger.tag("SYSTEM").error(e.getMessage());
+        }
+        return mapsItems;
+    }
+
+    private Element getBodyOfSearchResults(RequestData requestData) {
+        Element body = null;
+        try {
+            ProxyWebClient webClient = new ProxyWebClient();
+            body = webClient.requestToSearchEngine(requestData, diResolver);
+        } catch (IOException e) {
+            Logger.error(e);
+            Logger.tag("SYSTEM").error(e.getMessage());
+        }
+        return body;
     }
 }

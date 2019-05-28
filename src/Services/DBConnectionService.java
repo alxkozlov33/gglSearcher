@@ -82,6 +82,14 @@ public class DBConnectionService {
         ApplicationSettingsEntity searchPlaceholder = new ApplicationSettingsEntity();
         searchPlaceholder.setSettingName(PropertyKeys.SearchPlaceholder);
         appSettingsDao.createIfNotExists(searchPlaceholder);
+
+        ApplicationSettingsEntity SearchInGoogleEngine = new ApplicationSettingsEntity();
+        SearchInGoogleEngine.setSettingName(PropertyKeys.SearchInGoogleEngine);
+        appSettingsDao.createIfNotExists(SearchInGoogleEngine);
+
+        ApplicationSettingsEntity SearchInGoogleMapsEngine = new ApplicationSettingsEntity();
+        SearchInGoogleMapsEngine.setSettingName(PropertyKeys.SearchInGoogleMapsEngine);
+        appSettingsDao.createIfNotExists(SearchInGoogleMapsEngine);
     }
 
     private void updatePropertyByKey(PropertyKeys propertyKey, String value) {
@@ -235,7 +243,23 @@ public class DBConnectionService {
         return getApplicationSettingsPropertyByKey(PropertyKeys.DataFilePath).getSettingValue();
     }
 
-    public void updateFileDataPath(String filePath) {
+    public synchronized void updateFileDataPath(String filePath) {
         updateApplicationSettingsPropertyByKey(PropertyKeys.DataFilePath, filePath);
+    }
+
+    public synchronized boolean getGoogleSearchEngine() {
+        return Boolean.valueOf(getApplicationSettingsPropertyByKey(PropertyKeys.SearchInGoogleEngine).getSettingValue());
+    }
+
+    public synchronized void updateGoogleSearchEngine(String value) {
+        updateApplicationSettingsPropertyByKey(PropertyKeys.SearchInGoogleEngine, value);
+    }
+
+    public synchronized  boolean getGoogleMapsEngine() {
+        return Boolean.valueOf(getApplicationSettingsPropertyByKey(PropertyKeys.SearchInGoogleMapsEngine).getSettingValue());
+    }
+
+    public synchronized void updateGoogleMapsEngine(String value) {
+        updateApplicationSettingsPropertyByKey(PropertyKeys.SearchInGoogleMapsEngine, value);
     }
 }
