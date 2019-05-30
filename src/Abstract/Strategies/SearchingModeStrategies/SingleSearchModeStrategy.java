@@ -38,7 +38,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
             return;
         }
         if (!diResolver.getDbConnectionService().getGoogleSearchEngine() && !diResolver.getDbConnectionService().getGoogleMapsEngine()) {
-            message = "No one search engine chosen";
+            message = "No search method selected";
             return;
         }
 
