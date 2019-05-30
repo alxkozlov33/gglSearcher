@@ -94,10 +94,10 @@ public class GuiService {
 
         totalItems = totalItems + 1;
         if (totalItems > 1) {
-            setStatusText("Processed " + currentItem + "/" + (totalItems) +" items.");
+            setStatusText("Processed " + currentItem + "/" + (totalItems) +" links.");
         }
         else {
-            setStatusText("Processed " + currentItem + "/" + (totalItems) +" items");
+            setStatusText("Processed " + currentItem + "/" + (totalItems) +" links");
         }
         try {
             Thread.sleep(1500);

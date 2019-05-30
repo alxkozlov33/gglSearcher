@@ -40,7 +40,7 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
         }
 
         if (!diResolver.getDbConnectionService().getGoogleSearchEngine() && !diResolver.getDbConnectionService().getGoogleMapsEngine()) {
-            message = "No one search engine chosen";
+            message = "No one search mode chosen";
             return;
         }
         executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(50);

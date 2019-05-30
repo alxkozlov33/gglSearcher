@@ -28,6 +28,7 @@ public class CustomProxyMapsClient extends BaseEngine {
                 Thread.sleep(requestData.requestDelay);
                 search.perform();
                 do {
+                    Logger.tag("SYSTEM").info("Response OK from: " + requestData.requestURL);
                     placeCards.addAll(search.getResults());
                     i++;
                     if (search.hasNextPage()){
@@ -46,8 +47,9 @@ public class CustomProxyMapsClient extends BaseEngine {
                 //Logger.error(ex.getPageSource());
                 return placeCards;
             } catch (Exception e) {
-                Logger.tag("SYSTEM").info("Attempt: " + i);
-                Logger.tag("SYSTEM").error("Cannot get maps page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + e.getMessage());
+                Logger.tag("SYSTEM").error("Attempt: " + i +" failed. Next attempt in: "+((requestData.requestDelay * 2)/1000)+"s. " +
+                        "\nCannot get maps engine page source, waiting for next attempt: " + requestData.requestURL + " " +
+                        "\nCause: " + e);
             }
             isThreadSleep(i, requestData);
         }

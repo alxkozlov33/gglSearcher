@@ -77,6 +77,16 @@ public class StrUtils {
         return result;
     }
 
+    public static String encodeStringToUTF8(String inputString) {
+        String result = null;
+        try {
+            result = URLEncoder.encode(inputString, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            Logger.tag("SYSTEM").error(e);
+        }
+        return result;
+    }
+
     public static String createUrlForGoogleMaps(String inputPlaceHolder) {
         String result = null;
         if (StringUtils.isEmpty(inputPlaceHolder)) {

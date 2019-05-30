@@ -3,6 +3,7 @@ package Abstract.Engines;
 import java.io.*;
 import Abstract.Models.RequestData;
 import Services.DIResolver;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.*;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
@@ -35,8 +36,9 @@ public class ProxyWebClient extends BaseEngine {
                     return Jsoup.parse(pageSource);
                 }
             } catch (Exception ex) {
-                Logger.tag("SYSTEM").info("Attempt: " + i);
-                Logger.tag("SYSTEM").error("Cannot get page source, waiting for next attempt: " + requestData.requestURL + " \nCause: " + ex.getMessage());
+                Logger.tag("SYSTEM").error("Attempt: " + i +" failed. Next attempt in: "+((requestData.requestDelay * 2)/1000)+"s. " +
+                        "\nCannot get search engine page source, waiting for next attempt: " + requestData.requestURL + " " +
+                        "\nCause: " + ex.getMessage());
             }
             isThreadSleep(i, requestData);
         }
@@ -47,6 +49,7 @@ public class ProxyWebClient extends BaseEngine {
         if (response != null && response.getStatusLine().getStatusCode() == 200) {
             return true;
         }
-        throw new Exception();
+        StatusLine statusLine = response != null ? response.getStatusLine() : null;
+        throw new Exception("Response status code: " + statusLine);
     }
 }

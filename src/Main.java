@@ -1,6 +1,5 @@
 import Abstract.Commands.ApplicationStartedActionCommand;
 import GUI.Bootstrapper;
-import GUI.SettingsDialog;
 import Services.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ public class Main {
         DIResolver diResolver = new DIResolver(userAgentsRotatorService, guiService, outputDataService, inputDataService, settingsService, dbConnectionService);
 
         Bootstrapper bootstrapper = new Bootstrapper(diResolver);
-        bootstrapper.setTitle("Info searcher v4.8 [GGL]");
+        bootstrapper.setTitle("Info searcher v4.9.1 [GGL]");
         bootstrapper.setVisible(true);
         bootstrapper.setResizable(false);
         bootstrapper.setSize(800, 700);

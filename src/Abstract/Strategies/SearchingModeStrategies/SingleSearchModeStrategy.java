@@ -44,7 +44,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
 
         String URL = StrUtils.createUrlForSingleSearch(guiService.getSearchPlaceholderText());
         RequestData requestData = new RequestData(URL, 10, 3000);
-        requestData.setRequestTerm(guiService.getSearchPlaceholderText());
+        requestData.setRequestTerm(StrUtils.encodeStringToUTF8(guiService.getSearchPlaceholderText()));
 
         Element body = null;
         if (diResolver.getDbConnectionService().getGoogleSearchEngine()) {
@@ -57,6 +57,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         }
 
         if (body == null && mapsItems == null) {
+            message = "Search finished with problems. Data wasn't scraped.";
             return;
         }
 
@@ -71,6 +72,7 @@ public class SingleSearchModeStrategy extends SearchModeStrategyBase {
         regularItems.addAll(scrapedMapsItems);
 
         outputDataService.saveResultCsvItems(regularItems);
+        message = "Finished";
     }
 
     public void stopProcessing() {
