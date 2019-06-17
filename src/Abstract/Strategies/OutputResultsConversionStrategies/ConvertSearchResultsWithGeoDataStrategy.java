@@ -16,6 +16,7 @@ import org.jsoup.nodes.Element;
 import org.tinylog.Logger;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -38,6 +39,13 @@ public class ConvertSearchResultsWithGeoDataStrategy extends SearchResultsConver
         if (searchItems.size() == 0) {
             return outputItems;
         }
+
+        int sizeBeforeExclusion = searchItems.size();
+        List<String> csvFileData = diResolver.getInputDataService().getInputUrlsExclusionFileItems();
+        for (String url: csvFileData) {
+            searchItems.removeIf(next -> next.getLink().contains(url));
+        }
+        Logger.tag("SYSTEM").info("Items excluded: " + (sizeBeforeExclusion - searchItems.size()));
 
         DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(dbConnectionService.getSearchSettings().MetaTagsExceptions);

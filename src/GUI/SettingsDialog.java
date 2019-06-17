@@ -1,12 +1,16 @@
 package GUI;
 
+import Abstract.Commands.DomainURLsExclusion.ClearDomainExclusionFile;
 import Abstract.Commands.ExportSettingsActionCommand;
 import Abstract.Commands.ImportSettingsActionCommand;
+import Abstract.Commands.DomainURLsExclusion.SelectDomainExclusionFile;
 import Abstract.Models.SearchSettings;
 import Services.DIResolver;
+import Utils.StrUtils;
 import org.apache.commons.lang.StringUtils;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +27,9 @@ public class SettingsDialog extends JDialog {
     private JTextArea WordsInDomainURLSExceptions;
     private JTextArea TopLevelDomainsExceptions;
     private JTextArea LookForKeywordsInSearchResults;
+    private JButton uploadCSVWithDomainsButton;
+    private JButton clearButton;
+    private JLabel URLsExceptionsLabelFile;
     private SearchSettings searchSettings;
     private DIResolver diResolver;
 
@@ -42,6 +49,8 @@ public class SettingsDialog extends JDialog {
 
         ImportSettings.setAction(new ImportSettingsActionCommand(diResolver));
         ExportSettings.setAction(new ExportSettingsActionCommand(diResolver));
+        uploadCSVWithDomainsButton.setAction(new SelectDomainExclusionFile(diResolver));
+        clearButton.setAction(new ClearDomainExclusionFile(diResolver));
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -65,6 +74,7 @@ public class SettingsDialog extends JDialog {
             TopLevelDomainsExceptions.setText(String.join(";", searchSettings.ExceptionsForTopLevelDomains));
             LookForKeywordsInSearchResults.setText(String.join(";", searchSettings.KeywordsForLookingInSearchResults));
         }
+        URLsExceptionsLabelFile.setText(StrUtils.cutStringFromEnd(diResolver.getDbConnectionService().getExclusionURLsFileDataPath(),10));
     }
 
     private void onOK() {
@@ -98,7 +108,7 @@ public class SettingsDialog extends JDialog {
         dispose();
     }
 
-    public SearchSettings getSearchSettings() {
-        return searchSettings;
+    public JLabel getURLsExceptionsLabelFile() {
+        return URLsExceptionsLabelFile;
     }
 }

@@ -1,7 +1,5 @@
 package Abstract.Models.SearchResultModels;
 
-import org.tinylog.Logger;
-
 public class WebPageObject {
 
     public WebPageObject(String siteDescription, String siteKeywords, String siteName, String pagePlainText) {
@@ -15,6 +13,7 @@ public class WebPageObject {
     private String siteKeywords;
     private String siteName;
     private String pagePlainText;
+    private String URL;
 
     public String getSiteDescription() {
         return siteDescription;
@@ -30,5 +29,9 @@ public class WebPageObject {
 
     public String getPagePlainText() {
         return pagePlainText;
+    }
+
+    public String getURL() {
+        return URL;
     }
 }

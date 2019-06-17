@@ -11,5 +11,6 @@ public enum PropertyKeys {
     DataFilePath,
     SearchPlaceholder,
     SearchInGoogleEngine,
-    SearchInGoogleMapsEngine
+    SearchInGoogleMapsEngine,
+    URLsExcluions
 }

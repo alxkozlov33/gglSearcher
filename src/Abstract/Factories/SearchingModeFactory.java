@@ -31,6 +31,7 @@ public class SearchingModeFactory {
         }
 
         File inputFile = new File(dbConnectionService.getDataFilePath());
+        File inputUrlsExclusion = new File(dbConnectionService.getExclusionURLsFileDataPath());
 
         if (diResolver.getDbConnectionService().getWorkStatus()) {
 
@@ -38,6 +39,8 @@ public class SearchingModeFactory {
                 searchModeStrategy = new MultipleSearchModeStrategy(diResolver);
                 inputDataService.initInputFile(inputFile);
                 inputDataService.initInputFileData();
+                inputDataService.initInputExclusionFile(inputUrlsExclusion);
+                inputDataService.initInputExclusionFileData();
                 outputDataService.createOutputFileForMultipleSearchOutput(guiService.getSearchPlaceholderText());
             }
             else if (!StrUtils.isPlaceholderHasSubstituteTerms(placeHolder)) {

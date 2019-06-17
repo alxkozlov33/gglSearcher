@@ -75,15 +75,18 @@ public class MultipleSearchModeStrategy extends SearchModeStrategyBase {
 
     public void stopProcessing() {
         executor.shutdown();
-        try {
-            while (!executor.awaitTermination(30, TimeUnit.SECONDS));
-        } catch (InterruptedException e) {
-            Logger.error(e);
-        }
-
-        isWorkFlag = false;
-        diResolver.getDbConnectionService().updateWorkStatus(isWorkFlag);
-        message = "Finished";
+        Logger.tag("SYSTEM").info("Waiting for termination 10 sec.");
+        Thread thread = new Thread(() -> {
+            try {
+                while (!executor.awaitTermination(10, TimeUnit.SECONDS));
+            } catch (InterruptedException e) {
+                Logger.error(e);
+            }
+            isWorkFlag = false;
+            diResolver.getDbConnectionService().updateWorkStatus(isWorkFlag);
+            message = "Finished";
+        });
+        thread.start();
     }
 
     private static int getRandomNumberInRange(int min, int max) {

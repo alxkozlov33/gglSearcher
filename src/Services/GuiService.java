@@ -2,6 +2,7 @@ package Services;
 
 import GUI.*;
 import Utils.DirUtils;
+import Utils.StrUtils;
 import org.tinylog.Logger;
 import java.awt.*;
 import java.io.File;
@@ -21,7 +22,7 @@ public class GuiService {
     public void createNewSettingsDialog(DIResolver diResolver) {
         closeSettingsDialog();
         settingsDialog = new SettingsDialog(diResolver);
-        settingsDialog.setSize(500, 700);
+        settingsDialog.setSize(550, 700);
         settingsDialog.setTitle("Search settings");
         settingsDialog.setVisible(true);
     }
@@ -59,9 +60,19 @@ public class GuiService {
         bootstrapper.getSelectedFileLabelData().setText("");
     }
 
+    public void clearInputExclsuionsDataFilePath() {
+        settingsDialog.getURLsExceptionsLabelFile().setText("");
+    }
+
     public void setInputFilePath(File file) {
         if (DirUtils.isFileOk(file, "csv")) {
             bootstrapper.getSelectedFileLabelData().setText(cutPath(file.getAbsolutePath()));
+        }
+    }
+
+    public void setInputURLsExclusionDataFile(File file) {
+        if (DirUtils.isFileOk(file, "csv")) {
+            settingsDialog.getURLsExceptionsLabelFile().setText(StrUtils.cutStringFromEnd(file.getAbsolutePath(),10));
         }
     }
 

@@ -15,15 +15,6 @@ import java.util.List;
 public class SettingsService {
 
     private File settingsDataFile;
-    private SearchSettings searchSettings;
-
-    private File getSettingsDataFile() {
-        return settingsDataFile;
-    }
-
-    public SearchSettings getSearchSettings() {
-        return searchSettings;
-    }
 
     private void writeItemsToFile(List<String> list, String sectionName, BufferedWriter reader) {
         try {
@@ -44,7 +35,7 @@ public class SettingsService {
             FileWriter fstream = new FileWriter(fileToSave);
             BufferedWriter out = new BufferedWriter(fstream);
 
-            writeItemsToFile(searchSettings.ExceptionsForFoundDomains, "# Exceptions for found domains:",  out);
+            writeItemsToFile(searchSettings.ExceptionsForFoundDomains, "# Ignore these domains:",  out);
             writeItemsToFile(searchSettings.ExceptionsForWordsInDomainURLs, "# Exceptions for words in domain URLs:",  out);
             writeItemsToFile(searchSettings.MetaTagsExceptions, "# Exceptions meta titles:",  out);
             writeItemsToFile(searchSettings.ExceptionsForTopLevelDomains, "# Exceptions for top level domains:",  out);
@@ -61,12 +52,12 @@ public class SettingsService {
             settingsDataFile = file;
         }
 
-        searchSettings = new SearchSettings();
+        SearchSettings searchSettings = new SearchSettings();
         try {
-            List<String> lines = Files.readAllLines(getSettingsDataFile().toPath(), StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(settingsDataFile.toPath(), StandardCharsets.UTF_8);
             lines.removeIf(l -> l.equals(""));
             for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).contains("# Exceptions for found domains:")) {
+                if (lines.get(i).contains("# Ignore these domains:")) {
                     searchSettings.ExceptionsForFoundDomains = new ArrayList<>(collectTerms(i, lines));
                 }
 
@@ -74,7 +65,7 @@ public class SettingsService {
                     searchSettings.ExceptionsForWordsInDomainURLs = new ArrayList<>(collectTerms(i, lines));
                 }
 
-                if (lines.get(i).contains("# Exceptions meta titles:")) {
+                if (lines.get(i).contains("# Exceptions for meta titles:")) {
                     searchSettings.MetaTagsExceptions = new ArrayList<>(collectTerms(i, lines));
                 }
 

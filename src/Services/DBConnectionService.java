@@ -66,6 +66,10 @@ public class DBConnectionService {
         SearchSettingsEntity URLExceptions = new SearchSettingsEntity();
         URLExceptions.setSettingName(PropertyKeys.URLExceptions);
         searchSettingsDao.createIfNotExists(URLExceptions);
+
+        SearchSettingsEntity URLSExclusions = new SearchSettingsEntity();
+        URLSExclusions.setSettingName(PropertyKeys.URLsExcluions);
+        searchSettingsDao.createIfNotExists(URLSExclusions);
     }
 
     private void initFillApplicationSettingsTable() throws SQLException {
@@ -92,7 +96,7 @@ public class DBConnectionService {
         appSettingsDao.createIfNotExists(SearchInGoogleMapsEngine);
     }
 
-    private void updatePropertyByKey(PropertyKeys propertyKey, String value) {
+    private void updateSearchSettingsPropertyByKey(PropertyKeys propertyKey, String value) {
         if (value == null || propertyKey == null) {
             return;
         }
@@ -162,12 +166,12 @@ public class DBConnectionService {
 
     public void saveSearchSettings(SearchSettings searchSettings) {
         try {
-           updatePropertyByKey(PropertyKeys.DomainExceptions, String.join(delimiter, searchSettings.ExceptionsForFoundDomains));
-           updatePropertyByKey(PropertyKeys.KeywordsInSearchResults, String.join(delimiter, searchSettings.KeywordsForLookingInSearchResults));
-           updatePropertyByKey(PropertyKeys.MetaTagsExceptions, String.join(delimiter, searchSettings.MetaTagsExceptions));
-           updatePropertyByKey(PropertyKeys.SpecificWordsInDomainURLs, String.join(delimiter, searchSettings.KeywordsForLookingInDomainURLs));
-           updatePropertyByKey(PropertyKeys.TopLevelDomainsExceptions, String.join(delimiter, searchSettings.ExceptionsForTopLevelDomains));
-           updatePropertyByKey(PropertyKeys.URLExceptions, String.join(delimiter, searchSettings.ExceptionsForWordsInDomainURLs));
+           updateSearchSettingsPropertyByKey(PropertyKeys.DomainExceptions, String.join(delimiter, searchSettings.ExceptionsForFoundDomains));
+           updateSearchSettingsPropertyByKey(PropertyKeys.KeywordsInSearchResults, String.join(delimiter, searchSettings.KeywordsForLookingInSearchResults));
+           updateSearchSettingsPropertyByKey(PropertyKeys.MetaTagsExceptions, String.join(delimiter, searchSettings.MetaTagsExceptions));
+           updateSearchSettingsPropertyByKey(PropertyKeys.SpecificWordsInDomainURLs, String.join(delimiter, searchSettings.KeywordsForLookingInDomainURLs));
+           updateSearchSettingsPropertyByKey(PropertyKeys.TopLevelDomainsExceptions, String.join(delimiter, searchSettings.ExceptionsForTopLevelDomains));
+           updateSearchSettingsPropertyByKey(PropertyKeys.URLExceptions, String.join(delimiter, searchSettings.ExceptionsForWordsInDomainURLs));
         }
         catch(NullPointerException ex) {
             Logger.tag("SYSTEM").error(ex);
@@ -216,7 +220,6 @@ public class DBConnectionService {
         } catch (NullPointerException ex) {
             Logger.error(ex);
         }
-
         return searchSettings;
     }
 
@@ -234,10 +237,13 @@ public class DBConnectionService {
         return getApplicationSettingsPropertyByKey(PropertyKeys.SearchPlaceholder).getSettingValue();
     }
 
+    public String getExclusionURLsFileDataPath() {
+        return getSearchSettingsPropertyByKey(PropertyKeys.URLsExcluions).getSettingValue();
+    }
+
     public synchronized void updateSearchPlaceholder(String searchPlaceholder) {
         updateApplicationSettingsPropertyByKey(PropertyKeys.SearchPlaceholder, searchPlaceholder);
     }
-
 
     public String getDataFilePath() {
         return getApplicationSettingsPropertyByKey(PropertyKeys.DataFilePath).getSettingValue();
@@ -245,6 +251,10 @@ public class DBConnectionService {
 
     public synchronized void updateFileDataPath(String filePath) {
         updateApplicationSettingsPropertyByKey(PropertyKeys.DataFilePath, filePath);
+    }
+
+    public synchronized void updateExclusionURLsFileDataPath(String filePath) {
+        updateSearchSettingsPropertyByKey(PropertyKeys.URLsExcluions, filePath);
     }
 
     public synchronized boolean getGoogleSearchEngine() {

@@ -1,5 +1,6 @@
 package Abstract.Strategies.OutputResultsConversionStrategies;
 
+import Abstract.Models.InputModels.InputCsvModelItem;
 import Abstract.Models.OutputModels.IOutputModel;
 import Abstract.Models.OutputModels.OutputRegularCSVItem;
 import Abstract.Models.SearchResultModels.GoogleSearchResultItem;
@@ -11,6 +12,7 @@ import Services.*;
 import kbaa.gsearch.PlaceCard;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Element;
+import org.tinylog.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,15 @@ public class ConvertSearchResultsDataStrategy extends SearchResultsConvertStrate
         if (searchItems.size() == 0) {
             return outputItems;
         }
+
+
+        int sizeBeforeExclusion = searchItems.size();
+        List<String> csvFileData = diResolver.getInputDataService().getInputUrlsExclusionFileItems();
+        for (String url: csvFileData) {
+            searchItems.removeIf(next -> next.getLink().contains(url));
+        }
+        Logger.tag("SYSTEM").info("Items excluded: " + (sizeBeforeExclusion - searchItems.size()));
+
         GuiService guiService = diResolver.getGuiService();
         DBConnectionService dbConnectionService = diResolver.getDbConnectionService();
         MetaTagsExceptionsSpecification metaTagsExceptionsSpecification = new MetaTagsExceptionsSpecification(dbConnectionService.getSearchSettings().MetaTagsExceptions);

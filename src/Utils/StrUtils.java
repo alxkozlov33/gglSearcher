@@ -181,4 +181,13 @@ public class StrUtils {
         }
         return result;
     }
+
+    public static String cutStringFromEnd(String string, int length) {
+        String result = "";
+        if (string.length() > length)
+        {
+            result = ".."+string.substring(string.length() - length);
+        }
+        return result;
+    }
 }
